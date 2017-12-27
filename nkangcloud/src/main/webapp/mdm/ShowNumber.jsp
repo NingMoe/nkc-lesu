@@ -25,10 +25,12 @@
 	String qt= request.getParameter("qt");
 	String level="";
 	String isExternal="no";
+	boolean IsRegistered=false;
 	if(uid!=null&&uid!=""){
 		HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
 		if(res!=null){
 			level=res.get("level");
+			IsRegistered=MongoDBBasic.checkUserAuth(uid,"IsRegistered");
 		}
 		else{
 			isExternal="yes";
@@ -73,6 +75,11 @@
 .form_edit {    
 width: 95%;
 margin-left: 4%;
+}
+.sweet-alert{
+margin-top:-210px!important;}
+.sweet-alert h2{
+font-size:28px!important;
 }
 </style>
 </head>
@@ -156,6 +163,7 @@ margin-left: 4%;
 	var lengthMax=<%=lengthMax%>;
 	var uid='<%=uid%>';
 	var level='<%=level%>';
+	var IsRegistered=<%=IsRegistered%>;
 	var qt='<%=qt%>';
 	var rightQ=0;
 	var wrongQ=0;
@@ -189,7 +197,7 @@ margin-left: 4%;
 			if($("#next").val()=="查看战绩"){
 				if(isExternal=="yes"){
 					swal({  
-				        title:"长按二维码关注我们的公众号吧~",  
+				        title:"长按下图关注乐数享更多定制化一对一培训~",  
 				        text:"<img src='http://leshucq.bj.bcebos.com/standard/QRCode.jpg' alt='' />",
 				        html:"true",
 				        showConfirmButton:false, 
@@ -209,6 +217,32 @@ margin-left: 4%;
 					$("#timetext").hide();
 					$("#answerPanel").hide();
 					return;
+				}
+				else if(!IsRegistered){
+					swal({  
+					title:"注册乐数享更多定制化一对一珠心算在线培训~",  
+			        text:"<img src='http://leshucq.bj.bcebos.com/standard/QRCode.jpg' alt='' />",
+			        html:"true",
+			        showConfirmButton:true, 
+					showCancelButton: false,   
+					closeOnConfirm: false,   
+			        confirmButtonText:"我要注册", 
+			        animation:"slide-from-top"  
+			      }, 
+					function(inputValue){
+						if (inputValue === false){
+							return false;
+						}
+						else{
+							window.location.href="http://leshucq.bceapp.com/mdm/profile.jsp?UID="+uid;
+						}
+			      });
+			
+				$("#endPanel").hide();
+				$("#timestext").hide();
+				$("#timetext").hide();
+				$("#answerPanel").hide();
+				return;
 				}
 				else{
 				FusionCharts.ready(function() {

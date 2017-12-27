@@ -46,7 +46,7 @@ blog: http://www.tuterm.com
 
 						if(isExternal=="yes"){
 							swal({  
-						        title:"长按二维码关注我们的公众号吧~",  
+						        title:"长按下图关注乐数享更多定制化一对一培训~",  
 						        text:"<img src='http://leshucq.bj.bcebos.com/standard/QRCode.jpg' alt='' />",
 						        html:"true",
 						        showConfirmButton:false, 
@@ -60,11 +60,38 @@ blog: http://www.tuterm.com
 										return false;
 									}
 						      });
+						
 							$("#endPanel").hide();
 							$("#timestext").hide();
 							$("#timetext").hide();
 							$("#answerPanel").hide();
 							return;
+						}
+						else if(!IsRegistered){
+							swal({  
+							title:"注册乐数享更多定制化一对一珠心算在线培训~",  
+					        text:"<img src='http://leshucq.bj.bcebos.com/standard/QRCode.jpg' alt='' />",
+					        html:"true",
+					        showConfirmButton:true, 
+							showCancelButton: false,   
+							closeOnConfirm: false,   
+					        confirmButtonText:"我要注册", 
+					        animation:"slide-from-top"  
+					      }, 
+							function(inputValue){
+								if (inputValue === false){
+									return false;
+								}
+								else{
+									window.location.href="http://leshucq.bceapp.com/mdm/profile.jsp?UID="+uid;
+								}
+					      });
+					
+						$("#endPanel").hide();
+						$("#timestext").hide();
+						$("#timetext").hide();
+						$("#answerPanel").hide();
+						return;
 						}
 						else{
 						FusionCharts.ready(function() {
