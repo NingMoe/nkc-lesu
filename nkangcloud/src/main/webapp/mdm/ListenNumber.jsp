@@ -19,7 +19,7 @@
 	{
 		lengthMax = Integer.parseInt(request.getParameter("lengthMax"));
 		lengthMin = Integer.parseInt(request.getParameter("lengthMin"));
-		title=lengthMax+""+lengthMin;
+		title=lengthMin+"-"+lengthMax;
 	}
 	String uid = request.getParameter("UID");
 	String qt= request.getParameter("qt");
