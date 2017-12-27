@@ -502,10 +502,14 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 		DBObject query = new BasicDBObject();
 		query.put("OpenID", OpenID);
-		HashMap<String, String> res = new HashMap<String, String>();
+		System.out.println("OpenID----"+OpenID);
+		HashMap<String, String> res = null;
 		DBCursor queryresults = mongoDB.getCollection(wechat_user).find(query)
 				.limit(1);
-		if (null != queryresults) {
+		if (null != queryresults&&queryresults.hasNext()) {
+
+			System.out.println("queryresults has data----");
+			res=new HashMap<String, String>();
 			DBObject o = queryresults.next();
 			if (o.get("HeadUrl") != null) {
 				res.put("HeadUrl", o.get("HeadUrl").toString());
@@ -593,7 +597,7 @@ public class MongoDBBasic {
 				query);
 		if (null != queryresults) {
 			while(queryresults.hasNext()){
-			DBObject o = queryresults.next();
+	 		DBObject o = queryresults.next();
 			QuoteVisit qv;
 			if (o.get("nickName") != null) {
 				qv = new QuoteVisit();
