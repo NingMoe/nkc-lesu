@@ -602,6 +602,9 @@ margin-left: 4%;
 			temp = Math.round(Math.random()
 					* (lengthArray[lengthMax] - lengthArray[lengthMin - 1])
 					+ lengthArray[lengthMin - 1]);
+			if(temp==0){
+				temp=1;
+			}
 			if (i != 0) {
 				charQ = Math.round(Math.random() * (charArray.length - 1));
 				chars = charArray[charQ];
@@ -612,6 +615,9 @@ margin-left: 4%;
 						temp = Math.round(Math.random()
 								* (lengthArray[lengthMax] - lengthArray[lengthMin - 1])
 								+ lengthArray[lengthMin - 1]);
+						if(temp==0){
+							temp=1;
+						}
 					}
 					tempArray[i] = temp;
 				} else {
