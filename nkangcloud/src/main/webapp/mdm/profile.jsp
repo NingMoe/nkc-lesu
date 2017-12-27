@@ -79,6 +79,8 @@ System.out.println("isTeacher====="+isTeacher);
 <!-- <link href="../nkang/editor/froala_editor.min.css" rel="stylesheet" type="text/css"> -->  <!-- do not need this one -->
 <link href="../nkang/editor/font-awesome.min.css" rel="stylesheet" type="text/css"> 
 <link rel="stylesheet" type="text/css" href="../Jsp/CSS/common.css">
+<link rel="stylesheet" type="text/css" href="../Jsp/CSS/page.css">
+<link rel="stylesheet" type="text/css" href="../Jsp/CSS/register.css">
 <script type="text/javascript" src="../Jsp/JS/slides.js"></script>
 <link rel="stylesheet" type="text/css" href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="../mdm/uploadfile_css/demo.css" />
@@ -97,10 +99,10 @@ System.out.println("isTeacher====="+isTeacher);
 
 <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
 <style>
+ #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;z-index:998;} 
 	.mySlides {display:none}
 	.w3-left, .w3-right, .w3-badge {cursor:pointer}
 	.w3-badge {height:13px;width:13px;padding:0}
-        #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;} 
 .edit
 {
 	width: 60px;
@@ -373,9 +375,24 @@ var RoleObj=new Object();
 getLogo();
 var selectedType="<option value='communication'>常规沟通</option>";
 
+    $(function(){  
+        $(window).scroll(function(){  
+            if($(window).scrollTop()>200){  
+                $('#return-top').fadeIn(200);  
+                }  
+                else{$('#return-top').fadeOut(200);}  
+              
+            });  
+            $('#return-top').click(function(){  
+                $('body,html').animate({scrollTop:0},200);  
+                	return false;  
+                });
+        });
 $(window).load(function() {
+
 	$('head').append("<style>.naviArrow.is-selected::after{content: ''; display: block;width: 0;height: 0;border-left: .9em solid transparent;border-right: .9em solid transparent;border-top: .9em solid "+clientThemeColor+";position: relative;top: 0px;left: 50%;-webkit-transform: translateX(-50%); -ms-transform: translateX(-50%);transform: translateX(-50%);}</style>");
 	$("#navSupport").on("click",function(){
+		$("a").remove(".naviArrow");
 		$(this).append("<a class='naviArrow is-selected'></a>").css("border-top","10px solid "+clientThemeColor);
 		$(".naviArrow.is-selected::after").css("border-top",".9em solid "+clientThemeColor);
 		$("#navApp").css("border-top","10px solid #B4B8BB");
@@ -387,6 +404,7 @@ $(window).load(function() {
 		$("#WorkMates").hide();
 	});
 	$("#navApp").on("click",function(){
+		$("a").remove(".naviArrow");
 		$(this).append("<a class='naviArrow is-selected'></a>").css("border-top","10px solid "+clientThemeColor);
 		$(".naviArrow.is-selected::after").css("border-top",".9em solid "+clientThemeColor);
 		$("#navSupport").css("border-top","10px solid #B4B8BB");
@@ -398,6 +416,7 @@ $(window).load(function() {
 		$("#WorkMates").hide();
 	});
 	$("#navMember").on("click",function(){
+		$("a").remove(".naviArrow");
 		$(this).append("<a class='naviArrow is-selected'></a>").css("border-top","10px solid "+clientThemeColor);
 		$("naviArrow is-selected::after").css("border-top",".9em solid "+clientThemeColor);
 		$("#navSupport").css("border-top","10px solid #B4B8BB");
@@ -1007,6 +1026,7 @@ function sendValidateCode(phone){
         success: function(data) {
         	if(data=="OK"){
         	swal("恭喜!", "已收到您的请求，请耐心等候", "success");
+        	return false;
         	}
         }
     });}
@@ -1050,6 +1070,7 @@ function returnRegisterBack()
 								returnRegisterBack();
 							} else {
 								swal("注册失败", "请输入正确的信息！", "error");
+								return false;
 							}
 						}
 					});
@@ -1371,22 +1392,34 @@ function getNowFormatDate() {
   <div class="registerArea">
     <div class="register_title"><i class="fa fa-angle-left fa-lg return" onclick="returnRegisterBack()"></i>会员注册</div>
 <div id="fillPanel">
-<div class="singleInput">
-<p class="icon">  <i class="fa fa-user fa-lg" style="font-size:23px;"></i></p>
-<p class="inputArea"><input id="realname" type="text" placeholder="请输入你的姓名" /></p>
+<div class="i-base-form p-form" method="post" action="#" id="jp-form" conf-validate-id="validate1655828073">
+<div class="t-flex-wrap">
+              <div class="t-flex-item t-with-icon g-phone-wrap" id="jg-input-select-wrap">
+                  <input type="text" id="realname" class="text J_pageValidateItem g-input g-country-phone-input jg-phone-input" autocomplete="off" name="mobile"  placeholder="请输入姓名" >
+              </div>
+              
+          </div>
+          <div class="t-flex-wrap">
+              <div class="t-flex-item t-with-icon g-phone-wrap" id="jg-input-select-wrap">
+                  <input type="text" id="phone" class="text J_pageValidateItem g-input g-country-phone-input jg-phone-input" autocomplete="off" name="mobile"  placeholder="请输入手机号" >
+              </div>
+              
+          </div>
+          
+          <div class="t-flex-wrap">
+              <div class="t-flex-item">
+                  <input type="text" id="validateCode" name="msgCode" class="text code J_pageValidateItem" placeholder="手机验证码" data-regempty="请输入手机验证码">
+              </div>
+              <button class="i-base-btn p-get-code-btn"  onclick="sendValidateCode()">获取验证码</button>
+              
+          </div>
+          
+          <div class="p-btn-wrap">
+              <button class="i-base-btn p-register-btn" onclick="updateInfo()">提交</button>
+          </div>
+          
+      </div>
 </div>
-<div class="singleInput">
-<p class="icon">  <i class="fa fa-mobile fa-lg" style="margin-left:3px;"></i></p>
-<p class="inputArea">  <input id="phone" type="text" placeholder="请输入你的手机号" /></p>
-</div>
-<div class="singleInput" id="codePanel">
-<p class="icon">  <i class="fa fa-check fa-lg" style="font-size:21px;"></i></p>
-<p class="inputArea"><input id="validateCode" type="text" placeholder="请输入你的验证码"/> </p>
-<p class="sendCode" onclick="sendValidateCode()">发送验证码</p>
-</div>
-</div>
-<div class="register_btn" onclick="updateInfo()"><img src="../mdm/images/finger-up.png" style="margin-top: 10px;width: 30px;height: 30px;"><span style="display: block;
-">提交</span></div>
   </div>
 
 	<input id="uid" type="hidden" value="<%=uid%>" />
@@ -1692,7 +1725,6 @@ function getNowFormatDate() {
 		<span class="clientCopyRight"><nobr></nobr></span>
 	</div>
 	<!-- END FOOTER -->
-	
-
+		
 </body>
 </html>

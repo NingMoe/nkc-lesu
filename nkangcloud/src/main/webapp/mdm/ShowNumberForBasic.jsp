@@ -66,11 +66,13 @@ margin-left: 4%;
 <input type="text" id="timestext" class="niput" value="" style="position: absolute;width: 30%;left: 0px;text-align: left;top: 80px;z-index: -2;">
 	<section id="startPanel">
 		<div class="selectPanel">
-			<div class="circle startVoice bigger">看数开始</div>
+			<div class="circle start bigger">看数开始</div>
 		</div>
 	</section>
 	<section id="processPanel">
 		<div id="questionInput"  style="width:40%;margin-left:30%;margin-top: 0px;padding-top: 20px;padding-bottom:0" class="selectPanel"></div>
+			<input style='border-top: 1px solid black;width: 70%;font-size:25px;color:black;' type='text' class='niput sxt' disabled />
+<div class="form_edit clearfix">
 	</section>
 	<section id="endPanel">
 		<div class="selectPanel">
@@ -116,10 +118,8 @@ margin-left: 4%;
 
 
 	</section>
-	<div id="Result" style="display:none;"></div>
 	<div id="chart-container2">FusionCharts will render here</div>
 	<script src="../Jsp/JS/jquery-1.8.0.js"></script>
-	<script src="../Jsp/JS/leshu/speech.js"></script>
 	<script>
 
 	var speed=<%=speed%>;
@@ -140,19 +140,13 @@ margin-left: 4%;
 	var tempSequence = 0;
 	getQuestions();
 	getHistoryQuestion();
-	$('#Result').speech({
-		"speech" : true,
-		"speed" : 3,
-		"bg" : "./images/speech.png"
-	});
 
-	function endVoice() {
-
+	$(".start").on("click", function(){
 		if(wrongCollection!=""&&wrongCollection=="yes"){
 			wrongStart();
 		}else{
 		start();}
-	};
+	});
 	$('.form_edit .num').click(function(){
 		var oDiv = $("#answer");
 		var answer=oDiv.val()+this.innerHTML;

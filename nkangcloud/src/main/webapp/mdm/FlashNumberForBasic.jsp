@@ -67,7 +67,7 @@ margin-left: 4%;
 
 	<section id="startPanel">
 		<div class="selectPanel">
-			<div class="circle startVoice bigger">闪算开始</div>
+			<div class="circle start bigger">闪算开始</div>
 		</div>
 	</section>
 	<section id="processPanel" style=" position: relative;">
@@ -123,11 +123,9 @@ margin-left: 4%;
 			</div> -->
 		</div>
 	</section>
-	<div id="Result" style="display:none;"></div>
 	<div id="chart-container">FusionCharts will render here</div>
 	<div id="chart-container2">FusionCharts will render here</div>
 	<script src="../Jsp/JS/jquery-1.8.0.js"></script>
-	<script src="../Jsp/JS/leshu/speech.js"></script>
 	<script>
 
 		var speed=<%=speed%>;
@@ -151,19 +149,13 @@ margin-left: 4%;
 		var totalQuestion=0;
 		var wrongIndexArray=new Array();
 		var wrongIndex="";
-		$('#Result').speech({
-			"speech" : true,
-			"speed" : 3,
-			"bg" : "./images/speech.png"
-		});
 
-		function endVoice() {
-
+		$(".start").on("click", function(){
 			if(wrongCollection!=""&&wrongCollection=="yes"){
 				wrongStart();
 			}else{
 			start();}
-		};
+		});
 		$('.form_edit .num').click(function(){
 			var oDiv = $("#answer");
 			var answer=oDiv.val()+this.innerHTML;
