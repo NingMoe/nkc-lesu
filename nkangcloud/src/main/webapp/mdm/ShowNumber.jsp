@@ -221,7 +221,7 @@ font-size:28px!important;
 				else if(!IsRegistered){
 					swal({  
 					title:"注册乐数享更多定制化一对一珠心算在线培训~",  
-			        text:"<img src='http://leshucq.bj.bcebos.com/standard/QRCode.jpg' alt='' />",
+			        text:"<img src='http://leshucq.bj.bcebos.com/standard/leshuLogo2.jpg' width='50%' alt='' />",
 			        html:"true",
 			        showConfirmButton:true, 
 					showCancelButton: false,   
