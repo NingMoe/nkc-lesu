@@ -28,36 +28,42 @@
   <div class="mod_main ">
     <div id="bg_img" style="background: url(&#39;http://p1.dodoca.com/org/9/ac/cd9/ac52/c06df42088ca6978ef8924.jpg&#39;);background-size:100%;"></div>
    <div class="mod_menu">
-                                                      <a href="http://mp.weixin.qq.com/s?__biz=MzIxNjA5OTEzMQ==&amp;mid=402574737&amp;idx=1&amp;sn=f63fe66e7f01b130310ebb3538131d18#rd" onclick="tongji(522995,0);" style="background-color:rgba(30, 127, 196, 0.75);color:#ffffff;">
-                                        <i>
-                                            <img src="../mdm/images/leshu/19fc7f99cfe9bb301a0a5a.png" class="contentimgcl">
-                                    </i>
-                <span>中心简介</span>
-            </a>
-                                                      <a href="http://mp.weixin.qq.com/s?__biz=MzIxNjA5OTEzMQ==&amp;mid=402056300&amp;idx=1&amp;sn=da59acd7e2d363e009b87638ade05293#rd" onclick="tongji(522996,0);" style="background-color:rgba(30, 127, 196, 0.75);color:;">
-                                        <i>
-                                            <img src="../mdm/images/leshu/2804b4c496054f7a0d51fa.png" class="contentimgcl">
-                                    </i>
-                <span>课程介绍</span>
-            </a>
-                                                      <a href="http://mp.weixin.qq.com/s?__biz=MzIxNjA5OTEzMQ==&amp;mid=402025558&amp;idx=1&amp;sn=9876472f0bceed835ef27207b6a75164#rd" onclick="tongji(522997,0);" style="background-color:rgba(30, 127, 196, 0.75);color:;">
-                                        <i>
-                                            <img src="../mdm/images/leshu/79679c52ee0a82607843df.png" class="contentimgcl">
-                                    </i>
-                <span>创办者</span>
-            </a>
-                                                      <a href="http://mp.weixin.qq.com/s?__biz=MzIxNjA5OTEzMQ==&amp;mid=402044959&amp;idx=1&amp;sn=43ee17423c8c9b1131db2b8d1ac2a97e#rd" onclick="tongji(523000,0);" style="background-color:rgba(30, 127, 196, 0.75);color:;">
-                                        <i>
-                                            <img src="../mdm/images/leshu/bf5c670aed4fc0e4bbc1f0.png" class="contentimgcl">
-                                    </i>
-                <span>联系我们</span>
-            </a>
-                                                      <a href="http://mp.weixin.qq.com/s?__biz=MzIxNjA5OTEzMQ==&amp;mid=403112306&amp;idx=1&amp;sn=291166805280fb4af1e14d77f5e838c6#rd" onclick="tongji(524311,0);" style="background-color:rgba(30, 127, 196, 0.75);color:;">
-                                        <i>
-                                            <img src="../mdm/images/leshu/b119bc7a3f1e39e8b92e14.png" class="contentimgcl">
-                                    </i>
-                <span>常见问题</span>
-            </a>
+<a href="http://leshucq.bceapp.com/mdm/leshuintro/agentintro.html" onclick="tongji(522995,0);" style="background-color:rgba(30, 127, 196, 0.75);color:#ffffff;">
+	<i>
+		<img src="../mdm/images/leshu/19fc7f99cfe9bb301a0a5a.png" class="contentimgcl">
+	</i>
+    <span>学校简介</span>
+</a>
+<a href="http://leshucq.bceapp.com/mdm/leshuintro/courseintro.html" onclick="tongji(522996,0);" style="background-color:rgba(30, 127, 196, 0.75);color:;">
+	<i>
+		<img src="../mdm/images/leshu/2804b4c496054f7a0d51fa.png" class="contentimgcl">
+	</i>
+    <span>课程介绍</span>
+</a>
+<a href="http://leshucq.bceapp.com/mdm/leshuintro/activitymoment.html" onclick="tongji(522997,0);" style="background-color:rgba(30, 127, 196, 0.75);color:;">
+	<i>
+	        <img src="../mdm/images/leshu/79679c52ee0a82607843df.png" class="contentimgcl">
+	</i>
+    <span>活动剪影</span>
+</a>
+<a href="http://leshucq.bceapp.com/mdm/leshuintro/leshustudent.html" onclick="tongji(523000,0);" style="background-color:rgba(30, 127, 196, 0.75);color:;">
+	<i>
+	     	<img src="../mdm/images/leshu/bf5c670aed4fc0e4bbc1f0.png" class="contentimgcl">
+	</i>
+    <span>学员风采</span>
+</a>
+<a href="http://leshucq.bceapp.com/mdm/leshuintro/leshuteacher.html" onclick="tongji(523000,0);" style="background-color:rgba(30, 127, 196, 0.75);color:;">
+	<i>
+	     	<img src="../mdm/images/leshu/bf5c670aed4fc0e4bbc1f0.png" class="contentimgcl">
+	</i>
+    <span>乐数师资</span>
+</a>
+<a href="http://leshucq.bceapp.com/mdm/leshuintro/questionanswer.html" onclick="tongji(524311,0);" style="background-color:rgba(30, 127, 196, 0.75);color:;">
+	<i>
+	        <img src="../mdm/images/leshu/b119bc7a3f1e39e8b92e14.png" class="contentimgcl">
+	</i>
+    <span>常见问题</span>
+</a>
           </div>
   </div>
 
