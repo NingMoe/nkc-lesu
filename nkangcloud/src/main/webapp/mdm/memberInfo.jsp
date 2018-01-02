@@ -82,7 +82,7 @@ a:visited{
   text-align: left;
   padding-left:1%;
   height: 100%;
-  line-height: 40px;
+  line-height: 45px;
   float: left;
   font-weight:bold;
 }
@@ -93,7 +93,7 @@ a:visited{
   text-align: right;
   padding-right:2%;
   height: 100%;
-  line-height: 40px;
+  line-height: 45px;
 }
 .pay{
     text-align: center;
@@ -105,7 +105,7 @@ a:visited{
     bottom:30px;}
 .infoPay{
 padding-top:20px;
-height:60px;
+height:70px;
 /* border-bottom:1px solid #EFEFEF; */
 }
 .payTitle{
@@ -113,8 +113,8 @@ height:60px;
     line-height: 40px;
     color: black;
     padding-left: 10px;
-    font-size: 13px;
     border: none;
+    font-weight:bolder;
 }
 .infoItem{
 width:30%;
@@ -169,10 +169,14 @@ text-align:center;
      </div>
     </div>
     
-      <div class="infoArea payTitle">支付方式
+<div class="infoPanel">
+      <div class="infoArea">
+        <p class="infoTitle">支付方式</p>
+        <p class="infoVal"></p>
       </div>
+    </div>
           <div class="infoPanel">
-      <div class="infoPay" style="padding-top:0px">
+      <div class="infoPay">
 	  <div class="infoItem" style="color:gray;border:1px solid gray;line-height:50px;">支付宝支付</div>
 	  <div class="infoItem" style="line-height:50px;">微信支付</div>
      </div>
