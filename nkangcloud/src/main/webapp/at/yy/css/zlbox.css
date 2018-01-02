@@ -1,0 +1,145 @@
+/**鍏ㄥ浗鍦板潃閫夋嫨鎺т欢**/
+.zl_addressbox{
+	position:relative;
+	width:370px;
+}
+.zl_addressbox .ab_showbar{
+	width:90%;
+	height:30px;
+	line-height:30px;
+	background-color:#FFF;	
+}
+.zl_addressbox .ab_btn{
+	position:absolute;
+	right:0px;
+	top:0px;
+	width:30px;
+	height:30px;
+	padding:1px 0px 1px 0px;
+	background:#FFF url('img/cb_btn_down.png') no-repeat center center;
+}
+/**鍦板潃閫夋嫨闈㈡澘**/
+.zl_addressbox .selectaddr_box{
+    display:none;
+	position:absolute;
+	left:0px;
+	right:0px;
+	top:32px;
+	width:100%;
+	line-height:30px;
+	background-color:#FFF;
+	z-index:888;
+}
+.zl_addressbox .ab_bar{
+	width:100%;
+	height:40px;
+}
+.zl_addressbox .ab_bar:after{
+	clear:both;
+	content:'';
+	display:table;
+}
+.zl_addressbox .ab_bar li{
+	float:left;
+	width:25%;     /**杩欓噷濡傛灉瑕佽皟鏁村鍣ㄥぇ灏忥紝闇�瑕佸悓姝ヨ皟鏁�**/
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	background-color:#F0F0F0;
+	border-left:#CCC 1px solid;
+	border-bottom:transparent 1px solid ;
+	cursor:pointer;
+}
+.zl_addressbox .ab_bar li:first-child{
+	border-left:none;
+}
+.zl_addressbox .ab_bar li.current{
+	color:#009AFD;
+	background-color:#FFF;
+	cursor:none;
+}
+.zl_addressbox .ab_panel{
+	position:relative;
+	width:100%;
+}
+.zl_addressbox .ab_panel dd{
+	display:none;
+	position:relative;
+	width:100%;
+}
+.zl_addressbox .ab_panel dd.current{
+	display:block;
+}
+/**鐪佷唤闈㈡澘涓殑鍒嗙粍**/
+.zl_addressbox .ab_panel dd .ab_group{
+	position:relative;
+	width:100%;
+	margin-bottom:20px;
+}
+.zl_addressbox .ab_panel dd .ab_group span.ab_shengtitle{
+	display:block;
+	position:absolute;
+	top:0px;
+	width:60px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	font-size:0.8em;
+	color:#009AFD;
+}
+.zl_addressbox .ab_panel dd .ab_group .ab_sheng{
+	margin-left:40px;
+}
+.zl_addressbox .ab_panel dd ul.ab_item{
+	margin-top:10px;
+	margin-bottom:5px;
+}
+.zl_addressbox .ab_panel dd ul.ab_item:after{
+	clear:both;
+	display:table;
+	content:'';
+}
+.zl_addressbox .ab_panel dd ul.ab_item li{
+	float:left;
+	height:30px;
+	line-height:30px;
+	padding:0px 10px;
+	margin-left:10px;
+	cursor:pointer;
+} 
+.zl_addressbox .ab_panel dd ul.ab_item li:hover{
+	color:#009AFD;
+}
+.zl_addressbox .ab_panel dd ul.ab_item li.current{
+	border-radius:6px;
+	color:#FFF;
+	background-color:#009AFD;
+}
+.zl_addressbox.selected .selectaddr_box{
+	display:block;
+	padding-bottom:10px;
+}
+.zl_addressbox.selected  .ab_btn{
+	background:#FFF url('img/cb_btn_up.png') no-repeat center center;
+}
+/**鎻愮ず鐘舵��**/
+.zl_addressbox .ab_showbar .tip_info{
+	display:none;
+	width:90%;
+}
+.zl_addressbox .ab_showbar .value_info{
+	display:block;
+	width:90%;
+	padding-left:5px;
+}
+.zl_addressbox .ab_showbar .value_info span.sep{
+	color:#CCC;
+	font-size:0.8em;
+}
+
+.zl_addressbox .ab_showbar.tip .value_info{
+	display:none;
+}
+.zl_addressbox .ab_showbar.tip .tip_info{
+	display:block;
+}
