@@ -22,7 +22,17 @@ public final class Constants {
 	public static final String ucpass_token = "6dc9593907118f61208d1c1531337bc0";
 	public static final String ucpass_appId = "d9944779258e42ad8683b2ac2c4e92da";
 	
-	
+	/*	wechat payment config*/
+	public static final String devOpenID = "oI3krwR_gGNsz38r1bdB1_SkcoNw";
+	public static final String prodID= "1469932302";
+	public static final String partnerKey= "53fead94b3acec49763585f18b7b6nkc";
+	public static final String mcthID= "1469932302";
+	public static final String payBody= "LeshuCourse";
+	public static final String deviceInfo= "WEB";
+	public static final String notifyURL= "http://leshucq.bceapp.com/mdm/LeShuIntro.jsp";
+	public static final String signType= "MD5";
+	public static final String tradeType= "JSAPI";
+	public static final String totalFee= "1";
 	/**
 	 * 
 	 * MongoDB 集合名字
