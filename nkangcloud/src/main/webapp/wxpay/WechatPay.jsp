@@ -34,6 +34,7 @@ if(res!=null){
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>微信支付</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 	<style>
 	*{padding:0;margin: 0;}
 body{
@@ -153,6 +154,7 @@ text-align:center;
        var pg;
        var signType;
        var paySign;
+       var totalfee;
       function onBridgeReady(){
     	  WeixinJSBridge.invoke(  
                'getBrandWCPayRequest', {  
@@ -196,7 +198,7 @@ text-align:center;
                        onBridgeReady(); 
                     }   
                 }  
-            },"http://nkctech.duapp.com/pay/payparm?openId=<%= code%>&totalfee=<%= price%>",true);  
+            },"http://nkctech.duapp.com/pay/payparm?openId=<%= code%>&totalfee="+totalfee,true);  
         }  
 function send_request(callback, urladdress,isReturnData){        
     var xmlhttp = getXMLHttpRequest();  
@@ -241,6 +243,11 @@ function getXMLHttpRequest() {
     }  
     return xmlhttp;  
 }  
+$(function(){
+	$(".infoItem").on("click",function(){
+		totalfee=$(this).children("span").text();
+	});
+});
     </script>
     	
 	
