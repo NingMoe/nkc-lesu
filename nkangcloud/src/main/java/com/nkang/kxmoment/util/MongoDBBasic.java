@@ -4,21 +4,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.UUID;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
 
-import com.fasterxml.jackson.core.sym.Name;
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -35,7 +31,6 @@ import com.nkang.kxmoment.baseobject.AbacusQuizPool;
 import com.nkang.kxmoment.baseobject.AbacusRank;
 import com.nkang.kxmoment.baseobject.Appointment;
 import com.nkang.kxmoment.baseobject.ArticleMessage;
-import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
@@ -52,6 +47,9 @@ import com.nkang.kxmoment.baseobject.Visited;
 import com.nkang.kxmoment.baseobject.WeChatAccessKey;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.baseobject.classhourrecord.Classexpenserecord;
+import com.nkang.kxmoment.baseobject.classhourrecord.Classpayrecord;
+import com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation;
 import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.SmsUtils.RestTest;
 
@@ -72,6 +70,9 @@ public class MongoDBBasic {
 	private static String collectionVisited = "Visited";
 	private static String collectionHistoryAbacus = "HistoryAbacus";
 	private static String collectionAbacusRank="AbacusRank";
+	private static String collectionClassPayRecord="ClassPayRecord";
+	private static String collectionClassExpenseRecord="ClassExpenseRecord";
+	
 	public static DB getMongoDB() {
 		if (mongoDB != null) {
 			return mongoDB;
@@ -4233,4 +4234,99 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		return students;
 	}
 	
+//	--------------------------------------------- CLASS RECORD
+	public static boolean updateStudentBasicInformation(StudentBasicInformation stInfor) {
+		mongoDB = getMongoDB();
+//		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(
+//				new java.util.Date().getTime());
+		Boolean ret = false;
+		String OpenID = stInfor.getOpenID();
+		try {
+			DBCursor dbcur = mongoDB.getCollection(wechat_user).find(
+					new BasicDBObject().append("OpenID", OpenID));
+			if (null != dbcur) {
+				while (dbcur.hasNext()) {
+					DBObject o = dbcur.next();
+					DBObject dbo = new BasicDBObject();
+					
+					dbo.put("Teamer.enrolledTime", stInfor.getEnrolledTime());
+				    dbo.put("Teamer.enrolledWay", stInfor.getEnrolledWay());
+					dbo.put("Teamer.district", stInfor.getDistrict());
+					dbo.put("Teamer.totalClass", stInfor.getTotalClass());
+					dbo.put("Teamer.expenseClass", stInfor.getExpenseClass());
+					dbo.put("Teamer.leftPayClass", stInfor.getLeftPayClass());
+				    dbo.put("Teamer.leftSendClass", stInfor.getLeftSendClass());
+//					Object teamer = o.get("Teamer");
+//					if (teamer == null) {
+//						dbo.put("Teamer.registerDate", teamer.getRegisterDate());
+//					}
+					BasicDBObject doc = new BasicDBObject();
+					doc.put("$set", dbo);
+					WriteResult wr = mongoDB.getCollection(wechat_user).update(
+							new BasicDBObject().append("OpenID", OpenID), doc);
+					ret = true;
+				}
+			}
+		} catch (Exception e) {
+			log.info("updateStudentBasicInformation--" + e.getMessage());
+		}
+		return ret;
+	}
+
+	
+	public static boolean addClasspayrecord(Classpayrecord classpr) {
+		mongoDB = getMongoDB();
+		Boolean ret = false;
+		try {
+			DBObject dbo = new BasicDBObject();
+			
+			dbo.put("payOption", classpr.getPayOption());
+		    dbo.put("payMoney", classpr.getPayMoney());
+			dbo.put("classCount", classpr.getClassCount());
+			dbo.put("payTime", classpr.getPayTime());
+			dbo.put("studentName", classpr.getStudentName());
+			dbo.put("studentOpenID", classpr.getStudentOpenID());
+		    
+			//String OpenID = classpr.getStudentOpenID();
+		
+			
+			WriteResult wr = mongoDB.getCollection(collectionClassPayRecord).insert(dbo);
+			ret = true;
+			
+		} catch (Exception e) {
+			log.info("addClasspayrecord--" + e.getMessage());
+		}
+		return ret;
+	}
+//	collectionClassExpenseRecord
+	
+	public static boolean addClassExpenseRecord(Classexpenserecord exrecord) {
+		mongoDB = getMongoDB();
+		Boolean ret = false;
+
+		try {
+			DBObject dbo = new BasicDBObject();
+			
+			dbo.put("expenseOption", exrecord.getExpenseOption());
+		    dbo.put("expenseTime", exrecord.getExpenseTime());
+			dbo.put("expenseClassCount", exrecord.getExpenseClassCount());
+			dbo.put("teacherName", exrecord.getTeacherName());
+			dbo.put("teacherOpenID", exrecord.getTeacherOpenID());
+			dbo.put("studentName", exrecord.getStudentName());
+			dbo.put("studentOpenID",exrecord.getStudentOpenID());
+			dbo.put("expenseDistrict", exrecord.getExpenseDistrict());
+			dbo.put("teacherComment", exrecord.getTeacherComment());
+			dbo.put("teacherConfirmExpense", exrecord.isTeacherConfirmExpense());
+			dbo.put("teacherConfirmTime", exrecord.getTeacherConfirmTime());
+			dbo.put("parentConfirmExpense", exrecord.isParentConfirmExpense());
+			dbo.put("parentConfirmTime", exrecord.getParentConfirmTime());
+			
+			WriteResult wr = mongoDB.getCollection(collectionClassExpenseRecord).insert(dbo);
+			ret = true;
+			
+		} catch (Exception e) {
+			log.info("updateClassExpenseRecord--" + e.getMessage());
+		}
+		return ret;
+	}
 }
