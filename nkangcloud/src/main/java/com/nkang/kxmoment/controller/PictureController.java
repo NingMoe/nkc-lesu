@@ -1,6 +1,5 @@
 package com.nkang.kxmoment.controller;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,14 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ctc.wstx.util.StringUtil;
+
 import com.nkang.kxmoment.baseobject.FaceObj;
-import com.nkang.kxmoment.baseobject.WeChatMDLUser;
-import com.nkang.kxmoment.service.CoreService;
 import com.nkang.kxmoment.util.CommenJsonUtil;
 import com.nkang.kxmoment.util.FaceCalUtil;
 import com.nkang.kxmoment.util.FaceRecognition;
-import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.NumberUtil;
 import com.nkang.kxmoment.util.StringUtils;
 import com.nkang.kxmoment.util.Constants;
