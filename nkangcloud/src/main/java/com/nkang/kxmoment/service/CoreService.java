@@ -342,21 +342,21 @@ public class CoreService
 						articleList.add(article);
 						
 						Article articlenav1 = new Article();
-						articlenav1.setTitle("南坪校区[TEL:023-62387134]\n南坪万达广场2号写字楼11-6"); //九龙坡区铁路村198号
+						articlenav1.setTitle("南坪校区[TEL:023-62387134 | MOB：13372680273]\n南坪万达广场2号写字楼11-6"); //九龙坡区铁路村198号
 						articlenav1.setDescription("南坪校区[TEL:023-62387134]");
 						articlenav1.setPicUrl(navPic);
 						articlenav1.setUrl("http://m.amap.com/search/view/keywords=%E5%8D%97%E5%9D%AA%E4%B8%87%E8%BE%BE%E5%B9%BF%E5%9C%BA2%E5%8F%B7%E5%86%99%E5%AD%97%E6%A5%BC11-6%20");
 						articleList.add(articlenav1);
 						
 						Article articlenav2 = new Article();
-						articlenav2.setTitle("江北观音桥校区[TEL:023-67616306]\n观音桥中信大厦25-10"); //港城工业园区C区
+						articlenav2.setTitle("江北校区[TEL:023-67616306 | MOB：18102381821]\n红旗河沟佰乐街2栋5-14"); //港城工业园区C区
 						articlenav2.setDescription("江北校区[TEL:023-67616306]");
 						articlenav2.setPicUrl(navPic);
-						articlenav2.setUrl("http://m.amap.com/search/view/keywords=%E8%A7%82%E9%9F%B3%E6%A1%A5%E4%B8%AD%E4%BF%A1%E5%A4%A7%E5%8E%A625-10");
+						articlenav2.setUrl("https://m.amap.com/search/mapview/markers=29.584467%2C106.526931%2C%E9%87%8D%E5%BA%86%E5%B8%82%E6%B1%9F%E5%8C%97%E5%8C%BA%E4%BD%B0%E4%B9%90%E8%A1%972");
 						articleList.add(articlenav2);
 						
 						Article articlenav4 = new Article();
-						articlenav4.setTitle("李家沱校区[TEL:023-67505761]\n李家沱都和广场A栋30-5"); //重庆沙坪坝区土主镇西部物流园区中石油仓储中心
+						articlenav4.setTitle("李家沱校区[TEL:023-67505761 | MOB：18423316164]\n李家沱都和广场A栋30-5"); //重庆沙坪坝区土主镇西部物流园区中石油仓储中心
 						articlenav4.setDescription("李家沱校区[TEL:023-67505761]");
 						articlenav4.setPicUrl(navPic);
 						articlenav4.setUrl("http://m.amap.com/search/view/keywords=%E6%9D%8E%E5%AE%B6%E6%B2%B1%E9%83%BD%E5%92%8C%E5%B9%BF%E5%9C%BAA%E6%A0%8B30-5");
@@ -370,7 +370,7 @@ public class CoreService
 						articleList.add(articlenav3);
 												
 						Article articlenav6 = new Article();
-						articlenav6.setTitle("江北区青少年宫[TEL:13372680273]\n江北区青少年宫（石子山公园内）");
+						articlenav6.setTitle("青少年宫[TEL:15826269989]\n江北区青少年宫（石子山公园内）");
 						articlenav6.setDescription("石子山公园内");
 						articlenav6.setPicUrl(navPic);
 						articlenav6.setUrl("http://m.amap.com/search/mapview/keywords=%E7%9F%B3%E5%AD%90%E5%B1%B1%E4%BD%93%E8%82%B2%E5%85%AC%E5%9B%AD%E7%AF%AE%E7%90%83%E5%9C%BA&city=500105&poiid=B0FFH0QH92");
