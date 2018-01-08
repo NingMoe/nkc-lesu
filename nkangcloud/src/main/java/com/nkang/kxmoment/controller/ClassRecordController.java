@@ -44,6 +44,18 @@ public class ClassRecordController {
 		
 	}
 	
+	//updateStudentSendClass(String OpenID, int send)
+	
+	@RequestMapping("/updateStudentSendClass")
+	public @ResponseBody String UpdateStudentSendClass(@RequestParam(value = "openID") String openid,@RequestParam(value = "send") int send){
+		if(MongoDBBasic.updateStudentSendClass(openid,send)){
+			return "success";
+		}
+		
+		return "failed";
+		
+		
+	}
 //	ClassRecord/addClasspayrecord?payOption=YY语音&payMoney=2230&classCount=20&payTime=2018-01-05&studentName=march&studentOpenID=oO8exvzE95JUvwpNxNTxraOqzUFI
 	@RequestMapping("/addClasspayrecord")
 	public @ResponseBody String AddClasspayrecord(HttpServletRequest request, HttpServletResponse response,
