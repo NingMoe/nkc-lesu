@@ -4448,19 +4448,21 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 	// parentConfirmTime
 	public static boolean parentConfirmTime(String time) {
 		mongoDB = getMongoDB();
+		//DBObject dbob = new BasicDBObject();
 		Boolean ret = false;
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime());
 		try {
 			DBObject dbo = new BasicDBObject();
 			dbo.put("parentConfirmExpense", "yes");
-			dbo.put("parentConfirmTime", cursqlTS);
+			dbo.put("parentConfirmTime", DateUtil.timestamp2Str(cursqlTS));
 			BasicDBObject doc = new BasicDBObject();
 			doc.put("$set", dbo);
 			BasicDBObject db=new BasicDBObject();
 			db.append("teacherConfirmTime",time);
 			
-			mongoDB.getCollection(collectionClassExpenseRecord).update(db, doc);
-			//WriteResult wrt = mongoDB.getCollection(collectionClassExpenseRecord).update(new BasicDBObject().append("teacherConfirmTime", time), doc);
+			//dbob = mongoDB.getCollection(collectionClassExpenseRecord).findOne(db);
+			//mongoDB.getCollection(collectionClassExpenseRecord).update(db, doc);
+			mongoDB.getCollection(collectionClassExpenseRecord).update(new BasicDBObject().append("teacherConfirmTime", time), doc);
 			ret = true;
 			/*
 			DBCursor dbcur = mongoDB.getCollection(collectionClassExpenseRecord).find(new BasicDBObject().append("teacherConfirmTime", time));
@@ -4468,7 +4470,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				
 			}*/
 		} catch (Exception e) {
-			log.info("updateClassExpenseRecord--" + e.getMessage());
+			log.info("parentConfirmTime--" + e.getMessage());
 		}
 		return ret;
 	}
