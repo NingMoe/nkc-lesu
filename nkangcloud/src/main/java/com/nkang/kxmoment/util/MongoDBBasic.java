@@ -4267,6 +4267,36 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		return ret;
 	}
 
+	public static boolean updateStudentSendClass(String OpenID, int send) {
+		mongoDB = getMongoDB();
+		Boolean ret = false;
+		DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", OpenID));
+		if (null != dbcur) {
+			while (dbcur.hasNext()) {
+				int sent = 0;
+				DBObject teamer = dbcur.next();
+				Object tea = teamer.get("Teamer");
+				DBObject teamobj = new BasicDBObject();
+				teamobj = (DBObject) tea;
+				if (teamobj != null) {
+					
+					if(teamobj.get("leftSendClass")!=null && !"".equals(teamobj.get("leftSendClass")+"")){
+						sent = Integer.parseInt(teamobj.get("totalClass")+"");
+					}
+					sent = sent+send;
+				}
+				DBObject dbo = new BasicDBObject();
+			    dbo.put("Teamer.leftSendClass", sent);
+				BasicDBObject doc = new BasicDBObject();
+				doc.put("$set", dbo);
+				WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), doc);
+				ret = true;
+			}
+		}
+		return ret;
+		
+	}
+	
 	
 	public static boolean addClasspayrecord(Classpayrecord classpr) {
 		mongoDB = getMongoDB();
