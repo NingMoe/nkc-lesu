@@ -4272,6 +4272,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		if (null != dbcur) {
 			while (dbcur.hasNext()) {
 				int sent = 0;
+				int total=0;
 				DBObject teamer = dbcur.next();
 				Object tea = teamer.get("Teamer");
 				DBObject teamobj = new BasicDBObject();
@@ -4281,10 +4282,15 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					if(teamobj.get("leftSendClass")!=null && !"".equals(teamobj.get("leftSendClass")+"")){
 						sent = Integer.parseInt(teamobj.get("totalClass")+"");
 					}
+					if(teamobj.get("totalClass")!=null && !"".equals(teamobj.get("totalClass")+"")){
+						total = Integer.parseInt(teamobj.get("totalClass")+"");
+					}
 				}
 				sent = sent+send;
+				total=total+send;
 				DBObject dbo = new BasicDBObject();
 			    dbo.put("Teamer.leftSendClass", sent);
+			    dbo.put("Teamer.totalClass",total);
 				BasicDBObject doc = new BasicDBObject();
 				doc.put("$set", dbo);
 				WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), doc);
