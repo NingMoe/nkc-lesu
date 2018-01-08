@@ -12,7 +12,7 @@ import com.nkang.kxmoment.baseobject.classhourrecord.Classexpenserecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classpayrecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation;
 import com.nkang.kxmoment.util.MongoDBBasic;
-//ClassRecord/updateStudentBasicInformation?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&enrolledTime=2018-1-5&enrolledWay=lao&district=chongqing&totalClass=9&expenseClass=8&leftPayClass=8&leftSendClass=6
+//ClassRecord/updateStudentBasicInformation?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&enrolledTime=2018-1-5&enrolledWay=lao&district=chongqing
 @Controller
 @RequestMapping("/ClassRecord")
 public class ClassRecordController {
@@ -21,25 +21,26 @@ public class ClassRecordController {
 			@RequestParam(value = "openID") String openid,
 			@RequestParam(value = "enrolledTime") String enrolledTime,
 			@RequestParam(value = "enrolledWay") String enrolledWay,
-			@RequestParam(value = "district") String district,
-			@RequestParam(value = "totalClass") String totalClass,
-			@RequestParam(value = "expenseClass") String expenseClass,
-			@RequestParam(value = "leftPayClass") String leftPayClass,
-			@RequestParam(value = "leftSendClass") String leftSendClass)
+			@RequestParam(value = "district") String district
+			//@RequestParam(value = "totalClass") String totalClass,
+			//@RequestParam(value = "expenseClass") String expenseClass,
+			//@RequestParam(value = "leftPayClass") String leftPayClass,
+			//@RequestParam(value = "leftSendClass") String leftSendClass
+			)
 	{
 		StudentBasicInformation stInfor = new StudentBasicInformation();
 		stInfor.setDistrict(district);
 		stInfor.setEnrolledTime(enrolledTime);
 		stInfor.setEnrolledWay(enrolledWay);
-		stInfor.setExpenseClass(2);
-		stInfor.setLeftPayClass(5);
-		stInfor.setLeftSendClass(2);
-		stInfor.setOpenID("oO8exvzE95JUvwpNxNTxraOqzUFI");
-		stInfor.setTotalClass(9);
+		//stInfor.setExpenseClass(0);
+		//stInfor.setLeftPayClass(0);
+		//stInfor.setLeftSendClass(0);
+		stInfor.setOpenID(openid);
+		//stInfor.setTotalClass(0);
 		if(MongoDBBasic.updateStudentBasicInformation(stInfor)){
 			return "success";
 		}
-		return leftSendClass;
+		return "failed";
 		
 	}
 	
@@ -71,7 +72,7 @@ public class ClassRecordController {
 			return "succss";
 		}
 		
-				return studentOpenID;
+				return "failed";
 		
 		
 	}
@@ -117,7 +118,7 @@ public class ClassRecordController {
 			return "succss";
 		}
 		
-				return studentOpenID;
+		return "failed";
 		
 		
 	}

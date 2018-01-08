@@ -4239,8 +4239,6 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 //	--------------------------------------------- CLASS RECORD
 	public static boolean updateStudentBasicInformation(StudentBasicInformation stInfor) {
 		mongoDB = getMongoDB();
-//		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(
-//				new java.util.Date().getTime());
 		Boolean ret = false;
 		String OpenID = stInfor.getOpenID();
 		try {
@@ -4248,20 +4246,14 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					new BasicDBObject().append("OpenID", OpenID));
 			if (null != dbcur) {
 				while (dbcur.hasNext()) {
-					DBObject o = dbcur.next();
 					DBObject dbo = new BasicDBObject();
-					
 					dbo.put("Teamer.enrolledTime", stInfor.getEnrolledTime());
 				    dbo.put("Teamer.enrolledWay", stInfor.getEnrolledWay());
 					dbo.put("Teamer.district", stInfor.getDistrict());
-					dbo.put("Teamer.totalClass", stInfor.getTotalClass());
-					dbo.put("Teamer.expenseClass", stInfor.getExpenseClass());
-					dbo.put("Teamer.leftPayClass", stInfor.getLeftPayClass());
-				    dbo.put("Teamer.leftSendClass", stInfor.getLeftSendClass());
-//					Object teamer = o.get("Teamer");
-//					if (teamer == null) {
-//						dbo.put("Teamer.registerDate", teamer.getRegisterDate());
-//					}
+					//dbo.put("Teamer.totalClass", stInfor.getTotalClass());
+					//dbo.put("Teamer.expenseClass", stInfor.getExpenseClass());
+					//dbo.put("Teamer.leftPayClass", stInfor.getLeftPayClass());
+				   //dbo.put("Teamer.leftSendClass", stInfor.getLeftSendClass());
 					BasicDBObject doc = new BasicDBObject();
 					doc.put("$set", dbo);
 					WriteResult wr = mongoDB.getCollection(wechat_user).update(
@@ -4293,11 +4285,35 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		
 			
 			WriteResult wr = mongoDB.getCollection(collectionClassPayRecord).insert(dbo);
-			ret = true;
-			
+			DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", classpr.getStudentOpenID()));
+			while(dbcur.hasNext()){
+				DBObject o = dbcur.next();
+				Object teamer = o.get("Teamer");
+				DBObject updatedbo = new BasicDBObject();
+				DBObject teamobj = new BasicDBObject();
+				teamobj = (DBObject) teamer;
+				if (teamobj != null) {
+					int total = 0;
+					int leftPay=0;
+					if(teamobj.get("totalClass")!=null && !"".equals(teamobj.get("totalClass")+"")){
+						total = Integer.parseInt(teamobj.get("totalClass")+"");
+					}
+					if((teamobj.get("leftPayClass"))!=null && !"".equals(teamobj.get("leftPayClass")+"")){
+						leftPay = Integer.parseInt(teamobj.get("leftPayClass")+"");
+					}
+					updatedbo.put("Teamer.totalClass", total+classpr.getClassCount());
+					
+					updatedbo.put("Teamer.leftPayClass", classpr.getClassCount()+leftPay);
+					}
+					BasicDBObject doc = new BasicDBObject();
+					doc.put("$set", updatedbo);
+					WriteResult wrt = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", classpr.getStudentOpenID()), doc);
+					ret = true;
+				}
+
 		} catch (Exception e) {
 			log.info("addClasspayrecord--" + e.getMessage());
-		}
+			}
 		return ret;
 	}
 //	collectionClassExpenseRecord
@@ -4305,7 +4321,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 	public static boolean addClassExpenseRecord(Classexpenserecord exrecord) {
 		mongoDB = getMongoDB();
 		Boolean ret = false;
-
+		Boolean ret1 = false;
 		try {
 			DBObject dbo = new BasicDBObject();
 			
@@ -4325,10 +4341,66 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			
 			WriteResult wr = mongoDB.getCollection(collectionClassExpenseRecord).insert(dbo);
 			ret = true;
+			if(ret){
+				DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", exrecord.getStudentOpenID()));
+				while(dbcur.hasNext()){
+					DBObject o = dbcur.next();
+					Object teamer = o.get("Teamer");
+					DBObject updatedbo = new BasicDBObject();
+					DBObject teamobj = new BasicDBObject();
+					teamobj = (DBObject) teamer;
+					if (teamobj != null) {
+						if(teamobj.get("totalClass")==null || "".equals(teamobj.get("totalClass")+"")){
+							return false;
+						}
+						int total = Integer.parseInt(teamobj.get("totalClass")+"");
+						if(total<=0){
+							total=0;
+						}else if(null!=exrecord.getExpenseClassCount()&&!"".equals(exrecord.getExpenseClassCount())){
+							total=total-Integer.parseInt(exrecord.getExpenseClassCount());
+						}if(total<=0){
+							total=0;
+						}
+						
+						int expense = 0;
+						if(teamobj.get("expenseClass")!=null && !"".equals(teamobj.get("expenseClass")+"")){
+							expense = Integer.parseInt(teamobj.get("expenseClass")+"");
+							
+						}if(null!=exrecord.getExpenseClassCount()&&!"".equals(exrecord.getExpenseClassCount())){
+							expense=expense+Integer.parseInt(exrecord.getExpenseClassCount().trim());
+						}
+						
+						int leftPay = 0;
+						int leftsend=0;
+						if((teamobj.get("leftPayClass"))!=null && !"".equals(teamobj.get("leftPayClass")+"")){
+							leftPay = Integer.parseInt(teamobj.get("leftPayClass")+"");
+						}if(null!=exrecord.getExpenseClassCount()&&!"".equals(exrecord.getExpenseClassCount())){
+							leftPay = leftPay - Integer.parseInt(exrecord.getExpenseClassCount());
+						}if(leftPay<=0){
+							if((teamobj.get("leftSendClass"))!=null && !"".equals(teamobj.get("leftSendClass")+"")){
+								leftsend = Integer.parseInt(teamobj.get("leftSendClass")+"")-Math.abs(leftPay);
+							}if(leftsend<=0){
+								leftsend=0;
+							}
+							
+							leftPay = 0;
+						}
+						
+						updatedbo.put("Teamer.totalClass",total);
+						updatedbo.put("Teamer.expenseClass", expense);
+						updatedbo.put("Teamer.leftSendClass",leftsend );
+						updatedbo.put("Teamer.leftPayClass", leftPay);
+						BasicDBObject doc = new BasicDBObject();
+						doc.put("$set", updatedbo);
+						WriteResult wrt = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", exrecord.getStudentOpenID()), doc);
+						ret1 = true;
+					}
+				}
+			}
 			
 		} catch (Exception e) {
 			log.info("updateClassExpenseRecord--" + e.getMessage());
 		}
-		return ret;
+		return ret1;
 	}
 }
