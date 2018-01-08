@@ -125,9 +125,9 @@
 				ab_vauleinfo.html( '' );
 				ab_vauleinfo.append( '<span name="addr_c" id="addr_c">'+addr_obj.sheng+'</span>' );
 				if( addr_obj.shi !== '' &&  addr_obj.shi !== addr_obj.sheng){
-					ab_vauleinfo.append( '<span class="sep" name="addr_d" id="addr_d">/</span><span>'+addr_obj.shi+'</span>' );
+					ab_vauleinfo.append( '<span class="sep">/</span><span name="addr_d" id="addr_d">'+addr_obj.shi+'</span>' );
 					if( addr_obj.qu !== '' ){
-						ab_vauleinfo.append( '<span class="sep" name="addr_s" id="addr_s">/</span><span>'+addr_obj.qu+'</span>' );
+						ab_vauleinfo.append( '<span class="sep">/</span><span name="addr_s" id="addr_s">'+addr_obj.qu+'</span>' );
 					}
 				}
 				else if( addr_obj.shi !== '' &&  addr_obj.shi === addr_obj.sheng){
