@@ -45,7 +45,7 @@ public class ClassRecordController {
 	}
 	
 	//updateStudentSendClass(String OpenID, int send)
-	
+	//http://leshucq.bceapp.com/ClassRecord/updateStudentSendClass?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&send=2
 	@RequestMapping("/updateStudentSendClass")
 	public @ResponseBody String UpdateStudentSendClass(@RequestParam(value = "openID") String openid,@RequestParam(value = "send") int send){
 		if(MongoDBBasic.updateStudentSendClass(openid,send)){
