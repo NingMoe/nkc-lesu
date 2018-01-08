@@ -18,6 +18,7 @@
 	</head>
 	<script type="text/javascript">
 		$(function(){
+			var identifycode = "identifycode";
 			//初始化地址控件
 			$('#home_addr').czl_addressbox({});
 			
@@ -40,6 +41,18 @@
 					isValided=0;
 					return false;
 				}
+				
+				var useridentifycode=$("#user_identifycode").val();
+				if(useridentifycode == ""){
+					alert("验证码不能为空，请输入您所获取的验证码或重新获取");
+					isValided=0;
+					return false;
+				}else if(identifycode != useridentifycode){
+					alert("您输入的验证码不正确，请输入您所获取的验证码或重新获取");
+					isValided=0;
+					return false;
+				}
+				
 				var addr_c=$("#addr_c").text();
 				if(addr_c==""){
 					alert("请选择所在城市");
@@ -106,7 +119,49 @@
 				})
 			}
 			})
-		
+			
+			$("#user_identifybt").click(function(){
+				var isMobile=/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;  
+				var isPhone=/^((0\d{2,3})-)?(\d{7,8})(-(\d{3,}))?$/;
+				var tel=$("#user_mobile").val();
+				if(tel=='' || !isMobile.test(tel)){
+					alert("请输入正确的手机号码，方便我们联系到您");
+					return;
+				}
+				
+				identifycode = MathRand();
+				
+				$.ajax({
+			        cache: false,
+			        type: "POST",
+			        url:"../../sendValidateCode",
+			        data:{
+			        	phone:tel,
+			        	code:identifycode
+			        },
+			        async: true,
+			        error: function(request) {
+			            alert("发送失败，请稍后再试！");
+			        },
+			        success: function(data) {
+			        	if(data=="OK"){
+			        		alert("验证码已发送成功");
+				        	//swal("恭喜!", "已收到您的请求，请耐心等候", "success");
+				        	return;
+			        	}
+			        }
+			    });
+				
+			})
+			
+			function MathRand(){ 
+				var Num=""; 
+				for(var i=0;i<6;i++){ 
+					Num+=Math.floor(Math.random()*10); 
+				}
+				return Num;
+			}
+			
 		});
 	</script>
 	<body style="height: 96%">
@@ -117,7 +172,7 @@
 	     	</center>
      	</div>
 		<!-- detail information -->
-		<div style="background:#20b672; height: 100%; padding: 10% 10% 10%;">
+		<div style="background:#20b672; height: 100%; padding: 2% 10% 5%;">
 			<center>
 				<img src="sign_txt.png" alt="体验！">
 			</center>
@@ -127,7 +182,9 @@
 			</div>
 			<div class="form-group input-group" style="width: 100%">
 				 <!-- <span class="input-group-addon">*</span> -->
-				<input class="form-control" name="user_mobile" placeholder="请输入您的手机号码" type="text" id="user_mobile">
+				<input class="form-control" name="user_mobile" placeholder="请输入您的手机号码" type="text" id="user_mobile" style="width: 55%;border-radius:0px;">
+				<button type="button" class="btn btn-default" id="user_identifybt" style="width: 15%;padding-left: 6px;padding-right: 6px;border-radius:0px;">获取</button>
+				<input class="form-control" name="user_identifycode" placeholder="验证码" type="text" id="user_identifycode" style="width: 30%;border-radius:0px;">
 			</div>
 			<!--AddressBox-->
 			<div id="home_addr" class="form-group input-group zl_addressbox" style="width: 100%;border:1px solid #cccccc" >
