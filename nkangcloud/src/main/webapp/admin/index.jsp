@@ -259,8 +259,8 @@ $(window).load(function() {
 		$(this).addClass("editBtn");
 		var openid=$(this).find("span.openid").text();
 		var name=$(this).find("span.name").text();
-		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\",\""+name+"\")'><img src='../mdm/images/edit.png' slt='' /><p style='font-size: 14px;position: absolute;height: 60px;line-height: 20px;top: 48px;'>信息编辑</p></p></div>");
-		$(this).append("<div class='edit km'><p onclick='showClassPanel(\""+openid+"\",\""+name+"\")'>***<br/><p style='font-size: 14px;position: absolute;height: 60px;line-height: 20px;top: 50px;'>课时管理</p></p></div>");
+		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\",\""+name+"\")'><img src='../mdm/images/edit.png' alt='' /><p style='font-size: 14px;position: absolute;height: 60px;line-height: 20px;top: 48px;left:15px;'>信息编辑</p></p></div>");
+		$(this).append("<div class='edit km'><p onclick='showClassPanel(\""+openid+"\",\""+name+"\")'><img src='http://leshucq.bj.bcebos.com/standard/classunit.png' alt='' /><p style='font-size: 14px;position: absolute;height: 60px;line-height: 20px;top: 28px;left:15px;'>课时管理</p></p></div>");
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
@@ -477,12 +477,14 @@ function showClassPanel(openid,name){
 			            +'														<td><p class="classText">报名渠道</p></td>'
 			            +'														<td><select class="editInput"  name="from">'
 			         //   +roleSelect
+			         	+'															<option selected>老带新</option><option>网络</option><option>广告</option><option>其他</option>'
 			            +'													    </select></td>'
 			            +'													</tr>'
 			            +'													<tr>'
 			            +'														<td><p class="classText">报名校区</p></td>'
 			            +'														<td><select class="editInput"  name="district">'
 			         //   +roleSelect
+			         	+'															<option selected>江北校区</option><option>李家沱校区</option><option>南坪校区</option><option>杨家坪校区</option><option>青少年宫</option>'
 			            +'													    </select></td>'
 			            +'													</tr>'			            
 			            +'													<tr>'
