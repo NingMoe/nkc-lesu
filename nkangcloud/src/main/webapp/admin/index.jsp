@@ -200,6 +200,29 @@ ul li.singleQuote .firstLayer  .change{
 .clear{
 	clear:both;
 }
+.editText{
+    margin: 0;
+    margin-top: 8px;
+}
+
+.classText{
+    margin: 0;
+    margin-top: 8px;
+    width:100px;
+}
+.editInput{
+    height: 30px;
+    padding-left: 10px;
+    margin-top: 10px;
+    border-radius: 5px!important;
+    margin-left: 5px;}
+.radioInput{
+	margin:0!important;
+    margin-left: 20px!important;
+    margin-right: 5px!important;}
+.radioText{
+    margin-top: 10px;
+    display: inline-block;}
 </style>
 <script type="text/javascript">
 $(function(){  
@@ -236,7 +259,7 @@ $(window).load(function() {
 		var openid=$(this).find("span.openid").text();
 		var name=$(this).find("span.name").text();
 		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\",\""+name+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
-		$(this).append("<div class='edit km'><p onclick='showKMPanel(\""+openid+"\",\""+name+"\")'>***<br/>管理</p></div>");
+		$(this).append("<div class='edit km'><p onclick='showClassPanel(\""+openid+"\",\""+name+"\")'>***<br/>管理</p></div>");
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
@@ -366,12 +389,157 @@ function findTeacherList(){
 	});
 	
 }
+function showClassPanel(openid,name){
+	showCommonPanel();
+	//findTeacherList();
+	$(".Work_Mates_div_list_div2").removeClass("editBtn");
+	$(".Work_Mates_div_list_div2").remove(".edit");
+	$("body").append('<div id="UpdateClassPart" class="bouncePart" style="position:fixed;z-index:999;top:90px;width:90%;margin-left:6%;"><legend>编辑【'+name+'】的课时信息</legend><div id="UpdateClassPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+			+'<center>正在加载中...</center>'		
+	+'						</div>');
+	$('#UpdateClassPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass("bounceInDown animated");
+	 });
+	/* 	jQuery.ajax({
+		type : "GET",
+		url : "../CallGetWeChatUserFromMongoDB",
+		data : {
+			openid : openid
+		},
+		cache : false,
+		success : function(data) {
+			if (data.length > 0) {
+				var IsRegistered=data[0].IsRegistered==null?'false':data[0].IsRegistered;
+				var IsAuthenticated=data[0].IsAuthenticated==null?'false':data[0].IsAuthenticated;
+				var IsActived=data[0].isActive==null?'false':data[0].isActive;
+				var isAdmin=data[0].isAdmin==null?'false':data[0].isAdmin;
+				var isSmsTeam=data[0].isSmsTeam==null?'false':data[0].isSmsTeam;
+				var registerDate=data[0].registerDate==null?'':data[0].registerDate.replace(/\//g,"-");
+				var realName=data[0].realName==null?'':data[0].realName;
+				var phone=data[0].phone==null?'':data[0].phone;
+				var email=data[0].email==null?'':data[0].email;
+				var role=data[0].role==null?'':data[0].role;
+				var levelList=new Array('basic','primary','middle','high');
+				var levelNameList=new Array('启蒙','初级','中级','高级');
+				var selectedName="";
+				var selectedTeacherName="";
+				var level=data[0].level==null?'':data[0].level;
+				var teacher=data[0].teacher==null?'':data[0].teacher;
+				if(level!=''){
+					for(var q=0;q<levelList.length;q++){
+						if(level==levelList[q]){
+							levelList.splice(q,1);
+							selectedName=levelNameList[q];
+							levelNameList.splice(q,1);
+							break;
+						}
+					}
+				}
+				if(teacher!=''){
+					for(var p=0;p<teacherIds.length;p++){
+						if(teacher==teacherIds[p]){
+							teacherIds.splice(p,1);
+							selectedTeacherName=teacherNames[p];
+							teacherNames.splice(p,1);
+							break;
+						}
+					}
+				}
+				var levelSelect="<option selected='true' value='"+level+"'>"+selectedName+"</option>";
+				for(var p=0;p<levelList.length;p++){
+					levelSelect+="<option value='"+levelList[p]+"'>"+levelNameList[p]+"</option>";
+				}
+
+				var teacherSelect="<option selected='true' value='"+teacher+"'>"+selectedTeacherName+"</option>";
+				for(var p=0;p<teacherIds.length;p++){
+					teacherSelect+="<option value='"+teacherIds[p]+"'>"+teacherNames[p]+"</option>";
+				}
+				var selfIntro=data[0].selfIntro==null?'':data[0].selfIntro;
+				var roleSelect='														<option value="">-请选择-</option>';
+				for(var i=0;i<RoleList.length;i++){
+					if(role==RoleList[i].id){
+						roleSelect+='														<option selected="true" value="'+RoleList[i].id+'">'+RoleList[i].name+'</option>';
+					}else{
+						roleSelect+='														<option value="'+RoleList[i].id+'">'+RoleList[i].name+'</option>';
+					}
+				} */
+				$("#UpdateClassPartDiv").html('<form id="atest">'
+			            +'												<input type="hidden" name="uid" id="atest_uid" value="'+openid+'"/>'
+			            +'												<table id="tableForm" style="margin-top:-10px;width:100%;">'
+			            +'												    <tr>'
+			            +'													    <td><p class="classText">报名时间</p></td>'
+			            +'													    <td align="left" class="tdText" >'
+			            +'													    	<input class="editInput"  name="registerDate" type="date" id="registerDate" required  value="">'
+			            +'													    </td>'
+			            +'												    </tr>'
+			            +'													<tr>'
+			            +'														<td><p class="classText">报名渠道</p></td>'
+			            +'														<td><select class="editInput"  name="from">'
+			         //   +roleSelect
+			            +'													    </select></td>'
+			            +'													</tr>'
+			            +'													<tr>'
+			            +'														<td><p class="classText">报名校区</p></td>'
+			            +'														<td><select class="editInput"  name="district">'
+			         //   +roleSelect
+			            +'													    </select></td>'
+			            +'													</tr>'			            
+			            +'													<tr>'
+			            +'														<td><p class="classText">总课时</p></td>'
+			            +'														<td><input class="editInput" type="text" name="totalClass" value=""/></td>'
+			            +'													</tr>'
+			            +'													<tr>'
+			            +'														<td><p class="classText">已经消费课时</p></td>'
+			            +'														<td><input class="editInput" type="text" name="usedClass" value=""/></td>'
+			            +'													</tr>'
+			            +'													<tr>'
+			            +'														<td><p class="classText">剩余购买课时</p></td>'
+			            +'														<td><input class="editInput" type="text" name="leftClass" value=""/></td>'
+			            +'													</tr>'
+			            +'													<tr>'
+			            +'														<td><p class="classText">剩余赠与课时</p></td>'
+			            +'														<td><input class="editInput" type="text" name="LeftGiftClass" value=""/></td>'
+			            +'													</tr>'
+			            +'												 </table>'
+			            +'												 </form>'
+			            +'												 <button class="btnAthena EbtnLess" style="background-color:#20b672;margin-left: 90px;margin-top:15px;" id="updateUserInfoBtn">确定</button>');
+				$("#updateUserInfoBtn").click(function(){
+					/*					var isRegistered = $("input[name='isRegistered']:checked").val();
+					var registerDate = $("#registerDate").val();
+					if(isRegistered==null || registerDate==null){
+						swal("修改信息失败", "请输入正确的信息", "error");
+					}
+					var datas=$("#atest").serialize();
+ 					$.ajax({
+						url:"../updateUserInfo",
+						data:datas,
+						type:"POST",
+						dataType:"json",
+						contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+						cache:false,
+						async:false,
+						success:function(result) {
+							if(result){
+								swal("更改成功!", "恭喜!", "success"); 
+								hideBouncePanel();
+								getMDLUserLists();
+							} else {
+								swal("更改失败!", "请填写正确的信息.", "error");
+							}
+						}
+					}); */
+				});
+/* 			}
+		}
+	}); */
+}
+
 function showUpdateUserPanel(openid,name){
 	showCommonPanel();
 	findTeacherList();
 	$(".Work_Mates_div_list_div2").removeClass("editBtn");
 	$(".Work_Mates_div_list_div2").remove(".edit");
-	$("body").append('<div id="UpdateUserPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑【'+name+'】的基本信息</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+	$("body").append('<div id="UpdateUserPart" class="bouncePart" style="position:fixed;z-index:999;top:90px;width:80%;margin-left:10%;"><legend>编辑【'+name+'】的基本信息</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<center>正在加载中...</center>'		
 	+'						</div>');
 	$('#UpdateUserPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -442,76 +610,75 @@ function showUpdateUserPanel(openid,name){
 				}
 				$("#UpdateUserPartDiv").html('<form id="atest">'
 			            +'												<input type="hidden" name="uid" id="atest_uid" value="'+openid+'"/>'
-			            +'												<table id="tableForm" style="margin-top:-20px;">'
+			            +'												<table id="tableForm" style="margin-top:-10px;width:100%;">'
 			            +'													<tr>'
-			            +'														<td><nobr>真实姓名:</nobr></td>'
-			            +'														<td><input type="text" name="realName" value="'+realName+'"/></td>'
+			            +'														<td><p class="editText">真实姓名</p></td>'
+			            +'														<td><input class="editInput" type="text" name="realName" value="'+realName+'"/></td>'
 			            +'													</tr>'
 			            +'													<tr>'
-			            +'														<td>手机号码:</td>'
-			            +'														<td><input type="text" name="phone" value="'+phone+'"/></td>'
+			            +'														<td><p class="editText">手机号码</p></td>'
+			            +'														<td><input class="editInput" type="text" name="phone" value="'+phone+'"/></td>'
 			            +'													</tr>'
 			            /* +'													<tr>'
 			            +'														<td>电子邮箱:</td>'
 			            +'														<td><input type="text" name="email" value="'+email+'"/></td>'
 			            +'													</tr>' */
 			            +'													<tr>'
-			            +'														<td>用户角色:</td>'
+			            +'														<td><p class="editText">用户角色</p></td>'
 			           /*  +'														<td><input type="text" name="role" value="'+role+'"/></td>' */
-			            +'														<td><select  name="role">'
+			            +'														<td><select class="editInput"  name="role">'
 			            +roleSelect
 			            +'													    </select></td>'
 			            +'													</tr>'
 			            +'													<tr>'
-			            +'														<td>乐数老师:</td>'
+			            +'														<td><p class="editText">乐数老师</p></td>'
 			           /*  +'														<td><input type="text" name="role" value="'+role+'"/></td>' */
-			            +'														<td><select  name="teacher">'
+			            +'														<td><select class="editInput" name="teacher">'
 			            +teacherSelect
 			            +'													    </select></td>'
 			            +'													</tr>'
 			            +'													<tr>'
-			            +'														<td>学员级别:</td>'
-			            +'														<td><select  name="level">'
+			            +'														<td><p class="editText">学员级别</p></td>'
+			            +'														<td><select class="editInput"  name="level">'
 			            +levelSelect
 			            +'													    </select></td>'
 			            +'													</tr>'
 			            +'												    <tr>'
-			            +'													    <td>注册时间:</td>'
+			            +'													    <td><p class="editText">注册时间</p></td>'
 			            +'													    <td align="left" class="tdText" >'
-			            +'													    	<input name="registerDate" type="date" id="registerDate" required style="text-align: -webkit-center; width: 130px;"  value="'+registerDate+'">'
+			            +'													    	<input class="editInput"  name="registerDate" type="date" id="registerDate" required  value="'+registerDate+'">'
 			            +'													    </td>'
 			            +'												    </tr>'
 			            +'												    <tr>'
-			            +'												        <td>确认注册:</td>'
+			            +'												        <td><p class="editText">确认注册</p></td>'
 			            +'												        <td  align="left" class="tdText">'
-			            +'												        	<input type="radio" name="isRegistered" value="true"  '+(IsRegistered=="true"?'checked="checked"':'')+' />是&nbsp;&nbsp;&nbsp;<input type="radio" name="isRegistered" '+(IsRegistered!="true"?'checked="checked"':'')+' value="false"/>否'
+			            +'												        	<input class="radioInput" type="radio" name="isRegistered" value="true"  '+(IsRegistered=="true"?'checked="checked"':'')+' /><span class="radioText">是</span><input class="radioInput" type="radio" name="isRegistered" '+(IsRegistered!="true"?'checked="checked"':'')+' value="false"/><span class="radioText">否</span>'
 			            +'												        </td>'
 			            +'												    </tr> '
 			            +'												    <tr>'
-			            +'												        <td>聊天组:</td>'
+			            +'												        <td><p class="editText">聊天组</p></td>'
 			            +'												        <td  align="left" class="tdText">'
-			            +'												        	<input type="radio" name="isActived" value="true"  '+(IsActived=="true"?'checked="checked"':'')+' />是&nbsp;&nbsp;&nbsp;<input type="radio" name="isActived" '+(IsActived!="true"?'checked="checked"':'')+' value="false"/>否'
+			            +'												        	<input class="radioInput" type="radio" name="isActived" value="true"  '+(IsActived=="true"?'checked="checked"':'')+' /><span class="radioText">是</span><input class="radioInput" type="radio" name="isActived" '+(IsActived!="true"?'checked="checked"':'')+' value="false"/>否'
 			            +'												        </td>'
 			            +'												    </tr> '
 			            +'												    <tr>'
-			            +'												        <td>消息推送:</td>'
+			            +'												        <td><p class="editText">消息推送</p></td>'
 			            +'												        <td  align="left" class="tdText">'
-			            +'												        	<input type="radio" name="isAuthenticated" value="true"  '+(IsAuthenticated=="true"?'checked="checked"':'')+' />是&nbsp;&nbsp;&nbsp;<input type="radio" name="isAuthenticated" '+(IsAuthenticated!="true"?'checked="checked"':'')+' value="false"/>否'
+			            +'												        	<input class="radioInput" type="radio" name="isAuthenticated" value="true"  '+(IsAuthenticated=="true"?'checked="checked"':'')+' /><span class="radioText">是</span><input class="radioInput" type="radio" name="isAuthenticated" '+(IsAuthenticated!="true"?'checked="checked"':'')+' value="false"/><span class="radioText">否</span>'
 			            +'												        </td>'
 			            +'												    </tr> '
 			            +'												    <tr>'
-			            +'												        <td>后台管理:</td>'
+			            +'												        <td><p class="editText">后台管理</p></td>'
 			            +'												        <td  align="left" class="tdText">'
-			            +'												        	<input type="radio" name="isAdmin" value="true"  '+(isAdmin=="true"?'checked="checked"':'')+' />是&nbsp;&nbsp;&nbsp;<input type="radio" name="isAdmin" '+(isAdmin!="true"?'checked="checked"':'')+' value="false"/>否'
+			            +'												        	<input class="radioInput" type="radio" name="isAdmin" value="true"  '+(isAdmin=="true"?'checked="checked"':'')+' /><span class="radioText">是</span><input class="radioInput" type="radio" name="isAdmin" '+(isAdmin!="true"?'checked="checked"':'')+' value="false"/><span class="radioText">否</span>'
 			            +'												        </td>'
 			            +'												    </tr> '
-			            +'												    <tr>'
-			            +'												        <td>短讯组:</td>'
+/* 			            +'												    <tr>'
+			            +'												        <td><p class="editText">短讯组</p></td>'
 			            +'												        <td  align="left" class="tdText">'
-			            +'												        	<input type="radio" name="isSmsTeam" value="true"  '+(isSmsTeam=="true"?'checked="checked"':'')+' />是&nbsp;&nbsp;&nbsp;<input type="radio" name="isSmsTeam" '+(isSmsTeam!="true"?'checked="checked"':'')+' value="false"/>否'
+			            +'												        	<input class="radioInput" type="radio" name="isSmsTeam" value="true"  '+(isSmsTeam=="true"?'checked="checked"':'')+' /><span class="radioText">是</span><input class="radioInput" type="radio" name="isSmsTeam" '+(isSmsTeam!="true"?'checked="checked"':'')+' value="false"/><span class="radioText">否</span>'
 			            +'												        </td>'
-			            +'												    </tr> '
-			            +'												    <tr>'
+			            +'												    </tr> ' */
 			            +'												 </table>'
 			            +'												 </form>'
 			            +'												 <button class="btnAthena EbtnLess" style="background-color:#20b672;margin-left: 90px;margin-top:15px;" id="updateUserInfoBtn">确定</button>');
