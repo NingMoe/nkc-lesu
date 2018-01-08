@@ -105,9 +105,9 @@ public class ClassRecordController {
 			@RequestParam(value = "studentOpenID") String studentOpenID,
 			@RequestParam(value = "expenseDistrict") String expenseDistrict,
 			@RequestParam(value = "teacherComment") String teacherComment,
-			@RequestParam(value = "teacherConfirmExpense") String teacherConfirmExpense,
+			@RequestParam(value = "teacherConfirmExpense") boolean teacherConfirmExpense,
 			@RequestParam(value = "teacherConfirmTime") String teacherConfirmTime,
-			@RequestParam(value = "parentConfirmExpense") String parentConfirmExpense,
+			@RequestParam(value = "parentConfirmExpense") boolean parentConfirmExpense,
 			@RequestParam(value = "parentConfirmTime") String parentConfirmTime){
 		
 		Classexpenserecord cer = new Classexpenserecord();
@@ -115,12 +115,12 @@ public class ClassRecordController {
 		cer.setExpenseDistrict(expenseDistrict);
 		cer.setExpenseOption(expenseOption);
 		cer.setExpenseTime(expenseTime);
-		cer.setParentConfirmExpense(true);
+		cer.setParentConfirmExpense(parentConfirmExpense);
 		cer.setParentConfirmTime(parentConfirmTime);
 		cer.setStudentName(studentName);
 		cer.setStudentOpenID(studentOpenID);
 		cer.setTeacherComment(teacherComment);
-		cer.setTeacherConfirmExpense(true);
+		cer.setTeacherConfirmExpense(teacherConfirmExpense);
 		cer.setTeacherConfirmTime(teacherConfirmTime);
 		cer.setTeacherName(teacherName);
 		cer.setTeacherOpenID(teacherOpenID);
