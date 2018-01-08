@@ -4382,13 +4382,12 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 							}if(leftsend<=0){
 								leftsend=0;
 							}
-							
+							updatedbo.put("Teamer.leftSendClass",leftsend );
 							leftPay = 0;
 						}
 						
 						updatedbo.put("Teamer.totalClass",total);
 						updatedbo.put("Teamer.expenseClass", expense);
-						updatedbo.put("Teamer.leftSendClass",leftsend );
 						updatedbo.put("Teamer.leftPayClass", leftPay);
 						BasicDBObject doc = new BasicDBObject();
 						doc.put("$set", updatedbo);
