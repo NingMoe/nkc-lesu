@@ -4293,6 +4293,9 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			    dbo.put("Teamer.totalClass",total);
 				BasicDBObject doc = new BasicDBObject();
 				doc.put("$set", dbo);
+				
+				mongoDB = getMongoDB();
+				
 				WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), doc);
 				ret = true;
 			}
@@ -4319,6 +4322,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		
 			
 			WriteResult wr = mongoDB.getCollection(collectionClassPayRecord).insert(dbo);
+			mongoDB = getMongoDB();
 			DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", classpr.getStudentOpenID()));
 			while(dbcur.hasNext()){
 				DBObject o = dbcur.next();
@@ -4376,6 +4380,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			WriteResult wr = mongoDB.getCollection(collectionClassExpenseRecord).insert(dbo);
 			ret = true;
 			if(ret){
+				mongoDB = getMongoDB();
 				DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", exrecord.getStudentOpenID()));
 				while(dbcur.hasNext()){
 					DBObject o = dbcur.next();
@@ -4426,6 +4431,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 						updatedbo.put("Teamer.leftPayClass", leftPay);
 						BasicDBObject doc = new BasicDBObject();
 						doc.put("$set", updatedbo);
+						mongoDB = getMongoDB();
 						WriteResult wrt = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", exrecord.getStudentOpenID()), doc);
 						ret1 = true;
 					}
