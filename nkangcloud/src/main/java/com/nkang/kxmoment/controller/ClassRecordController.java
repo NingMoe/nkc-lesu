@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classexpenserecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classpayrecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation;
+import com.nkang.kxmoment.util.DateUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
 //ClassRecord/updateStudentBasicInformation?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&enrolledTime=2018-1-5&enrolledWay=lao&district=chongqing
 @Controller
@@ -104,24 +105,24 @@ public class ClassRecordController {
 			@RequestParam(value = "studentName") String studentName,
 			@RequestParam(value = "studentOpenID") String studentOpenID,
 			@RequestParam(value = "expenseDistrict") String expenseDistrict,
-			@RequestParam(value = "teacherComment") String teacherComment,
-			@RequestParam(value = "teacherConfirmExpense") boolean teacherConfirmExpense,
-			@RequestParam(value = "teacherConfirmTime") String teacherConfirmTime,
-			@RequestParam(value = "parentConfirmExpense") boolean parentConfirmExpense,
-			@RequestParam(value = "parentConfirmTime") String parentConfirmTime){
+			@RequestParam(value = "teacherComment") String teacherComment){
+			//@RequestParam(value = "teacherConfirmExpense") boolean teacherConfirmExpense,
+			//@RequestParam(value = "teacherConfirmTime") String teacherConfirmTime
+			//@RequestParam(value = "parentConfirmExpense") boolean parentConfirmExpense,
+			//@RequestParam(value = "parentConfirmTime") String parentConfirmTime
 		
 		Classexpenserecord cer = new Classexpenserecord();
 		cer.setExpenseClassCount(expenseClassCount);
 		cer.setExpenseDistrict(expenseDistrict);
 		cer.setExpenseOption(expenseOption);
 		cer.setExpenseTime(expenseTime);
-		cer.setParentConfirmExpense(parentConfirmExpense);
-		cer.setParentConfirmTime(parentConfirmTime);
+		//cer.setParentConfirmExpense(parentConfirmExpense);
+		//cer.setParentConfirmTime(parentConfirmTime);
 		cer.setStudentName(studentName);
 		cer.setStudentOpenID(studentOpenID);
 		cer.setTeacherComment(teacherComment);
-		cer.setTeacherConfirmExpense(teacherConfirmExpense);
-		cer.setTeacherConfirmTime(teacherConfirmTime);
+		//cer.setTeacherConfirmExpense(teacherConfirmExpense);
+		//cer.setTeacherConfirmTime(teacherConfirmTime);
 		cer.setTeacherName(teacherName);
 		cer.setTeacherOpenID(teacherOpenID);
 		
@@ -132,6 +133,18 @@ public class ClassRecordController {
 		
 		return "failed";
 		
+		
+	}
+	
+	@RequestMapping("/parentConfirmTime")
+	public @ResponseBody String parentConfirmTime(@RequestParam(value = "teacherConfirmTime") String ConfirmTime){
+		
+		if(MongoDBBasic.parentConfirmTime(ConfirmTime)){
+			
+			return "succss";
+		}
+		
+		return "failed";
 		
 	}
 	

@@ -1,6 +1,7 @@
 package com.nkang.kxmoment.util;
 
 import java.sql.Timestamp;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -83,4 +84,10 @@ public class DateUtil {
   System.out.println(tstamp);
   System.out.println(timestamp2Str(null));
  }*/
+ //long to date
+ public static String convertTime(long time){
+     Date date = new Date(time);
+     Format format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+     return format.format(date);
+ }
 }

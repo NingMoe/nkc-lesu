@@ -4354,13 +4354,14 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			}
 		return ret;
 	}
-//	collectionClassExpenseRecord
+//	collectionClassExpenseRecord    by teacher
 	
 	public static boolean addClassExpenseRecord(Classexpenserecord exrecord) {
 		mongoDB = getMongoDB();
 		Boolean ret = false;
 		Boolean ret1 = false;
 		try {
+			Date a = new Date();
 			DBObject dbo = new BasicDBObject();
 			
 			dbo.put("expenseOption", exrecord.getExpenseOption());
@@ -4372,10 +4373,10 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			dbo.put("studentOpenID",exrecord.getStudentOpenID());
 			dbo.put("expenseDistrict", exrecord.getExpenseDistrict());
 			dbo.put("teacherComment", exrecord.getTeacherComment());
-			dbo.put("teacherConfirmExpense", exrecord.isTeacherConfirmExpense());
-			dbo.put("teacherConfirmTime", exrecord.getTeacherConfirmTime());
-			dbo.put("parentConfirmExpense", exrecord.isParentConfirmExpense());
-			dbo.put("parentConfirmTime", exrecord.getParentConfirmTime());
+			dbo.put("teacherConfirmExpense", "yes");
+			dbo.put("teacherConfirmTime", a.getTime());//convertTime(a.getTime()),convertTime(Long.valueOf("1515398255469"))
+			dbo.put("parentConfirmExpense", "no");
+			//dbo.put("parentConfirmTime", exrecord.getParentConfirmTime());
 			
 			WriteResult wr = mongoDB.getCollection(collectionClassExpenseRecord).insert(dbo);
 			ret = true;
@@ -4442,5 +4443,29 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			log.info("updateClassExpenseRecord--" + e.getMessage());
 		}
 		return ret1;
+	}
+	
+	// parentConfirmTime
+	public static boolean parentConfirmTime(String time) {
+		mongoDB = getMongoDB();
+		Boolean ret = false;
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime());
+		try {
+			DBCursor dbcur = mongoDB.getCollection(collectionClassExpenseRecord).find(new BasicDBObject().append("teacherConfirmTime", time));
+			while(dbcur.hasNext()){
+				DBObject dbo = new BasicDBObject();
+				dbo.put("parentConfirmExpense", "yes");
+				dbo.put("parentConfirmTime", cursqlTS);
+				BasicDBObject doc = new BasicDBObject();
+				doc.put("$set", dbo);
+				mongoDB = getMongoDB();
+				WriteResult wrt = mongoDB.getCollection(collectionClassExpenseRecord).update(new BasicDBObject().append("teacherConfirmTime", time), doc);
+				ret = true;
+				
+			}
+		} catch (Exception e) {
+			log.info("updateClassExpenseRecord--" + e.getMessage());
+		}
+		return ret;
 	}
 }
