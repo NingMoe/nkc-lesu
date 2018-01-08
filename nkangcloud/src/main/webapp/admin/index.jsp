@@ -216,7 +216,8 @@ ul li.singleQuote .firstLayer  .change{
     padding-left: 10px;
     margin-top: 10px;
     border-radius: 5px!important;
-    margin-left: 5px;}
+    margin-left: 5px;
+    line-height:30px;}
 .radioInput{
 	margin:0!important;
     margin-left: 20px!important;
@@ -395,7 +396,9 @@ function showClassPanel(openid,name){
 	//findTeacherList();
 	$(".Work_Mates_div_list_div2").removeClass("editBtn");
 	$(".Work_Mates_div_list_div2").remove(".edit");
-	$("body").append('<div id="UpdateClassPart" class="bouncePart" style="position:fixed;z-index:999;top:90px;width:90%;margin-left:6%;"><legend>编辑【'+name+'】的课时信息</legend><div id="UpdateClassPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+
+    $('body,html').animate({scrollTop:0},200);  
+	$("body").append('<div id="UpdateClassPart" class="bouncePart" style="position:absolute;z-index:999;top:90px;width:90%;margin-left:6%;"><legend>编辑【'+name+'】的课时信息</legend><div id="UpdateClassPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<center>正在加载中...</center>'		
 	+'						</div>');
 	$('#UpdateClassPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -542,7 +545,8 @@ function showUpdateUserPanel(openid,name){
 	findTeacherList();
 	$(".Work_Mates_div_list_div2").removeClass("editBtn");
 	$(".Work_Mates_div_list_div2").remove(".edit");
-	$("body").append('<div id="UpdateUserPart" class="bouncePart" style="position:fixed;z-index:999;top:90px;width:86%;margin-left:7%;"><legend>编辑【'+name+'】的基本信息</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+    $('body,html').animate({scrollTop:0},200);  
+	$("body").append('<div id="UpdateUserPart" class="bouncePart" style="position:absolute;z-index:999;top:90px;width:86%;margin-left:7%;"><legend>编辑【'+name+'】的基本信息</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<center>正在加载中...</center>'		
 	+'						</div>');
 	$('#UpdateUserPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -796,7 +800,7 @@ function showLogoPanel(index){
 }
 function showCommonPanel()
 {
-	$("body").append("<div  id='data_model_div' style='z-index:999;position:fixed;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='http://leshu.bj.bcebos.com/icon/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:8px;right:20px;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:"+clientThemeColor+";position:absolute;top:70px;'></div></div>");
+	$("body").append("<div  id='data_model_div' style='z-index:999;height:100000px'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='http://leshu.bj.bcebos.com/icon/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:8px;right:20px;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:"+clientThemeColor+";position:absolute;top:70px;'></div></div>");
 	$('#data_model_div').removeClass().addClass('panelShowAnmitation').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass();
 	    }); }
