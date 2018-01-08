@@ -4283,8 +4283,8 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					if(teamobj.get("leftSendClass")!=null && !"".equals(teamobj.get("leftSendClass")+"")){
 						sent = Integer.parseInt(teamobj.get("totalClass")+"");
 					}
-					sent = sent+send;
 				}
+				sent = sent+send;
 				DBObject dbo = new BasicDBObject();
 			    dbo.put("Teamer.leftSendClass", sent);
 				BasicDBObject doc = new BasicDBObject();
@@ -4380,10 +4380,11 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					DBObject teamobj = new BasicDBObject();
 					teamobj = (DBObject) teamer;
 					if (teamobj != null) {
-						if(teamobj.get("totalClass")==null || "".equals(teamobj.get("totalClass")+"")){
-							return false;
+						int total = 0;
+						if(teamobj.get("totalClass")!=null && !"".equals(teamobj.get("totalClass")+"")){
+							total = Integer.parseInt(teamobj.get("totalClass")+"");
 						}
-						int total = Integer.parseInt(teamobj.get("totalClass")+"");
+						
 						if(total<=0){
 							total=0;
 						}else if(null!=exrecord.getExpenseClassCount()&&!"".equals(exrecord.getExpenseClassCount())){
