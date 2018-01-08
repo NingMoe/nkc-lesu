@@ -3336,7 +3336,7 @@ public class MongoDBBasic {
 			String templateId="231590";
 			telList.add("15123944895"); //Ning
 			telList.add("18883811118"); //presendent guo
-			String para=": 姓名【"+app.getName() + "】 电话【"+app.getTel()+"】 课程【"+app.getSubject()+"】";
+			String para=": 姓名<"+app.getName() + "> 电话<"+app.getTel()+"> 课程<"+app.getSubject()+">";
 			for(String to : telList){
 				if(to!=null && !"".equals(to)){
 					log.info("----"+to);
