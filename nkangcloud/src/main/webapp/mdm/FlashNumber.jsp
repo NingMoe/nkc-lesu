@@ -615,9 +615,10 @@ margin-left: 4%;
 				if (chars == '-') {
 					while (tempTotal - temp < 0) {
 
-						temp = Math.round(Math.random()
+						/* temp = Math.round(Math.random()
 								* (lengthArray[lengthMax] - lengthArray[lengthMin - 1])
-								+ lengthArray[lengthMin - 1]);
+								+ lengthArray[lengthMin - 1]); */
+						tempCharArray[i] = '+';
 						if(temp==0){
 							temp=1;
 						}
