@@ -3339,7 +3339,9 @@ public class MongoDBBasic {
 			String para=": 姓名【"+app.getName() + "】 电话【"+app.getTel()+"】 课程【"+app.getSubject()+"】";
 			for(String to : telList){
 				if(to!=null && !"".equals(to)){
+					log.info("----"+to);
 					RestTest.testTemplateSMS(true, Constants.ucpass_accountSid,Constants.ucpass_token,Constants.ucpass_appId, templateId,to,para);
+					log.info("----"+para);
 				}
 			}
 
