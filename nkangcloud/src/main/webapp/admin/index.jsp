@@ -85,7 +85,7 @@ MongoDBBasic.updateUser(uid);
     background: orange;
 }
 .edit img {
-    width:25px;height:auto;position:absolute;top:25px;margin-left: 2px;
+    width:25px;height:auto;position:absolute;top:13px;left: 20px;
 }
 .edit.km p{
 	line-height:35px;
@@ -259,8 +259,8 @@ $(window).load(function() {
 		$(this).addClass("editBtn");
 		var openid=$(this).find("span.openid").text();
 		var name=$(this).find("span.name").text();
-		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\",\""+name+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
-		$(this).append("<div class='edit km'><p onclick='showClassPanel(\""+openid+"\",\""+name+"\")'>***<br/>管理</p></div>");
+		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\",\""+name+"\")'><img src='../mdm/images/edit.png' slt='' /><p style='font-size: 14px;position: absolute;height: 60px;line-height: 20px;top: 48px;'>信息编辑</p></p></div>");
+		$(this).append("<div class='edit km'><p onclick='showClassPanel(\""+openid+"\",\""+name+"\")'>***<br/><p style='font-size: 14px;position: absolute;height: 60px;line-height: 20px;top: 50px;'>课时管理</p></p></div>");
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
