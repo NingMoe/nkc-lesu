@@ -25,10 +25,12 @@
 	String qt= request.getParameter("qt");
 	String level="";	
 	String isExternal="no";
+	boolean IsRegistered=false;
 	if(uid!=null&&uid!=""){
 		HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
 		if(res!=null){
 			level=res.get("level");
+			IsRegistered=MongoDBBasic.checkUserAuth(uid,"IsRegistered");
 		}
 		else{
 			isExternal="yes";
@@ -164,6 +166,7 @@ margin-left: 4%;
 		var lengthMin =<%=lengthMin%>;
 		var lengthMax =<%=lengthMax%>;
 		var isExternal='<%=isExternal%>';
+		var IsRegistered=<%=IsRegistered%>;
 		var totalTime=0;
 		var charArray = new Array('减', '加', '加');
 		var tempCharArray = new Array();
