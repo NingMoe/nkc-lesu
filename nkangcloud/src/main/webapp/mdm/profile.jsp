@@ -1102,6 +1102,9 @@ function getReminderForMore(){
 	swal("Opps!","更多应用正在开发中~","error");
 }
 
+function getReminderForNew(){
+	swal("Opps!","该功能正在开发中~","error");
+}
 function getUserInfo(username, headimgurl, openId) {
 			$("#info_interact").css("display","block");
 			$("#info_interact2").css("display","block");
@@ -1629,6 +1632,12 @@ function getNowFormatDate() {
 												<img src="http://leshucq.bj.bcebos.com/standard/techerview.png" />
 													<h4>我的学员</h4></a>
 												</td><% } %>
+												
+												<td>
+													<a target="_self" onclick="getReminderForNew()">
+														<img src="http://leshucq.bj.bcebos.com/standard/classunit2.png" /><h4>我的课时</h4>
+													</a>
+												</td>
 											</tr>
 										</table>
 									</div>

@@ -260,8 +260,8 @@ $(window).load(function() {
 		$(this).addClass("editBtn");
 		var openid=$(this).find("span.openid").text();
 		var name=$(this).find("span.name").text();
-		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\",\""+name+"\")'><img src='../mdm/images/edit.png' alt='' /><p style='font-size: 14px;position: absolute;height: 60px;line-height: 20px;top: 48px;left:15px;'>信息编辑</p></p></div>");
-		$(this).append("<div class='edit km'><p onclick='showClassPanel(\""+openid+"\",\""+name+"\")'><img src='http://leshucq.bj.bcebos.com/standard/classunit.png' alt='' /><p style='font-size: 14px;position: absolute;height: 60px;line-height: 20px;top: 28px;left:15px;'>课时管理</p></p></div>");
+		$(this).append("<div class='edit' onclick='showUpdateUserPanel(\""+openid+"\",\""+name+"\")'><p><img src='../mdm/images/edit.png' alt='' /><p style='font-size: 14px;position: absolute;height: 60px;line-height: 20px;top: 48px;left:15px;'>信息编辑</p></p></div>");
+		$(this).append("<div class='edit km' onclick='showClassPanel(\""+openid+"\",\""+name+"\")' ><p><img src='http://leshucq.bj.bcebos.com/standard/classunit.png' alt='' /><p style='font-size: 14px;position: absolute;height: 60px;line-height: 20px;top: 28px;left:15px;'>课时管理</p></p></div>");
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
@@ -404,120 +404,101 @@ function showClassPanel(openid,name){
 	$('#UpdateClassPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
 	 });
-	/* 	jQuery.ajax({
+	 	jQuery.ajax({
 		type : "GET",
-		url : "../CallGetWeChatUserFromMongoDB",
+		url : "../ClassRecord/getStudentBasicInformation",
 		data : {
-			openid : openid
+			openID : openid
 		},
 		cache : false,
 		success : function(data) {
-			if (data.length > 0) {
-				var IsRegistered=data[0].IsRegistered==null?'false':data[0].IsRegistered;
-				var IsAuthenticated=data[0].IsAuthenticated==null?'false':data[0].IsAuthenticated;
-				var IsActived=data[0].isActive==null?'false':data[0].isActive;
-				var isAdmin=data[0].isAdmin==null?'false':data[0].isAdmin;
-				var isSmsTeam=data[0].isSmsTeam==null?'false':data[0].isSmsTeam;
-				var registerDate=data[0].registerDate==null?'':data[0].registerDate.replace(/\//g,"-");
-				var realName=data[0].realName==null?'':data[0].realName;
-				var phone=data[0].phone==null?'':data[0].phone;
-				var email=data[0].email==null?'':data[0].email;
-				var role=data[0].role==null?'':data[0].role;
-				var levelList=new Array('basic','primary','middle','high');
-				var levelNameList=new Array('启蒙','初级','中级','高级');
-				var selectedName="";
-				var selectedTeacherName="";
-				var level=data[0].level==null?'':data[0].level;
-				var teacher=data[0].teacher==null?'':data[0].teacher;
-				if(level!=''){
-					for(var q=0;q<levelList.length;q++){
-						if(level==levelList[q]){
-							levelList.splice(q,1);
-							selectedName=levelNameList[q];
-							levelNameList.splice(q,1);
+				var realName=data.realName==null?'':data.realName;
+				var enrolledTime=data.enrolledTime==null?'':data.enrolledTime;
+				var enrolledWay=data.enrolledWay==null?'':data.enrolledWay;
+				var district=data.district==null?'':data.district;
+				var totalClass=data.totalClass==null?'':data.totalClass;
+				var expenseClass=data.expenseClass==null?'':data.expenseClass;
+				var leftPayClass=data.leftPayClass==null?'':data.leftPayClass;
+				var leftSendClass=data.leftSendClass==null?'':data.leftSendClass;
+				var districtList=new Array('jb','ljt','np','yjp');
+				var districtNameList=new Array('江北校区','李家沱校区','南坪校区','杨家坪校区');
+				var enrolledWayList=new Array('web','ad','ldx','other');
+				var enrolledWayNameList=new Array('网络','广告','老带新','其他');
+				var selectedDistrictName="";
+				var selectedenrolledWayName="";
+				if(district!=''){
+					for(var q=0;q<districtList.length;q++){
+						if(district==districtList[q]){
+							districtList.splice(q,1);
+							selectedDistrictName=districtNameList[q];
+							districtNameList.splice(q,1);
 							break;
 						}
 					}
 				}
-				if(teacher!=''){
-					for(var p=0;p<teacherIds.length;p++){
-						if(teacher==teacherIds[p]){
-							teacherIds.splice(p,1);
-							selectedTeacherName=teacherNames[p];
-							teacherNames.splice(p,1);
+				if(enrolledWay!=''){
+					for(var p=0;p<enrolledWayList.length;p++){
+						if(enrolledWay==enrolledWayList[p]){
+							enrolledWayList.splice(p,1);
+							selectedenrolledWayName=enrolledWayNameList[p];
+							enrolledWayNameList.splice(p,1);
 							break;
 						}
 					}
 				}
-				var levelSelect="<option selected='true' value='"+level+"'>"+selectedName+"</option>";
-				for(var p=0;p<levelList.length;p++){
-					levelSelect+="<option value='"+levelList[p]+"'>"+levelNameList[p]+"</option>";
+				var districtSelect="<option selected='true' value='"+district+"'>"+selectedDistrictName+"</option>";
+				for(var p=0;p<districtList.length;p++){
+					districtSelect+="<option value='"+districtList[p]+"'>"+districtNameList[p]+"</option>";
 				}
 
-				var teacherSelect="<option selected='true' value='"+teacher+"'>"+selectedTeacherName+"</option>";
-				for(var p=0;p<teacherIds.length;p++){
-					teacherSelect+="<option value='"+teacherIds[p]+"'>"+teacherNames[p]+"</option>";
+				var enrolledWaySelect="<option selected='true' value='"+enrolledWay+"'>"+selectedenrolledWayName+"</option>";
+				for(var p=0;p<enrolledWayList.length;p++){
+					enrolledWaySelect+="<option value='"+enrolledWayList[p]+"'>"+enrolledWayNameList[p]+"</option>";
 				}
-				var selfIntro=data[0].selfIntro==null?'':data[0].selfIntro;
-				var roleSelect='														<option value="">-请选择-</option>';
-				for(var i=0;i<RoleList.length;i++){
-					if(role==RoleList[i].id){
-						roleSelect+='														<option selected="true" value="'+RoleList[i].id+'">'+RoleList[i].name+'</option>';
-					}else{
-						roleSelect+='														<option value="'+RoleList[i].id+'">'+RoleList[i].name+'</option>';
-					}
-				} */
-				$("#UpdateClassPartDiv").html('<form id="atest">'
-			            +'												<input type="hidden" name="uid" id="atest_uid" value="'+openid+'"/>'
+				$("#UpdateClassPartDiv").html('<form id="updateClassForm">'
+			            +'												<input type="hidden" name="openID" id="atest_uid" value="'+openid+'"/>'
 			            +'												<table id="tableForm" style="margin-top:-10px;width:100%;">'
 			            +'												    <tr>'
 			            +'													    <td><p class="classText">报名时间</p></td>'
 			            +'													    <td align="left" class="tdText" >'
-			            +'													    	<input class="editInput"  name="registerDate" type="date" id="registerDate" required  value="">'
+			            +'													    	<input class="editInput"  name="enrolledTime" type="date" id="registerDate" required  value="'+enrolledTime+'">'
 			            +'													    </td>'
 			            +'												    </tr>'
 			            +'													<tr>'
 			            +'														<td><p class="classText">报名渠道</p></td>'
-			            +'														<td><select class="editInput"  name="from">'
-			         //   +roleSelect
-			         	+'															<option selected>老带新</option><option>网络</option><option>广告</option><option>其他</option>'
+			            +'														<td><select class="editInput"  name="enrolledWay">'
+			            +enrolledWaySelect
 			            +'													    </select></td>'
 			            +'													</tr>'
 			            +'													<tr>'
 			            +'														<td><p class="classText">报名校区</p></td>'
 			            +'														<td><select class="editInput"  name="district">'
-			         //   +roleSelect
-			         	+'															<option selected>江北校区</option><option>李家沱校区</option><option>南坪校区</option><option>杨家坪校区</option><option>青少年宫</option>'
+			            +districtSelect
 			            +'													    </select></td>'
 			            +'													</tr>'			            
 			            +'													<tr>'
 			            +'														<td><p class="classText">总课时</p></td>'
-			            +'														<td><input class="editInput" type="text" name="totalClass" value=""/></td>'
+			            +'														<td><input class="editInput" type="text" name="totalClass" value="'+totalClass+'"/></td>'
 			            +'													</tr>'
 			            +'													<tr>'
 			            +'														<td><p class="classText">已经消费课时</p></td>'
-			            +'														<td><input class="editInput" type="text" name="usedClass" value=""/></td>'
+			            +'														<td><input class="editInput" type="text" name="expenseClass" value="'+expenseClass+'"/></td>'
 			            +'													</tr>'
 			            +'													<tr>'
 			            +'														<td><p class="classText">剩余购买课时</p></td>'
-			            +'														<td><input class="editInput" type="text" name="leftClass" value=""/></td>'
+			            +'														<td><input class="editInput" type="text" name="leftPayClass" value="'+leftPayClass+'"/></td>'
 			            +'													</tr>'
 			            +'													<tr>'
 			            +'														<td><p class="classText">剩余赠与课时</p></td>'
-			            +'														<td><input class="editInput" type="text" name="LeftGiftClass" value=""/></td>'
+			            +'														<td><input class="editInput" type="text" name="leftSendClass" value="'+leftSendClass+'"/></td>'
 			            +'													</tr>'
 			            +'												 </table>'
 			            +'												 </form>'
-			            +'												 <button class="btnAthena EbtnLess" style="background-color:#20b672;margin-left: 90px;margin-top:15px;" id="updateUserInfoBtn">确定</button>');
-				$("#updateUserInfoBtn").click(function(){
-					/*					var isRegistered = $("input[name='isRegistered']:checked").val();
-					var registerDate = $("#registerDate").val();
-					if(isRegistered==null || registerDate==null){
-						swal("修改信息失败", "请输入正确的信息", "error");
-					}
-					var datas=$("#atest").serialize();
+			            +'												 <button class="btnAthena EbtnLess" style="background-color:#20b672;margin-left: 90px;margin-top:15px;" id="updateClassBtn">确定</button>');
+				$("#updateClassBtn").click(function(){
+					var datas=$("#updateClassForm").serialize();
  					$.ajax({
-						url:"../updateUserInfo",
+						url:"../ClassRecord/updateStudentBasicInfo",
 						data:datas,
 						type:"POST",
 						dataType:"json",
@@ -533,11 +514,10 @@ function showClassPanel(openid,name){
 								swal("更改失败!", "请填写正确的信息.", "error");
 							}
 						}
-					}); */
+					}); 
 				});
-/* 			}
 		}
-	}); */
+	}); 
 }
 
 function showUpdateUserPanel(openid,name){
@@ -1152,8 +1132,8 @@ jQuery
 					<!-- end logoElements-->
 				</div>
 				<div class="tab-pane  active" id="WorkMates">
-				<img id="refreshUser"  src="http://leshu.bj.bcebos.com/icon/refresh2.png" style="height:25px;float:right;margin-top:8px;margin-left:15px;"/>
-					<img id="syncUser"  src="http://leshu.bj.bcebos.com/icon/sync.png" style="height:30px;float:right;margin-top:7px;"/>
+<!-- 				<img id="refreshUser"  src="http://leshu.bj.bcebos.com/icon/refresh2.png" style="height:25px;float:right;margin-top:8px;margin-left:15px;"/>
+ -->					<img id="syncUser"  src="http://leshu.bj.bcebos.com/icon/sync.png" style="height:30px;float:right;margin-top:7px;"/>
 					<div id="chart-container" style="margin-left:auto;margin-right:auto;text-align:center;"></div>
 					
 					

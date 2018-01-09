@@ -20,7 +20,7 @@ import com.nkang.kxmoment.util.MongoDBBasic;
 @RequestMapping("/ClassRecord")
 public class ClassRecordController {
 	@RequestMapping("/updateStudentBasicInfo")
-	public @ResponseBody String AddClassRecord(
+	public @ResponseBody boolean AddClassRecord(
 			@RequestParam(value = "openID") String openid,
 			@RequestParam(value = "enrolledTime") String enrolledTime,
 			@RequestParam(value = "enrolledWay") String enrolledWay,
@@ -58,9 +58,9 @@ public class ClassRecordController {
 		stInfor.setOpenID(openid);
 		
 		if(MongoDBBasic.updateStudentBasicInformation(stInfor)){
-			return "success.....";
+			return true;
 		}
-		return openid;
+		return false;
 		
 	}
 	
