@@ -396,7 +396,7 @@ font-size:28px!important;
 				 wrongQ=0;
 				 rightQ=0;
 				timeStart();}
-				if(second>=300){
+				if(minute>=5&&second>=0){
 					swal("答题结束", "五分钟到了噢~！", "warning");
 					timeStop();
 					FusionCharts.ready(function() {
