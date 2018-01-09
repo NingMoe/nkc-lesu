@@ -230,7 +230,7 @@ margin-left: 4%;
 			$("#answerPanel").hide();
 			$("#startPanel").hide();
 			$("#processPanel").show();}
-			if(qt=="minute"&&second>30){
+			if(qt=="minute"&&second>300){
 				$("#next").val("下一题");
 			}
 			var tempTime=minute*60+ (millisecond / 1000) + second;
@@ -438,8 +438,8 @@ margin-left: 4%;
 				 wrongQ=0;
 				 rightQ=0;
 				timeStart();}
-				if(second>=30){
-					swal("答题结束", "三分钟到了噢~！", "warning");
+				if(second>=300){
+					swal("答题结束", "五分钟到了噢~！", "warning");
 					timeStop();
 					FusionCharts.ready(function() {
 						var cSatScoreChart = new FusionCharts({

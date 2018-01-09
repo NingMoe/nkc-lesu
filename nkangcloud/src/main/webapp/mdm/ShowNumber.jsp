@@ -396,8 +396,8 @@ font-size:28px!important;
 				 wrongQ=0;
 				 rightQ=0;
 				timeStart();}
-				if(second>=30){
-					swal("答题结束", "三分钟到了噢~！", "warning");
+				if(second>=300){
+					swal("答题结束", "五分钟到了噢~！", "warning");
 					timeStop();
 					FusionCharts.ready(function() {
 						var cSatScoreChart = new FusionCharts({
