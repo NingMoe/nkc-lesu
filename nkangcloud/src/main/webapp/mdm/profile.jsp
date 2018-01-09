@@ -1635,7 +1635,7 @@ function getNowFormatDate() {
 												
 												<td>
 													<a target="_self" onclick="getReminderForNew()">
-														<img src="http://leshucq.bj.bcebos.com/standard/classunit2.png" /><h4>我的课时</h4>
+														<img src="http://leshucq.bj.bcebos.com/standard/classunitmgt.png" /><h4>我的课时</h4>
 													</a>
 												</td>
 											</tr>
