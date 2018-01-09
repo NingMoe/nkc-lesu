@@ -1,5 +1,7 @@
 package com.nkang.kxmoment.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,35 +15,52 @@ import com.nkang.kxmoment.baseobject.classhourrecord.Classpayrecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation;
 import com.nkang.kxmoment.util.DateUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
-//ClassRecord/updateStudentBasicInformation?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&enrolledTime=2018-1-5&enrolledWay=lao&district=chongqing
+//  http://leshucq.bceapp.com/ClassRecord/updateStudentBasicInfo?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&enrolledTime=2018-1-5&enrolledWay=lao&district=chongqing&totalClass=55&expenseClass=33&leftPayClass=22&leftSendClass=0
 @Controller
 @RequestMapping("/ClassRecord")
 public class ClassRecordController {
-	@RequestMapping("/updateStudentBasicInformation")
-	public @ResponseBody String AddClassRecord(HttpServletRequest request, HttpServletResponse response,
+	@RequestMapping("/updateStudentBasicInfo")
+	public @ResponseBody String AddClassRecord(
 			@RequestParam(value = "openID") String openid,
 			@RequestParam(value = "enrolledTime") String enrolledTime,
 			@RequestParam(value = "enrolledWay") String enrolledWay,
-			@RequestParam(value = "district") String district
-			//@RequestParam(value = "totalClass") String totalClass,
-			//@RequestParam(value = "expenseClass") String expenseClass,
-			//@RequestParam(value = "leftPayClass") String leftPayClass,
-			//@RequestParam(value = "leftSendClass") String leftSendClass
+			@RequestParam(value = "district") String district,
+			@RequestParam(value = "totalClass") String totalClass,
+			@RequestParam(value = "expenseClass") String expenseClass,
+			@RequestParam(value = "leftPayClass") String leftPayClass,
+			@RequestParam(value = "leftSendClass") String leftSendClass
 			)
 	{
 		StudentBasicInformation stInfor = new StudentBasicInformation();
 		stInfor.setDistrict(district);
 		stInfor.setEnrolledTime(enrolledTime);
 		stInfor.setEnrolledWay(enrolledWay);
-		//stInfor.setExpenseClass(0);
-		//stInfor.setLeftPayClass(0);
-		//stInfor.setLeftSendClass(0);
-		stInfor.setOpenID(openid);
-		//stInfor.setTotalClass(0);
-		if(MongoDBBasic.updateStudentBasicInformation(stInfor)){
-			return "success";
+		if(totalClass!=null && !"".equals(totalClass)){
+			stInfor.setTotalClass(Integer.parseInt(totalClass));
+		}else{
+			stInfor.setTotalClass(-1);
 		}
-		return "failed";
+		if(expenseClass!=null && !"".equals(expenseClass)){
+			stInfor.setExpenseClass(Integer.parseInt(expenseClass));
+				}else{
+					stInfor.setExpenseClass(-1);
+				}
+		if(leftPayClass!=null && !"".equals(leftPayClass)){
+			stInfor.setLeftPayClass(Integer.parseInt(leftPayClass));
+		}else{
+			stInfor.setLeftPayClass(-1);
+		}
+		if(leftSendClass!=null && !"".equals(leftSendClass)){
+			stInfor.setLeftSendClass(Integer.parseInt(leftSendClass));
+		}else{
+			stInfor.setLeftSendClass(-1);
+		}
+		stInfor.setOpenID(openid);
+		
+		if(MongoDBBasic.updateStudentBasicInformation(stInfor)){
+			return "success.....";
+		}
+		return openid;
 		
 	}
 	
@@ -57,9 +76,19 @@ public class ClassRecordController {
 		
 		
 	}
+	
+	// getStudentInformation by openid
+	//http://leshucq.bceapp.com/ClassRecord/getStudentBasicInformation?openID=oO8exvzE95JUvwpNxNTxraOqzUFI
+	@RequestMapping("/getStudentBasicInformation")
+	public @ResponseBody StudentBasicInformation getStudentBasicInformation(@RequestParam(value = "openID") String openid){
+		return MongoDBBasic.getStudentBasicInformation(openid);
+		
+		}
+	
+	
 //	ClassRecord/addClasspayrecord?payOption=YY语音&payMoney=2230&classCount=20&payTime=2018-01-05&studentName=march&studentOpenID=oO8exvzE95JUvwpNxNTxraOqzUFI
 	@RequestMapping("/addClasspayrecord")
-	public @ResponseBody String AddClasspayrecord(HttpServletRequest request, HttpServletResponse response,
+	public @ResponseBody String AddClasspayrecord(
 			@RequestParam(value = "payOption") String payOption,
 			@RequestParam(value = "payMoney") String payMoney,
 			@RequestParam(value = "classCount") String classCount,
@@ -82,12 +111,19 @@ public class ClassRecordController {
 		cpd.setStudentOpenID(studentOpenID);
 		cpd.setClassCount(count);
 		if(MongoDBBasic.addClasspayrecord(cpd)){
-			return "succss";
+			return "succss addClasspayrecord";
 		}
 		
 				return "failed";
 		
 		
+	}
+	
+	//get Classpayrecords   getClasspayrecords?openid=oO8exvzE95JUvwpNxNTxraOqzUFI
+	//	http://leshucq.bceapp.com/ClassRecord/getClasspayrecords?openID=oO8exvzE95JUvwpNxNTxraOqzUFI
+	@RequestMapping("/getClasspayrecords")
+	public @ResponseBody List<Classpayrecord> getClasspayrecords(@RequestParam(value = "openID") String openid){
+		return MongoDBBasic.getClasspayrecords(openid);
 	}
 
 //	ClassRecord/addClassExpenseRecord?expenseOption=YY语音&expenseTime=2018-1-5&
@@ -136,10 +172,22 @@ public class ClassRecordController {
 		
 	}
 	
-	@RequestMapping("/parentConfirmTime")
-	public @ResponseBody String parentConfirmTime(@RequestParam(value = "teacherConfirmTime") String ConfirmTime){
+	//getClassExpenseRecords by studentid
+	// http://leshucq.bceapp.com/ClassRecord/getExpenseRecords?openID=oO8exvzE95JUvwpNxNTxraOqzUFI
+	@RequestMapping("/getExpenseRecords")
+	public @ResponseBody List<Classexpenserecord> getClassExpenseRecords(@RequestParam(value = "openID") String openid){
 		
-		if(MongoDBBasic.parentConfirmTime(ConfirmTime)){
+		return MongoDBBasic.getClassExpenseRecords(openid);
+	}
+	
+	
+	// http://leshucq.bceapp.com/ClassRecord/parentConfirmTime?comment=nice---&teacherConfirmTime=1515403834131
+	@RequestMapping("/parentConfirmTime")
+	public @ResponseBody String parentConfirmTime(
+			@RequestParam(value = "comment") String parentComment,
+			@RequestParam(value = "teacherConfirmTime") String ConfirmTime){
+		
+		if(MongoDBBasic.parentConfirmTime(ConfirmTime,parentComment)){
 			
 			return "succss";
 		}

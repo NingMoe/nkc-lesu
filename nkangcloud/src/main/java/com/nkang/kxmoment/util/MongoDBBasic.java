@@ -4240,25 +4240,35 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		Boolean ret = false;
 		String OpenID = stInfor.getOpenID();
 		try {
-			DBCursor dbcur = mongoDB.getCollection(wechat_user).find(
+			DBObject dbcur = mongoDB.getCollection(wechat_user).findOne(
 					new BasicDBObject().append("OpenID", OpenID));
-			if (null != dbcur) {
-				while (dbcur.hasNext()) {
-					DBObject dbo = new BasicDBObject();
-					dbo.put("Teamer.enrolledTime", stInfor.getEnrolledTime());
-				    dbo.put("Teamer.enrolledWay", stInfor.getEnrolledWay());
-					dbo.put("Teamer.district", stInfor.getDistrict());
-					//dbo.put("Teamer.totalClass", stInfor.getTotalClass());
-					//dbo.put("Teamer.expenseClass", stInfor.getExpenseClass());
-					//dbo.put("Teamer.leftPayClass", stInfor.getLeftPayClass());
-				   //dbo.put("Teamer.leftSendClass", stInfor.getLeftSendClass());
-					BasicDBObject doc = new BasicDBObject();
-					doc.put("$set", dbo);
-					WriteResult wr = mongoDB.getCollection(wechat_user).update(
-							new BasicDBObject().append("OpenID", OpenID), doc);
-					ret = true;
+
+			if(dbcur!=null) {
+				DBObject dbo = new BasicDBObject();
+				dbo.put("Teamer.enrolledTime", stInfor.getEnrolledTime());
+			    dbo.put("Teamer.enrolledWay", stInfor.getEnrolledWay());
+				dbo.put("Teamer.district", stInfor.getDistrict());
+				if(stInfor.getTotalClass()!=-1){
+					dbo.put("Teamer.totalClass", stInfor.getTotalClass());
 				}
+				if(stInfor.getExpenseClass()!=-1){
+					dbo.put("Teamer.expenseClass", stInfor.getExpenseClass());
+				}
+				if(stInfor.getLeftPayClass()!=-1){
+					dbo.put("Teamer.leftPayClass", stInfor.getLeftPayClass());
+				}
+				if(stInfor.getLeftSendClass()!=-1){
+					dbo.put("Teamer.leftSendClass", stInfor.getLeftSendClass());
+				}
+			   
+				BasicDBObject doc = new BasicDBObject();
+				doc.put("$set", dbo);
+				WriteResult wr = mongoDB.getCollection(wechat_user).update(
+						new BasicDBObject().append("OpenID", OpenID), doc);
+				ret = true;
+				
 			}
+		
 		} catch (Exception e) {
 			log.info("updateStudentBasicInformation--" + e.getMessage());
 		}
@@ -4280,7 +4290,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				if (teamobj != null) {
 					
 					if(teamobj.get("leftSendClass")!=null && !"".equals(teamobj.get("leftSendClass")+"")){
-						sent = Integer.parseInt(teamobj.get("totalClass")+"");
+						sent = Integer.parseInt(teamobj.get("leftSendClass")+"");
 					}
 					if(teamobj.get("totalClass")!=null && !"".equals(teamobj.get("totalClass")+"")){
 						total = Integer.parseInt(teamobj.get("totalClass")+"");
@@ -4304,6 +4314,40 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		
 	}
 	
+	// getStudentInformation by openid
+	public static StudentBasicInformation getStudentBasicInformation(String openid){
+		mongoDB = getMongoDB();
+		StudentBasicInformation sbi = new StudentBasicInformation();
+		try {
+			DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", openid));
+			if (null != dbcur) {
+				while (dbcur.hasNext()) {
+					DBObject dbo = dbcur.next();
+					Object tea = dbo.get("Teamer");
+					DBObject teamobj = new BasicDBObject();
+					teamobj = (DBObject) tea;
+					int expenseClass=teamobj.get("realName")==null?0:Integer.parseInt(teamobj.get("expenseClass")+"");
+					int leftPayClass=teamobj.get("realName")==null?0:Integer.parseInt(teamobj.get("leftPayClass")+"");
+					int leftSendClass=teamobj.get("realName")==null?0:Integer.parseInt(teamobj.get("leftSendClass")+"");
+					int totalClass=teamobj.get("realName")==null?0:Integer.parseInt(teamobj.get("totalClass")+"");
+					sbi.setDistrict(teamobj.get("district")+"");
+					sbi.setEnrolledTime(teamobj.get("enrolledTime")+"");
+					sbi.setEnrolledWay(teamobj.get("enrolledWay")+"");
+					sbi.setExpenseClass(expenseClass);
+					sbi.setLeftPayClass(leftPayClass);
+					sbi.setLeftSendClass(leftSendClass);
+					sbi.setPhone(teamobj.get("phone")+"");
+					sbi.setRealName(teamobj.get("realName")+"");
+					sbi.setTotalClass(totalClass);
+				}
+			}
+		}catch (Exception e) {
+			log.info( e.getMessage());
+			}
+		
+		return sbi;
+		
+	}
 	
 	public static boolean addClasspayrecord(Classpayrecord classpr) {
 		mongoDB = getMongoDB();
@@ -4319,7 +4363,6 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			dbo.put("studentOpenID", classpr.getStudentOpenID());
 		    
 			//String OpenID = classpr.getStudentOpenID();
-		
 			
 			WriteResult wr = mongoDB.getCollection(collectionClassPayRecord).insert(dbo);
 			mongoDB = getMongoDB();
@@ -4347,6 +4390,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					doc.put("$set", updatedbo);
 					WriteResult wrt = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", classpr.getStudentOpenID()), doc);
 					ret = true;
+					break;
 				}
 
 		} catch (Exception e) {
@@ -4354,6 +4398,31 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			}
 		return ret;
 	}
+	
+	//get Classpayrecords
+	public static List<Classpayrecord> getClasspayrecords(String openid) {
+		mongoDB = getMongoDB();
+		List<Classpayrecord> records = new ArrayList<Classpayrecord>();
+		try {
+			DBCursor dbcur = mongoDB.getCollection(collectionClassPayRecord).find(new BasicDBObject().append("studentOpenID", openid));
+			while(dbcur.hasNext()){
+				Classpayrecord classrecord = new Classpayrecord();
+				DBObject dboj = dbcur.next();
+				classrecord.setClassCount(dboj.get("classCount")==null?0:Integer.parseInt(dboj.get("classCount")+""));
+				classrecord.setPayMoney(Integer.parseInt(dboj.get("payMoney")+""));
+				classrecord.setPayOption(dboj.get("payOption")+"");
+				classrecord.setPayTime(dboj.get("payTime")+"");
+				classrecord.setStudentName(dboj.get("studentName")+"");
+				classrecord.setStudentOpenID(openid);
+				records.add(classrecord);
+			}
+		}catch (Exception e) {
+			log.info(e.getMessage());
+			}
+		return records;
+	}
+	
+	
 //	collectionClassExpenseRecord    by teacher
 	
 	public static boolean addClassExpenseRecord(Classexpenserecord exrecord) {
@@ -4382,10 +4451,10 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			ret = true;
 			if(ret){
 				mongoDB = getMongoDB();
-				DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", exrecord.getStudentOpenID()));
-				while(dbcur.hasNext()){
-					DBObject o = dbcur.next();
-					Object teamer = o.get("Teamer");
+				DBObject dbcur = mongoDB.getCollection(wechat_user).findOne(new BasicDBObject().append("OpenID", exrecord.getStudentOpenID()));
+				if(dbcur!=null){
+					//DBObject o = dbcur.next();
+					Object teamer = dbcur.get("Teamer");
 					DBObject updatedbo = new BasicDBObject();
 					DBObject teamobj = new BasicDBObject();
 					teamobj = (DBObject) teamer;
@@ -4445,8 +4514,39 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		return ret1;
 	}
 	
+	//get ClassExpenseRecords by id
+	public static List<Classexpenserecord> getClassExpenseRecords(String openid) {
+		mongoDB = getMongoDB();
+		List<Classexpenserecord> recordList = new ArrayList<Classexpenserecord>();
+		DBObject query = new BasicDBObject();
+		query.put("studentOpenID",openid);
+		DBCursor records = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
+		while(records.hasNext()){
+			Classexpenserecord record = new Classexpenserecord();
+			DBObject dbo = records.next();
+			record.setExpenseClassCount(dbo.get("expenseClassCount")==null?"":dbo.get("expenseClassCount")+"");
+			record.setExpenseDistrict(dbo.get("expenseDistrict")==null?"":dbo.get("expenseDistrict")+"");
+			record.setExpenseOption(dbo.get("expenseOption")==null?"":dbo.get("expenseOption")+"");
+			record.setExpenseTime(dbo.get("expenseTime")==null?"":dbo.get("expenseTime")+"");
+			record.setParentConfirmExpense("yes".equals(dbo.get("parentConfirmExpense")+"")?true:false);
+			record.setParentConfirmTime(dbo.get("parentConfirmTime")==null?"":dbo.get("parentConfirmTime")+"");
+			record.setStudentName(dbo.get("studentName")==null?"":dbo.get("studentName")+"");
+			record.setStudentOpenID(dbo.get("studentOpenID")==null?"":dbo.get("studentOpenID")+"");
+			record.setTeacherComment(dbo.get("teacherComment")==null?"":dbo.get("teacherComment")+"");
+			record.setTeacherConfirmExpense("yes".equals(dbo.get("teacherConfirmExpense")+"")?true:false);
+			record.setTeacherConfirmTime(dbo.get("teacherConfirmTime")==null?"":dbo.get("teacherConfirmTime")+"");
+			record.setTeacherName(dbo.get("teacherName")==null?"":dbo.get("teacherName")+"");
+			record.setTeacherOpenID(dbo.get("teacherOpenID")==null?"":dbo.get("teacherOpenID")+"");
+			record.setParentComment(dbo.get("parentComment")==null?"":dbo.get("parentComment")+"");
+			recordList.add(record);
+		}
+		return recordList;
+		
+	}
+	
+	
 	// parentConfirmTime
-	public static boolean parentConfirmTime(String time) {
+	public static boolean parentConfirmTime(String time,String comment) {
 		mongoDB = getMongoDB();
 		//DBObject dbob = new BasicDBObject();
 		Boolean ret = false;
@@ -4455,6 +4555,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			DBObject dbo = new BasicDBObject();
 			dbo.put("parentConfirmExpense", "yes");
 			dbo.put("parentConfirmTime", DateUtil.timestamp2Str(cursqlTS));
+			dbo.put("parentComment", comment);
 			BasicDBObject doc = new BasicDBObject();
 			doc.put("$set", dbo);
 			BasicDBObject db=new BasicDBObject();

@@ -3,6 +3,7 @@ package com.nkang.kxmoment.baseobject.classhourrecord;
                 1-》 消费时间： 2017.12.23 星期三 下午3点-4点半
                 1-》 消费课时： 1
                 1-》       任课老师： 苹果老师
+                	家长反馈
                 老师id
                 1-》 学员姓名： 康智萌
                 1-》 学员ID：12345
@@ -27,6 +28,14 @@ public class Classexpenserecord {
 	public String teacherConfirmTime;
 	public boolean parentConfirmExpense;
 	public String parentConfirmTime;
+	public String parentComment;
+	
+	public String getParentComment() {
+		return parentComment;
+	}
+	public void setParentComment(String parentComment) {
+		this.parentComment = parentComment;
+	}
 	public String getExpenseOption() {
 		return expenseOption;
 	}
