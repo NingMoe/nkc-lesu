@@ -305,12 +305,8 @@ margin-left: 4%;
 
 				if (i != 0 && tempCharArray[i - 1] == '减') {
 					var minusNumber = getVoiceForNumber(i);
-					while (tempArray[i - 1] - minusNumber <= 0
-							|| currentTotal - minusNumber <= 0) {
-						if (length != 1 && length != lengthMin) {
-							length = length - 1;
-						}
-						minusNumber = getVoiceForNumber(i);
+					if ( currentTotal - minusNumber <= 0) {
+						tempCharArray[i - 1] == '加'
 					}
 					tempArray[i] = minusNumber;
 					if (length != 1) {
