@@ -4459,7 +4459,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					DBObject teamobj = new BasicDBObject();
 					teamobj = (DBObject) teamer;
 					if (teamobj != null) {
-						int total = 0;
+						/*int total = 0;
 						if(teamobj.get("totalClass")!=null && !"".equals(teamobj.get("totalClass")+"")){
 							total = Integer.parseInt(teamobj.get("totalClass")+"");
 						}
@@ -4471,7 +4471,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 						}if(total<=0){
 							total=0;
 						}
-						
+						*/
 						int expense = 0;
 						if(teamobj.get("expenseClass")!=null && !"".equals(teamobj.get("expenseClass")+"")){
 							expense = Integer.parseInt(teamobj.get("expenseClass")+"");
@@ -4496,7 +4496,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 							leftPay = 0;
 						}
 						
-						updatedbo.put("Teamer.totalClass",total);
+						//updatedbo.put("Teamer.totalClass",total);
 						updatedbo.put("Teamer.expenseClass", expense);
 						updatedbo.put("Teamer.leftPayClass", leftPay);
 						BasicDBObject doc = new BasicDBObject();
