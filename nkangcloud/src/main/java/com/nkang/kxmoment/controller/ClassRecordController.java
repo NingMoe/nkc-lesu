@@ -28,13 +28,15 @@ public class ClassRecordController {
 			@RequestParam(value = "totalClass") String totalClass,
 			@RequestParam(value = "expenseClass") String expenseClass,
 			@RequestParam(value = "leftPayClass") String leftPayClass,
-			@RequestParam(value = "leftSendClass") String leftSendClass
+			@RequestParam(value = "leftSendClass") String leftSendClass,
+			@RequestParam(value = "classType") String classType
 			)
 	{
 		StudentBasicInformation stInfor = new StudentBasicInformation();
 		stInfor.setDistrict(district);
 		stInfor.setEnrolledTime(enrolledTime);
 		stInfor.setEnrolledWay(enrolledWay);
+		stInfor.setClassType(classType);
 		if(totalClass!=null && !"".equals(totalClass)){
 			stInfor.setTotalClass(Integer.parseInt(totalClass));
 		}else{

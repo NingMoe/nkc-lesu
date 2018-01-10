@@ -1634,7 +1634,7 @@ function getNowFormatDate() {
 												</td><% } %>
 												
 												<td>
-													<a target="_self" onclick="getReminderForNew()">
+													<a target="_self" href="http://leshucq.bceapp.com/mdm/MyClassDetail.jsp?UID=<%=uid %>">
 														<img src="http://leshucq.bj.bcebos.com/standard/classunitmgt.png" /><h4>我的课时</h4>
 													</a>
 												</td>

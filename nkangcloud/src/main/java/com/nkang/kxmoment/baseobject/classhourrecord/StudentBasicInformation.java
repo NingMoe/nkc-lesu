@@ -19,6 +19,13 @@ public class StudentBasicInformation {
 	public String enrolledTime;
 	public String enrolledWay;
 	public String district;
+	public String classType;
+	public String getClassType() {
+		return classType;
+	}
+	public void setClassType(String classType) {
+		this.classType = classType;
+	}
 	public int totalClass;
 	public int expenseClass;
 	public int leftPayClass;

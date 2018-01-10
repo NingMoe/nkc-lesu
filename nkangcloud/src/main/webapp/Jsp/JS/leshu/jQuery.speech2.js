@@ -31,7 +31,7 @@ blog: http://www.tuterm.com
 				var _speech = $(".start");
 				_speech.on('click', function() { //捕获点击事件	
 					var tempTime=minute*60+ (millisecond / 1000) + second;
-					if(qt=="minute"&&second>300){
+					if(qt=="minute"&&minute>=5&&second>=0){
 						$("#next").val("查看战绩");
 					}
 					if($("#next").val()!="查看战绩"){

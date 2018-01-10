@@ -4248,6 +4248,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				dbo.put("Teamer.enrolledTime", stInfor.getEnrolledTime());
 			    dbo.put("Teamer.enrolledWay", stInfor.getEnrolledWay());
 				dbo.put("Teamer.district", stInfor.getDistrict());
+				dbo.put("Teamer.classType", stInfor.getClassType());
 				if(stInfor.getTotalClass()!=-1){
 					dbo.put("Teamer.totalClass", stInfor.getTotalClass());
 				}
@@ -4326,10 +4327,11 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					Object tea = dbo.get("Teamer");
 					DBObject teamobj = new BasicDBObject();
 					teamobj = (DBObject) tea;
-					int expenseClass=teamobj.get("realName")==null?0:Integer.parseInt(teamobj.get("expenseClass")+"");
-					int leftPayClass=teamobj.get("realName")==null?0:Integer.parseInt(teamobj.get("leftPayClass")+"");
-					int leftSendClass=teamobj.get("realName")==null?0:Integer.parseInt(teamobj.get("leftSendClass")+"");
-					int totalClass=teamobj.get("realName")==null?0:Integer.parseInt(teamobj.get("totalClass")+"");
+					int expenseClass=teamobj.get("expenseClass")==null?0:Integer.parseInt(teamobj.get("expenseClass")+"");
+					int leftPayClass=teamobj.get("leftPayClass")==null?0:Integer.parseInt(teamobj.get("leftPayClass")+"");
+					int leftSendClass=teamobj.get("leftSendClass")==null?0:Integer.parseInt(teamobj.get("leftSendClass")+"");
+					int totalClass=teamobj.get("totalClass")==null?0:Integer.parseInt(teamobj.get("totalClass")+"");
+					String classType=teamobj.get("classType")==null?"":teamobj.get("classType")+"";
 					sbi.setDistrict(teamobj.get("district")+"");
 					sbi.setEnrolledTime(teamobj.get("enrolledTime")+"");
 					sbi.setEnrolledWay(teamobj.get("enrolledWay")+"");
@@ -4337,6 +4339,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					sbi.setLeftPayClass(leftPayClass);
 					sbi.setLeftSendClass(leftSendClass);
 					sbi.setPhone(teamobj.get("phone")+"");
+					sbi.setClassType(classType);
 					sbi.setRealName(teamobj.get("realName")+"");
 					sbi.setTotalClass(totalClass);
 				}

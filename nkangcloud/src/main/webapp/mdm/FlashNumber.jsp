@@ -223,7 +223,7 @@ margin-left: 4%;
 			numberL="50%";
 		}
 		function start() {
-			if(qt=="minute"&&second>30){
+			if(qt=="minute"&&minute>=5&&second>=0){
 				$("#next").val("查看战绩");
 			}
 			if($("#next").val()!="查看战绩"){

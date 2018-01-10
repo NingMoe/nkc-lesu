@@ -420,12 +420,16 @@ function showClassPanel(openid,name){
 				var expenseClass=data.expenseClass==null?'':data.expenseClass;
 				var leftPayClass=data.leftPayClass==null?'':data.leftPayClass;
 				var leftSendClass=data.leftSendClass==null?'':data.leftSendClass;
+				var classType=data.classType==null?'':data.classType;
 				var districtList=new Array('jb','ljt','np','yjp');
 				var districtNameList=new Array('江北校区','李家沱校区','南坪校区','杨家坪校区');
 				var enrolledWayList=new Array('web','ad','ldx','other');
 				var enrolledWayNameList=new Array('网络','广告','老带新','其他');
+				var classTypeList=new Array('zxs','yypy','qwsx');
+				var classTypeNameList=new Array('珠心算','丫丫拼音','趣味 数学');
 				var selectedDistrictName="";
 				var selectedenrolledWayName="";
+				var selectedClassTypeName="";
 				if(district!=''){
 					for(var q=0;q<districtList.length;q++){
 						if(district==districtList[q]){
@@ -446,6 +450,16 @@ function showClassPanel(openid,name){
 						}
 					}
 				}
+				if(classType!=''){
+					for(var p=0;p<classTypeList.length;p++){
+						if(classType==classTypeList[p]){
+							classTypeList.splice(p,1);
+							selectedClassTypeName=classTypeNameList[p];
+							classTypeNameList.splice(p,1);
+							break;
+						}
+					}
+				}
 				var districtSelect="<option selected='true' value='"+district+"'>"+selectedDistrictName+"</option>";
 				for(var p=0;p<districtList.length;p++){
 					districtSelect+="<option value='"+districtList[p]+"'>"+districtNameList[p]+"</option>";
@@ -454,6 +468,10 @@ function showClassPanel(openid,name){
 				var enrolledWaySelect="<option selected='true' value='"+enrolledWay+"'>"+selectedenrolledWayName+"</option>";
 				for(var p=0;p<enrolledWayList.length;p++){
 					enrolledWaySelect+="<option value='"+enrolledWayList[p]+"'>"+enrolledWayNameList[p]+"</option>";
+				}
+				var classTypeSelect="<option selected='true' value='"+classType+"'>"+selectedClassTypeName+"</option>";
+				for(var p=0;p<classTypeList.length;p++){
+					classTypeSelect+="<option value='"+classTypeList[p]+"'>"+classTypeNameList[p]+"</option>";
 				}
 				$("#UpdateClassPartDiv").html('<form id="updateClassForm">'
 			            +'												<input type="hidden" name="openID" id="atest_uid" value="'+openid+'"/>'
@@ -474,6 +492,12 @@ function showClassPanel(openid,name){
 			            +'														<td><p class="classText">报名校区</p></td>'
 			            +'														<td><select class="editInput"  name="district">'
 			            +districtSelect
+			            +'													    </select></td>'
+			            +'													</tr>'	
+			            +'													<tr>'
+			            +'														<td><p class="classText">课时类型</p></td>'
+			            +'														<td><select class="editInput"  name="classType">'
+			            +classTypeSelect
 			            +'													    </select></td>'
 			            +'													</tr>'			            
 			            +'													<tr>'
