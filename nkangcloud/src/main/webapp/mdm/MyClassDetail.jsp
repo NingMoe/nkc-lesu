@@ -1,11 +1,15 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="com.nkang.kxmoment.util.*"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page
 	import="com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation"%>
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%
 	String uid = request.getParameter("UID");
+	Date d = new Date();  
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+    String dateNowStr = sdf.format(d);  
 	StudentBasicInformation sbi = MongoDBBasic
 			.getStudentBasicInformation(uid);
 	String name = "";
@@ -54,7 +58,6 @@
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <script src="../Jsp/JS/fusioncharts.js" type="text/javascript"></script>
 <script src="../Jsp/JS/hulk-light.js" type="text/javascript"></script>
-<script src="hulk-light.js"></script>
 <script>
 	var used = "<%=used%>";
 	var left = "<%=left%>";
@@ -99,16 +102,16 @@ top:0px;
 width:94%;
 margin-left:3%;
 height:80px;
-border-top:1px solid black;
-border-bottom:1px solid black;
+border-top:1px solid #CFCFCF;
+border-bottom:1px solid #CFCFCF;
 }
 .classRow{
 height:70px;
-width:19.7%;
+width:24.7%;
 margin-top:5px;
 margin-bottom:5px;
 float:left;
-border-left:1px solid black;}
+border-left:1px solid #CFCFCF;}
 .classRow p{
 font-size:13px;
 width:100%;
@@ -132,9 +135,33 @@ position:relative;
     z-index: 1002;
     left: 0;
 }
+.classType{
+width:100%;
+text-align:center;
+height:40px;
+line-height:40px;
+font-size:16px;
+font-family:黑体;
+position:absolute;
+top:90px;
+z-index:100000;
+}
+.time{
+
+width:100%;
+text-align:center;
+height:40px;
+line-height:40px;
+font-size:14px;
+font-family:黑体;
+position:absolute;
+top:260px;
+z-index:100000;
+}
 </style>
 </head>
 <body>
+
 	<div id="data_model_div" style="height: 100px">
 		<i class="icon"
 			style="position: absolute; top: 25px; z-index: 100; right: 20px;">
@@ -155,12 +182,10 @@ position:relative;
 		</div>
 	</div>
 	<div id="chart-container">FusionCharts will render here</div>
+<p class="classType"><%=classType %></p>
+<p class="time"><%=dateNowStr %></p>
 	<div class="classPanel">
 		<div class="classRow" style="border-left: none;">
-			<p>课时类别</p>
-			<p><%=classType %></p>
-		</div>
-		<div class="classRow">
 			<p>课时总量</p>
 			<p><%=total %></p>
 		</div>
