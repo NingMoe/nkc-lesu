@@ -55,7 +55,9 @@
 <style type="text/css">
 *{margin:0;}
 body{
-overflow:hidden;}
+overflow:hidden;
+width:680px;
+}
 
 #footer {
     bottom: 0;
