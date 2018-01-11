@@ -391,7 +391,121 @@ function findTeacherList(){
 	});
 	
 }
+
 var records;
+var keyArrays;
+var keyNameArrays;
+function getClassRecord(obj){
+	var ct=$(obj).find("option:selected").val()
+	var realName=records[ct].realName==null?'':records[ct].realName;
+	var enrolledTime=records[ct].enrolledTime==null?'':records[ct].enrolledTime;
+	var enrolledWay=records[ct].enrolledWay==null?'':records[ct].enrolledWay;
+	var district=records[ct].district==null?'':records[ct].district;
+	var totalClass=records[ct].totalClass==null?'':records[ct].totalClass;
+	var expenseClass=records[ct].expenseClass==null?'':records[ct].expenseClass;
+	var leftPayClass=records[ct].leftPayClass==null?'':records[ct].leftPayClass;
+	var leftSendClass=records[ct].leftSendClass==null?'':records[ct].leftSendClass;
+	var classType=records[ct].classType==null?'':records[ct].classType;
+	var districtList=new Array('jb','ljt','np','yjp');
+	var districtNameList=new Array('江北校区','李家沱校区','南坪校区','杨家坪校区');
+	var enrolledWayList=new Array('web','ad','ldx','other');
+	var enrolledWayNameList=new Array('网络','广告','老带新','其他');
+	var classTypeList=keyArrays;
+	var classTypeNameList=keyNameArrays;
+	var selectedDistrictName="";
+	var selectedenrolledWayName="";
+	var selectedClassTypeName="";
+	if(district!=''){
+		for(var q=0;q<districtList.length;q++){
+			if(district==districtList[q]){
+				districtList.splice(q,1);
+				selectedDistrictName=districtNameList[q];
+				districtNameList.splice(q,1);
+				break;
+			}
+		}
+	}
+	if(enrolledWay!=''){
+		for(var p=0;p<enrolledWayList.length;p++){
+			if(enrolledWay==enrolledWayList[p]){
+				enrolledWayList.splice(p,1);
+				selectedenrolledWayName=enrolledWayNameList[p];
+				enrolledWayNameList.splice(p,1);
+				break;
+			}
+		}
+	}
+	if(classType!=''){
+		for(var p=0;p<classTypeList.length;p++){
+			if(classType==classTypeList[p]){
+				classTypeList.splice(p,1);
+				selectedClassTypeName=classTypeNameList[p];
+				classTypeNameList.splice(p,1);
+				break;
+			}
+		}
+	}
+	var districtSelect="<option selected='true' value='"+district+"'>"+selectedDistrictName+"</option>";
+	for(var p=0;p<districtList.length;p++){
+		districtSelect+="<option value='"+districtList[p]+"'>"+districtNameList[p]+"</option>";
+	}
+
+	var enrolledWaySelect="<option selected='true' value='"+enrolledWay+"'>"+selectedenrolledWayName+"</option>";
+	for(var p=0;p<enrolledWayList.length;p++){
+		enrolledWaySelect+="<option value='"+enrolledWayList[p]+"'>"+enrolledWayNameList[p]+"</option>";
+	}
+	var classTypeSelect="<option selected='true' value='"+classType+"'>"+selectedClassTypeName+"</option>";
+	for(var p=0;p<classTypeList.length;p++){
+		classTypeSelect+="<option value='"+classTypeList[p]+"'>"+classTypeNameList[p]+"</option>";
+	}
+	$("#UpdateClassPartDiv").html('<form id="updateClassForm">'
+            +'												<input type="hidden" name="openID" id="atest_uid" value="'+openid+'"/>'
+            +'												<table id="tableForm" style="margin-top:-10px;width:100%;">'
+            +'												    <tr>'
+            +'													    <td><p class="classText">报名时间</p></td>'
+            +'													    <td align="left" class="tdText" >'
+            +'													    	<input class="editInput"  name="enrolledTime" type="date" id="enrolledTime" required  value="'+enrolledTime+'">'
+            +'													    </td>'
+            +'												    </tr>'
+            +'													<tr>'
+            +'														<td><p class="classText">报名渠道</p></td>'
+            +'														<td><select class="editInput"  name="enrolledWay"  id="enrolledWay">'
+            +enrolledWaySelect
+            +'													    </select></td>'
+            +'													</tr>'
+            +'													<tr>'
+            +'														<td><p class="classText">报名校区</p></td>'
+            +'														<td><select class="editInput"  name="district"  id="district">'
+            +districtSelect
+            +'													    </select></td>'
+            +'													</tr>'	
+            +'													<tr>'
+            +'														<td><p class="classText">课时类型</p></td>'
+            +'														<td><select class="editInput"  onchange="getClassRecord(this)  name="classType" id="classType">'
+            +classTypeSelect
+            +'													    </select></td>'
+            +'													</tr>'			            
+            +'													<tr>'
+            +'														<td><p class="classText">总课时</p></td>'
+            +'														<td><input class="editInput" type="text" name="totalClass" id="totalClass" value="'+totalClass+'"/></td>'
+            +'													</tr>'
+            +'													<tr>'
+            +'														<td><p class="classText">已经消费课时</p></td>'
+            +'														<td><input class="editInput" type="text" name="expenseClass" id="expenseClass" value="'+expenseClass+'"/></td>'
+            +'													</tr>'
+            +'													<tr>'
+            +'														<td><p class="classText">剩余购买课时</p></td>'
+            +'														<td><input class="editInput" type="text" name="leftPayClass" id="leftPayClass" value="'+leftPayClass+'"/></td>'
+            +'													</tr>'
+            +'													<tr>'
+            +'														<td><p class="classText">剩余赠与课时</p></td>'
+            +'														<td><input class="editInput" type="text" name="leftSendClass" id="leftSendClass" value="'+leftSendClass+'"/></td>'
+            +'													</tr>'
+            +'												 </table>'
+            +'												 </form>'
+            +'												 <button class="btnAthena EbtnLess" style="background-color:#20b672;margin-left: 90px;margin-top:15px;" id="updateClassBtn">确定</button>');
+
+}
 function showClassPanel(openid,name){
 	showCommonPanel();
 	//findTeacherList();
@@ -429,8 +543,8 @@ function showClassPanel(openid,name){
 					}
 					
 				}
-				var keyArrays=keys.split(",");
-				var keyNameArrays=keyNameArrays.split(",");
+				keyArrays=keys.split(",");
+				keyNameArrays=keyNameArrays.split(",");
 				var index=keyArrays[0];
 				keyArrays.remove(keyArrays.length-1);
 				keyNameArrays.remove(keyNameArrays.length-1);
@@ -501,42 +615,42 @@ function showClassPanel(openid,name){
 			            +'												    <tr>'
 			            +'													    <td><p class="classText">报名时间</p></td>'
 			            +'													    <td align="left" class="tdText" >'
-			            +'													    	<input class="editInput"  name="enrolledTime" type="date" id="registerDate" required  value="'+enrolledTime+'">'
+			            +'													    	<input class="editInput"  name="enrolledTime" type="date" id="enrolledTime" required  value="'+enrolledTime+'">'
 			            +'													    </td>'
 			            +'												    </tr>'
 			            +'													<tr>'
 			            +'														<td><p class="classText">报名渠道</p></td>'
-			            +'														<td><select class="editInput"  name="enrolledWay">'
+			            +'														<td><select class="editInput"  name="enrolledWay"  id="enrolledWay">'
 			            +enrolledWaySelect
 			            +'													    </select></td>'
 			            +'													</tr>'
 			            +'													<tr>'
 			            +'														<td><p class="classText">报名校区</p></td>'
-			            +'														<td><select class="editInput"  name="district">'
+			            +'														<td><select class="editInput"  name="district"  id="district">'
 			            +districtSelect
 			            +'													    </select></td>'
 			            +'													</tr>'	
 			            +'													<tr>'
 			            +'														<td><p class="classText">课时类型</p></td>'
-			            +'														<td><select class="editInput"  name="classType">'
+			            +'														<td><select class="editInput" onchange="getClassRecord(this)" name="classType" id="classType">'
 			            +classTypeSelect
 			            +'													    </select></td>'
 			            +'													</tr>'			            
 			            +'													<tr>'
 			            +'														<td><p class="classText">总课时</p></td>'
-			            +'														<td><input class="editInput" type="text" name="totalClass" value="'+totalClass+'"/></td>'
+			            +'														<td><input class="editInput" type="text" name="totalClass" id="totalClass" value="'+totalClass+'"/></td>'
 			            +'													</tr>'
 			            +'													<tr>'
 			            +'														<td><p class="classText">已经消费课时</p></td>'
-			            +'														<td><input class="editInput" type="text" name="expenseClass" value="'+expenseClass+'"/></td>'
+			            +'														<td><input class="editInput" type="text" name="expenseClass" id="expenseClass" value="'+expenseClass+'"/></td>'
 			            +'													</tr>'
 			            +'													<tr>'
 			            +'														<td><p class="classText">剩余购买课时</p></td>'
-			            +'														<td><input class="editInput" type="text" name="leftPayClass" value="'+leftPayClass+'"/></td>'
+			            +'														<td><input class="editInput" type="text" name="leftPayClass" id="leftPayClass" value="'+leftPayClass+'"/></td>'
 			            +'													</tr>'
 			            +'													<tr>'
 			            +'														<td><p class="classText">剩余赠与课时</p></td>'
-			            +'														<td><input class="editInput" type="text" name="leftSendClass" value="'+leftSendClass+'"/></td>'
+			            +'														<td><input class="editInput" type="text" name="leftSendClass" id="leftSendClass" value="'+leftSendClass+'"/></td>'
 			            +'													</tr>'
 			            +'												 </table>'
 			            +'												 </form>'
