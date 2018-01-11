@@ -111,7 +111,7 @@ var foo = {};
 		
 		<!-- http://pic1.nipic.com/2009-02-26/2009226111421860_2.jpg  -->
 		<!-- http://leshu.bj.bcebos.com/standard/leshuLogo.png -->
-		<img style="position: absolute; top: 8px; left: 10px; z-index: 100; height: 60px;" class="HpLogo" src="http://pic1.nipic.com/2009-02-26/2009226111421860_2.jpg" alt="Logo" />
+		<img style="position: absolute; top: 8px; left: 10px; z-index: 100; height: 60px;" class="HpLogo" src="http://leshucq.bj.bcebos.com/icon/sw.jpg" alt="Logo" />
 		<div
 			style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
