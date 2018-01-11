@@ -1,6 +1,8 @@
 package com.nkang.kxmoment.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -68,7 +70,7 @@ public class ClassRecordController {
 	
 	//updateStudentSendClass(String OpenID, int send)
 	//http://leshucq.bceapp.com/ClassRecord/updateStudentSendClass?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&send=2
-	@RequestMapping("/updateStudentSendClass")
+	/*@RequestMapping("/updateStudentSendClass")
 	public @ResponseBody String UpdateStudentSendClass(@RequestParam(value = "openID") String openid,@RequestParam(value = "send") int send){
 		if(MongoDBBasic.updateStudentSendClass(openid,send)){
 			return "success";
@@ -78,12 +80,14 @@ public class ClassRecordController {
 		
 		
 	}
+	*/
 	
+
 	// getStudentInformation by openid
-	//http://leshucq.bceapp.com/ClassRecord/getStudentBasicInformation?openID=oO8exvzE95JUvwpNxNTxraOqzUFI
-	@RequestMapping("/getStudentBasicInformation")
-	public @ResponseBody StudentBasicInformation getStudentBasicInformation(@RequestParam(value = "openID") String openid){
-		return MongoDBBasic.getStudentBasicInformation(openid);
+	//http://leshucq.bceapp.com/ClassRecord/getClassTypeRecords?openID=oO8exvzE95JUvwpNxNTxraOqzUFI
+	@RequestMapping("/getClassTypeRecords")
+	public @ResponseBody Map<String,StudentBasicInformation> getClassTypeRecords(@RequestParam(value = "openID") String openid){
+		return MongoDBBasic.getClassTypeRecords(openid);
 		
 		}
 	

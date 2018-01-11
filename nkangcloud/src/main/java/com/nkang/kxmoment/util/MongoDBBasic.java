@@ -4246,17 +4246,20 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 
 			if(true) {
 				//DBObject dbj = (DBObject) dbcur.get("ClassTypeRecord");
-				DBObject dbo = new BasicDBObject();
-				dbo.put("Teamer.enrolledTime", stInfor.getEnrolledTime());
-			    dbo.put("Teamer.enrolledWay", stInfor.getEnrolledWay());
-				dbo.put("Teamer.district", stInfor.getDistrict());
+//				DBObject dbo = new BasicDBObject();
+//				dbo.put("Teamer.enrolledTime", stInfor.getEnrolledTime());
+//			    dbo.put("Teamer.enrolledWay", stInfor.getEnrolledWay());
+//				dbo.put("Teamer.district", stInfor.getDistrict());
 				//dbo.put("Teamer.classType", stInfor.getClassType());
 				
-				BasicDBObject doc = new BasicDBObject();
-				doc.put("$set", dbo);
+//				BasicDBObject doc = new BasicDBObject();
+//				doc.put("$set", dbo);
 				DBObject query = new BasicDBObject();
 				query.put("payOption", stInfor.getClassType());
 				query.put("OpenID", OpenID);
+				query.put("enrolledTime", stInfor.getEnrolledTime());
+				query.put("enrolledWay", stInfor.getEnrolledWay());
+				query.put("district", stInfor.getDistrict());
 				if(stInfor.getTotalClass()!=-1){
 					query.put("totalClass", stInfor.getTotalClass());
 				}
@@ -4270,7 +4273,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					query.put("leftSendClass", stInfor.getLeftSendClass());
 				}
 				
-				WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), doc);
+				//WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), doc);
 				DBObject db = new BasicDBObject();
 				db.put("OpenID", OpenID);
 				db.put("payOption", stInfor.getClassType());
@@ -4291,6 +4294,41 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			log.info("updateStudentBasicInformation--" + e.getMessage());
 		}
 		return ret;
+	}
+	
+	
+	//ClassTypeRecord
+	public static Map<String,StudentBasicInformation> getClassTypeRecords(String OpenID){
+		Map<String,StudentBasicInformation> map = new HashMap();
+		//List<String> lstype = new ArrayList<String>();
+		StudentBasicInformation sbi = new StudentBasicInformation();
+		try {
+			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(new BasicDBObject().append("OpenID", OpenID));
+			while(wr.hasNext()){
+				DBObject db = wr.next();
+				String key=db.get("payOption")+"";
+				int expenseClass=db.get("expenseClass")==null?0:Integer.parseInt(db.get("expenseClass")+"");
+				int leftPayClass=db.get("leftPayClass")==null?0:Integer.parseInt(db.get("leftPayClass")+"");
+				int leftSendClass=db.get("leftSendClass")==null?0:Integer.parseInt(db.get("leftSendClass")+"");
+				int totalClass=db.get("totalClass")==null?0:Integer.parseInt(db.get("totalClass")+"");
+				String classType=db.get("payOption")==null?"":db.get("payOption")+"";
+				sbi.setDistrict(db.get("district")+"");
+				sbi.setEnrolledTime(db.get("enrolledTime")+"");
+				sbi.setEnrolledWay(db.get("enrolledWay")+"");
+				sbi.setExpenseClass(expenseClass);
+				sbi.setLeftPayClass(leftPayClass);
+				sbi.setLeftSendClass(leftSendClass);
+				//sbi.setPhone(dbcur.get("phone")+"");
+				sbi.setClassType(classType);
+				//sbi.setRealName(dbcur.get("realName")+"");
+				sbi.setTotalClass(totalClass);
+				map.put(key, sbi);
+			}
+		}catch (Exception e) {
+			log.info( e.getMessage());
+			}
+		return map;
+		
 	}
 /*
 	public static boolean updateStudentSendClass(String OpenID, int send) {
@@ -4332,8 +4370,8 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		
 	}*/
 	
-	// getStudentInformation by openid
-	public static StudentBasicInformation getStudentBasicInformation(String openid){
+	// getStudentInformation by openid collectionClassTypeRecord
+	/*public static StudentBasicInformation getStudentBasicInformation(String openid,String payOption){
 		mongoDB = getMongoDB();
 		StudentBasicInformation sbi = new StudentBasicInformation();
 		try {
@@ -4367,7 +4405,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		
 		return sbi;
 		
-	}
+	}*/
 	
 	public static boolean addClasspayrecord(Classpayrecord classpr) {
 		mongoDB = getMongoDB();
