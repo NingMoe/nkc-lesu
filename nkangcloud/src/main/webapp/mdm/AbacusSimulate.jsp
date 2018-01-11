@@ -33,11 +33,11 @@
 <meta charset="utf-8" />
 <title>乐数珠心算算盘模拟器</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<link rel="stylesheet" type="text/css"href="../MetroStyleFiles/sweetalert.css" />
+<!-- <link rel="stylesheet" type="text/css"href="../MetroStyleFiles/sweetalert.css" />
 <script src="../MetroStyleFiles/sweetalert.min.js"></script>
 <link href="../Jsp/JS/leshu/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <script src="../Jsp/JS/leshu/custom.js"></script>
-<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script> -->
 
 <script type="text/javascript" src="../Jsp/JS/leshu/abacus.js"></script>
 
