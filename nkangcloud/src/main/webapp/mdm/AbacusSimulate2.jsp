@@ -59,10 +59,10 @@ table {
 }
 
 
-div#calculator {
+/* div#calculator {
 	margin-left:-4%;
 	margin-right:-4%;
-}
+} */
 </style>
 <script>
 var foo = {};
