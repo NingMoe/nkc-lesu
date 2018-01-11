@@ -391,6 +391,7 @@ function findTeacherList(){
 	});
 	
 }
+var records;
 function showClassPanel(openid,name){
 	showCommonPanel();
 	//findTeacherList();
@@ -406,27 +407,48 @@ function showClassPanel(openid,name){
 	 });
 	 	jQuery.ajax({
 		type : "GET",
-		url : "../ClassRecord/getStudentBasicInformation",
+		url : "../ClassRecord/getClassTypeRecords",
 		data : {
 			openID : openid
 		},
 		cache : false,
 		success : function(data) {
-				var realName=data.realName==null?'':data.realName;
-				var enrolledTime=data.enrolledTime==null?'':data.enrolledTime;
-				var enrolledWay=data.enrolledWay==null?'':data.enrolledWay;
-				var district=data.district==null?'':data.district;
-				var totalClass=data.totalClass==null?'':data.totalClass;
-				var expenseClass=data.expenseClass==null?'':data.expenseClass;
-				var leftPayClass=data.leftPayClass==null?'':data.leftPayClass;
-				var leftSendClass=data.leftSendClass==null?'':data.leftSendClass;
-				var classType=data.classType==null?'':data.classType;
+			 	records=data;
+				var keys="";
+				var keyNames="";
+				for(var key in data){
+					keys+=key+",";
+					if(key=="zxs"){
+						keyNames+="珠心算,";	
+					}
+					if(key=="yypy"){
+						keyNames+="丫丫拼音,";	
+					}
+					if(key=="qwsx"){
+						keyNames+="趣味数学,";	
+					}
+					
+				}
+				var keyArrays=keys.split(",");
+				var keyNameArrays=keyNameArrays.split(",");
+				var index=keyArrays[0];
+				keyArrays.remove(keyArrays.length-1);
+				keyNameArrays.remove(keyNameArrays.length-1);
+				var realName=data[index].realName==null?'':data[index].realName;
+				var enrolledTime=data[index].enrolledTime==null?'':data[index].enrolledTime;
+				var enrolledWay=data[index].enrolledWay==null?'':data[index].enrolledWay;
+				var district=data[index].district==null?'':data[index].district;
+				var totalClass=data[index].totalClass==null?'':data[index].totalClass;
+				var expenseClass=data[index].expenseClass==null?'':data[index].expenseClass;
+				var leftPayClass=data[index].leftPayClass==null?'':data[index].leftPayClass;
+				var leftSendClass=data[index].leftSendClass==null?'':data[index].leftSendClass;
+				var classType=data[index].classType==null?'':data[index].classType;
 				var districtList=new Array('jb','ljt','np','yjp');
 				var districtNameList=new Array('江北校区','李家沱校区','南坪校区','杨家坪校区');
 				var enrolledWayList=new Array('web','ad','ldx','other');
 				var enrolledWayNameList=new Array('网络','广告','老带新','其他');
-				var classTypeList=new Array('zxs','yypy','qwsx');
-				var classTypeNameList=new Array('珠心算','丫丫拼音','趣味 数学');
+				var classTypeList=keyArrays;
+				var classTypeNameList=keyNameArrays;
 				var selectedDistrictName="";
 				var selectedenrolledWayName="";
 				var selectedClassTypeName="";
