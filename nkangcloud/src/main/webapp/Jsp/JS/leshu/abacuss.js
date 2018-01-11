@@ -132,13 +132,13 @@ function v046(v022) {
 					+ this.abacusname
 					+ ".assignstring(document.forms."
 					+ this.formname
-					+ ".number.value);\">Update</button></td>\<td width=30%><button type=button onclick=\""
+					+ ".number.value);\">数译珠</button></td>\<td width=30%><button type=button onclick=\""
 					+ this.abacusname
 					+ ".reset();document.forms."
 					+ this.formname
 					+ ".number.value="
 					+ this.abacusname
-					+ ".currentvaluestring;\">Reset</button></td>\</form>\</tr></table></td></tr>\<tr><td>");
+					+ ".currentvaluestring;\">清零</button></td>\</form>\</tr></table></td></tr>\<tr><td>");
 	document.write("<table cellpadding=0 cellspacing=0>");
 	for (v015 = 0; v015 < v036 + 2; v015++) {
 		document.write("<tr>");
