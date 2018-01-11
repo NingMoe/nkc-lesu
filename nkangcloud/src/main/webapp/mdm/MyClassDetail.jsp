@@ -67,7 +67,7 @@
 			type : 'pie3d',
 			renderAt : 'chart-container',
 			width : '100%',
-			height : '200',
+			height : '230',
 			dataFormat : 'json',
 			dataSource : {
 				"chart" : {
@@ -98,7 +98,7 @@ body{
 overflow:hidden;}
 .classPanel{
 position:relative;
-top:0px;
+top:20px;
 width:94%;
 margin-left:3%;
 height:80px;
@@ -155,7 +155,7 @@ line-height:40px;
 font-size:14px;
 font-family:黑体;
 position:absolute;
-top:260px;
+top:300px;
 z-index:100000;
 }
 </style>
