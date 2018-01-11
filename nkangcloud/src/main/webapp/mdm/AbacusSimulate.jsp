@@ -39,8 +39,7 @@
 <script src="../Jsp/JS/leshu/custom.js"></script>
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 
-<script src="../Jsp/JS/leshu/abacus.js"></script>
-
+<script type="text/javascript" src="../Jsp/JS/leshu/abacus.js"></script>
 
 <style type="text/css">
 *{margin:0;}
