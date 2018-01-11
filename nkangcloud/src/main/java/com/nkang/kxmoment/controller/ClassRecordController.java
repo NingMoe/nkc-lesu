@@ -187,13 +187,13 @@ public class ClassRecordController {
 	}
 	
 	
-	// http://leshucq.bceapp.com/ClassRecord/parentConfirmTime?comment=nice---&teacherConfirmTime=1515403834131
+	// http://leshucq.bceapp.com/ClassRecord/parentConfirmTime?expenseID=1515403834131&comment=nice---GOOD
 	@RequestMapping("/parentConfirmTime")
 	public @ResponseBody String parentConfirmTime(
-			@RequestParam(value = "comment") String parentComment,
-			@RequestParam(value = "teacherConfirmTime") String ConfirmTime){
+			@RequestParam(value = "expenseID") String expenseID,
+			@RequestParam(value = "comment") String parentComment){
 		
-		if(MongoDBBasic.parentConfirmTime(ConfirmTime,parentComment)){
+		if(MongoDBBasic.parentConfirmTime(expenseID,parentComment)){
 			
 			return "succss";
 		}
