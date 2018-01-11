@@ -89,7 +89,7 @@
 	var left = "<%=left%>";
 	var gift = "<%=gift%>";
 	var records=eval('<%=resultJSON%>');
-	function getClassRecord(obj){
+	function getClassRecordByType(obj){
 		var ct=$(obj).find("option:selected").val();
 		var totalClass=records[ct]==null?'':records[ct].totalClass;
 		var expenseClass=records[ct]==null?'':records[ct].expenseClass;
@@ -203,16 +203,18 @@ position:relative;
     z-index: 1002;
     left: 0;
 }
-.classType{
-width:100%;
-text-align:center;
-height:40px;
-line-height:40px;
-font-size:16px;
-font-family:黑体;
-position:absolute;
-top:90px;
-z-index:100000;
+.classType{    
+width: 30%;
+    height: 30px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    font-family: 黑体;
+    position: absolute;
+    top: 100px;
+    z-index: 100000;
+    border-radius: 5px;
+    margin-left: 5%;
 }
 .time{
 
