@@ -128,11 +128,11 @@ function v046(v022) {
 					+ this.currentvaluestring
 					+ " onkeypress=\"return "
 					+ this.abacusname
-					+ ".isallowed(event)\"></input></td>\<td width=30%><button type=button onclick=\""
+					+ ".isallowed(event)\"></input></td>\<td width=50%><button type=button onclick=\""
 					+ this.abacusname
 					+ ".assignstring(document.forms."
 					+ this.formname
-					+ ".number.value);\">数译珠</button></td>\<td width=30%><button type=button onclick=\""
+					+ ".number.value);\">数译珠</button></td>\<td width=50%><button type=button onclick=\""
 					+ this.abacusname
 					+ ".reset();document.forms."
 					+ this.formname
