@@ -32,8 +32,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script type="text/javascript" src="../Jsp/JS/leshu/jquery.min.js.download"></script>
-<script src="../Jsp/JS/leshu/abacus.js.download" type="text/javascript"></script>
-<script src="../Jsp/JS/leshu/soroban.js.download" type="text/javascript"></script>
+<script src="../Jsp/JS/leshu/abacuss.js" type="text/javascript"></script>
+<script src="../Jsp/JS/leshu/soroban.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css"/>
 <title>乐数珠心算算盘模拟器</title>
 
@@ -58,9 +58,6 @@ table {
 	vertical-align: bottom;
 }
 
-div table {
-	margin-left: 20px;
-}
 
 div#calculator {
 	margin-left:-4%;
