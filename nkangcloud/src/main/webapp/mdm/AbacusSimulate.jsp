@@ -73,25 +73,19 @@ overflow:hidden;}
 </head>
 <body onload="run();">
 	<div id="data_model_div" style="height: 100px">
-		<i class="icon"
-			style="position: absolute; top: 25px; z-index: 100; right: 20px;">
-			<!-- <img class="exit" src="http://leshu.bj.bcebos.com/icon/EXIT1.png"
-			style="width: 30px; height: 30px;"> -->
+		<i class="icon" style="position: absolute; top: 25px; z-index: 100; right: 20px;">
 			<div style="width: 30px; height: 30px; float: left; border-radius: 50%; overflow: hidden;">
-				<img class="exit" src="<%=headImgUrl%>"
-					style="width: 30px; height: 30px;" />
-			</div> <span
-			style="position: relative; top: 8px; left: 5px; font-style: normal"><%=name%></span>
-		</i> <img
-			style="position: absolute; top: 8px; left: 10px; z-index: 100; height: 60px;"
-			class="HpLogo"
-			src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo">
+				<img class="exit" src="<%= headImgUrl%>" style="width: 30px; height: 30px;" />
+			</div> 
+			<span style="position: relative; top: 8px; left: 5px; font-style: normal"><%= name%></span>
+		</i> 
+		<img style="position: absolute; top: 8px; left: 10px; z-index: 100; height: 60px;" class="HpLogo" src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo" />
 		<div
 			style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
 	</div>
-	<div id="myAbacus2" style="position:relative;top:-200px;;"> <canvas id="myAbacus2_Abacus" width="680" height="420"></canvas></div>
-	<div style="text-align: center; width:100%;">
+	<div id="myAbacus2"> <canvas id="myAbacus2_Abacus"></canvas></div>
+	<div style="text-align: center; width:100%; margin-top:50px;">
 		<img alt="" src="http://leshucq.bj.bcebos.com/icon/reset-icon.png" style="margin: 0 auto;" onClick="pagereload();"/>
 	</div>
 	<div id="footer">
