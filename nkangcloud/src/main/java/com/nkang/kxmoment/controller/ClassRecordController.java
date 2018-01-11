@@ -92,7 +92,7 @@ public class ClassRecordController {
 		}
 	
 	
-//	ClassRecord/addClasspayrecord?payOption=YY语音&payMoney=2230&classCount=20&payTime=2018-01-05&studentName=march&studentOpenID=oO8exvzE95JUvwpNxNTxraOqzUFI
+//	http://leshucq.bceapp.com/ClassRecord/addClasspayrecord?payOption=YY语音&payMoney=2230&classCount=20&payTime=2018-01-05&studentName=march&studentOpenID=oO8exvzE95JUvwpNxNTxraOqzUFI
 	@RequestMapping("/addClasspayrecord")
 	public @ResponseBody String AddClasspayrecord(
 			@RequestParam(value = "payOption") String payOption,
