@@ -43,14 +43,15 @@
 	String gift=sbisList.get(0).getLeftSendClass()+"";
 	String classType=sbisList.get(0).getClassType();
 	String total=sbisList.get(0).getTotalClass()+"";
+	String classTypeName="";
 	if(classType.equals("zxs")){
-		classType="珠心算";
+		classTypeName="珠心算";
 	}
 	if(classType.equals("yypy")){
-		classType="丫丫拼音";
+		classTypeName="丫丫拼音";
 	}
 	if(classType.equals("qwsx")){
-		classType="趣味数学";
+		classTypeName="趣味数学";
 	}
 	sbisList.remove(0);
 	classTypes.remove(0);
@@ -67,7 +68,7 @@
 		}
 	}
 	classNameTypes.remove(0);
-    String resultJSON=JSONObject.toJSONString(sbisList);
+    String resultJSON=JSONObject.toJSONString(sbis);
 %>
 <!DOCTYPE html>
 <html>
@@ -88,8 +89,9 @@
 	var used = "<%=used%>";
 	var left = "<%=left%>";
 	var gift = "<%=gift%>";
-	var records=eval('<%=resultJSON%>');
+	var recordsJson='<%=resultJSON%>';
 	function getClassRecordByType(obj){
+		var records=JSON.parse(recordsJson);
 		var ct=$(obj).find("option:selected").val();
 		var totalClass=records[ct]==null?'':records[ct].totalClass;
 		var expenseClass=records[ct]==null?'':records[ct].expenseClass;
@@ -253,7 +255,7 @@ z-index:100000;
 	</div>
 	<div id="chart-container">FusionCharts will render here</div>
 <select class="classType" onchange="getClassRecordByType(this)">
-<option selected><%=classType %></option>
+<option value="<%=classType %>" selected><%=classTypeName %></option>
 <%for(int i=0;i<classTypes.size();i++){ %>
 
 <option value="<%=classTypes.get(i) %>"><%=classNameTypes.get(i) %></option>
