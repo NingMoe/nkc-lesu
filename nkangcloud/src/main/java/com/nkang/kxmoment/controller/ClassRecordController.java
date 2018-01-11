@@ -15,7 +15,7 @@ import com.nkang.kxmoment.baseobject.classhourrecord.Classpayrecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation;
 import com.nkang.kxmoment.util.DateUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
-//  http://leshucq.bceapp.com/ClassRecord/updateStudentBasicInfo?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&enrolledTime=2018-1-5&enrolledWay=lao&district=chongqing&totalClass=55&expenseClass=33&leftPayClass=22&leftSendClass=0
+//  http://leshucq.bceapp.com/ClassRecord/updateStudentBasicInfo?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&enrolledTime=2018-1-5&enrolledWay=lao&district=chongqing&totalClass=55&expenseClass=33&leftPayClass=22&leftSendClass=0&classType=珠心算
 @Controller
 @RequestMapping("/ClassRecord")
 public class ClassRecordController {

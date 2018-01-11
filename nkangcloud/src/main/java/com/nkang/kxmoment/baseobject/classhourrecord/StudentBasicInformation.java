@@ -13,6 +13,7 @@ package com.nkang.kxmoment.baseobject.classhourrecord;
 
  */
 public class StudentBasicInformation {
+	public String payOption;
 	public String openID;
 	public String realName;
 	public String phone;
@@ -30,6 +31,14 @@ public class StudentBasicInformation {
 	public int expenseClass;
 	public int leftPayClass;
 	public int leftSendClass;
+	
+	
+	public String getPayOption() {
+		return payOption;
+	}
+	public void setPayOption(String payOption) {
+		this.payOption = payOption;
+	}
 	public String getOpenID() {
 		return openID;
 	}
