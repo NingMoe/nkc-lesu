@@ -107,8 +107,11 @@ var foo = {};
 				<img class="exit" src="<%= headImgUrl%>" style="width: 30px; height: 30px;" />
 			</div> 
 			<span style="position: relative; top: 8px; left: 5px; font-style: normal"><%= name%></span>
-		</i> 
-		<img style="position: absolute; top: 8px; left: 10px; z-index: 100; height: 60px;" class="HpLogo" src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo" />
+		</i>
+		
+		<!-- http://pic1.nipic.com/2009-02-26/2009226111421860_2.jpg  -->
+		<!-- http://leshu.bj.bcebos.com/standard/leshuLogo.png -->
+		<img style="position: absolute; top: 8px; left: 10px; z-index: 100; height: 60px;" class="HpLogo" src="http://pic1.nipic.com/2009-02-26/2009226111421860_2.jpg" alt="Logo" />
 		<div
 			style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
@@ -212,7 +215,7 @@ var foo = {};
 	
 </div>
 	<div id="footer">
-		<span class="clientCopyRight"><nobr>©版权所有 | 重庆乐数艺术培训有限公司</nobr></span>
+		<span class="clientCopyRight"><nobr>©版权所有 | 重庆NKC科技有限公司</nobr></span>
 	</div>
 </main>
 
