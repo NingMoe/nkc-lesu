@@ -396,7 +396,7 @@ var records;
 var keyArrays;
 var keyNameArrays;
 function getClassRecord(obj){
-	var ct=$(obj).find("option:selected").val()
+	var ct=$(obj).find("option:selected").val();
 	var realName=records[ct]==null?'':records[ct].realName;
 	var enrolledTime=records[ct]==null?'':records[ct].enrolledTime;
 	var enrolledWay=records[ct]==null?'':records[ct].enrolledWay;
@@ -405,7 +405,7 @@ function getClassRecord(obj){
 	var expenseClass=records[ct]==null?'':records[ct].expenseClass;
 	var leftPayClass=records[ct]==null?'':records[ct].leftPayClass;
 	var leftSendClass=records[ct]==null?'':records[ct].leftSendClass;
-	var classType=records[ct]==null?'':records[ct].classType;
+	var classType=ct;
 	var districtList=new Array('jb','ljt','np','yjp');
 	var districtNameList=new Array('江北校区','李家沱校区','南坪校区','杨家坪校区');
 	var enrolledWayList=new Array('web','ad','ldx','other');
@@ -459,8 +459,14 @@ function getClassRecord(obj){
 		classTypeSelect+="<option value='"+classTypeList[p]+"'>"+classTypeNameList[p]+"</option>";
 	}
 	$("#UpdateClassPartDiv").html('<form id="updateClassForm">'
-            +'												<input type="hidden" name="openID" id="atest_uid" value="'+openid+'"/>'
+            +'												<input type="hidden" name="openID" id="atest_uid" value="<%=uid%>"/>'
             +'												<table id="tableForm" style="margin-top:-10px;width:100%;">'
+            +'													<tr>'
+            +'														<td><p class="classText">课时类型</p></td>'
+            +'														<td><select class="editInput" onchange="getClassRecord(this)" name="classType" id="classType">'
+            +classTypeSelect
+            +'													    </select></td>'
+            +'													</tr>'	
             +'												    <tr>'
             +'													    <td><p class="classText">报名时间</p></td>'
             +'													    <td align="left" class="tdText" >'
@@ -478,13 +484,7 @@ function getClassRecord(obj){
             +'														<td><select class="editInput"  name="district"  id="district">'
             +districtSelect
             +'													    </select></td>'
-            +'													</tr>'	
-            +'													<tr>'
-            +'														<td><p class="classText">课时类型</p></td>'
-            +'														<td><select class="editInput"  onchange="getClassRecord(this)  name="classType" id="classType">'
-            +classTypeSelect
-            +'													    </select></td>'
-            +'													</tr>'			            
+            +'													</tr>'		            
             +'													<tr>'
             +'														<td><p class="classText">总课时</p></td>'
             +'														<td><input class="editInput" type="text" name="totalClass" id="totalClass" value="'+totalClass+'"/></td>'
@@ -505,6 +505,27 @@ function getClassRecord(obj){
             +'												 </form>'
             +'												 <button class="btnAthena EbtnLess" style="background-color:#20b672;margin-left: 90px;margin-top:15px;" id="updateClassBtn">确定</button>');
 
+	$("#updateClassBtn").click(function(){
+		var datas=$("#updateClassForm").serialize();
+			$.ajax({
+			url:"../ClassRecord/updateStudentBasicInfo",
+			data:datas,
+			type:"POST",
+			dataType:"json",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			cache:false,
+			async:false,
+			success:function(result) {
+				if(result){
+					swal("更改成功!", "恭喜!", "success"); 
+					hideBouncePanel();
+					getMDLUserLists();
+				} else {
+					swal("更改失败!", "请填写正确的信息.", "error");
+				}
+			}
+		}); 
+	});
 }
 function showClassPanel(openid,name){
 	showCommonPanel();
@@ -600,6 +621,12 @@ function showClassPanel(openid,name){
 				$("#UpdateClassPartDiv").html('<form id="updateClassForm">'
 			            +'												<input type="hidden" name="openID" id="atest_uid" value="'+openid+'"/>'
 			            +'												<table id="tableForm" style="margin-top:-10px;width:100%;">'
+			            +'													<tr>'
+			            +'														<td><p class="classText">课时类型</p></td>'
+			            +'														<td><select class="editInput" onchange="getClassRecord(this)" name="classType" id="classType">'
+			            +classTypeSelect
+			            +'													    </select></td>'
+			            +'													</tr>'	
 			            +'												    <tr>'
 			            +'													    <td><p class="classText">报名时间</p></td>'
 			            +'													    <td align="left" class="tdText" >'
@@ -616,12 +643,6 @@ function showClassPanel(openid,name){
 			            +'														<td><p class="classText">报名校区</p></td>'
 			            +'														<td><select class="editInput"  name="district"  id="district">'
 			            +districtSelect
-			            +'													    </select></td>'
-			            +'													</tr>'	
-			            +'													<tr>'
-			            +'														<td><p class="classText">课时类型</p></td>'
-			            +'														<td><select class="editInput" onchange="getClassRecord(this)" name="classType" id="classType">'
-			            +classTypeSelect
 			            +'													    </select></td>'
 			            +'													</tr>'			            
 			            +'													<tr>'
