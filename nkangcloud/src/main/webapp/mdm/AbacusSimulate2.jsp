@@ -59,7 +59,7 @@ table {
 }
 
 div table {
-	margin: 0 auto;
+	margin-left: 20px;
 }
 
 div#calculator {
@@ -84,11 +84,7 @@ var foo = {};
 
 
 <style type="text/css">
-*{margin:0;}
-body{
-overflow:hidden;
-width:680px;
-}
+
 
 #footer {
     bottom: 0;
