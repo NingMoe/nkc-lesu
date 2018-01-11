@@ -12,16 +12,7 @@
 	Date d = new Date();  
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
     String dateNowStr = sdf.format(d);  
-    Map<String,StudentBasicInformation> sbis = MongoDBBasic.getClassTypeRecords(uid);
-    Set<String> types=sbis.keySet();
-    List<String> classTypes=new ArrayList<String>();
-    List<String> classNameTypes=new ArrayList<String>();
-    List<StudentBasicInformation> sbisList=new ArrayList<StudentBasicInformation>();
-    for(String i : types){
-    	classTypes.add(i);
-    	classNameTypes.add(i);
-    	sbisList.add(sbis.get(i));
-    }
+
 	String name = "";
 	String headImgUrl ="";
 	String phone="";
@@ -38,12 +29,32 @@
 			phone=res.get("phone");
 		}
 	}
-	String used=sbisList.get(0).getExpenseClass()+"";
-	String left=sbisList.get(0).getLeftPayClass()+"";
-	String gift=sbisList.get(0).getLeftSendClass()+"";
-	String classType=sbisList.get(0).getClassType();
-	String total=sbisList.get(0).getTotalClass()+"";
+    Map<String,StudentBasicInformation> sbis = MongoDBBasic.getClassTypeRecords(uid);
+
+	String used="";
+	String left="";
+	String gift="";
+	String classType="";
+	String total="";
 	String classTypeName="";
+	String resultJSON="";
+	String isEmpty="N";
+    List<String> classTypes=new ArrayList<String>();
+    List<String> classNameTypes=new ArrayList<String>();
+    if(!sbis.isEmpty()){
+    Set<String> types=sbis.keySet();
+    List<StudentBasicInformation> sbisList=new ArrayList<StudentBasicInformation>();
+    for(String i : types){
+    	classTypes.add(i);
+    	classNameTypes.add(i);
+    	sbisList.add(sbis.get(i));
+    }
+	used=sbisList.get(0).getExpenseClass()+"";
+	left=sbisList.get(0).getLeftPayClass()+"";
+	gift=sbisList.get(0).getLeftSendClass()+"";
+	classType=sbisList.get(0).getClassType();
+	total=sbisList.get(0).getTotalClass()+"";
+	classTypeName="";
 	if(classType.equals("zxs")){
 		classTypeName="珠心算";
 	}
@@ -68,7 +79,11 @@
 		}
 	}
 	classNameTypes.remove(0);
-    String resultJSON=JSONObject.toJSONString(sbis);
+    resultJSON=JSONObject.toJSONString(sbis);
+    }
+    else{
+    	isEmpty="Y";
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -79,9 +94,6 @@
 <link rel="stylesheet" type="text/css"
 	href="../MetroStyleFiles/sweetalert.css" />
 <script src="../MetroStyleFiles/sweetalert.min.js"></script>
-<link href="../Jsp/JS/leshu/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<script src="../Jsp/JS/leshu/custom.js"></script>
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <script src="../Jsp/JS/fusioncharts.js" type="text/javascript"></script>
 <script src="../Jsp/JS/hulk-light.js" type="text/javascript"></script>
@@ -89,8 +101,41 @@
 	var used = "<%=used%>";
 	var left = "<%=left%>";
 	var gift = "<%=gift%>";
+	var isEmpty='<%=isEmpty%>';
 	var recordsJson='<%=resultJSON%>';
+	function getNowFormatDate() {
+	    var date = new Date();
+	    var seperator1 = "-";
+	    var seperator2 = ":";
+	    var month = date.getMonth() + 1;
+	    var hour=date.getHours();
+	    var minute=date.getMinutes();
+	    var second=date.getSeconds();
+	    var strDate = date.getDate();
+	    if (month >= 1 && month <= 9) {
+	        month = "0" + month;
+	    }
+	    if (hour >= 1 && hour <= 9) {
+	        hour = "0" + hour;
+	    }
+	    if (minute >= 1 && minute <= 9) {
+	        minute = "0" + minute;
+	    }
+	    if (second >= 1 && second <= 9) {
+	        second = "0" + second;
+	    }
+	    if (strDate >= 0 && strDate <= 9) {
+	        strDate = "0" + strDate;
+	    }
+	    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+	            + " " + hour + seperator2 + monute
+	            + seperator2 + second;
+	    return currentdate;
+	}
 	function getClassRecordByType(obj){
+		var currentdate = getNowFormatDate();
+		$(".time").text(currentdate);
+		
 		var records=JSON.parse(recordsJson);
 		var ct=$(obj).find("option:selected").val();
 		var totalClass=records[ct]==null?'':records[ct].totalClass;
@@ -132,6 +177,7 @@
 		});
 		
 	}
+	if(isEmpty!='Y'){
 	FusionCharts.ready(function() {
 		var dietChart = new FusionCharts({
 			type : 'pie3d',
@@ -161,6 +207,10 @@
 			}
 		}).render();
 	});
+	}else{
+		alert("联系乐数购买课程吧~！");
+		//swal("您没有购买课程哦~", "联系乐数购买课程吧~！", "warning");
+	}
 </script>
 <style type="text/css">
 *{margin:0;}
@@ -253,6 +303,7 @@ z-index:100000;
 			style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
 	</div>
+	<%if(!sbis.isEmpty()){ %>
 	<div id="chart-container">FusionCharts will render here</div>
 <select class="classType" onchange="getClassRecordByType(this)">
 <option value="<%=classType %>" selected><%=classTypeName %></option>
@@ -280,6 +331,7 @@ z-index:100000;
 			<p id="gift"><%=gift %></p>
 		</div>
 	</div>
+	<%} %>
 	<div id="footer">
 		<span class="clientCopyRight"><nobr>©版权所有 | 重庆乐数艺术培训有限公司</nobr></span>
 	</div>
