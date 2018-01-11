@@ -4445,6 +4445,19 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				doc.put("$set", updatedbo);
 				mongoDB.getCollection(collectionClassTypeRecord).update(dbcur, doc);
 				ret = true;
+			}else{
+				
+				updatedbo.put("payOption", classpr.getPayOption());
+				updatedbo.put("OpenID", classpr.getStudentOpenID());
+				updatedbo.put("enrolledTime", "");
+				updatedbo.put("enrolledWay", "购买时候");
+				updatedbo.put("district", "付款校区");
+				updatedbo.put("expenseClass", 0);
+				updatedbo.put("leftPayClass", classpr.getClassCount());
+				updatedbo.put("leftSendClass", 0);
+				updatedbo.put("totalClass", classpr.getClassCount());
+				mongoDB.getCollection(collectionClassTypeRecord).insert(updatedbo);
+				ret = true;
 			}
 		} catch (Exception e) {
 			log.info("addClasspayrecord--" + e.getMessage());
