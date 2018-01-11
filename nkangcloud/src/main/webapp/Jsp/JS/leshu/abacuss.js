@@ -120,7 +120,7 @@ function v046(v022) {
 	document
 			.write("<table cellspacing=0 cellpadding=0>\<tr><td align=center><table cellspacing=0 cellpadding=0><tr>\<form name=\""
 					+ this.formname
-					+ "\">\<td><input name=\"number\" type=text maxlength="
+					+ "\">\<td><input id=\"numberid\" name=\"number\" type=text maxlength="
 					+ this.v018
 					+ " size="
 					+ this.v018

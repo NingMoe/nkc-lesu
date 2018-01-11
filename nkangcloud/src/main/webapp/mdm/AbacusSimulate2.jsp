@@ -82,6 +82,9 @@ var foo = {};
 
 <style type="text/css">
 
+#numberid{
+	width:150px;
+}
 
 #footer {
     bottom: 0;
