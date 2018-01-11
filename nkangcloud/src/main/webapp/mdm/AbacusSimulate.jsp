@@ -30,9 +30,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>乐数珠心算算盘模拟器</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>乐数珠心算算盘模拟器</title>
+		<meta name="viewport" content="width=device-width, user-scalable=yes">
 <!-- <link rel="stylesheet" type="text/css"href="../MetroStyleFiles/sweetalert.css" />
 <script src="../MetroStyleFiles/sweetalert.min.js"></script>
 <link href="../Jsp/JS/leshu/font-awesome/css/font-awesome.min.css" rel="stylesheet">
