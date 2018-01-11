@@ -54,18 +54,19 @@
 	}
 	sbisList.remove(0);
 	classTypes.remove(0);
-	classNameTypes.remove(0);
+
 	for(int i=0;i<classNameTypes.size();i++){
 		if(classNameTypes.get(i).equals("zxs")){
 			classNameTypes.set(i, "珠心算");
 		}
-		if(classNameTypes.get(0).equals("yypy")){
+		if(classNameTypes.get(i).equals("yypy")){
 			classNameTypes.set(i,"丫丫拼音");
 		}
-		if(classNameTypes.get(0).equals("qwsx")){
+		if(classNameTypes.get(i).equals("qwsx")){
 			classNameTypes.set(i,"趣味数学");
 		}
 	}
+	classNameTypes.remove(0);
     String resultJSON=JSONObject.toJSONString(sbisList);
 %>
 <!DOCTYPE html>
