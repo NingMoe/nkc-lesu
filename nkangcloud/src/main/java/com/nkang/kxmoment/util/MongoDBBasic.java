@@ -4301,7 +4301,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 	public static Map<String,StudentBasicInformation> getClassTypeRecords(String OpenID){
 		Map<String,StudentBasicInformation> map = new HashMap();
 		//List<String> lstype = new ArrayList<String>();
-		StudentBasicInformation sbi = new StudentBasicInformation();
+		StudentBasicInformation sbi;
 		try {
 			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(new BasicDBObject().append("OpenID", OpenID));
 			while(wr.hasNext()){
@@ -4312,6 +4312,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				int leftSendClass=db.get("leftSendClass")==null?0:Integer.parseInt(db.get("leftSendClass")+"");
 				int totalClass=db.get("totalClass")==null?0:Integer.parseInt(db.get("totalClass")+"");
 				String classType=db.get("payOption")==null?"":db.get("payOption")+"";
+				sbi = new StudentBasicInformation();
 				sbi.setDistrict(db.get("district")+"");
 				sbi.setEnrolledTime(db.get("enrolledTime")+"");
 				sbi.setEnrolledWay(db.get("enrolledWay")+"");
