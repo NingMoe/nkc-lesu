@@ -86,7 +86,7 @@ width:680px;
 			style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
 	</div>
-	<div id="myAbacus2" style="position:relative;top:-150px;"> <canvas id="myAbacus2_Abacus"></canvas></div>
+	<div id="myAbacus2" style="position:absolute;top:-150px;"> <canvas id="myAbacus2_Abacus"></canvas></div>
 	<div style="text-align: center; width:100%; margin-top:50px;">
 		<img alt="" src="http://leshucq.bj.bcebos.com/icon/reset-icon.png" style="margin: 0 auto;" onClick="pagereload();"/>
 	</div>
