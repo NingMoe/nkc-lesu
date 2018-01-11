@@ -23,7 +23,7 @@ public final class Constants {
 	public static final String ucpass_appId = "d9944779258e42ad8683b2ac2c4e92da";
 	
 	/*	wechat payment config*/
-	public static final String devOpenID = "oI3krwR_gGNsz38r1bdB1_SkcoNw";
+	public static final String devOpenID = "oO8exvz-DZOu8wc0f81v9EHYq2HE";
 	public static final String prodID= "1469932302";
 	public static final String partnerKey= "53fead94b3acec49763585f18b7b6nkc";
 	public static final String mcthID= "1469932302";
