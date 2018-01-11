@@ -128,7 +128,7 @@
 	        strDate = "0" + strDate;
 	    }
 	    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-	            + " " + hour + seperator2 + monute
+	            + " " + hour + seperator2 + minute
 	            + seperator2 + second;
 	    return currentdate;
 	}
