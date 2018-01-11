@@ -41,6 +41,13 @@
 
 <script type="text/javascript" src="../Jsp/JS/leshu/abacus.js"></script>
 
+<script type="text/javascript">
+	function run() {
+		var abacus2 = new Abacus("myAbacus2", 1);
+		abacus2.init();
+	}
+</script>
+
 <style type="text/css">
 *{margin:0;}
 body{
