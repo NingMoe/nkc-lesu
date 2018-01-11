@@ -2,16 +2,26 @@
 <%@ page import="com.nkang.kxmoment.util.*"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="com.alibaba.fastjson.JSONObject"%>
+
 <%@ page
 	import="com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation"%>
-<%@ page import="java.util.*,org.json.JSONObject"%>
+<%@ page import="java.util.*"%>
 <%
 	String uid = request.getParameter("UID");
 	Date d = new Date();  
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
     String dateNowStr = sdf.format(d);  
-	StudentBasicInformation sbi = MongoDBBasic
-			.getStudentBasicInformation(uid);
+    Map<String,StudentBasicInformation> sbis = MongoDBBasic.getClassTypeRecords(uid);
+    Set<String> types=sbis.keySet();
+    List<String> classTypes=new ArrayList<String>();
+    List<String> classNameTypes=new ArrayList<String>();
+    List<StudentBasicInformation> sbisList=new ArrayList<StudentBasicInformation>();
+    for(String i : types){
+    	classTypes.add(i);
+    	classNameTypes.add(i);
+    	sbisList.add(sbis.get(i));
+    }
 	String name = "";
 	String headImgUrl ="";
 	String phone="";
@@ -28,11 +38,11 @@
 			phone=res.get("phone");
 		}
 	}
-	String used=sbi.getExpenseClass()+"";
-	String left=sbi.getLeftPayClass()+"";
-	String gift=sbi.getLeftSendClass()+"";
-	String classType=sbi.getClassType();
-	String total=sbi.getTotalClass()+"";
+	String used=sbisList.get(0).getExpenseClass()+"";
+	String left=sbisList.get(0).getLeftPayClass()+"";
+	String gift=sbisList.get(0).getLeftSendClass()+"";
+	String classType=sbisList.get(0).getClassType();
+	String total=sbisList.get(0).getTotalClass()+"";
 	if(classType.equals("zxs")){
 		classType="珠心算";
 	}
@@ -42,6 +52,21 @@
 	if(classType.equals("qwsx")){
 		classType="趣味数学";
 	}
+	sbisList.remove(0);
+	classTypes.remove(0);
+	classNameTypes.remove(0);
+	for(int i=0;i<classNameTypes.size();i++){
+		if(classNameTypes.get(i).equals("zxs")){
+			classNameTypes.set(i, "珠心算");
+		}
+		if(classNameTypes.get(0).equals("yypy")){
+			classNameTypes.set(i,"丫丫拼音");
+		}
+		if(classNameTypes.get(0).equals("qwsx")){
+			classNameTypes.set(i,"趣味数学");
+		}
+	}
+    String resultJSON=JSONObject.toJSONString(sbisList);
 %>
 <!DOCTYPE html>
 <html>
@@ -62,6 +87,48 @@
 	var used = "<%=used%>";
 	var left = "<%=left%>";
 	var gift = "<%=gift%>";
+	var records=eval('<%=resultJSON%>');
+	function getClassRecord(obj){
+		var ct=$(obj).find("option:selected").val();
+		var totalClass=records[ct]==null?'':records[ct].totalClass;
+		var expenseClass=records[ct]==null?'':records[ct].expenseClass;
+		var leftPayClass=records[ct]==null?'':records[ct].leftPayClass;
+		var leftSendClass=records[ct]==null?'':records[ct].leftSendClass;
+		$("#total").text(totalClass);
+		$("#used").text(expenseClass);
+		$("#left").text(leftPayClass);
+		$("#gift").text(leftSendClass);
+		FusionCharts.ready(function() {
+			var dietChart = new FusionCharts({
+				type : 'pie3d',
+				renderAt : 'chart-container',
+				width : '100%',
+				height : '230',
+				dataFormat : 'json',
+				dataSource : {
+					"chart" : {
+						"caption" : "",
+						"showValues" : "1",
+						"numberSuffix" : "",
+						"theme" : "hulk-light",
+						"enableMultiSlicing" : "1"
+
+					},
+					"data" : [ {
+						"label" : "已用课时",
+						"value" : expenseClass
+					}, {
+						"label" : "剩余课时",
+						"value" : leftPayClass
+					}, {
+						"label" : "赠送课时",
+						"value" : leftSendClass
+					} ]
+				}
+			}).render();
+		});
+		
+	}
 	FusionCharts.ready(function() {
 		var dietChart = new FusionCharts({
 			type : 'pie3d',
@@ -182,24 +249,30 @@ z-index:100000;
 		</div>
 	</div>
 	<div id="chart-container">FusionCharts will render here</div>
-<p class="classType"><%=classType %></p>
+<select class="classType" onchange="getClassRecordByType(this)">
+<option selected><%=classType %></option>
+<%for(int i=0;i<classTypes.size();i++){ %>
+
+<option value="<%=classTypes.get(i) %>"><%=classNameTypes.get(i) %></option>
+<%} %>
+</select>
 <p class="time"><%=dateNowStr %></p>
 	<div class="classPanel">
 		<div class="classRow" style="border-left: none;">
 			<p>课时总量</p>
-			<p><%=total %></p>
+			<p id="total"><%=total %></p>
 		</div>
 		<div class="classRow">
 			<p>已用课时</p>
-			<p><%=used %></p>
+			<p id="used"><%=used %></p>
 		</div>
 		<div class="classRow" style="border-right: none;">
 			<p>剩余课时</p>
-			<p><%=left %></p>
+			<p id="left"><%=left %></p>
 		</div>
 		<div class="classRow" style="border-right: none;">
 			<p>赠送课时</p>
-			<p><%=gift %></p>
+			<p id="gift"><%=gift %></p>
 		</div>
 	</div>
 	<div id="footer">
