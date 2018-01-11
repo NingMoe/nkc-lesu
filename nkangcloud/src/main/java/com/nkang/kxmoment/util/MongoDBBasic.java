@@ -4482,10 +4482,11 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		mongoDB = getMongoDB();
 		Boolean ret = false;
 		Boolean ret1 = false;
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime());
 		try {
 			Date a = new Date();
 			DBObject dbo = new BasicDBObject();
-			
+			dbo.put("expenseID", a.getTime()+"");
 			dbo.put("expenseOption", exrecord.getExpenseOption());
 		    dbo.put("expenseTime", exrecord.getExpenseTime());
 			dbo.put("expenseClassCount", exrecord.getExpenseClassCount());
@@ -4496,68 +4497,63 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			dbo.put("expenseDistrict", exrecord.getExpenseDistrict());
 			dbo.put("teacherComment", exrecord.getTeacherComment());
 			dbo.put("teacherConfirmExpense", "yes");
-			dbo.put("teacherConfirmTime", a.getTime()+"");//convertTime(a.getTime()),convertTime(Long.valueOf("1515398255469"))
+			dbo.put("teacherConfirmTime", DateUtil.timestamp2Str(cursqlTS));//convertTime(a.getTime()),convertTime(Long.valueOf("1515398255469"))
 			dbo.put("parentConfirmExpense", "no");
 			//dbo.put("parentConfirmTime", exrecord.getParentConfirmTime());
 			
-			WriteResult wr = mongoDB.getCollection(collectionClassExpenseRecord).insert(dbo);
+			mongoDB.getCollection(collectionClassExpenseRecord).insert(dbo);
 			ret = true;
 			if(ret){
+				DBObject query = new BasicDBObject();
+				query.put("OpenID", exrecord.getStudentOpenID());
+				query.put("payOption", exrecord.getExpenseOption());
 				mongoDB = getMongoDB();
-				DBObject dbcur = mongoDB.getCollection(wechat_user).findOne(new BasicDBObject().append("OpenID", exrecord.getStudentOpenID()));
+				DBObject dbcur = mongoDB.getCollection(collectionClassTypeRecord).findOne(query);
 				if(dbcur!=null){
-					//DBObject o = dbcur.next();
-					Object teamer = dbcur.get("Teamer");
 					DBObject updatedbo = new BasicDBObject();
-					DBObject teamobj = new BasicDBObject();
-					teamobj = (DBObject) teamer;
-					if (teamobj != null) {
-						/*int total = 0;
-						if(teamobj.get("totalClass")!=null && !"".equals(teamobj.get("totalClass")+"")){
-							total = Integer.parseInt(teamobj.get("totalClass")+"");
-						}
-						
-						if(total<=0){
-							total=0;
-						}else if(null!=exrecord.getExpenseClassCount()&&!"".equals(exrecord.getExpenseClassCount())){
-							total=total-Integer.parseInt(exrecord.getExpenseClassCount());
-						}if(total<=0){
-							total=0;
-						}
-						*/
-						int expense = 0;
-						if(teamobj.get("expenseClass")!=null && !"".equals(teamobj.get("expenseClass")+"")){
-							expense = Integer.parseInt(teamobj.get("expenseClass")+"");
-							
-						}if(null!=exrecord.getExpenseClassCount()&&!"".equals(exrecord.getExpenseClassCount())){
-							expense=expense+Integer.parseInt(exrecord.getExpenseClassCount().trim());
-						}
-						
-						int leftPay = 0;
-						int leftsend=0;
-						if((teamobj.get("leftPayClass"))!=null && !"".equals(teamobj.get("leftPayClass")+"")){
-							leftPay = Integer.parseInt(teamobj.get("leftPayClass")+"");
-						}if(null!=exrecord.getExpenseClassCount()&&!"".equals(exrecord.getExpenseClassCount())){
-							leftPay = leftPay - Integer.parseInt(exrecord.getExpenseClassCount());
-						}if(leftPay<=0){
-							if((teamobj.get("leftSendClass"))!=null && !"".equals(teamobj.get("leftSendClass")+"")){
-								leftsend = Integer.parseInt(teamobj.get("leftSendClass")+"")-Math.abs(leftPay);
-							}if(leftsend<=0){
-								leftsend=0;
-							}
-							updatedbo.put("Teamer.leftSendClass",leftsend );
-							leftPay = 0;
-						}
-						
-						//updatedbo.put("Teamer.totalClass",total);
-						updatedbo.put("Teamer.expenseClass", expense);
-						updatedbo.put("Teamer.leftPayClass", leftPay);
-						BasicDBObject doc = new BasicDBObject();
-						doc.put("$set", updatedbo);
-						mongoDB = getMongoDB();
-						WriteResult wrt = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", exrecord.getStudentOpenID()), doc);
-						ret1 = true;
+					/*int total = 0;
+					if(teamobj.get("totalClass")!=null && !"".equals(teamobj.get("totalClass")+"")){
+						total = Integer.parseInt(teamobj.get("totalClass")+"");
 					}
+					
+					if(total<=0){
+						total=0;
+					}else if(null!=exrecord.getExpenseClassCount()&&!"".equals(exrecord.getExpenseClassCount())){
+						total=total-Integer.parseInt(exrecord.getExpenseClassCount());
+					}if(total<=0){
+						total=0;
+					}
+					*/
+					int expense = 0;
+					if(dbcur.get("expenseClass")!=null && !"".equals(dbcur.get("expenseClass")+"")){
+						expense = Integer.parseInt(dbcur.get("expenseClass")+"");
+						
+					}if(null!=exrecord.getExpenseClassCount()&&!"".equals(exrecord.getExpenseClassCount())){
+						expense=expense+Integer.parseInt(exrecord.getExpenseClassCount().trim());
+					}
+					int leftPay = 0;
+					int leftsend=0;
+					if((dbcur.get("leftPayClass"))!=null && !"".equals(dbcur.get("leftPayClass")+"")){
+						leftPay = Integer.parseInt(dbcur.get("leftPayClass")+"");
+					}if(null!=exrecord.getExpenseClassCount()&&!"".equals(exrecord.getExpenseClassCount())){
+						leftPay = leftPay - Integer.parseInt(exrecord.getExpenseClassCount());
+					}if(leftPay<=0){
+						if((dbcur.get("leftSendClass"))!=null && !"".equals(dbcur.get("leftSendClass")+"")){
+							leftsend = Integer.parseInt(dbcur.get("leftSendClass")+"")-Math.abs(leftPay);
+						}if(leftsend<=0){
+							leftsend=0;
+						}
+						updatedbo.put("leftSendClass",leftsend );
+						leftPay = 0;
+					}
+					
+					updatedbo.put("expenseClass", expense);
+					updatedbo.put("leftPayClass", leftPay);
+					BasicDBObject doc = new BasicDBObject();
+					doc.put("$set", updatedbo);
+					mongoDB = getMongoDB();
+					mongoDB.getCollection(collectionClassTypeRecord).update(dbcur, doc);
+					ret1 = true;
 				}
 			}
 			
@@ -4577,6 +4573,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		while(records.hasNext()){
 			Classexpenserecord record = new Classexpenserecord();
 			DBObject dbo = records.next();
+			record.setExpenseID(dbo.get("expenseID")+"");
 			record.setExpenseClassCount(dbo.get("expenseClassCount")==null?"":dbo.get("expenseClassCount")+"");
 			record.setExpenseDistrict(dbo.get("expenseDistrict")==null?"":dbo.get("expenseDistrict")+"");
 			record.setExpenseOption(dbo.get("expenseOption")==null?"":dbo.get("expenseOption")+"");
@@ -4599,7 +4596,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 	
 	
 	// parentConfirmTime
-	public static boolean parentConfirmTime(String time,String comment) {
+	public static boolean parentConfirmTime(String id,String comment) {
 		mongoDB = getMongoDB();
 		//DBObject dbob = new BasicDBObject();
 		Boolean ret = false;
@@ -4612,11 +4609,11 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			BasicDBObject doc = new BasicDBObject();
 			doc.put("$set", dbo);
 			BasicDBObject db=new BasicDBObject();
-			db.append("teacherConfirmTime",time);
+			db.append("expenseID",id);
 			
 			//dbob = mongoDB.getCollection(collectionClassExpenseRecord).findOne(db);
 			//mongoDB.getCollection(collectionClassExpenseRecord).update(db, doc);
-			mongoDB.getCollection(collectionClassExpenseRecord).update(new BasicDBObject().append("teacherConfirmTime", time), doc);
+			mongoDB.getCollection(collectionClassExpenseRecord).update(new BasicDBObject().append("expenseID", id), doc);
 			ret = true;
 			/*
 			DBCursor dbcur = mongoDB.getCollection(collectionClassExpenseRecord).find(new BasicDBObject().append("teacherConfirmTime", time));

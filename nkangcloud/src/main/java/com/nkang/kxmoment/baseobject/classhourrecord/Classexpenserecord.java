@@ -15,6 +15,7 @@ package com.nkang.kxmoment.baseobject.classhourrecord;
                 1-》 家长确认课销时间： 2017.12.23 星期三 9:30PM
 */
 public class Classexpenserecord {
+	public String expenseID;
 	public String expenseOption;
 	public String expenseTime;
 	public String expenseClassCount;
@@ -30,6 +31,12 @@ public class Classexpenserecord {
 	public String parentConfirmTime;
 	public String parentComment;
 	
+	public String getExpenseID() {
+		return expenseID;
+	}
+	public void setExpenseID(String expenseID) {
+		this.expenseID = expenseID;
+	}
 	public String getParentComment() {
 		return parentComment;
 	}
