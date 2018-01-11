@@ -91,8 +91,9 @@ overflow:hidden;}
 		</div>
 	</div>
 	<div id="myAbacus2" style="position:relative;top:-200px;;"> <canvas id="myAbacus2_Abacus" width="680" height="420"></canvas></div>
-	<center><img src="http://leshucq.bj.bcebos.com/icon/reset-icon.png" onClick="pagereload();"/></center>
-	
+	<div style="text-align: center; width:100%;">
+		<img alt="" src="http://leshucq.bj.bcebos.com/icon/reset-icon.png" style="margin: 0 auto;" onClick="pagereload();"/>
+	</div>
 	<div id="footer">
 		<span class="clientCopyRight"><nobr>©版权所有 | 重庆乐数艺术培训有限公司</nobr></span>
 	</div>
