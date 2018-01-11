@@ -4412,7 +4412,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		Boolean ret = false;
 		try {
 			DBObject dbo = new BasicDBObject();
-			
+			//dbo.put("payOption", classpr.getPayOption());
 			dbo.put("payOption", classpr.getPayOption());
 		    dbo.put("payMoney", classpr.getPayMoney());
 			dbo.put("classCount", classpr.getClassCount());
@@ -4422,35 +4422,30 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		    
 			//String OpenID = classpr.getStudentOpenID();
 			
-			WriteResult wr = mongoDB.getCollection(collectionClassPayRecord).insert(dbo);
+			mongoDB.getCollection(collectionClassPayRecord).insert(dbo);
+			
+			DBObject query = new BasicDBObject();
+			query.put("OpenID", classpr.getStudentOpenID());
+			query.put("payOption", classpr.getPayOption());
 			mongoDB = getMongoDB();
-			DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", classpr.getStudentOpenID()));
-			while(dbcur.hasNext()){
-				DBObject o = dbcur.next();
-				Object teamer = o.get("Teamer");
-				DBObject updatedbo = new BasicDBObject();
-				DBObject teamobj = new BasicDBObject();
-				teamobj = (DBObject) teamer;
-				if (teamobj != null) {
-					int total = 0;
-					int leftPay=0;
-					if(teamobj.get("totalClass")!=null && !"".equals(teamobj.get("totalClass")+"")){
-						total = Integer.parseInt(teamobj.get("totalClass")+"");
-					}
-					if((teamobj.get("leftPayClass"))!=null && !"".equals(teamobj.get("leftPayClass")+"")){
-						leftPay = Integer.parseInt(teamobj.get("leftPayClass")+"");
-					}
-					updatedbo.put("Teamer.totalClass", total+classpr.getClassCount());
-					
-					updatedbo.put("Teamer.leftPayClass", classpr.getClassCount()+leftPay);
-					}
-					BasicDBObject doc = new BasicDBObject();
-					doc.put("$set", updatedbo);
-					WriteResult wrt = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", classpr.getStudentOpenID()), doc);
-					ret = true;
-					break;
+			DBObject dbcur = mongoDB.getCollection(collectionClassTypeRecord).findOne(query);
+			DBObject updatedbo = new BasicDBObject();
+			int total = 0;
+			int leftPay=0;
+			if(null!=dbcur){
+				if(dbcur.get("totalClass")!=null && !"".equals(dbcur.get("totalClass")+"")){
+					total = Integer.parseInt(dbcur.get("totalClass")+"");
 				}
-
+				if((dbcur.get("leftPayClass"))!=null && !"".equals(dbcur.get("leftPayClass")+"")){
+					leftPay = Integer.parseInt(dbcur.get("leftPayClass")+"");
+				}
+				updatedbo.put("totalClass", total+classpr.getClassCount());
+				updatedbo.put("leftPayClass", classpr.getClassCount()+leftPay);
+				BasicDBObject doc = new BasicDBObject();
+				doc.put("$set", updatedbo);
+				mongoDB.getCollection(collectionClassTypeRecord).update(dbcur, doc);
+				ret = true;
+			}
 		} catch (Exception e) {
 			log.info("addClasspayrecord--" + e.getMessage());
 			}
