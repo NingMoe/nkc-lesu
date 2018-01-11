@@ -46,6 +46,10 @@
 		var abacus2 = new Abacus("myAbacus2", 1);
 		abacus2.init();
 	}
+	
+	function pagereload(){
+		window.location.reload();
+	}
 </script>
 
 <style type="text/css">
@@ -86,7 +90,9 @@ overflow:hidden;}
 			style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
 	</div>
-<div id="myAbacus2" style="position:relative;top:-200px;;"> <canvas id="myAbacus2_Abacus" width="680" height="420"></canvas></div>
+	<div id="myAbacus2" style="position:relative;top:-200px;;"> <canvas id="myAbacus2_Abacus" width="680" height="420"></canvas></div>
+	<center><img src="http://leshucq.bj.bcebos.com/icon/reset-icon.png" onClick="pagereload();"/></center>
+	
 	<div id="footer">
 		<span class="clientCopyRight"><nobr>©版权所有 | 重庆乐数艺术培训有限公司</nobr></span>
 	</div>
