@@ -397,21 +397,21 @@ var keyArrays;
 var keyNameArrays;
 function getClassRecord(obj){
 	var ct=$(obj).find("option:selected").val()
-	var realName=records[ct].realName==null?'':records[ct].realName;
-	var enrolledTime=records[ct].enrolledTime==null?'':records[ct].enrolledTime;
-	var enrolledWay=records[ct].enrolledWay==null?'':records[ct].enrolledWay;
-	var district=records[ct].district==null?'':records[ct].district;
-	var totalClass=records[ct].totalClass==null?'':records[ct].totalClass;
-	var expenseClass=records[ct].expenseClass==null?'':records[ct].expenseClass;
-	var leftPayClass=records[ct].leftPayClass==null?'':records[ct].leftPayClass;
-	var leftSendClass=records[ct].leftSendClass==null?'':records[ct].leftSendClass;
-	var classType=records[ct].classType==null?'':records[ct].classType;
+	var realName=records[ct]==null?'':records[ct].realName;
+	var enrolledTime=records[ct]==null?'':records[ct].enrolledTime;
+	var enrolledWay=records[ct]==null?'':records[ct].enrolledWay;
+	var district=records[ct]==null?'':records[ct].district;
+	var totalClass=records[ct]==null?'':records[ct].totalClass;
+	var expenseClass=records[ct]==null?'':records[ct].expenseClass;
+	var leftPayClass=records[ct]==null?'':records[ct].leftPayClass;
+	var leftSendClass=records[ct]==null?'':records[ct].leftSendClass;
+	var classType=records[ct]==null?'':records[ct].classType;
 	var districtList=new Array('jb','ljt','np','yjp');
 	var districtNameList=new Array('江北校区','李家沱校区','南坪校区','杨家坪校区');
 	var enrolledWayList=new Array('web','ad','ldx','other');
 	var enrolledWayNameList=new Array('网络','广告','老带新','其他');
-	var classTypeList=keyArrays;
-	var classTypeNameList=keyNameArrays;
+	var classTypeList=new Array('zxs','yypy','qwsx');
+	var classTypeNameList=new Array('珠心算','丫丫拼音','趣味数学');
 	var selectedDistrictName="";
 	var selectedenrolledWayName="";
 	var selectedClassTypeName="";
@@ -529,40 +529,28 @@ function showClassPanel(openid,name){
 		success : function(data) {
 			 	records=data;
 				var keys="";
-				var keyNames="";
 				for(var key in data){
 					keys+=key+",";
-					if(key=="zxs"){
-						keyNames+="珠心算,";	
-					}
-					if(key=="yypy"){
-						keyNames+="丫丫拼音,";	
-					}
-					if(key=="qwsx"){
-						keyNames+="趣味数学,";	
-					}
 					
 				}
 				keyArrays=keys.split(",");
-				keyNameArrays=keyNameArrays.split(",");
 				var index=keyArrays[0];
-				keyArrays.remove(keyArrays.length-1);
-				keyNameArrays.remove(keyNameArrays.length-1);
-				var realName=data[index].realName==null?'':data[index].realName;
-				var enrolledTime=data[index].enrolledTime==null?'':data[index].enrolledTime;
-				var enrolledWay=data[index].enrolledWay==null?'':data[index].enrolledWay;
-				var district=data[index].district==null?'':data[index].district;
-				var totalClass=data[index].totalClass==null?'':data[index].totalClass;
-				var expenseClass=data[index].expenseClass==null?'':data[index].expenseClass;
-				var leftPayClass=data[index].leftPayClass==null?'':data[index].leftPayClass;
-				var leftSendClass=data[index].leftSendClass==null?'':data[index].leftSendClass;
-				var classType=data[index].classType==null?'':data[index].classType;
+				
+				var realName=data[index]==null?'':data[index].realName;
+				var enrolledTime=data[index]==null?'':data[index].enrolledTime;
+				var enrolledWay=data[index]==null?'':data[index].enrolledWay;
+				var district=data[index]==null?'':data[index].district;
+				var totalClass=data[index]==null?'':data[index].totalClass;
+				var expenseClass=data[index]==null?'':data[index].expenseClass;
+				var leftPayClass=data[index]==null?'':data[index].leftPayClass;
+				var leftSendClass=data[index]==null?'':data[index].leftSendClass;
+				var classType=data[index]==null?'':data[index].classType;
 				var districtList=new Array('jb','ljt','np','yjp');
 				var districtNameList=new Array('江北校区','李家沱校区','南坪校区','杨家坪校区');
 				var enrolledWayList=new Array('web','ad','ldx','other');
 				var enrolledWayNameList=new Array('网络','广告','老带新','其他');
-				var classTypeList=keyArrays;
-				var classTypeNameList=keyNameArrays;
+				var classTypeList=new Array('zxs','yypy','qwsx');
+				var classTypeNameList=new Array('珠心算','丫丫拼音','趣味数学');
 				var selectedDistrictName="";
 				var selectedenrolledWayName="";
 				var selectedClassTypeName="";
