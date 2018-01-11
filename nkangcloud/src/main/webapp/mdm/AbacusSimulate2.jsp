@@ -35,7 +35,7 @@
 <script src="../Jsp/JS/leshu/abacuss.js" type="text/javascript"></script>
 <script src="../Jsp/JS/leshu/soroban.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css"/>
-<title>乐数珠心算算盘模拟器</title>
+<title>珠心算算盘模拟器</title>
 
 <style>
 th,td,img {

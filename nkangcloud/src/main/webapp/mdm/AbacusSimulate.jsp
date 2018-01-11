@@ -31,7 +31,7 @@
 <html>
 <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>乐数珠心算算盘模拟器</title>
+		<title>珠心算算盘模拟器</title>
 		<meta name="viewport" content="width=device-width, user-scalable=yes">
 <!-- <link rel="stylesheet" type="text/css"href="../MetroStyleFiles/sweetalert.css" />
 <script src="../MetroStyleFiles/sweetalert.min.js"></script>
