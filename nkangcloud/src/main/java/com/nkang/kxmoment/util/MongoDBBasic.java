@@ -4494,7 +4494,6 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 	
 	public static boolean addClassExpenseRecord(Classexpenserecord exrecord) {
 		mongoDB = getMongoDB();
-		Boolean ret = false;
 		Boolean ret1 = false;
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime());
 		try {
@@ -4521,7 +4520,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				DBObject query = new BasicDBObject();
 				query.put("OpenID", exrecord.getStudentOpenID());
 				query.put("payOption", exrecord.getExpenseOption());
-				mongoDB = getMongoDB();
+				//mongoDB = getMongoDB();
 				DBObject dbcur = mongoDB.getCollection(collectionClassTypeRecord).findOne(query);
 				
 				if(dbcur!=null){
