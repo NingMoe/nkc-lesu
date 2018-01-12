@@ -117,19 +117,10 @@ function v046(v022) {
 		this.v018 = v022;
 	var v036 = this.v017;
 	var v021 = this.v018;
-	document.write("<table cellspacing=0 cellpadding=0>\<tr><td align=center><table cellspacing=0 cellpadding=0><tr>\<form name=\""
+	document
+			.write("<table cellspacing=0 cellpadding=0>\<tr><td align=center><table cellspacing=0 cellpadding=0><tr>\<form name=\""
 					+ this.formname
-					+ "\">\<td><div id='calculator'><div><section id='endPanel'><div class='selectPanel'><input id='answer' type='text' class='niput' value='' style='border-bottom: 1px solid #22B26F; width: 60%; margin-bottom: 10px;font-size:23px;' disabled/><div class='form_edit clearfix'><div class='num'>1</div><div class='num'>2</div><div class='num'>3</div><div class='num'>4</div><div class='num'>5</div><div class='num'>6</div><div class='num'>7</div><div class='num'>8</div><div class='num'>9</div><div id='remove' onclick=\""
-					+ this.abacusname
-					+ ".reset();document.forms."
-					+ this.formname
-					+ ".number.value="
-					+ this.abacusname
-					+ ".currentvaluestring;\">清零</div><div class='num'>0</div><div id='soropancalc' class='end' onclick=\""
-					+ this.abacusname
-					+ ".assignstring(document.forms."
-					+ this.formname
-					+ ".number.value);\">译珠</div></div></div></section></div></div><input id=\"numberid\" name=\"number\" type=text maxlength="
+					+ "\">\<td><input id=\"numberid\" name=\"number\" type=text maxlength="
 					+ this.v018
 					+ " size="
 					+ this.v018
@@ -137,8 +128,17 @@ function v046(v022) {
 					+ this.currentvaluestring
 					+ " onkeypress=\"return "
 					+ this.abacusname
-					+ ".isallowed(event)\"></input></td>\</form>\</tr></table></td></tr>\<tr><td>");
-
+					+ ".isallowed(event)\"></input></td>\<td width=50%><button type=button onclick=\""
+					+ this.abacusname
+					+ ".assignstring(document.forms."
+					+ this.formname
+					+ ".number.value);\">译珠</button></td>\<td width=50%><button type=button onclick=\""
+					+ this.abacusname
+					+ ".reset();document.forms."
+					+ this.formname
+					+ ".number.value="
+					+ this.abacusname
+					+ ".currentvaluestring;\">清零</button></td>\</form>\</tr></table></td></tr>\<tr><td>");
 	document.write("<table cellpadding=0 cellspacing=0>");
 	for (v015 = 0; v015 < v036 + 2; v015++) {
 		document.write("<tr>");
@@ -196,10 +196,6 @@ function v046(v022) {
 	}
 	document.write("</table>");
 	document.write("</td></tr></table>");
-	
-
-			
-			
 	document.forms[this.formname].number.value = this.currentvaluestring;
 	this.v029 = 1;
 	return;
@@ -250,4 +246,3 @@ function Abacus(nm, nc, abtype, iv, imagep, beadpic, nobeadpic, basepic,
 	this.assignstring(Number(iv).toString(10));
 	return;
 }
-
