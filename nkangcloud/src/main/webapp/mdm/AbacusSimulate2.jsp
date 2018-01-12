@@ -35,35 +35,60 @@
 <script src="../Jsp/JS/leshu/abacuss.js" type="text/javascript"></script>
 <script src="../Jsp/JS/leshu/soroban.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css"/>
+<link rel="stylesheet" type="text/css" href="../Jsp/JS/leshu/custom.css"/>
 <title>珠心算算盘模拟器</title>
 
 <style>
-th,td,img {
-	padding: 0px;
-	margin: 0px;
-	border: 0px;
-	vertical-align: bottom;
-}
+	th,td,img {
+		padding: 0px;
+		margin: 0px;
+		border: 0px;
+		vertical-align: bottom;
+	}
+	
+	td img {
+		vertical-align: bottom;
+		width: 100%;
+		height: auto;
+	}
+	
+	table {
+		border-collapse: collapse;
+		border-spacing: 0px;
+		border: none;
+		vertical-align: bottom;
+	}
 
-td img {
-	vertical-align: bottom;
-	width: 100%;
-	height: auto;
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0px;
-	border: none;
-	vertical-align: bottom;
-}
-
-
-/* div#calculator {
-	margin-left:-4%;
-	margin-right:-4%;
-} */
+	/* div#calculator {
+		margin-left:-4%;
+		margin-right:-4%;
+	} */
+	#numberid{
+		width:100px;
+	}
+	#footer {
+	    bottom: 0;
+	    color: #757575;
+	    font-size: 12px;
+	    padding: 10px 1%;
+	    position: fixed;
+	    text-align: center;
+	    width: 100%;
+	    z-index: 1002;
+	    left: 0;
+	}
+	.form_edit {    
+		width: 95%;
+		margin-left: 4%;
+	}
+	#endPanel{
+		position: relative;
+		top:-40px;
+	}
+	
+	
 </style>
+
 <script>
 var foo = {};
 	switch(window.orientation) {
@@ -77,28 +102,6 @@ var foo = {};
 	}
 </script>
 
-
-
-
-<style type="text/css">
-
-#numberid{
-	width:100px;
-}
-
-#footer {
-    bottom: 0;
-    color: #757575;
-    font-size: 12px;
-    padding: 10px 1%;
-    position: fixed;
-    text-align: center;
-    width: 100%;
-    z-index: 1002;
-    left: 0;
-}
-
-</style>
 </head>
 <body>
 	<div id="data_model_div" style="height: 100px">
@@ -109,108 +112,61 @@ var foo = {};
 			<span style="position: relative; top: 8px; left: 5px; font-style: normal"><%= name%></span>
 		</i>
 		
-		<!-- http://pic1.nipic.com/2009-02-26/2009226111421860_2.jpg  -->
+		<!-- http://leshucq.bj.bcebos.com/icon/sw.jpg  -->
 		<!-- http://leshu.bj.bcebos.com/standard/leshuLogo.png -->
-		<img style="position: absolute; top: 8px; left: 10px; z-index: 100; height: 60px;" class="HpLogo" src="http://leshucq.bj.bcebos.com/icon/sw.jpg" alt="Logo" />
+		<img style="position: absolute; top: 8px; left: 10px; z-index: 100; height: 60px;" class="HpLogo" src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo" />
 		<div
 			style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
 	</div>
-<main>
+	
+	
+	
 
+<script type="text/javascript">mysoroban.htmldraw(foo.columns);</script>
+<script src="jquery-1.8.0.js" type="text/javascript"></script>
 <div id="calculator">
 	<div>
-		<script type="text/javascript">mysoroban.htmldraw(foo.columns)</script>
-	
-	<!-- <table cellpadding="0" cellspacing="0">
-		<tbody>
-			<tr style="line-height:6px;">
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_middlesep.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_middlesep.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_middlesep.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_middlesep.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_middlesep.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_middlesep.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_middlesep.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_middlesep.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_middlesep.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_middlesep.png"></td>
-			</tr>
-			<tr>
-				<td><img name="B1-9-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_nobead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B1-8-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_nobead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B1-7-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_nobead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B1-6-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_nobead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B1-5-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_nobead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B1-4-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B1-3-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_nobead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B1-2-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B1-1-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_nobead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B1-0-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_nobead.png" onclick="mysoroban.v039(this.name)"></td>
-			</tr>
-			<tr>
-				<td><img name="B2-9-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B2-8-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B2-7-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B2-6-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B2-5-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B2-4-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B2-3-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B2-2-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B2-1-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B2-0-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-			</tr>
-			<tr>
-				<td><img name="B3-9-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B3-8-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B3-7-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B3-6-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B3-5-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B3-4-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_nobead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B3-3-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B3-2-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B3-1-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B3-0-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-			</tr>
-			<tr>
-				<td><img name="B4-9-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B4-8-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B4-7-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B4-6-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B4-5-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B4-4-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B4-3-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B4-2-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_nobead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B4-1-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B4-0-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-			</tr>
-			<tr>
-				<td><img name="B5-9-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B5-8-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B5-7-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B5-6-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B5-5-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B5-4-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B5-3-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B5-2-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B5-1-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-				<td><img name="B5-0-mysoroban" src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bead.png" onclick="mysoroban.v039(this.name)"></td>
-			</tr>
-			<tr>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bottomborder.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bottomborder.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bottomborder.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bottomborder.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bottomborder.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bottomborder.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bottomborder.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bottomborder.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bottomborder.png"></td>
-				<td><img src="http://leshucq.bj.bcebos.com/abacus/SmallSoroban_image_bottomborder.png"></td>
-			</tr>
-		</tbody>
-	</table> -->
-	
+		<section id="endPanel">
+			<div class="selectPanel">
+				<input id="answer" type="text" class="niput" value="" style="border-bottom: 1px solid #22B26F; width: 60%; margin-bottom: 20px;font-size:23px;" disabled />
+				<div class="form_edit clearfix">
+					<div class="num">1</div>
+					<div class="num">2</div>
+					<div class="num">3</div>
+					<div class="num">4</div>
+					<div class="num">5</div>
+					<div class="num">6</div>
+					<div class="num">7</div>
+					<div class="num">8</div>
+					<div class="num">9</div>
+					<div id="remove">清零</div>
+					<div class="num">0</div>
+					<div id="soropancalc" class="end">译珠</div>
+				</div>
+			</div>
+		</section>
+		
+		<script type="text/javascript">
+			$('.form_edit .num').click(function(){
+				var oDiv = $("#answer");
+				var answer=oDiv.val()+this.innerHTML;
+				oDiv.val(answer);
+			})
+			$('#remove').click(function(){
+				var oDiv = $("#answer");
+				var oDivHtml = oDiv.val();
+				//oDiv.val(oDivHtml.substring(0,oDivHtml.length-1));
+				oDiv.val(null);
+			});
+			$('#soropancalc').click(function(){
+				//To Be Done
+				//var v022 = new Array();
+				//mysoroban.v046(v022);
+				//mysorobannumber.assignstring(answer);
+			});
+			
+		</script>
 </div>
 	
 </div>
