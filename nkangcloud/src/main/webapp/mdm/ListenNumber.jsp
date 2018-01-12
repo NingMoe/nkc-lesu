@@ -290,49 +290,47 @@ margin-left: 4%;
 			for (var i = 0; i < numCount; i++) {
 				length = Math.round(Math.random() * (lengthMax - lengthMin)
 						+ lengthMin);
-				if (i != numCount - 1) {
 					charQ = Math.round(Math.random() * (charArray.length - 1));
 					chars = charArray[charQ];
-					tempCharArray[i] = chars;
-					if(chars=="减"){
-						chars = chars + ',';
-					}else{
-						chars = '';
+					if(i==0){
+						chars="加";
 					}
-				} else {
-					chars = '';
-				}
+					tempCharArray[i] = chars;
 
-				if (i != 0 && tempCharArray[i - 1] == '减') {
+				if ( chars == '减') {
 					var minusNumber = getVoiceForNumber(i);
 					if ( currentTotal - minusNumber <= 0) {
-						tempCharArray[i - 1] == '加';
+						tempCharArray[i] = '加';
+						chars='加';
 					}
 					tempArray[i] = minusNumber;
+					if( chars == '减'){
+						chars='减,';
+					}
 					if (length != 1) {
-						temp += replaceZero(tempString, length) + ',' + chars;
+						temp += chars+replaceZero(tempString, length)+",";
 					} else {
 
-						temp += yitemp + ',' + chars;
+						temp += chars+yitemp+",";
 					}
 				} else {
 					getVoiceForNumber(i);
 					if (length != 1) {
-						temp += replaceZero(tempString, length) + ',' + chars;
+						temp += replaceZero(tempString, length)+",";
 					} else {
 
-						temp += yitemp + ',' + chars;
+						temp += yitemp+",";
 					}
 				}
 
 				if (i != 0) {
-					currentTotal = count(tempCharArray[i - 1], currentTotal,
+					currentTotal = count(tempCharArray[i], currentTotal,
 							tempArray[i]);
 				}
 
 			}
 
-			text = text + temp + "请答题";
+			text = text + temp + ",请答题";
 			$("#Result").text(text);
 			console.log(text);
 			return text;

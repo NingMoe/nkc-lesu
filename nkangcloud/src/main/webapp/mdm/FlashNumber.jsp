@@ -619,6 +619,7 @@ margin-left: 4%;
 								* (lengthArray[lengthMax] - lengthArray[lengthMin - 1])
 								+ lengthArray[lengthMin - 1]); */
 						tempCharArray[i] = '+';
+						chars='+';
 					}
 					tempArray[i] = temp;
 				} else {
