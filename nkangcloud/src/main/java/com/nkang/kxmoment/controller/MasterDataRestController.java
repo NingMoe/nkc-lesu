@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.springframework.web.bind.annotation.*;
-
 import com.nkang.kxmoment.baseobject.Appointment;
+import com.nkang.kxmoment.baseobject.AppointmentList;
 import com.nkang.kxmoment.baseobject.ArticleMessage;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.ClientMeta;
@@ -787,6 +787,13 @@ public class MasterDataRestController {
 		String status=MongoDBBasic.addNewAppointment(app);
 		return status;
 	}
+	
+    @RequestMapping("/details/{id}")
+    @ResponseBody
+    public AppointmentList details(@PathVariable("page") int page) {
+        return MongoDBBasic.getAppointmentList(page);
+    }
+	
 	
 	@RequestMapping("/getVisitedDetail")
 	public @ResponseBody List<Visited> getVisitedByDate(@RequestParam(value="dateIndex")String dateIndex,@RequestParam(value="pageName")String pageName){

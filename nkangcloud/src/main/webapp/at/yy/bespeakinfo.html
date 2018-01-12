@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html  ng-app="infoApp" style="height: 100%">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>预约信息管理</title>
+		<meta name="keywords" content="" />
+		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+		<meta name="description" content="" />
+         <script type="text/javascript" src="angular.js"></script>
+         <script type="text/javascript" src="angular-resource.js"></script>
+         <script type="text/javascript" src="bespeakinfo.js"></script>
+         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	</head>
+
+	<body ng-controller="detailsCtrl" style="height: 96%; background-color:#fdfdfd;">
+		<!-- logo information -->
+		<div style="position:relative;">
+	     	<center>
+	     		<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EG8wW&amp;oid=00D90000000pkXM" width="80">
+	     	</center>
+	     	<hr style="margin: 0px;">
+	     	<div style="padding: 2px 0px 2px 0px;">
+		     	<div style="font-size:14px;text-align:center;">预约信息管理</div>
+	     	</div>
+     	</div>
+		<!-- detail information -->
+		<div id="myTabContent" style="background: #20b672;border: 1px solid; border-color:#ddd; padding: 5px 30px 5px 30px;">
+			<div  style="margin: 2px;color: white;font-weight: bolder;">
+	     		<span style="display:inline-block; width: 25%; font-size: 12px;padding: 3px;">孩子姓名</span><!--
+		     --><span style="display:inline-block; width: 35%; font-size: 12px;padding: 3px;">家长电话</span><!--
+		     --><span style="display:inline-block; width: 25%; font-size: 12px;padding: 3px;">预约校区</span><!--
+		     --><span style="display:inline-block; width: 15%; font-size: 12px;padding: 3px;">详细</span>
+	     	</div>
+	     	<div ng-repeat="detail in detailsinfo.appointmentList" style="color: white;margin:1px 2px 1px 2px;">
+	     		<span style="display:inline-block; width: 25%; font-size: 12px;padding: 3px;">{{detail.name}}</span><!--
+		     --><span style="display:inline-block; width: 35%; font-size: 12px;padding: 3px;">{{detail.tel}}</span><!--
+		     --><span style="display:inline-block; width: 25%; font-size: 12px;padding: 3px;">{{detail.school}}</span><!--
+		     --><span style="display:inline-block; width: 15%; font-size: 12px;" ng-click="showDetail(detail);">
+					<center>
+			     		<img ng-show="!detail.show"src="css/img/cb_btn_down.png" width="25">
+			     		<img ng-show="detail.show" src="css/img/cb_btn_up.png" width="25">
+			     	</center>
+	     		</span>
+	     		<div ng-show="detail.show" style="margin: 5px 5px 5px 5px;">
+					<table class="table table-hover" style="border: 1px solid; border-color:#ddd; font-size: 10px;margin-bottom: 2px; background: #eeeeee;color: #555555;">
+<!-- 						<thead> -->
+<!-- 							<hr style="margin: 2px;"> -->
+<!-- 						</thead> -->
+						<tbody>
+							<tr>
+								<td style="padding:2px;">年龄</td>
+								<td style="padding:2px;">{{detail.age}}</td>
+								<td style="padding:2px;">性别</td>
+								<td style="padding:2px;">{{detail.sex}}</td>
+							</tr>
+							<tr>
+								<td style="padding:2px;">住址</td>
+								<td style="padding:2px;">{{detail.addr}}</td>
+								<td style="padding:2px;">科目</td>
+								<td style="padding:2px;">{{detail.subject}}</td>
+							</tr>
+							<tr>
+								<td style="padding:2px;">预约时间</td>
+								<td style="padding:2px;">{{detail.date}}</td>
+								<td style="padding:2px;">备注</td>
+								<td style="padding:2px;">{{detail.description}}</td>
+							</tr>
+						</tbody>
+					</table>
+	     		</div>
+	     	</div>
+	     	<!-- page info -->
+	     	<div style="margin:8px 8px 8px 8px;position: relative;">
+	     		<div style="display:inline-block; width: 25%;">
+	     			<button type="button" class="btn btn-default"  style="padding: 2px 3px 2px 3px; font-size: 12px;" ng-click="showPreviousPage();">上一页</button>
+	     		</div><!--
+		     --><div style="display:inline-block; width:50%; text-align:center;font-size: 12px;color: white;font-weight: bolder;">
+		     		共{{detailsinfo.totalPage}}页，当前第{{detailsinfo.pageNum}}页
+	     		</div><!--
+		     --><div style="display:inline-block;width: 25%;position: absolute;">
+	     			<button type="button" class="btn btn-default" style="float:right;padding: 2px 3px 2px 3px; font-size: 12px" ng-click="showNextPage();">下一页</button>
+	     		</div>
+	     	</div>
+	     </div>
+     	<!-- copyright information -->
+     	<div style="margin: 20px 0px 20px 0px;">
+	     	<div style="font-size:12px;text-align:center;">©版权所有|重庆乐数艺术培训有限公司</div>
+     	</div>
+
+	</body>
+</html>

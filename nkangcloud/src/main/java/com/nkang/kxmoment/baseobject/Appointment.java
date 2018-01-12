@@ -44,13 +44,28 @@ public class Appointment {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public String date;
-	public String name;
-	public String tel;
-	public String addr;
-	public String age;
-	public String sex;
-	public String school;
+	private String date;
+	private String name;
+	private String tel;
+	private String addr;
+	private String age;
+	private String sex;
+	private String school;
+	private Boolean show;
+	private String description;
+	
+	public Boolean getShow() {
+		return show;
+	}
+	public void setShow(Boolean show) {
+		this.show = show;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public String getSchool() {
 		return school;
 	}

@@ -71,7 +71,7 @@
 					isValided=0;
 					return false;
 				}
-				var addr=addr_c+addr_d+addr_s;
+				var addr=addr_c+'|'+addr_d+'|'+addr_s;
 	
 				var age=$("#user_age option:selected").val();
 				if(age=='-'){
@@ -162,189 +162,211 @@
 				return Num;
 			}
 			
+			$('#myTab a').click(function (e) {
+				  e.preventDefault()
+				  $(this).tab('show')
+				})
+			
 		});
 	</script>
 	<body style="height: 96%">
 		<!-- logo information -->
-		<div>
+		<div style="position:relative;">
 	     	<center>
 	     		<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EG8wW&amp;oid=00D90000000pkXM" width="120">
 	     	</center>
+	     	<!-- nav -->
+<!-- 			<ul id="myTab" class="nav nav-tabs" style="float:right;position:absolute;right:0px;bottom:0px;"> -->
+<!-- 				<li class="active"><a href="#bespeak" data-toggle="tab" style="padding:5px; font-size:12px;">预约页面</a></li> -->
+<!-- 				<li><a href="#manager" data-toggle="tab" style="padding:5px; font-size:12px;">预约信息</a></li> -->
+<!-- 			</ul> -->
      	</div>
+     	<!-- nav -->
+<!-- 		<ul id="myTab" class="nav nav-tabs"> -->
+<!-- 			<li class="active"><a href="#bespeak" data-toggle="tab" style="padding:5px; font-size:12px;">预约页面</a></li> -->
+<!-- 			<li><a href="#manager" data-toggle="tab" style="padding:5px; font-size:12px;">预约信息</a></li> -->
+<!-- 		</ul> -->
 		<!-- detail information -->
-		<div style="background:#20b672; height: 100%; padding: 2% 10% 5%;">
-			<center>
-				<img src="sign_txt.png" alt="体验！">
-			</center>
-			<div class="form-group input-group" style="width: 100%">
-				 <!-- <span class="input-group-addon">*</span> -->
-				<input class="form-control" name="user_name" placeholder="请输入孩子姓名" type="text" id="user_name">
-			</div>
-			<div class="form-group input-group" style="width: 100%">
-				 <!-- <span class="input-group-addon">*</span> -->
-				<input class="form-control" name="user_mobile" placeholder="请输入您的手机号码" type="text" id="user_mobile" style="width: 55%;border-radius:0px;">
-				<button type="button" class="btn btn-default" id="user_identifybt" style="width: 15%;padding-left: 6px;padding-right: 6px;border-radius:0px;">获取</button>
-				<input class="form-control" name="user_identifycode" placeholder="验证码" type="text" id="user_identifycode" style="width: 30%;border-radius:0px;">
-			</div>
-			<!--AddressBox-->
-			<div id="home_addr" class="form-group input-group zl_addressbox" style="width: 100%;border:1px solid #cccccc" >
-			   <div class="ab_showbar tip" style="width: 100%;">
-				  <div class="tip_info" style="width: 100%;color:#999999;font-size:14px;padding:0px 12px;">请选择您的家庭住址</div>
-				  <div class="value_info" style="width: 100%;font-size:14px;padding:0px 12px;">
-					  <!--结果显示容器-->
-				  </div>
-			   </div>
-			   <span class="ab_btn"></span>
-			   <div class="selectaddr_box">
-				  <div class="ab_bar">
-					 <ul>
-						<li class="sheng current">省市</li>
-						<li class="shi">区县</li>
-						<li class="qu">街道</li>
-					 </ul>
-				  </div>
-				  <div class="ab_panel">
-					<dl>
-					   <dd class="sheng current">
-						  <div class="ab_group">
-							<ul class="ab_sheng ab_item">
-							   <li>重庆市</li>
-							</ul>
-						  </div>
-
-					   </dd>
-					   <dd class="shi">
-						  <ul class="ab_shi ab_item" style="overflow: scroll;height: 200px;">
-							<!--区县容器-->
-						  </ul>
-					   </dd>
-					   <dd class="qu">
-						  <ul class="ab_qu ab_item" style="overflow: scroll;">
-							<!--街道容器-->
-						  </ul>
-					   </dd>
-					</dl>
-				  </div>
-			   </div>
-			</div>
-			<!--End of AddressBox-->
-			
-<!-- 			<div class="form-group input-group"> -->
-<!-- 				<span class="input-group-addon" data-toggle="tooltip" title="请选择孩子的年龄" style="padding:6px 6px;">年龄</span> -->
-<!-- 				<select class="form-control" name="user_age" id="user_age" > -->
-<!-- 					<option value="0">0周岁</option> -->
-<!-- 					<option value="1">1周岁</option> -->
-<!-- 					<option value="2">2周岁</option> -->
-<!-- 					<option value="3">3周岁</option> -->
-<!-- 					<option value="4">4周岁</option> -->
-<!-- 					<option value="5">5周岁</option> -->
-<!-- 					<option value="6">6周岁</option> -->
-<!-- 					<option value="7">7周岁</option> -->
-<!-- 					<option value="8">8周岁</option> -->
-<!-- 					<option value="9">9周岁</option> -->
-<!-- 					<option value="10">10周岁</option> -->
-<!-- 					<option value="11">11周岁</option> -->
-<!-- 					<option value="12">12周岁</option> -->
-<!-- 					<option value="13">13周岁</option> -->
-<!-- 					<option value="14">14周岁</option> -->
-<!-- 					<option value="15">15周岁</option> -->
-<!-- 					<option value="16">16周岁</option> -->
-<!-- 				</select> -->
-<!-- 				<span class="input-group-addon" data-toggle="tooltip" title="请选择孩子的性别" style="padding:6px 6px;">性别</span> -->
-<!-- 				<select class="form-control" name="user_sex" id="user_sex"> -->
-<!-- 					<option value="男">男孩</option> -->
-<!-- 					<option value="女">女孩</option> -->
-<!-- 				</select> -->
-<!-- 			</div> -->
-<!-- 			<div class="form-group input-group"> -->
-<!-- 				<span class="input-group-addon" data-toggle="tooltip"  title="请选择孩子试听的校区" style="padding:6px 6px;">校区</span> -->
-<!-- 				<select class="form-control"> -->
-<!-- 					<option value="观音桥">观音桥校区</option> -->
-<!-- 					<option value="李家沱">李家沱校区</option> -->
-<!-- 					<option value="南坪">南坪校区</option> -->
-<!-- 				</select> -->
-<!-- 				<span class="input-group-addon" data-toggle="tooltip"  title="请选择孩子试听的科目" style="padding:6px 6px;">科目</span> -->
-<!-- 				<select class="form-control"> -->
-<!-- 					<option value="珠心算">珠心算</option> -->
-<!-- 					<option value="趣味数学">趣味数学</option> -->
-<!-- 					<option value="趣味识字">趣味识字</option> -->
-<!-- 					<option value="YY拼音">YY拼音</option> -->
-<!-- 				</select> -->
-<!-- 			</div> -->
-
-			<div class="form-group input-group" style="width: 100%;">
-				<div class="input-group" style="width: 52%; float: left;">
-					<span class="input-group-addon" data-toggle="tooltip" title="请选择孩子的年龄" style="padding:6px 6px;">年龄</span>
-					<select class="form-control" name="user_age" id="user_age" >
-						<option value="-">-年龄-</option>
-						<option value="0">0周岁</option>
-						<option value="1">1周岁</option>
-						<option value="2">2周岁</option>
-						<option value="3">3周岁</option>
-						<option value="4">4周岁</option>
-						<option value="5">5周岁</option>
-						<option value="6">6周岁</option>
-						<option value="7">7周岁</option>
-						<option value="8">8周岁</option>
-						<option value="9">9周岁</option>
-						<option value="10">10周岁</option>
-						<option value="11">11周岁</option>
-						<option value="12">12周岁</option>
-						<option value="13">13周岁</option>
-						<option value="14">14周岁</option>
-						<option value="15">15周岁</option>
-						<option value="16">16周岁</option>
-					</select>
+		<div id="myTabContent" class="tab-content" style="height: 82%;">
+			<!-- bespeak UI -->
+			<div class="tab-pane fade in active" id="bespeak" style="background:#20b672; height: 100%; padding: 2% 10% 5%;">
+				<center>
+					<img src="sign_txt.png" alt="体验！">
+				</center>
+				<div class="form-group input-group" style="width: 100%">
+					 <!-- <span class="input-group-addon">*</span> -->
+					<input class="form-control" name="user_name" placeholder="请输入孩子姓名" type="text" id="user_name">
 				</div>
-				<div class="input-group" style="width: 48%; float: left;">
-					<span class="input-group-addon" data-toggle="tooltip" title="请选择孩子的性别" style="padding:6px 6px;">性别</span>
-					<select class="form-control" name="user_sex" id="user_sex">
-						<option value="-">-性别-</option>
-						<option value="男">男孩</option>
-						<option value="女">女孩</option>
-					</select>
+				<div class="form-group input-group" style="width: 100%">
+					 <!-- <span class="input-group-addon">*</span> -->
+					<input class="form-control" name="user_mobile" placeholder="请输入您的手机号码" type="text" id="user_mobile" style="width: 55%;border-radius:0px;">
+					<button type="button" class="btn btn-default" id="user_identifybt" style="width: 15%;padding-left: 6px;padding-right: 6px;border-radius:0px;">获取</button>
+					<input class="form-control" name="user_identifycode" placeholder="验证码" type="text" id="user_identifycode" style="width: 30%;border-radius:0px;">
 				</div>
-			</div>
-			<div class="form-group input-group" style="width: 100%;">
-				<div class="input-group" style="width: 52%; float: left;">
-					<span class="input-group-addon" data-toggle="tooltip"  title="请选择孩子试听的校区" style="padding:6px 6px;">校区</span>
-					<select class="form-control" name="user_school" id="user_school">
-						<option value="-">-校区-</option>
-						<option value="江北">江北校区</option>
-						<option value="李家沱">李家沱校区</option>
-						<option value="南坪">南坪校区</option>
-						<option value="杨家坪">杨家坪校区</option>
-						<option value="青少年宫">青少年宫</option>
-					</select>
+				<!--AddressBox-->
+				<div id="home_addr" class="form-group input-group zl_addressbox" style="width: 100%;border:1px solid #cccccc" >
+				   <div class="ab_showbar tip" style="width: 100%;">
+					  <div class="tip_info" style="width: 100%;color:#999999;font-size:14px;padding:0px 12px;">请选择您的家庭住址</div>
+					  <div class="value_info" style="width: 100%;font-size:14px;padding:0px 12px;">
+						  <!--结果显示容器-->
+					  </div>
+				   </div>
+				   <span class="ab_btn"></span>
+				   <div class="selectaddr_box">
+					  <div class="ab_bar">
+						 <ul>
+							<li class="sheng current">省市</li>
+							<li class="shi">区县</li>
+							<li class="qu">街道</li>
+						 </ul>
+					  </div>
+					  <div class="ab_panel">
+						<dl>
+						   <dd class="sheng current">
+							  <div class="ab_group">
+								<ul class="ab_sheng ab_item">
+								   <li>重庆市</li>
+								</ul>
+							  </div>
+	
+						   </dd>
+						   <dd class="shi">
+							  <ul class="ab_shi ab_item" style="overflow: scroll;height: 200px;">
+								<!--区县容器-->
+							  </ul>
+						   </dd>
+						   <dd class="qu">
+							  <ul class="ab_qu ab_item" style="overflow: scroll;">
+								<!--街道容器-->
+							  </ul>
+						   </dd>
+						</dl>
+					  </div>
+				   </div>
 				</div>
-				<div class="input-group" style="width: 48%; float: left;">
-				<span class="input-group-addon" data-toggle="tooltip"  title="请选择孩子试听的科目" style="padding:6px 6px;">科目</span>
-					<select class="form-control" name="user_subject" id="user_subject">
-						<option value="-">-科目-</option>
-						<option value="珠心算">珠心算</option>
-						<option value="趣味数学">趣味数学</option>
-						<option value="趣味识字">趣味识字</option>
-						<option value="YY拼音">YY拼音</option>
-					</select>
+				<!--End of AddressBox-->
+				
+	<!-- 			<div class="form-group input-group"> -->
+	<!-- 				<span class="input-group-addon" data-toggle="tooltip" title="请选择孩子的年龄" style="padding:6px 6px;">年龄</span> -->
+	<!-- 				<select class="form-control" name="user_age" id="user_age" > -->
+	<!-- 					<option value="0">0周岁</option> -->
+	<!-- 					<option value="1">1周岁</option> -->
+	<!-- 					<option value="2">2周岁</option> -->
+	<!-- 					<option value="3">3周岁</option> -->
+	<!-- 					<option value="4">4周岁</option> -->
+	<!-- 					<option value="5">5周岁</option> -->
+	<!-- 					<option value="6">6周岁</option> -->
+	<!-- 					<option value="7">7周岁</option> -->
+	<!-- 					<option value="8">8周岁</option> -->
+	<!-- 					<option value="9">9周岁</option> -->
+	<!-- 					<option value="10">10周岁</option> -->
+	<!-- 					<option value="11">11周岁</option> -->
+	<!-- 					<option value="12">12周岁</option> -->
+	<!-- 					<option value="13">13周岁</option> -->
+	<!-- 					<option value="14">14周岁</option> -->
+	<!-- 					<option value="15">15周岁</option> -->
+	<!-- 					<option value="16">16周岁</option> -->
+	<!-- 				</select> -->
+	<!-- 				<span class="input-group-addon" data-toggle="tooltip" title="请选择孩子的性别" style="padding:6px 6px;">性别</span> -->
+	<!-- 				<select class="form-control" name="user_sex" id="user_sex"> -->
+	<!-- 					<option value="男">男孩</option> -->
+	<!-- 					<option value="女">女孩</option> -->
+	<!-- 				</select> -->
+	<!-- 			</div> -->
+	<!-- 			<div class="form-group input-group"> -->
+	<!-- 				<span class="input-group-addon" data-toggle="tooltip"  title="请选择孩子试听的校区" style="padding:6px 6px;">校区</span> -->
+	<!-- 				<select class="form-control"> -->
+	<!-- 					<option value="观音桥">观音桥校区</option> -->
+	<!-- 					<option value="李家沱">李家沱校区</option> -->
+	<!-- 					<option value="南坪">南坪校区</option> -->
+	<!-- 				</select> -->
+	<!-- 				<span class="input-group-addon" data-toggle="tooltip"  title="请选择孩子试听的科目" style="padding:6px 6px;">科目</span> -->
+	<!-- 				<select class="form-control"> -->
+	<!-- 					<option value="珠心算">珠心算</option> -->
+	<!-- 					<option value="趣味数学">趣味数学</option> -->
+	<!-- 					<option value="趣味识字">趣味识字</option> -->
+	<!-- 					<option value="YY拼音">YY拼音</option> -->
+	<!-- 				</select> -->
+	<!-- 			</div> -->
+	
+				<div class="form-group input-group" style="width: 100%;">
+					<div class="input-group" style="width: 52%; float: left;">
+						<span class="input-group-addon" data-toggle="tooltip" title="请选择孩子的年龄" style="padding:6px 6px;">年龄</span>
+						<select class="form-control" name="user_age" id="user_age" >
+							<option value="-">-年龄-</option>
+							<option value="0周岁">0周岁</option>
+							<option value="1周岁">1周岁</option>
+							<option value="2周岁">2周岁</option>
+							<option value="3周岁">3周岁</option>
+							<option value="4周岁">4周岁</option>
+							<option value="5周岁">5周岁</option>
+							<option value="6周岁">6周岁</option>
+							<option value="7周岁">7周岁</option>
+							<option value="8周岁">8周岁</option>
+							<option value="9周岁">9周岁</option>
+							<option value="10周岁">10周岁</option>
+							<option value="11周岁">11周岁</option>
+							<option value="12周岁">12周岁</option>
+							<option value="13周岁">13周岁</option>
+							<option value="14周岁">14周岁</option>
+							<option value="15周岁">15周岁</option>
+							<option value="16周岁">16周岁</option>
+						</select>
+					</div>
+					<div class="input-group" style="width: 48%; float: left;">
+						<span class="input-group-addon" data-toggle="tooltip" title="请选择孩子的性别" style="padding:6px 6px;">性别</span>
+						<select class="form-control" name="user_sex" id="user_sex">
+							<option value="-">-性别-</option>
+							<option value="男孩">男孩</option>
+							<option value="男孩">女孩</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group input-group" style="width: 100%;">
+					<div class="input-group" style="width: 52%; float: left;">
+						<span class="input-group-addon" data-toggle="tooltip"  title="请选择孩子试听的校区" style="padding:6px 6px;">校区</span>
+						<select class="form-control" name="user_school" id="user_school">
+							<option value="-">-校区-</option>
+							<option value="江北校区">江北校区</option>
+							<option value="李家沱校区">李家沱校区</option>
+							<option value="南坪校区">南坪校区</option>
+							<option value="杨家坪校区">杨家坪校区</option>
+							<option value="青少年宫">青少年宫</option>
+						</select>
+					</div>
+					<div class="input-group" style="width: 48%; float: left;">
+					<span class="input-group-addon" data-toggle="tooltip"  title="请选择孩子试听的科目" style="padding:6px 6px;">科目</span>
+						<select class="form-control" name="user_subject" id="user_subject">
+							<option value="-">-科目-</option>
+							<option value="珠心算">珠心算</option>
+							<option value="趣味数学">趣味数学</option>
+							<option value="趣味识字">趣味识字</option>
+							<option value="丫丫拼音">丫丫拼音</option>
+						</select>
+					</div>
+				</div>
+	
+	<!-- 			<div class="btn-group" style="text-align:center; width: 100%; margin-top: 20px;"> -->
+	<!-- 				<button type="button" class="btn btn-default" id="complete" style="width: 50%;left: 25%;">立即预约免费试听</button> -->
+	<!-- 			</div> -->
+	
+				<div class="btn-group" style="text-align:center; width: 100%; margin-top: 20px;">
+	    			<center>
+	    				<img id="complete" src="http://leshucq.bj.bcebos.com/standard/reserverationclass.png" style="width:100px; height:100px;">
+	<!--     				<input id="complete" type="image" src="http://leshucq.bj.bcebos.com/standard/reserverationclass.png" style="width:100px; height:100px;"> -->
+	    			</center>
+	    			<span style="color:white;">立即预约免费试听</span>
 				</div>
 			</div>
 
-<!-- 			<div class="btn-group" style="text-align:center; width: 100%; margin-top: 20px;"> -->
-<!-- 				<button type="button" class="btn btn-default" id="complete" style="width: 50%;left: 25%;">立即预约免费试听</button> -->
-<!-- 			</div> -->
-
-			<div class="btn-group" style="text-align:center; width: 100%; margin-top: 20px;">
-    			<center>
-    				<img id="complete" src="http://leshucq.bj.bcebos.com/standard/reserverationclass.png" style="width:100px; height:100px;">
-<!--     				<input id="complete" type="image" src="http://leshucq.bj.bcebos.com/standard/reserverationclass.png" style="width:100px; height:100px;"> -->
-    			</center>
-    			<span style="color:white;">立即预约免费试听</span>
-			</div>
-			
-			 
-		</div>
 <!-- 		<a style="position: absolute; bottom: 0px; z-index: 1000; width: 100%;"> -->
 <!-- 			<img style="width: 100%" src="online_0912.png"> -->
 <!-- 		</a> -->
+
+     	<!-- copyright information -->
+     	<div style="margin: 20px 0px 20px 0px;">
+	     	<div style="font-size:12px;text-align:center;">©版权所有|重庆乐数艺术培训有限公司</div>
+     	</div>
+
 	</body>
 </html>

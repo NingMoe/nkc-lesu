@@ -30,6 +30,7 @@ import com.mongodb.WriteResult;
 import com.nkang.kxmoment.baseobject.AbacusQuizPool;
 import com.nkang.kxmoment.baseobject.AbacusRank;
 import com.nkang.kxmoment.baseobject.Appointment;
+import com.nkang.kxmoment.baseobject.AppointmentList;
 import com.nkang.kxmoment.baseobject.ArticleMessage;
 import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
@@ -3305,13 +3306,13 @@ public class MongoDBBasic {
 			DBObject query = new BasicDBObject();
 			query.put("childName", app.getName());
 			query.put("tel", app.getTel());
-			query.put("address", app.getAddr());
-			query.put("age", app.getAge());
-			query.put("sex", app.getSex());
-			query.put("school", app.getSchool());
-			query.put("subject", app.getSubject());
+//			query.put("address", app.getAddr());
+//			query.put("age", app.getAge());
+//			query.put("sex", app.getSex());
+//			query.put("school", app.getSchool());
+//			query.put("subject", app.getSubject());
 			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime());
-			query.put("date", DateUtil.timestamp2Str(cursqlTS));
+//			query.put("date", DateUtil.timestamp2Str(cursqlTS));
 			DBObject apppoint = mongoDB.getCollection(APPOINTMENT).findOne(query);
 			if (apppoint != null) {
 				// String num = visited.get("visitedNum")+"";
@@ -3350,6 +3351,50 @@ public class MongoDBBasic {
 
 		return ret;
 	}
+	
+	public static AppointmentList getAppointmentList(int page) {
+		if (mongoDB == null) {
+			mongoDB = getMongoDB();
+		}
+		
+		AppointmentList details = new AppointmentList();
+		try{
+			
+			int totalNum = mongoDB.getCollection(APPOINTMENT).find().count();
+			details.setTotalNum(totalNum);
+			details.setTotalPage(totalNum/18+1);
+			details.setPageNum(page);
+			
+			DBObject sortQ = new BasicDBObject();
+			sortQ.put("date",-1);
+			DBCursor queryresults = mongoDB.getCollection(APPOINTMENT).find().sort(sortQ).limit(18).skip((page-1)*18);
+			if (null != queryresults) {
+				while (queryresults.hasNext()) {
+					Appointment detail = new Appointment();
+					DBObject DBObj = queryresults.next();
+					
+					
+					String addr = DBObj.get("addr").toString().replaceAll("|", "").substring(3);
+					detail.setAddr(addr);
+					detail.setAge(DBObj.get("age")+"");
+					detail.setDate(DBObj.get("date")+"");
+					detail.setDescription("未备注");
+					detail.setName(DBObj.get("childName")+"");
+					detail.setSchool(DBObj.get("school")+"");
+					detail.setSex(DBObj.get("sex")+"");
+					detail.setSubject(DBObj.get("subject")+"");
+					detail.setTel(DBObj.get("tel")+"");
+					detail.setShow(false);
+					details.getAppointmentList().add(detail);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return details;
+	}
+	
 	public static String updateVisited(String openid, String date,
 			String pageName, String imgUrl, String nickName) {
 		if (mongoDB == null) {
