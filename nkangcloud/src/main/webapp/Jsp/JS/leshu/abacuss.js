@@ -118,7 +118,7 @@ function v046(v022) {
 	var v036 = this.v017;
 	var v021 = this.v018;
 	document
-			.write("<table cellspacing=0 cellpadding=0>\<tr><td align=center><table cellspacing=0 cellpadding=0><tr>\<form name=\""
+			.write("<table cellspacing=0 cellpadding=0>\<tr><td align=left><table cellspacing=0 cellpadding=0><tr>\<form name=\""
 					+ this.formname
 					+ "\">\<td><input id=\"numberid\" name=\"number\" type=text maxlength="
 					+ this.v018
@@ -128,11 +128,11 @@ function v046(v022) {
 					+ this.currentvaluestring
 					+ " onkeypress=\"return "
 					+ this.abacusname
-					+ ".isallowed(event)\"></input></td>\<td width=50%><button type=button onclick=\""
+					+ ".isallowed(event)\"></input></td>\<td width=50%><button id=\"calcbeadid\" type=button onclick=\""
 					+ this.abacusname
 					+ ".assignstring(document.forms."
 					+ this.formname
-					+ ".number.value);\">译珠</button></td>\<td width=50%><button type=button onclick=\""
+					+ ".number.value);\">译珠</button></td>\<td width=50%><button id=\"clearbeadid\" type=button onclick=\""
 					+ this.abacusname
 					+ ".reset();document.forms."
 					+ this.formname
