@@ -77,6 +77,11 @@
 	    z-index: 1002;
 	    left: 0;
 	}
+	.selectPanel {
+	    padding: 20px 20px;
+	    text-align: center;
+	    margin-top: 5px;
+	}
 	.form_edit {    
 		width: 95%;
 		margin-left: 4%;
@@ -129,7 +134,7 @@ var foo = {};
 	<div>
 		<section id="endPanel">
 			<div class="selectPanel">
-				<input id="answer" type="text" class="niput" value="" style="border-bottom: 1px solid #22B26F; width: 60%; margin-bottom: 20px;font-size:23px;" disabled />
+				<input id="answer" type="text" class="niput" value="" style="border-bottom: 1px solid #22B26F; width: 60%; margin-bottom: 10px;font-size:23px;" disabled />
 				<div class="form_edit clearfix">
 					<div class="num">1</div>
 					<div class="num">2</div>
