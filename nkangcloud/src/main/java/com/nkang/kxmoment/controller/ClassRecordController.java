@@ -170,7 +170,7 @@ public class ClassRecordController {
 		
 		
 		if(MongoDBBasic.addClassExpenseRecord(cer)){
-			return "succss";
+			return "succss addClassExpenseRecord";
 		}
 		
 		return "failed";
