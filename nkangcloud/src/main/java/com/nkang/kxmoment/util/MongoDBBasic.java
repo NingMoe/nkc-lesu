@@ -4515,15 +4515,17 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			dbo.put("parentConfirmExpense", "no");
 			//dbo.put("parentConfirmTime", exrecord.getParentConfirmTime());
 			
-			mongoDB.getCollection(collectionClassExpenseRecord).insert(dbo);
-			ret = true;
-			if(ret){
+			
+			
+			if(true){
 				DBObject query = new BasicDBObject();
 				query.put("OpenID", exrecord.getStudentOpenID());
 				query.put("payOption", exrecord.getExpenseOption());
 				mongoDB = getMongoDB();
 				DBObject dbcur = mongoDB.getCollection(collectionClassTypeRecord).findOne(query);
+				
 				if(dbcur!=null){
+					mongoDB.getCollection(collectionClassExpenseRecord).insert(dbo);
 					DBObject updatedbo = new BasicDBObject();
 					/*int total = 0;
 					if(teamobj.get("totalClass")!=null && !"".equals(teamobj.get("totalClass")+"")){
