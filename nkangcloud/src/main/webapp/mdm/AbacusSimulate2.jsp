@@ -58,6 +58,13 @@
 		border: none;
 		vertical-align: bottom;
 	}
+	
+	.selectPanel {
+	    padding: 20px 20px;
+	    text-align: center;
+	    margin-top: 5px;
+	}
+
 
 	/* div#calculator {
 		margin-left:-4%;
@@ -130,51 +137,7 @@ var foo = {};
 
 <script type="text/javascript">mysoroban.htmldraw(foo.columns);</script>
 <script src="jquery-1.8.0.js" type="text/javascript"></script>
-<div id="calculator">
-	<div>
-		<section id="endPanel">
-			<div class="selectPanel">
-				<input id="answer" type="text" class="niput" value="" style="border-bottom: 1px solid #22B26F; width: 60%; margin-bottom: 10px;font-size:23px;" disabled />
-				<div class="form_edit clearfix">
-					<div class="num">1</div>
-					<div class="num">2</div>
-					<div class="num">3</div>
-					<div class="num">4</div>
-					<div class="num">5</div>
-					<div class="num">6</div>
-					<div class="num">7</div>
-					<div class="num">8</div>
-					<div class="num">9</div>
-					<div id="remove">清零</div>
-					<div class="num">0</div>
-					<div id="soropancalc" class="end">译珠</div>
-				</div>
-			</div>
-		</section>
-		
-		<script type="text/javascript">
-			$('.form_edit .num').click(function(){
-				var oDiv = $("#answer");
-				var answer=oDiv.val()+this.innerHTML;
-				oDiv.val(answer);
-			})
-			$('#remove').click(function(){
-				var oDiv = $("#answer");
-				var oDivHtml = oDiv.val();
-				//oDiv.val(oDivHtml.substring(0,oDivHtml.length-1));
-				oDiv.val(null);
-			});
-			$('#soropancalc').click(function(){
-				//To Be Done
-				//var v022 = new Array();
-				//mysoroban.v046(v022);
-				//mysorobannumber.assignstring(answer);
-			});
-			
-		</script>
-</div>
-	
-</div>
+
 	<div id="footer">
 		<span class="clientCopyRight"><nobr>©版权所有 | 重庆NKC科技有限公司</nobr></span>
 	</div>
