@@ -133,7 +133,7 @@ function v046(v022) {
 	var myvar = "<table cellspacing=0 cellpadding=0><tr><td align=center><table width=\"380px\" cellspacing=0 cellpadding=0><tr><form name=\""
 					+ this.formname
 					+ "\">\<td><div id=\"calculator\"><div><section id=\"endPanel\">"
-					+ "<div class=\"selectPanel\"><input id=\"answer\" class=\"niput\" style=\"border-bottom: 1px solid #22B26F; width: 80%; height:15px; margin-bottom: 3px;font-size:23px;\" name=\"number\" type=text maxlength="
+					+ "<div class=\"selectPanel\"><input id=\"answer\" class=\"niput\" style=\"border-bottom: 1px solid #22B26F; width: 80%; height:15px; margin-bottom: 3px;font-size:23px;\" name=\"number\" disabled type=text maxlength="
 					+ this.v018
 					+ " size="
 					+ this.v018
