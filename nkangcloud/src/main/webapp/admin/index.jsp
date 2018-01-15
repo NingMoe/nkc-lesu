@@ -8,7 +8,11 @@ String uid = request.getParameter("UID");
 SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 Date date=new Date();
 String currentDate = format.format(date);
+String name="";
 HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+if(res.get("NickName")!=null&&res.get("NickName")!=""){
+	name=res.get("NickName").toString();
+}
 MongoDBBasic.updateVisited(uid,currentDate,"index",res.get("HeadUrl"),res.get("NickName"));
 String hardcodeUID = "oO8exvz-DZOu8wc0f81v9EHYq2HE";
 String hardcodeUID2 = "oI3krwbSD3toGOnt_bhuhXQ0TVyo";
@@ -395,7 +399,7 @@ function findTeacherList(){
 var records;
 var keyArrays;
 var keyNameArrays;
-function getClassRecord(obj){
+function getClassRecord(obj,uid,name){
 	var ct=$(obj).find("option:selected").val();
 	var realName=records[ct]==null?'':records[ct].realName;
 	var enrolledTime=records[ct]==null?'':records[ct].enrolledTime;
@@ -417,7 +421,7 @@ function getClassRecord(obj){
 	var selectedClassTypeName="";
 	if(district!=''){
 		for(var q=0;q<districtList.length;q++){
-			if(district==districtList[q]){
+			if(district==districtNameList[q]){
 				districtList.splice(q,1);
 				selectedDistrictName=districtNameList[q];
 				districtNameList.splice(q,1);
@@ -427,7 +431,7 @@ function getClassRecord(obj){
 	}
 	if(enrolledWay!=''){
 		for(var p=0;p<enrolledWayList.length;p++){
-			if(enrolledWay==enrolledWayList[p]){
+			if(enrolledWay==enrolledWayNameList[p]){
 				enrolledWayList.splice(p,1);
 				selectedenrolledWayName=enrolledWayNameList[p];
 				enrolledWayNameList.splice(p,1);
@@ -437,7 +441,7 @@ function getClassRecord(obj){
 	}
 	if(classType!=''){
 		for(var p=0;p<classTypeList.length;p++){
-			if(classType==classTypeList[p]){
+			if(classType==classTypeNameList[p]){
 				classTypeList.splice(p,1);
 				selectedClassTypeName=classTypeNameList[p];
 				classTypeNameList.splice(p,1);
@@ -447,23 +451,24 @@ function getClassRecord(obj){
 	}
 	var districtSelect="<option selected='true' value='"+district+"'>"+selectedDistrictName+"</option>";
 	for(var p=0;p<districtList.length;p++){
-		districtSelect+="<option value='"+districtList[p]+"'>"+districtNameList[p]+"</option>";
+		districtSelect+="<option value='"+districtNameList[p]+"'>"+districtNameList[p]+"</option>";
 	}
 
 	var enrolledWaySelect="<option selected='true' value='"+enrolledWay+"'>"+selectedenrolledWayName+"</option>";
 	for(var p=0;p<enrolledWayList.length;p++){
-		enrolledWaySelect+="<option value='"+enrolledWayList[p]+"'>"+enrolledWayNameList[p]+"</option>";
+		enrolledWaySelect+="<option value='"+enrolledWayNameList[p]+"'>"+enrolledWayNameList[p]+"</option>";
 	}
 	var classTypeSelect="<option selected='true' value='"+classType+"'>"+selectedClassTypeName+"</option>";
 	for(var p=0;p<classTypeList.length;p++){
-		classTypeSelect+="<option value='"+classTypeList[p]+"'>"+classTypeNameList[p]+"</option>";
+		classTypeSelect+="<option value='"+classTypeNameList[p]+"'>"+classTypeNameList[p]+"</option>";
 	}
 	$("#UpdateClassPartDiv").html('<form id="updateClassForm">'
-            +'												<input type="hidden" name="openID" id="atest_uid" value="<%=uid%>"/>'
+            +'												<input type="hidden" name="openID" id="atest_uid" value="'+uid+'"/>'
+            +'												<input type="hidden" name="name" id="nickName" value="'+name+'"/>'
             +'												<table id="tableForm" style="margin-top:-10px;width:100%;">'
             +'													<tr>'
             +'														<td><p class="classText">课时类型</p></td>'
-            +'														<td><select class="editInput" onchange="getClassRecord(this)" name="classType" id="classType">'
+            +'														<td><select class="editInput" onchange="getClassRecord(this,\''+uid+'\',\''+name+'\')" name="classType" id="classType">'
             +classTypeSelect
             +'													    </select></td>'
             +'													</tr>'	
@@ -577,7 +582,7 @@ function showClassPanel(openid,name){
 				var selectedClassTypeName="";
 				if(district!=''){
 					for(var q=0;q<districtList.length;q++){
-						if(district==districtList[q]){
+						if(district==districtNameList[q]){
 							districtList.splice(q,1);
 							selectedDistrictName=districtNameList[q];
 							districtNameList.splice(q,1);
@@ -587,7 +592,7 @@ function showClassPanel(openid,name){
 				}
 				if(enrolledWay!=''){
 					for(var p=0;p<enrolledWayList.length;p++){
-						if(enrolledWay==enrolledWayList[p]){
+						if(enrolledWay==enrolledWayNameList[p]){
 							enrolledWayList.splice(p,1);
 							selectedenrolledWayName=enrolledWayNameList[p];
 							enrolledWayNameList.splice(p,1);
@@ -597,7 +602,7 @@ function showClassPanel(openid,name){
 				}
 				if(classType!=''){
 					for(var p=0;p<classTypeList.length;p++){
-						if(classType==classTypeList[p]){
+						if(classType==classTypeNameList[p]){
 							classTypeList.splice(p,1);
 							selectedClassTypeName=classTypeNameList[p];
 							classTypeNameList.splice(p,1);
@@ -607,23 +612,24 @@ function showClassPanel(openid,name){
 				}
 				var districtSelect="<option selected='true' value='"+district+"'>"+selectedDistrictName+"</option>";
 				for(var p=0;p<districtList.length;p++){
-					districtSelect+="<option value='"+districtList[p]+"'>"+districtNameList[p]+"</option>";
+					districtSelect+="<option value='"+districtNameList[p]+"'>"+districtNameList[p]+"</option>";
 				}
 
 				var enrolledWaySelect="<option selected='true' value='"+enrolledWay+"'>"+selectedenrolledWayName+"</option>";
 				for(var p=0;p<enrolledWayList.length;p++){
-					enrolledWaySelect+="<option value='"+enrolledWayList[p]+"'>"+enrolledWayNameList[p]+"</option>";
+					enrolledWaySelect+="<option value='"+enrolledWayNameList[p]+"'>"+enrolledWayNameList[p]+"</option>";
 				}
 				var classTypeSelect="<option selected='true' value='"+classType+"'>"+selectedClassTypeName+"</option>";
 				for(var p=0;p<classTypeList.length;p++){
-					classTypeSelect+="<option value='"+classTypeList[p]+"'>"+classTypeNameList[p]+"</option>";
+					classTypeSelect+="<option value='"+classTypeNameList[p]+"'>"+classTypeNameList[p]+"</option>";
 				}
 				$("#UpdateClassPartDiv").html('<form id="updateClassForm">'
 			            +'												<input type="hidden" name="openID" id="atest_uid" value="'+openid+'"/>'
+			            +'												<input type="hidden" name="name" id="nickName" value="'+name+'"/>'
 			            +'												<table id="tableForm" style="margin-top:-10px;width:100%;">'
 			            +'													<tr>'
 			            +'														<td><p class="classText">课时类型</p></td>'
-			            +'														<td><select class="editInput" onchange="getClassRecord(this)" name="classType" id="classType">'
+			            +'														<td><select class="editInput" onchange="getClassRecord(this,\''+openid+'\',\''+name+'\')" name="classType" id="classType">'
 			            +classTypeSelect
 			            +'													    </select></td>'
 			            +'													</tr>'	
@@ -766,6 +772,7 @@ function showUpdateUserPanel(openid,name){
 				}
 				$("#UpdateUserPartDiv").html('<form id="atest">'
 			            +'												<input type="hidden" name="uid" id="atest_uid" value="'+openid+'"/>'
+			            +'												<input type="hidden" name="nickName" id="nickName" value="'+name+'"/>'
 			            +'												<table id="tableForm" style="margin-top:-10px;width:100%;">'
 			            +'													<tr>'
 			            +'														<td><p class="editText">真实姓名</p></td>'

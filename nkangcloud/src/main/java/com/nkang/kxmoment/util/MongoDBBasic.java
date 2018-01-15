@@ -4305,6 +4305,8 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				query.put("enrolledTime", stInfor.getEnrolledTime());
 				query.put("enrolledWay", stInfor.getEnrolledWay());
 				query.put("district", stInfor.getDistrict());
+
+				query.put("name", stInfor.getRealName());
 				if(stInfor.getTotalClass()!=-1){
 					query.put("totalClass", stInfor.getTotalClass());
 				}
@@ -4374,6 +4376,32 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			log.info( e.getMessage());
 			}
 		return map;
+		
+	}
+	
+	public static List<WeChatUser> getAllOpenIDHasClass(){
+		List<WeChatUser> uids = new ArrayList<WeChatUser>();
+		WeChatUser wcu;
+		String uid="";
+		String nickName="";
+		try {
+			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find();
+			if (null != wr) {
+			while(wr.hasNext()){
+				DBObject db = wr.next();
+				uid=db.get("OpenID")==null?"":db.get("OpenID")+"";
+
+				nickName=db.get("name")==null?"":db.get("name")+"";
+				wcu=new WeChatUser();
+				wcu.setOpenid(uid);
+				wcu.setNickname(nickName);
+				uids.add(wcu);
+				}
+			}
+		}catch (Exception e) {
+			log.info( e.getMessage());
+			}
+		return uids;
 		
 	}
 /*

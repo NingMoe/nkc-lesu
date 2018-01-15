@@ -134,16 +134,26 @@ $(function(){
 	findParentList();
 	function findParentList(){
 		$.ajax({
-			 url:'../userProfile/findParents',
+			 url:'../ClassRecord/getAllOpenIDHasClass',
 			 type:"GET",
 			 data : {},
 			 success:function(data){
 				 if(data){
+
+						var keys="";
+						for(var key in data){
+							keys+=key+",";
+							
+						}
+
+						keyArrays=keys.split(",");
+						keyArrays.splice(keyArrays.length-1,1);
 					 var select="";
-					 for(var i=0;i<data.length;i++){
-						 select+="<option value='"+data[i].openid+"' >"+data[i].nickname+"</option>";;
+					 for(var i=0;i<keyArrays.length;i++){
+						 select+="<option value='"+keyArrays[i]+"' >"+data[keyArrays[i]]+"</option>";
 					 }
 					 $("#studentsList").html(select);
+					 getClassRecordById(keyArrays[0]);
 				 }
 				 
 			}
@@ -170,7 +180,78 @@ $(function(){
 		}); 
 	});
 
-})
+	var records;
+
+	function getClassRecordById(id){
+
+		jQuery.ajax({
+			type : "GET",
+			url : "../ClassRecord/getClassTypeRecords",
+			data : {
+				openID : id
+			},
+			cache : false,
+			success : function(data) {
+				records=data;
+				var keys="";
+				for(var key in data){
+					keys+=key+",";
+					
+				}
+				keyArrays=keys.split(",");
+				keyArrays.splice(keyArrays.length-1,1);
+				var index=keyArrays[0];
+
+				 var select="";
+				 for(var i=0;i<keyArrays.length;i++){
+					 select+="<option value='"+keyArrays[i]+"' >"+keyArrays[i]+"</option>";;
+				 }
+				 $("#typeList").html(select);
+				var district=data[index]==null?'':data[index].district;
+				$("#expenseDistrict").val(district);
+			}
+		});
+	}
+	function getClassRecordByStudent(obj){
+
+		var openid=$(obj).find("option:selected").val();
+		jQuery.ajax({
+			type : "GET",
+			url : "../ClassRecord/getClassTypeRecords",
+			data : {
+				openID : openid
+			},
+			cache : false,
+			success : function(data) {
+				records=data;
+				var keys="";
+				for(var key in data){
+					keys+=key+",";
+					
+				}
+				keyArrays=keys.split(",");
+				var index=keyArrays[0];
+
+				 var select="";
+				 for(var i=0;i<keyArrays.length;i++){
+					 select+="<option value='"+keyArrays[i]+"' >"+keyArrays[i]+"</option>";;
+				 }
+				 $("#typeList").html(select);
+				var district=data[index]==null?'':data[index].district;
+				$("#expenseDistrict").val(district);
+			}
+		});
+	}
+	function getClassRecordByType(obj){
+
+		var ct=$(obj).find("option:selected").val();
+		var district=records[ct]==null?'':records[ct].district;
+		$("#expenseDistrict").val(district);
+	}
+	window.getClassRecordByType=getClassRecordByType;
+	window.getClassRecordByStudent=getClassRecordByStudent;
+	window.getClassRecordById=getClassRecordById;
+});
 </script>
 </head>
 <body>
@@ -209,14 +290,11 @@ $(function(){
 					
 						<tr>
 							<td><p class="classText">学员姓名</p></td>
-							<td><select id="studentsList" class="editInput" name="studentOpenID"></select></td>
+							<td><select id="studentsList" class="editInput" onchange="getClassRecordByStudent(this)" name="studentOpenID"></select></td>
 						</tr>
 						<tr>
 							<td><p class="classText">消费项目</p></td>
-							<td><select class="editInput">
-							 <option selected="true" value="yypy">丫丫拼音</option>
-									<option value="zxs">珠心算</option>
-									<option value="qwsx">趣味数学</option>
+							<td><select id="typeList" onchange="getClassRecordByType(this)" class="editInput">
 							</select></td>
 						</tr>
 						<tr>
@@ -227,12 +305,8 @@ $(function(){
 						</tr>
 						<tr>
 							<td><p class="classText">课消校区</p></td>
-							<td><select class="editInput" name="expenseDistrict" id="district"><option
-										selected="true" value="np">南坪校区</option>
-									<option value="jb">江北校区</option>
-									<option value="ljt">李家沱校区</option>
-									<option value="yjp">杨家坪校区</option>
-							</select></td>
+							<td><input class="editInput"  name="expenseDistrict" type="text" id="expenseDistrict"   value="">'
+							</td>
 						</tr>
 						<tr>
 							<td><p class="classText">消费课时</p></td>

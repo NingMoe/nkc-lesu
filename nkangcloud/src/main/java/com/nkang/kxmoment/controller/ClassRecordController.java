@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classexpenserecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classpayrecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation;
@@ -25,6 +26,7 @@ public class ClassRecordController {
 	public @ResponseBody boolean AddClassRecord(
 			@RequestParam(value = "openID") String openid,
 			@RequestParam(value = "enrolledTime") String enrolledTime,
+			@RequestParam(value = "name") String name,
 			@RequestParam(value = "enrolledWay") String enrolledWay,
 			@RequestParam(value = "district") String district,
 			@RequestParam(value = "totalClass") String totalClass,
@@ -60,7 +62,7 @@ public class ClassRecordController {
 			stInfor.setLeftSendClass(-1);
 		}
 		stInfor.setOpenID(openid);
-		
+		stInfor.setRealName(name);
 		if(MongoDBBasic.updateStudentBasicInformation(stInfor)){
 			return true;
 		}
@@ -88,6 +90,18 @@ public class ClassRecordController {
 	@RequestMapping("/getClassTypeRecords")
 	public @ResponseBody Map<String,StudentBasicInformation> getClassTypeRecords(@RequestParam(value = "openID") String openid){
 		return MongoDBBasic.getClassTypeRecords(openid);
+		
+		}
+	@RequestMapping("/getAllOpenIDHasClass")
+	public @ResponseBody Map<String,String>  getAllOpenIDHasClass(){
+		List<WeChatUser> wcus=MongoDBBasic.getAllOpenIDHasClass();
+		Map<String,String> map=new HashMap<String,String>();
+		for(int i=0;i<wcus.size();i++){
+			if(!map.containsKey(wcus.get(i).getOpenid())){
+				map.put(wcus.get(i).getOpenid(), wcus.get(i).getNickname());
+			}
+		}
+		return map;
 		
 		}
 	
@@ -144,7 +158,7 @@ public class ClassRecordController {
 			@RequestParam(value = "expenseClassCount") String expenseClassCount,
 			@RequestParam(value = "teacherName") String teacherName,
 			@RequestParam(value = "teacherOpenID") String teacherOpenID,
-			@RequestParam(value = "studentName") String studentName,
+			@RequestParam(value = "studentName",required=false) String studentName,
 			@RequestParam(value = "studentOpenID") String studentOpenID,
 			@RequestParam(value = "expenseDistrict") String expenseDistrict,
 			@RequestParam(value = "teacherComment") String teacherComment){
