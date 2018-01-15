@@ -602,7 +602,7 @@ margin-left: 4%;
 				$("#endPanel").show();
 				return;
 			}
-			temp = Math.round(Math.random()
+			temp = Math.floor(Math.random()
 					* (lengthArray[lengthMax] - lengthArray[lengthMin - 1])
 					+ lengthArray[lengthMin - 1]);
 			if(temp==0){

@@ -28,7 +28,7 @@ public class MasterDataController {
     @RequestMapping("/getBespeakInfo")
     public ModelAndView main() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("bespeakinfo");
+        mv.setViewName("at/yy/bespeakinfo");
         return mv;
     }
 }

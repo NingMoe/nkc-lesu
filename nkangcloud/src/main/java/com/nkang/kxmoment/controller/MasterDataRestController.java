@@ -788,7 +788,7 @@ public class MasterDataRestController {
 		return status;
 	}
 	
-    @RequestMapping("/details/{id}")
+    @RequestMapping("/details/{page}")
     @ResponseBody
     public AppointmentList details(@PathVariable("page") int page) {
         return MongoDBBasic.getAppointmentList(page);
