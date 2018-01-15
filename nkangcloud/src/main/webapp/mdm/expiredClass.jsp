@@ -294,7 +294,7 @@ $(function(){
 						</tr>
 						<tr>
 							<td><p class="classText">消费项目</p></td>
-							<td><select id="typeList" onchange="getClassRecordByType(this)" class="editInput">
+							<td><select id="typeList" name="expenseOption" onchange="getClassRecordByType(this)" class="editInput">
 							</select></td>
 						</tr>
 						<tr>
@@ -305,7 +305,7 @@ $(function(){
 						</tr>
 						<tr>
 							<td><p class="classText">课消校区</p></td>
-							<td><input class="editInput"  name="expenseDistrict" type="text" id="expenseDistrict"   value="">'
+							<td><input class="editInput"  name="expenseDistrict" type="text" id="expenseDistrict"   value="" disabled />'
 							</td>
 						</tr>
 						<tr>
