@@ -790,11 +790,18 @@ public class MasterDataRestController {
 	
     @RequestMapping("/details/{page}")
     @ResponseBody
-    public AppointmentList details(@PathVariable("page") int page) {
-        return MongoDBBasic.getAppointmentList(page);
+    public AppointmentList details(@PathVariable("page") String page) {
+    
+        return MongoDBBasic.getAppointmentList(Integer.parseInt(page));
     }
 	
+    @RequestMapping("/getDetails")
+    @ResponseBody
+    public AppointmentList getDetails(@RequestParam("page") String page) {
+        return MongoDBBasic.getAppointmentList(Integer.parseInt(page));
+    }
 	
+    
 	@RequestMapping("/getVisitedDetail")
 	public @ResponseBody List<Visited> getVisitedByDate(@RequestParam(value="dateIndex")String dateIndex,@RequestParam(value="pageName")String pageName){
 		String pn="";
