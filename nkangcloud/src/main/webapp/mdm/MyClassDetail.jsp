@@ -306,7 +306,7 @@ z-index:100000;
 	<%if(!sbis.isEmpty()){ %>
 	<div id="chart-container">FusionCharts will render here</div>
 <select class="classType" onchange="getClassRecordByType(this)">
-<option value="<%=classType %>" selected><%=classTypeName %></option>
+<option value="<%=classType %>" selected><%=classType %></option>
 <%for(int i=0;i<classTypes.size();i++){ %>
 
 <option value="<%=classTypes.get(i) %>"><%=classNameTypes.get(i) %></option>
@@ -318,10 +318,10 @@ z-index:100000;
 			<p>课时总量</p>
 			<p id="total"><%=total %></p>
 		</div>
-		<div class="classRow">
+		<a href="expenseClassList.jsp?UID=<%=uid%>"><div class="classRow">
 			<p>已用课时</p>
 			<p id="used"><%=used %></p>
-		</div>
+		</div></a>
 		<div class="classRow" style="border-right: none;">
 			<p>剩余课时</p>
 			<p id="left"><%=left %></p>
