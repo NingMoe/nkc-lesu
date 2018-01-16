@@ -152,7 +152,7 @@ public class ClassRecordController {
 //  teacherComment=GOOD&teacherConfirmExpense=true&teacherConfirmTime=1-5&parentConfirmExpense=true&parentConfirmTime=1-5
 	
 	@RequestMapping("/addClassExpenseRecord")
-	public @ResponseBody String AddClassExpenseRecord(HttpServletRequest request, HttpServletResponse response,
+	public @ResponseBody boolean AddClassExpenseRecord(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "expenseOption") String expenseOption,
 			@RequestParam(value = "expenseTime") String expenseTime,
 			@RequestParam(value = "expenseClassCount") String expenseClassCount,
@@ -184,10 +184,10 @@ public class ClassRecordController {
 		
 		
 		if(MongoDBBasic.addClassExpenseRecord(cer)){
-			return "succss addClassExpenseRecord";
+			return true;
 		}
 		
-		return "failed";
+		return false;
 		
 		
 	}
