@@ -76,7 +76,7 @@ wx.config({
      }); */
      var shareTitle='乐数珠心算虚拟算盘练习';
      var shareDesc='快来看，快来看，乐数有虚拟算盘帮助小朋友练习珠算互译';
-     var shareImgUrl='http://leshu.bj.bcebos.com/standard/leshuLogo.png';
+     var shareImgUrl='http://leshucq.bj.bcebos.com/standard/leshushortlogo.JPG';
 	//----------“分享给朋友”
      wx.onMenuShareAppMessage({
          title: shareTitle, // 分享标题
