@@ -2,7 +2,7 @@
 <%@ page import="com.nkang.kxmoment.util.OAuthUitl.SNSUserInfo,java.lang.*"%>
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
-<%@ page import="com.nkang.kxmoment.baseobject.WeChatMDLUser"%>
+<%@ page import="com.nkang.kxmoment.baseobject.classhourrecord.Classexpenserecord"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.nkang.kxmoment.util.*"%>
 <%
@@ -25,6 +25,7 @@ if(res!=null){
 		phone=res.get("phone");
 	}
 }
+List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords(uid);
 %><!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +34,7 @@ if(res!=null){
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <style type="text/css">
 *{margin:0;}
+a,a:hover,a:visited{text-decoration:none;}
 .expensePanel{
 width:88%;
 margin-left:5%;
@@ -94,24 +96,12 @@ padding-right:2%;}
 			style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
 	</div>
-<a href="expenseClassDetail.jsp?UID=<%=uid %>" >
+	<%for(int i=0;i<records.size();i++){ %>
+<a href="expenseClassDetail.jsp?UID=<%=uid %>&&expenseID=<%=records.get(i).getExpenseID() %>" >
 <div class="expensePanel">
-<div class="item"><p class="title">丫丫拼音</p><p class="value">江北校区</p></div>
-<div class="item"><p class="title">2018/01/15</p><p class="value">1课时</p></div>
+<div class="item"><p class="title"><%=records.get(i).getExpenseOption() %></p><p class="value"><%=records.get(i).getExpenseDistrict() %></p></div>
+<div class="item"><p class="title"><%=records.get(i).getExpenseTime() %></p><p class="value"><%=records.get(i).getExpenseClassCount() %>课时</p></div>
 </div></a>
-
-<a href="expenseClassDetail.jsp?UID=<%=uid %>" >
-<div class="expensePanel">
-<div class="item"><p class="title">珠心算拼音</p><p class="value">南坪校区</p></div>
-<div class="item"><p class="title">2018/01/11</p><p class="value">1课时</p></div>
-</div>
-</a>
-
-<a href="expenseClassDetail.jsp?UID=<%=uid %>" >
-<div class="expensePanel">
-<div class="item"><p class="title">丫丫拼音</p><p class="value">江北校区</p></div>
-<div class="item"><p class="title">2018/01/13</p><p class="value">1课时</p></div>
-</div>
-</a>
+<%} %>
 </body>
 </html>

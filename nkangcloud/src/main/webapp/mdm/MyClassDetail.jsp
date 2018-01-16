@@ -225,6 +225,8 @@ height:80px;
 border-top:1px solid #CFCFCF;
 border-bottom:1px solid #CFCFCF;
 }
+
+a,a:hover,a:visited{text-decoration:none;}
 .classRow{
 height:70px;
 width:24.7%;

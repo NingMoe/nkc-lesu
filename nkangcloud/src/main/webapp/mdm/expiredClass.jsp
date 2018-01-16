@@ -38,11 +38,7 @@ if(res!=null){
 <script src="../MetroStyleFiles/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css" />
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
-<script>
-	var used = "22";
-	var left = "10";
-	var gift = "2";
-</script>
+
 <style type="text/css">
 * {
 	margin: 0;
@@ -171,11 +167,7 @@ $(function(){
 			cache:false,
 			async:false,
 			success:function(result) {
-				if(result){
 					swal("更改成功!", "恭喜!", "success"); 
-				} else {
-					swal("更改失败!", "请填写正确的信息.", "error");
-				}
 			}
 		}); 
 	});
@@ -305,7 +297,7 @@ $(function(){
 						</tr>
 						<tr>
 							<td><p class="classText">课消校区</p></td>
-							<td><input class="editInput"  name="expenseDistrict" type="text" id="expenseDistrict"   value="" disabled />'
+							<td><input class="editInput"  name="expenseDistrict" type="text" id="expenseDistrict"   value=""/>'
 							</td>
 						</tr>
 						<tr>

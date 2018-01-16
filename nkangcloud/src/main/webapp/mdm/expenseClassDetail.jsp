@@ -2,12 +2,14 @@
 <%@ page import="com.nkang.kxmoment.util.OAuthUitl.SNSUserInfo,java.lang.*"%>
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
-<%@ page import="com.nkang.kxmoment.baseobject.WeChatMDLUser"%>
+<%@ page import="com.nkang.kxmoment.baseobject.classhourrecord.Classexpenserecord"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.nkang.kxmoment.util.*"%>
 <%
 
 String uid = request.getParameter("UID"); 
+
+String expenseID = request.getParameter("expenseID"); 
 
 String name = "";
 String headImgUrl ="";
@@ -25,6 +27,8 @@ if(res!=null){
 		phone=res.get("phone");
 	}
 }
+
+Classexpenserecord record=MongoDBBasic.getexpenseRecord(expenseID);
 %><!DOCTYPE html>
 <html>
 <head>
@@ -128,13 +132,13 @@ margin-left:7%;}
 		</div>
 	</div>
 <div class="usedPanel">
-<div class="item"><p class="title">学员姓名</p><p class="value">潘路月</p></div>
-<div class="item"><p class="title">消费项目</p><p class="value">丫丫拼音</p></div>
-<div class="item"><p class="title">消费时间</p><p class="value">2018/01/15</p></div>
-<div class="item"><p class="title">消费课时</p><p class="value">1</p></div>
-<div class="item"><p class="title">任课老师</p><p class="value">苹果老师</p></div>
-<div class="item"><p class="title">课消校区</p><p class="value">江北校区</p></div>
-<div class="item"><p class="title">老师评语</p><p class="value">很棒</p></div>
+<div class="item"><p class="title">学员姓名</p><p class="value"><%=name %></p></div>
+<div class="item"><p class="title">消费项目</p><p class="value"><%=record.getExpenseOption() %></p></div>
+<div class="item"><p class="title">消费时间</p><p class="value"><%=record.getExpenseTime() %></p></div>
+<div class="item"><p class="title">消费课时</p><p class="value"><%=record.getExpenseClassCount() %></p></div>
+<div class="item"><p class="title">任课老师</p><p class="value"><%=record.getTeacherName() %></p></div>
+<div class="item"><p class="title">课消校区</p><p class="value"><%=record.getExpenseDistrict() %></p></div>
+<div class="item"><p class="title">老师评语</p><p class="value"><%=record.getTeacherComment() %></p></div>
 </div>
 </body>
 </html>
