@@ -167,7 +167,10 @@ $(function(){
 			cache:false,
 			async:false,
 			success:function(result) {
-					swal("更改成功!", "恭喜!", "success"); 
+					//swal("更改成功!", "恭喜!", "success"); 
+					alert("消课成功~");
+					$("#totalClass").val("");
+					$("#teacherComment").val("");
 			}
 		}); 
 	});
@@ -307,7 +310,7 @@ $(function(){
 						</tr>
 						<tr>
 							<td><p class="classText">老师评语</p></td>
-							<td><textarea class="editInput" name="teacherComment" ></textarea></td>
+							<td><textarea class="editInput" id="teacherComment" name="teacherComment" ></textarea></td>
 						</tr>
 					</tbody>
 				</table>
