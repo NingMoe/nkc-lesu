@@ -33,7 +33,7 @@ Classexpenserecord record=MongoDBBasic.getexpenseRecord(expenseID);
 <html>
 <head>
 <meta charset="utf-8" />
-<title>乐数-练习参数</title>
+<title>课销详情</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <script src="fusioncharts.js"></script>
 <script src="hulk-light.js"></script> 

@@ -30,7 +30,7 @@ List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords(uid);
 <html>
 <head>
 <meta charset="utf-8" />
-<title>乐数-练习参数</title>
+<title>课销记录</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <style type="text/css">
 *{margin:0;}
