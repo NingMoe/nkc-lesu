@@ -163,14 +163,17 @@ $(function(){
 			data:datas,
 			type:"POST",
 			dataType:"json",
-			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			cache:false,
-			async:false,
-			success:function(result) {
-					//swal("更改成功!", "恭喜!", "success"); 
-					alert("消课成功~");
+			success:function(data) {
+				if(data){
+					swal("更改成功!", "恭喜!", "success"); 
+					//alert("消课成功~");
 					$("#totalClass").val("");
 					$("#teacherComment").val("");
+				}
+				else{
+
+					swal("更改失败!", "请填写正确的信息.", "error");
+				}
 			}
 		}); 
 	});
