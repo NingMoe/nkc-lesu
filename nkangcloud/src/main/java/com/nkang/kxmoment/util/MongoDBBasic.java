@@ -3351,7 +3351,11 @@ public class MongoDBBasic {
 
 		return ret;
 	}
-	
+/*
+ * author:Beason
+ * 
+ * method:getAppointmentList
+ * */	
 	public static AppointmentList getAppointmentList(int page) {
 		if (mongoDB == null) {
 			mongoDB = getMongoDB();
@@ -3365,28 +3369,41 @@ public class MongoDBBasic {
 			details.setTotalPage(totalNum/18+1);
 			details.setPageNum(page);
 			
+			int limit = 18;
+			int skip = (page-1)*18;
 			DBObject sortQ = new BasicDBObject();
 			sortQ.put("date",-1);
-			DBCursor queryresults = mongoDB.getCollection(APPOINTMENT).find().sort(sortQ).limit(18).skip((page-1)*18);
-			if (null != queryresults) {
+			DBCursor queryresults = mongoDB.getCollection(APPOINTMENT).find().sort(sortQ).limit(limit).skip(skip);
+			if (null != queryresults && queryresults.size()!=0) {
+				System.out.println("queryresults size:"+queryresults.size());
 				while (queryresults.hasNext()) {
 					Appointment detail = new Appointment();
 					DBObject DBObj = queryresults.next();
 					
-					
 					String addr = DBObj.get("addr").toString().replaceAll("|", "").substring(3);
 					detail.setAddr(addr);
+					System.out.println("addr:"+addr);
 					detail.setAge(DBObj.get("age")+"");
+					System.out.println("age:"+DBObj.get("age"));
 					detail.setDate(DBObj.get("date")+"");
+					System.out.println("date:"+DBObj.get("date"));
 					detail.setDescription("未备注");
 					detail.setName(DBObj.get("childName")+"");
+					System.out.println("childName:"+DBObj.get("childName"));
 					detail.setSchool(DBObj.get("school")+"");
+					System.out.println("school:"+DBObj.get("school"));
 					detail.setSex(DBObj.get("sex")+"");
+					System.out.println("sex:"+DBObj.get("sex"));
 					detail.setSubject(DBObj.get("subject")+"");
+					System.out.println("subject:"+DBObj.get("subject"));
 					detail.setTel(DBObj.get("tel")+"");
+					System.out.println("tel:"+DBObj.get("tel"));
 					detail.setShow(false);
 					details.getAppointmentList().add(detail);
 				}
+				System.out.println("details size:"+details.getAppointmentList().size());
+			}else{
+				System.out.println("queryresults is null!");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
