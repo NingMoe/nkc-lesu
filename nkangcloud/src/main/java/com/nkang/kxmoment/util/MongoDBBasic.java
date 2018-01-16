@@ -4713,4 +4713,37 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		}
 		return ret;
 	}
+	
+	// getexpenseRecord by expenseID
+		public static Classexpenserecord getexpenseRecord(String id) {
+			mongoDB = getMongoDB();
+			Classexpenserecord record=null;
+			try {
+				BasicDBObject db=new BasicDBObject();
+				db.append("expenseID",id);
+				
+				DBObject dbo = mongoDB.getCollection(collectionClassExpenseRecord).findOne(db);
+				if(null!=dbo){
+					record = new Classexpenserecord();
+					record.setExpenseID(dbo.get("expenseID")+"");
+					record.setExpenseClassCount(dbo.get("expenseClassCount")==null?"":dbo.get("expenseClassCount")+"");
+					record.setExpenseDistrict(dbo.get("expenseDistrict")==null?"":dbo.get("expenseDistrict")+"");
+					record.setExpenseOption(dbo.get("expenseOption")==null?"":dbo.get("expenseOption")+"");
+					record.setExpenseTime(dbo.get("expenseTime")==null?"":dbo.get("expenseTime")+"");
+					record.setParentConfirmExpense("yes".equals(dbo.get("parentConfirmExpense")+"")?true:false);
+					record.setParentConfirmTime(dbo.get("parentConfirmTime")==null?"":dbo.get("parentConfirmTime")+"");
+					record.setStudentName(dbo.get("studentName")==null?"":dbo.get("studentName")+"");
+					record.setStudentOpenID(dbo.get("studentOpenID")==null?"":dbo.get("studentOpenID")+"");
+					record.setTeacherComment(dbo.get("teacherComment")==null?"":dbo.get("teacherComment")+"");
+					record.setTeacherConfirmExpense("yes".equals(dbo.get("teacherConfirmExpense")+"")?true:false);
+					record.setTeacherConfirmTime(dbo.get("teacherConfirmTime")==null?"":dbo.get("teacherConfirmTime")+"");
+					record.setTeacherName(dbo.get("teacherName")==null?"":dbo.get("teacherName")+"");
+					record.setTeacherOpenID(dbo.get("teacherOpenID")==null?"":dbo.get("teacherOpenID")+"");
+					record.setParentComment(dbo.get("parentComment")==null?"":dbo.get("parentComment")+"");
+				}
+			} catch (Exception e) {
+				log.info("parentConfirmTime--" + e.getMessage());
+			}
+			return record;
+		}
 }
