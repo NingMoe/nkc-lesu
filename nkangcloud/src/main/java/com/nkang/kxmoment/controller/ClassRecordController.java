@@ -216,4 +216,12 @@ public class ClassRecordController {
 		
 	}
 	
+	
+	@RequestMapping("/getexpenseRecord")
+	public @ResponseBody Classexpenserecord getexpenseRecord(
+			@RequestParam(value = "expenseID") String expenseID
+			){
+		return MongoDBBasic.getexpenseRecord(expenseID);
+		
+	}
 }
