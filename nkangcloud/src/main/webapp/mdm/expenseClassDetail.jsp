@@ -72,12 +72,12 @@ $(function(){
 width:86%;
 margin-left:7%;}
 	.item{
-	height:35px;
+	height:30px;
 	width:100%;}
 	.title{
 	height:100%;
 	width:30%;
-	line-height:45px;
+	line-height:30px;
 	text-align:left;
 	font-size:15px;
 	float:left;
@@ -85,7 +85,7 @@ margin-left:7%;}
 	.value{
 	height:100%;
 	width:70%;
-	line-height:45px;
+	line-height:30px;
 	text-align:right;
 	font-size:15px;
 	float:left;
@@ -108,6 +108,7 @@ margin-left:7%;}
     height: 35px;
     line-height: 35px;
     text-align: center;
+    font-size:15px;
     position: fixed;
     bottom: 0px;
     color: white;
@@ -144,8 +145,9 @@ margin-left:7%;}
 <div class="item"><p class="title">课消校区</p><p class="value"><%=record.getExpenseDistrict() %></p></div>
 <div class="item"><p class="title">确认状态</p><p class="value">
 <%if(!record.isParentConfirmExpense()){ %>未确认<%}else{ %>已确认<%} %></p></div>
-</div>
+
 <div class="item"><p class="title">老师评语</p><p class="value"><%=record.getTeacherComment() %></p></div>
+</div>
 
 <%if(!record.isParentConfirmExpense()){ %>
 <div class="xk">确认销课</div>
