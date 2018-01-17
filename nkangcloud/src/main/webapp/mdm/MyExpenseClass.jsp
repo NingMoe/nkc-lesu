@@ -32,9 +32,14 @@ List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords(uid);
 <meta charset="utf-8" />
 <title>课销记录</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
+<link rel="stylesheet" type="text/css" href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css" />
+
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css" />
+<script src="../MetroStyleFiles/sweetalert.min.js"></script>
 <style type="text/css">
 *{margin:0;}
-a,a:hover,a:visited{text-decoration:none;}
+a,a:hover,a:visited{text-decoration:none;color:black;}
 .expensePanel{
 width:88%;
 margin-left:5%;
@@ -75,6 +80,7 @@ padding-right:2%;}
     left: 0;
 }
 </style>
+
 </head>
 <body>
 	<div id="data_model_div" style="height: 100px">

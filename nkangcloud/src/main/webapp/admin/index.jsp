@@ -791,7 +791,7 @@ function showUpdateUserPanel(openid,name){
 						}
 					}
 				}
-				if(teacher!=''){
+				/* if(teacher!=''){
 					for(var p=0;p<teacherIds.length;p++){
 						if(teacher==teacherIds[p]){
 							teacherIds.splice(p,1);
@@ -800,7 +800,7 @@ function showUpdateUserPanel(openid,name){
 							break;
 						}
 					}
-				}
+				} */
 				var levelSelect="<option selected='true' value='"+level+"'>"+selectedName+"</option>";
 				for(var p=0;p<levelList.length;p++){
 					levelSelect+="<option value='"+levelList[p]+"'>"+levelNameList[p]+"</option>";

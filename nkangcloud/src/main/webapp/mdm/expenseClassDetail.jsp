@@ -35,42 +35,36 @@ Classexpenserecord record=MongoDBBasic.getexpenseRecord(expenseID);
 <meta charset="utf-8" />
 <title>课销详情</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<script src="fusioncharts.js"></script>
-<script src="hulk-light.js"></script> 
+<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
+<link rel="stylesheet" type="text/css" href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css" />
+
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css" />
+<script src="../MetroStyleFiles/sweetalert.min.js"></script>
 <script>
-var used="22";
-var left="10";
-var gift="2";
-FusionCharts.ready(function() {
-  var dietChart = new FusionCharts({
-    type: 'pie3d',
-    renderAt: 'chart-container',
-    width: '100%',
-    height: '200',
-    dataFormat: 'json',
-    dataSource: {
-      "chart": {
-        "caption": "",
-        "showValues":"1",
-        "numberSuffix": "",
-        "theme": "hulk-light",
-        "enableMultiSlicing":"1"
+$(function(){
+	$("#xk").on("click",function(){
+		$.ajax({
+			 url:'../ClassRecord/parentConfirmTime',
+			 type:"GET",
+			 data : {
+				 expenseID:'<%=expenseID%>',
+				 comment:""
+			 },
+			 success:function(data){
+				 if(data){
+						swal("确认成功!", "恭喜!", "success"); 
+						window.location.href="http://leshucq.bceapp.com/mdm/expenseClassDetail.jsp?UID=<%=uid %>&&expenseID=<%=expenseID%>";
+					}
+					else{
 
-      },
-      "data": [{
-        "label": "已用课时",
-        "value": used
-      }, {
-        "label": "剩余课时",
-        "value": left
-      }, {
-        "label": "赠送课时",
-        "value": gift
-      }]
-    }
-  }).render();
-});
-
+						swal("确认失败!", "请填写正确的信息.", "error");
+					}
+				
+				 
+			}
+		});
+	});
+})
 </script>
 <style type="text/css">
 *{margin:0;}
@@ -108,6 +102,16 @@ margin-left:7%;}
     z-index: 1002;
     left: 0;
 }
+.xk{
+
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    color: white;
+    background: #20b672;}
 </style>
 </head>
 <body>
@@ -139,6 +143,11 @@ margin-left:7%;}
 <div class="item"><p class="title">任课老师</p><p class="value"><%=record.getTeacherName() %></p></div>
 <div class="item"><p class="title">课消校区</p><p class="value"><%=record.getExpenseDistrict() %></p></div>
 <div class="item"><p class="title">老师评语</p><p class="value"><%=record.getTeacherComment() %></p></div>
+<div class="item"><p class="title">确认状态</p><p class="value">
+<%if(!record.isParentConfirmExpense()){ %>未确认<%}else{ %>已确认<%} %></p></div>
 </div>
+<%if(!record.isParentConfirmExpense()){ %>
+<div class="xk">确认销课</div>
+<%} %>
 </body>
 </html>
