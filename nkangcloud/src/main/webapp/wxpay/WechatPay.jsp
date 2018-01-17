@@ -298,7 +298,7 @@ $(function(){
           <div class="infoPanel">
       <div class="infoPay">
 	  <div class="infoItem" style="color:gray;border:1px solid gray;line-height:50px;">支付宝支付</div>
-	  <div class="infoItem" style="line-height:50px;">微信支付</div>
+	  <div class="infoItem" style="color:gray;border:1px solid gray;line-height:50px;">微信支付</div>
      </div>
     </div>
       <div class="infoArea pay"><a href="javascript:pay();" style="color:white;">立即购买</a></div>
