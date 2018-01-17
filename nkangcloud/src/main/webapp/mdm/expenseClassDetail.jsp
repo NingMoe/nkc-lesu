@@ -71,7 +71,7 @@ $(function(){
 									swal("确认成功!", "恭喜!", "success"); 
 									$("#status").text("已确认");
 									$(".xk").hide();
-									$(".usedPanel").append("<div class='item'><p class='title'>家长评语</p><textarea style='color:black;margin-bottom:10px;border:none;width:100%;' class='value' disabled>"+comment+"</textarea></div>")
+									$(".usedPanel").append("<div class='item'><p class='title'>家长评语</p><p style='color:black;margin-bottom:10px;border:none;width:100%;' class='value' disabled>"+comment+"</p></div>")
 								}
 								else{
 
@@ -106,7 +106,7 @@ margin-left:7%;}
 	font-weight:bold;
 	}
 	.value{
-	height:100%;
+	height:auto;
 	width:70%;
 	line-height:30px;
 	text-align:left;
@@ -169,8 +169,8 @@ margin-left:7%;}
 <div class="item"><p class="title">确认状态</p><p id="status" class="value">
 <%if(!record.isParentConfirmExpense()){ %>未确认<%}else{ %>已确认<%} %></p></div>
 
-<div class="item"><p class="title">老师评语</p><textarea style="margin-bottom:10px;border:none;width:100%;" class="value" disabled><%=record.getTeacherComment() %></textarea></div>
-<%if(record.isParentConfirmExpense()){ %><div class="item"><p class="title">家长评语</p><textarea style="color:black;margin-bottom:10px;border:none;width:100%;" class="value" disabled><%=record.getParentComment() %></textarea></div><%} %>
+<div class="item"><p class="title">老师评语</p><p style="margin-bottom:10px;border:none;width:100%;" class="value" ><%=record.getTeacherComment() %></p></div>
+<%if(record.isParentConfirmExpense()){ %><div class="item"><p class="title">家长评语</p><p style="color:black;margin-bottom:10px;border:none;width:100%;" class="value" ><%=record.getParentComment() %></p></div><%} %>
 </div>
 
 <%if(!record.isParentConfirmExpense()){ %>
