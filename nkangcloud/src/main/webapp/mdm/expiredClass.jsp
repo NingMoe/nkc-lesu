@@ -141,10 +141,10 @@ $(function(){
 					 var select="";
 					 studentRecords=data;
 					 for(var i=0;i<data.length;i++){
-						 select+="<option value='"+data[i].OpenID+"' >"+data[i].name+"</option>";
+						 select+="<option value='"+data[i].openID+"' >"+data[i].name+"</option>";
 					 }
 					 $("#studentsList").html(select);
-					 getClassRecordById(data[0].OpenID);
+					 getClassRecordById(data[0].openID);
 				 }
 				 
 			}
