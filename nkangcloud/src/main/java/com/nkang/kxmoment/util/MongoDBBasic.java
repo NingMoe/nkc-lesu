@@ -3380,7 +3380,7 @@ public class MongoDBBasic {
 				while (queryresults.hasNext()) {
 					Appointment detail = new Appointment();
 					DBObject DBObj = queryresults.next();
-					String addr = DBObj.get("address").toString().replaceAll("|", "").substring(3);
+					String addr = DBObj.get("address").toString().replace("|", "").substring(3);
 					detail.setAddr(addr);
 					detail.setAge(DBObj.get("age")+"");
 					detail.setDate(DBObj.get("date")+"");
