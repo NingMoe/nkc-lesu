@@ -201,7 +201,7 @@ text-align:center;
                    onBridgeReady(); 
                 }   
             }  
-            },"http://nkctech.duapp.com/pay/payparm?openId=<%= code%>&totalfee="+totalfee,true);   
+            },"http://leshucq.bceapp.com/pay/payparm?openId=<%= code%>&totalfee="+totalfee,true);   
         }  
 function send_request(callback, urladdress,isReturnData){        
     var xmlhttp = getXMLHttpRequest();  
