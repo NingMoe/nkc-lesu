@@ -42,7 +42,7 @@ Classexpenserecord record=MongoDBBasic.getexpenseRecord(expenseID);
 <script src="../MetroStyleFiles/sweetalert.min.js"></script>
 <script>
 $(function(){
-	$("#xk").on("click",function(){
+	$(".xk").on("click",function(){
 		$.ajax({
 			 url:'../ClassRecord/parentConfirmTime',
 			 type:"GET",
@@ -142,10 +142,11 @@ margin-left:7%;}
 <div class="item"><p class="title">消费课时</p><p class="value"><%=record.getExpenseClassCount() %></p></div>
 <div class="item"><p class="title">任课老师</p><p class="value"><%=record.getTeacherName() %></p></div>
 <div class="item"><p class="title">课消校区</p><p class="value"><%=record.getExpenseDistrict() %></p></div>
-<div class="item"><p class="title">老师评语</p><p class="value"><%=record.getTeacherComment() %></p></div>
 <div class="item"><p class="title">确认状态</p><p class="value">
 <%if(!record.isParentConfirmExpense()){ %>未确认<%}else{ %>已确认<%} %></p></div>
 </div>
+<div class="item"><p class="title">老师评语</p><p class="value"><%=record.getTeacherComment() %></p></div>
+
 <%if(!record.isParentConfirmExpense()){ %>
 <div class="xk">确认销课</div>
 <%} %>
