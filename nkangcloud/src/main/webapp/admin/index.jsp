@@ -400,6 +400,8 @@ var records;
 var keyArrays;
 var keyNameArrays;
 function getClassRecord(obj,uid,name){
+
+	findTeacherList();
 	var ct=$(obj).find("option:selected").val();
 	var realName=records[ct]==null?'':records[ct].realName;
 	var enrolledTime=records[ct]==null?'':records[ct].enrolledTime;
