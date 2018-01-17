@@ -141,7 +141,7 @@ $(function(){
 					 var select="";
 					 studentRecords=data;
 					 for(var i=0;i<data.length;i++){
-						 select+="<option value='"+data[i].openID+"' >"+data[i].name+"</option>";
+						 select+="<option value='"+data[i].openID+"' >"+data[i].realName+"</option>";
 					 }
 					 $("#studentsList").html(select);
 					 getClassRecordById(data[0].openID);
