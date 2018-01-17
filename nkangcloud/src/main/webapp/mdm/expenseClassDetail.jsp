@@ -83,7 +83,7 @@ margin-left:7%;}
 	.title{
 	height:100%;
 	width:30%;
-	line-height:55px;
+	line-height:45px;
 	text-align:left;
 	font-size:15px;
 	float:left;

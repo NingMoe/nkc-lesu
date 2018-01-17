@@ -21,6 +21,13 @@ public class StudentBasicInformation {
 	public String enrolledWay;
 	public String district;
 	public String classType;
+	public String teacher;
+	public String getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
+	}
 	public String getClassType() {
 		return classType;
 	}

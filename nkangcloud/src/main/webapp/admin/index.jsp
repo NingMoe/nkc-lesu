@@ -409,6 +409,7 @@ function getClassRecord(obj,uid,name){
 	var expenseClass=records[ct]==null?'':records[ct].expenseClass;
 	var leftPayClass=records[ct]==null?'':records[ct].leftPayClass;
 	var leftSendClass=records[ct]==null?'':records[ct].leftSendClass;
+	var teacher=records[ct]==null?'':records[ct].teacher;
 	var classType=ct;
 	var districtList=new Array('jb','ljt','np','yjp');
 	var districtNameList=new Array('江北校区','李家沱校区','南坪校区','杨家坪校区');
@@ -419,12 +420,24 @@ function getClassRecord(obj,uid,name){
 	var selectedDistrictName="";
 	var selectedenrolledWayName="";
 	var selectedClassTypeName="";
+	var selectedTeacherName="";
 	if(district!=''){
 		for(var q=0;q<districtList.length;q++){
 			if(district==districtNameList[q]){
 				districtList.splice(q,1);
 				selectedDistrictName=districtNameList[q];
 				districtNameList.splice(q,1);
+				break;
+			}
+		}
+	}
+
+	if(teacher!=''){
+		for(var p=0;p<teacherIds.length;p++){
+			if(teacher==teacherIds[p]){
+				teacherIds.splice(p,1);
+				selectedTeacherName=teacherNames[p];
+				teacherNames.splice(p,1);
 				break;
 			}
 		}
@@ -462,6 +475,11 @@ function getClassRecord(obj,uid,name){
 	for(var p=0;p<classTypeList.length;p++){
 		classTypeSelect+="<option value='"+classTypeNameList[p]+"'>"+classTypeNameList[p]+"</option>";
 	}
+
+	var teacherSelect="<option selected='true' value='"+teacher+"'>"+selectedTeacherName+"</option>";
+	for(var p=0;p<teacherIds.length;p++){
+		teacherSelect+="<option value='"+teacherIds[p]+"'>"+teacherNames[p]+"</option>";
+	}
 	$("#UpdateClassPartDiv").html('<form id="updateClassForm">'
             +'												<input type="hidden" name="openID" id="atest_uid" value="'+uid+'"/>'
             +'												<input type="hidden" name="name" id="nickName" value="'+name+'"/>'
@@ -472,6 +490,12 @@ function getClassRecord(obj,uid,name){
             +classTypeSelect
             +'													    </select></td>'
             +'													</tr>'	
+            +'													<tr>'
+            +'														<td><p class="editText">乐数老师</p></td>'
+            +'														<td><select class="editInput" name="teacher">'
+            +teacherSelect
+            +'													    </select></td>'
+            +'													</tr>'
             +'												    <tr>'
             +'													    <td><p class="classText">报名时间</p></td>'
             +'													    <td align="left" class="tdText" >'
@@ -534,7 +558,7 @@ function getClassRecord(obj,uid,name){
 }
 function showClassPanel(openid,name){
 	showCommonPanel();
-	//findTeacherList();
+	findTeacherList();
 	$(".Work_Mates_div_list_div2").removeClass("editBtn");
 	$(".Work_Mates_div_list_div2").remove(".edit");
 
@@ -571,6 +595,7 @@ function showClassPanel(openid,name){
 				var leftPayClass=data[index]==null?'':data[index].leftPayClass;
 				var leftSendClass=data[index]==null?'':data[index].leftSendClass;
 				var classType=data[index]==null?'':data[index].classType;
+				var teacher=data[index]==null?'':data[index].teacher;
 				var districtList=new Array('jb','ljt','np','yjp');
 				var districtNameList=new Array('江北校区','李家沱校区','南坪校区','杨家坪校区');
 				var enrolledWayList=new Array('web','ad','ldx','other');
@@ -580,6 +605,8 @@ function showClassPanel(openid,name){
 				var selectedDistrictName="";
 				var selectedenrolledWayName="";
 				var selectedClassTypeName="";
+
+				var selectedTeacherName="";
 				if(district!=''){
 					for(var q=0;q<districtList.length;q++){
 						if(district==districtNameList[q]){
@@ -610,6 +637,17 @@ function showClassPanel(openid,name){
 						}
 					}
 				}
+
+				if(teacher!=''){
+					for(var p=0;p<teacherIds.length;p++){
+						if(teacher==teacherIds[p]){
+							teacherIds.splice(p,1);
+							selectedTeacherName=teacherNames[p];
+							teacherNames.splice(p,1);
+							break;
+						}
+					}
+				}
 				var districtSelect="<option selected='true' value='"+district+"'>"+selectedDistrictName+"</option>";
 				for(var p=0;p<districtList.length;p++){
 					districtSelect+="<option value='"+districtNameList[p]+"'>"+districtNameList[p]+"</option>";
@@ -623,6 +661,11 @@ function showClassPanel(openid,name){
 				for(var p=0;p<classTypeList.length;p++){
 					classTypeSelect+="<option value='"+classTypeNameList[p]+"'>"+classTypeNameList[p]+"</option>";
 				}
+
+				var teacherSelect="<option selected='true' value='"+teacher+"'>"+selectedTeacherName+"</option>";
+				for(var p=0;p<teacherIds.length;p++){
+					teacherSelect+="<option value='"+teacherIds[p]+"'>"+teacherNames[p]+"</option>";
+				}
 				$("#UpdateClassPartDiv").html('<form id="updateClassForm">'
 			            +'												<input type="hidden" name="openID" id="atest_uid" value="'+openid+'"/>'
 			            +'												<input type="hidden" name="name" id="nickName" value="'+name+'"/>'
@@ -633,6 +676,12 @@ function showClassPanel(openid,name){
 			            +classTypeSelect
 			            +'													    </select></td>'
 			            +'													</tr>'	
+			            +'													<tr>'
+			            +'														<td><p class="editText">乐数老师</p></td>'
+			            +'														<td><select class="editInput" name="teacher">'
+			            +teacherSelect
+			            +'													    </select></td>'
+			            +'													</tr>'
 			            +'												    <tr>'
 			            +'													    <td><p class="classText">报名时间</p></td>'
 			            +'													    <td align="left" class="tdText" >'
@@ -697,7 +746,7 @@ function showClassPanel(openid,name){
 
 function showUpdateUserPanel(openid,name){
 	showCommonPanel();
-	findTeacherList();
+	//findTeacherList();
 	$(".Work_Mates_div_list_div2").removeClass("editBtn");
 	$(".Work_Mates_div_list_div2").remove(".edit");
     $('body,html').animate({scrollTop:0},200);  
@@ -731,7 +780,7 @@ function showUpdateUserPanel(openid,name){
 				var selectedName="";
 				var selectedTeacherName="";
 				var level=data[0].level==null?'':data[0].level;
-				var teacher=data[0].teacher==null?'':data[0].teacher;
+			//	var teacher=data[0].teacher==null?'':data[0].teacher;
 				if(level!=''){
 					for(var q=0;q<levelList.length;q++){
 						if(level==levelList[q]){
@@ -757,10 +806,10 @@ function showUpdateUserPanel(openid,name){
 					levelSelect+="<option value='"+levelList[p]+"'>"+levelNameList[p]+"</option>";
 				}
 
-				var teacherSelect="<option selected='true' value='"+teacher+"'>"+selectedTeacherName+"</option>";
+				/* var teacherSelect="<option selected='true' value='"+teacher+"'>"+selectedTeacherName+"</option>";
 				for(var p=0;p<teacherIds.length;p++){
 					teacherSelect+="<option value='"+teacherIds[p]+"'>"+teacherNames[p]+"</option>";
-				}
+				} */
 				var selfIntro=data[0].selfIntro==null?'':data[0].selfIntro;
 				var roleSelect='														<option value="">-请选择-</option>';
 				for(var i=0;i<RoleList.length;i++){
@@ -792,14 +841,13 @@ function showUpdateUserPanel(openid,name){
 			            +'														<td><select class="editInput"  name="role">'
 			            +roleSelect
 			            +'													    </select></td>'
-			            +'													</tr>'
+			            +'													</tr>'/* 
 			            +'													<tr>'
 			            +'														<td><p class="editText">乐数老师</p></td>'
-			           /*  +'														<td><input type="text" name="role" value="'+role+'"/></td>' */
 			            +'														<td><select class="editInput" name="teacher">'
 			            +teacherSelect
 			            +'													    </select></td>'
-			            +'													</tr>'
+			            +'													</tr>' */
 			            +'													<tr>'
 			            +'														<td><p class="editText">学员级别</p></td>'
 			            +'														<td><select class="editInput"  name="level">'

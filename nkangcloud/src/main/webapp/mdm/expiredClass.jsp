@@ -128,28 +128,23 @@ height:100px!important;}
 <script>
 $(function(){
 	findParentList();
+	var studentRecords;
 	function findParentList(){
 		$.ajax({
-			 url:'../ClassRecord/getAllOpenIDHasClass',
+			 url:'../ClassRecord/getClassTypeRecordsByTeacher',
 			 type:"GET",
-			 data : {},
+			 data : {
+				 teacher:'<%=uid%>',
+			 },
 			 success:function(data){
 				 if(data){
-
-						var keys="";
-						for(var key in data){
-							keys+=key+",";
-							
-						}
-
-						keyArrays=keys.split(",");
-						keyArrays.splice(keyArrays.length-1,1);
 					 var select="";
-					 for(var i=0;i<keyArrays.length;i++){
-						 select+="<option value='"+keyArrays[i]+"' >"+data[keyArrays[i]]+"</option>";
+					 studentRecords=data;
+					 for(var i=0;i<data.length;i++){
+						 select+="<option value='"+data[i].OpenID+"' >"+data[i].name+"</option>";
 					 }
 					 $("#studentsList").html(select);
-					 getClassRecordById(keyArrays[0]);
+					 getClassRecordById(data[0].OpenID);
 				 }
 				 
 			}

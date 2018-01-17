@@ -29,6 +29,7 @@ public class ClassRecordController {
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "enrolledWay") String enrolledWay,
 			@RequestParam(value = "district") String district,
+			@RequestParam(value = "teacher") String teacher,
 			@RequestParam(value = "totalClass") String totalClass,
 			@RequestParam(value = "expenseClass") String expenseClass,
 			@RequestParam(value = "leftPayClass") String leftPayClass,
@@ -37,6 +38,7 @@ public class ClassRecordController {
 			)
 	{
 		StudentBasicInformation stInfor = new StudentBasicInformation();
+		stInfor.setTeacher(teacher);
 		stInfor.setDistrict(district);
 		stInfor.setEnrolledTime(enrolledTime);
 		stInfor.setEnrolledWay(enrolledWay);
@@ -90,6 +92,11 @@ public class ClassRecordController {
 	@RequestMapping("/getClassTypeRecords")
 	public @ResponseBody Map<String,StudentBasicInformation> getClassTypeRecords(@RequestParam(value = "openID") String openid){
 		return MongoDBBasic.getClassTypeRecords(openid);
+		
+		}
+	@RequestMapping("/getClassTypeRecordsByTeacher")
+	public @ResponseBody List<StudentBasicInformation> getClassTypeRecordsByTeacher(@RequestParam(value = "teacher") String teacherID){
+		return MongoDBBasic.getClassTypeRecordsByTeacher(teacherID);
 		
 		}
 	@RequestMapping("/getAllOpenIDHasClass")

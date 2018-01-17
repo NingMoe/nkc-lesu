@@ -1186,7 +1186,6 @@ public class MongoDBBasic {
 			update.put("Teamer.phone", user.getPhone());
 			update.put("Teamer.role", user.getRole());
 			update.put("Teamer.level", user.getLevel());
-			update.put("Teacher", user.getTeacher());
 
 			log.info("Teacher--" + user.getTeacher());
 			System.out.println("get level from mongoBasic"+user.getLevel());
@@ -4315,6 +4314,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				query.put("enrolledTime", stInfor.getEnrolledTime());
 				query.put("enrolledWay", stInfor.getEnrolledWay());
 				query.put("district", stInfor.getDistrict());
+				query.put("teacher", stInfor.getTeacher());
 
 				query.put("name", stInfor.getRealName());
 				if(stInfor.getTotalClass()!=-1){
@@ -4371,6 +4371,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				String classType=db.get("payOption")==null?"":db.get("payOption")+"";
 				sbi = new StudentBasicInformation();
 				sbi.setDistrict(db.get("district")+"");
+				sbi.setTeacher(db.get("teacher")+"");
 				sbi.setEnrolledTime(db.get("enrolledTime")+"");
 				sbi.setEnrolledWay(db.get("enrolledWay")+"");
 				sbi.setExpenseClass(expenseClass);
@@ -4386,6 +4387,44 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			log.info( e.getMessage());
 			}
 		return map;
+		
+	}
+	
+	//ClassTypeRecord
+	public static List<StudentBasicInformation> getClassTypeRecordsByTeacher(String teacherID){
+		List<StudentBasicInformation> list = new ArrayList<StudentBasicInformation>();
+		//List<String> lstype = new ArrayList<String>();
+		StudentBasicInformation sbi;
+		try {
+			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(new BasicDBObject().append("teacher", teacherID));
+			while(wr.hasNext()){
+				DBObject db = wr.next();
+				String key=db.get("payOption")+"";
+				int expenseClass=db.get("expenseClass")==null?0:Integer.parseInt(db.get("expenseClass")+"");
+				int leftPayClass=db.get("leftPayClass")==null?0:Integer.parseInt(db.get("leftPayClass")+"");
+				int leftSendClass=db.get("leftSendClass")==null?0:Integer.parseInt(db.get("leftSendClass")+"");
+				int totalClass=db.get("totalClass")==null?0:Integer.parseInt(db.get("totalClass")+"");
+				String classType=db.get("payOption")==null?"":db.get("payOption")+"";
+				sbi = new StudentBasicInformation();
+				sbi.setDistrict(db.get("district")+"");
+				sbi.setTeacher(db.get("teacher")+"");
+				sbi.setEnrolledTime(db.get("enrolledTime")+"");
+				sbi.setEnrolledWay(db.get("enrolledWay")+"");
+				sbi.setOpenID(db.get("OpenID")+"");
+				sbi.setRealName(db.get("name")+"");
+				sbi.setExpenseClass(expenseClass);
+				sbi.setLeftPayClass(leftPayClass);
+				sbi.setLeftSendClass(leftSendClass);
+				//sbi.setPhone(dbcur.get("phone")+"");
+				sbi.setClassType(classType);
+				//sbi.setRealName(dbcur.get("realName")+"");
+				sbi.setTotalClass(totalClass);
+				list.add(sbi);
+			}
+		}catch (Exception e) {
+			log.info( e.getMessage());
+			}
+		return list;
 		
 	}
 	
