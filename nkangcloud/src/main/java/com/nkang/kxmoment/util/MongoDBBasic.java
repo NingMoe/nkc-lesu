@@ -3306,13 +3306,8 @@ public class MongoDBBasic {
 			DBObject query = new BasicDBObject();
 			query.put("childName", app.getName());
 			query.put("tel", app.getTel());
-//			query.put("address", app.getAddr());
-//			query.put("age", app.getAge());
-//			query.put("sex", app.getSex());
-//			query.put("school", app.getSchool());
-//			query.put("subject", app.getSubject());
 			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime());
-//			query.put("date", DateUtil.timestamp2Str(cursqlTS));
+
 			DBObject apppoint = mongoDB.getCollection(APPOINTMENT).findOne(query);
 			if (apppoint != null) {
 				// String num = visited.get("visitedNum")+"";
@@ -3331,13 +3326,19 @@ public class MongoDBBasic {
 				// doc.put("$set", update);
 				mongoDB.getCollection(APPOINTMENT).update(query, doc);
 			} else {
+				query.put("address", app.getAddr());
+				query.put("age", app.getAge());
+				query.put("sex", app.getSex());
+				query.put("school", app.getSchool());
+				query.put("subject", app.getSubject());
+				query.put("date", DateUtil.timestamp2Str(cursqlTS));
 				mongoDB.getCollection(APPOINTMENT).insert(query);
 			}
 			//send message to leshu admin to get client engaged
 			List<String> telList = new ArrayList<String>();
 			String templateId="231590";
 			telList.add("15123944895"); //Ning
-			telList.add("18883811118"); //presendent guo
+			//telList.add("18883811118"); //presendent guo
 			String para=": 姓名 "+app.getName() + " 电话 "+app.getTel()+" 课程 "+app.getSubject();
 			for(String to : telList){
 				if(to!=null && !"".equals(to)){
@@ -3365,6 +3366,7 @@ public class MongoDBBasic {
 		try{
 			
 			int totalNum = mongoDB.getCollection(APPOINTMENT).find().count();
+			System.out.println("totalNum:"+totalNum);
 			details.setTotalNum(totalNum);
 			details.setTotalPage(totalNum/18+1);
 			details.setPageNum(page);
@@ -3379,25 +3381,16 @@ public class MongoDBBasic {
 				while (queryresults.hasNext()) {
 					Appointment detail = new Appointment();
 					DBObject DBObj = queryresults.next();
-					
-					String addr = DBObj.get("addr").toString().replaceAll("|", "").substring(3);
+					String addr = DBObj.get("address").toString().replaceAll("|", "").substring(3);
 					detail.setAddr(addr);
-					System.out.println("addr:"+addr);
 					detail.setAge(DBObj.get("age")+"");
-					System.out.println("age:"+DBObj.get("age"));
 					detail.setDate(DBObj.get("date")+"");
-					System.out.println("date:"+DBObj.get("date"));
 					detail.setDescription("未备注");
 					detail.setName(DBObj.get("childName")+"");
-					System.out.println("childName:"+DBObj.get("childName"));
 					detail.setSchool(DBObj.get("school")+"");
-					System.out.println("school:"+DBObj.get("school"));
 					detail.setSex(DBObj.get("sex")+"");
-					System.out.println("sex:"+DBObj.get("sex"));
 					detail.setSubject(DBObj.get("subject")+"");
-					System.out.println("subject:"+DBObj.get("subject"));
 					detail.setTel(DBObj.get("tel")+"");
-					System.out.println("tel:"+DBObj.get("tel"));
 					detail.setShow(false);
 					details.getAppointmentList().add(detail);
 				}
