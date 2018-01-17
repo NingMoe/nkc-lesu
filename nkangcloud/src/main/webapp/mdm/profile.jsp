@@ -1637,12 +1637,18 @@ function getNowFormatDate() {
 													<a target="_self" href="http://leshucq.bceapp.com/mdm/MyClassDetail.jsp?UID=<%=uid %>">
 														<img src="http://leshucq.bj.bcebos.com/standard/classunitmgt.png" /><h4>我的课时</h4>
 													</a>
-												</td><% } %>
+												</td>
+												<td>
+													<a target="_self" href="http://leshucq.bceapp.com/mdm/MyExpenseClass.jsp?UID=<%=uid %>">
+														<img src="http://leshucq.bj.bcebos.com/standard/classunitmgt.png" /><h4>我的课销</h4>
+													</a>
+												</td>
+												<% } %>
 													<%if(isTeacher==true) { %>
 												<td>
 												<a target="_self"  href="http://leshucq.bceapp.com/mdm/expiredClass.jsp?UID=<%=uid %>">
 												<img src="http://leshucq.bj.bcebos.com/standard%2Fclassunit2.png" />
-													<h4>课消管理</h4></a>
+													<h4>课销管理</h4></a>
 												</td><% } %>
 											</tr>
 										</table>
