@@ -103,7 +103,7 @@ a:visited{
     text-align: center;
     height:50px;
     line-height: 50px;
-    background: #000000;
+    background: #20b672;
     color: white;
     position:absolute;
     bottom:30px;}
@@ -125,8 +125,8 @@ width:30%;
 margin-left:2%;
 height:50px;
 float:left;
-border:1px solid #000000;
-color:#000000;
+border:1px solid #20b672;
+color:#20b672;
 border-radius:5px;
 line-height:25px;
 font-size:0.8rem;
@@ -146,7 +146,7 @@ text-align:center;
 }
 .default{
 	color:white;
-	background:#000000;
+	background:#20b672;
 }
 	</style>
 	</head>
@@ -247,7 +247,7 @@ function getXMLHttpRequest() {
     return xmlhttp;  
 }
 $(function(){
-	$(".infoItem").on("click",function(){
+	$(".price").on("click",function(){
 		totalfee=$(this).children("span").text();
 		$(this).addClass("default");
 		$(this).siblings().removeClass("default");
@@ -266,20 +266,26 @@ $(function(){
 			</div>
 			<span style="position: relative;top: 8px;left: 5px;font-style:normal"><%=name %></span>
 		</i>
-		<img style="position: absolute;top: 8px;left: 10px;z-index: 100;height: 60px;" class="HpLogo" src="http://nkctech.gz.bcebos.com/nkclogo.png" alt="Logo">
-		<div style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #000000;"></div>
+		<img style="position: absolute;top: 8px;left: 10px;z-index: 100;height: 60px;" class="HpLogo" src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo">
+		<div style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;"></div>
 	</div>
     <div class="infoPanel">
       <div class="infoArea">
         <p class="infoTitle">手机号码</p>
         <p class="infoVal"><%=phone %></p>
       </div>
+    </div>   
+     <div class="infoPanel">
+      <div class="infoArea">
+        <p class="infoTitle">姓名</p>
+        <p class="infoVal"><%=name %></p>
+      </div>
     </div>
     <div class="infoPanel">
       <div class="infoPay">
-	  <div class="infoItem default"><span>2160</span>元<br>24次课</div>
-	  <div class="infoItem"><span>3880</span>元<br>48次课</div>
-	  <div class="infoItem"><span>6680</span>元<br>96次课</div>
+	  <div class="infoItem price default"><span>2160</span>元<br>24次课</div>
+	  <div class="infoItem price"><span>3880</span>元<br>48次课</div>
+	  <div class="infoItem price"><span>6680</span>元<br>96次课</div>
      </div>
     </div>
 
@@ -292,7 +298,7 @@ $(function(){
           <div class="infoPanel">
       <div class="infoPay">
 	  <div class="infoItem" style="color:gray;border:1px solid gray;line-height:50px;">支付宝支付</div>
-	  <div class="infoItem default" style="line-height:50px;">微信支付</div>
+	  <div class="infoItem" style="line-height:50px;">微信支付</div>
      </div>
     </div>
       <div class="infoArea pay"><a href="javascript:pay();" style="color:white;">立即购买</a></div>
