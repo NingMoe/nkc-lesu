@@ -9,6 +9,7 @@
 
 String uid = request.getParameter("UID"); 
 
+String classType= request.getParameter("classType");
 String name = "";
 String headImgUrl ="";
 String phone="";
@@ -25,7 +26,7 @@ if(res!=null){
 		phone=res.get("phone");
 	}
 }
-List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords(uid);
+List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords(uid, classType);
 %><!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +49,7 @@ padding-right:2%;}
 	width:100%;}
 	.title{
 	height:100%;
-	width:30%;
+	width:35%;
 	line-height:38px;
 	text-align:left;
 	font-size:15px;
@@ -56,7 +57,7 @@ padding-right:2%;}
 	}
 	.value{
 	height:100%;
-	width:69%;
+	width:64%;
 	line-height:38px;
 	text-align:right;
 	font-size:15px;
@@ -99,8 +100,10 @@ padding-right:2%;}
 	<%for(int i=0;i<records.size();i++){ %>
 <a href="expenseClassDetail.jsp?UID=<%=uid %>&&expenseID=<%=records.get(i).getExpenseID() %>" >
 <div class="expensePanel">
-<div class="item"><p class="title"><%=records.get(i).getExpenseOption() %></p><p class="value"><%=records.get(i).getExpenseDistrict() %></p></div>
-<div class="item"><p class="title"><%=records.get(i).getExpenseTime() %></p><p class="value"><%=records.get(i).getExpenseClassCount() %>课时</p></div>
+<div class="item"><p class="title"><%=records.get(i).getExpenseOption() %>(<%=records.get(i).getExpenseClassCount() %>课时)</p><p class="value"><%=records.get(i).getExpenseDistrict() %></p></div>
+<div class="item"><p class="title"><%=records.get(i).getExpenseTime() %></p><p class="value">
+<%if(records.get(i).isParentConfirmExpense()) {%><span style="color:green;">已确认</span><%}else{ %><span style="color:red;">未确认</span><%} %>
+</p></div>
 </div></a>
 <%} %>
 </body>

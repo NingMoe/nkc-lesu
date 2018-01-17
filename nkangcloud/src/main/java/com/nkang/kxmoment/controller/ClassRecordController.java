@@ -202,24 +202,23 @@ public class ClassRecordController {
 	//getClassExpenseRecords by studentid
 	// http://leshucq.bceapp.com/ClassRecord/getExpenseRecords?openID=oO8exvzE95JUvwpNxNTxraOqzUFI
 	@RequestMapping("/getExpenseRecords")
-	public @ResponseBody List<Classexpenserecord> getClassExpenseRecords(@RequestParam(value = "openID") String openid){
+	public @ResponseBody List<Classexpenserecord> getClassExpenseRecords(@RequestParam(value = "openID") String openid,@RequestParam(value = "classType",required=false) String classType){
 		
-		return MongoDBBasic.getClassExpenseRecords(openid);
+		if(classType==null){
+			classType="";
+		}
+		return MongoDBBasic.getClassExpenseRecords(openid,classType);
 	}
 	
 	
 	// http://leshucq.bceapp.com/ClassRecord/parentConfirmTime?expenseID=1515660345557&comment=nice---GOOD
 	@RequestMapping("/parentConfirmTime")
-	public @ResponseBody String parentConfirmTime(
+	public @ResponseBody boolean parentConfirmTime(
 			@RequestParam(value = "expenseID") String expenseID,
 			@RequestParam(value = "comment") String parentComment){
 		
-		if(MongoDBBasic.parentConfirmTime(expenseID,parentComment)){
+		return MongoDBBasic.parentConfirmTime(expenseID,parentComment);
 			
-			return "succss";
-		}
-		
-		return "failed";
 		
 	}
 	

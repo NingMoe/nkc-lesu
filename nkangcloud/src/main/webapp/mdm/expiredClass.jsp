@@ -308,7 +308,7 @@ $(function(){
 						</tr>
 						<tr>
 							<td><p class="classText">老师评语</p></td>
-							<td><textarea class="editInput" id="teacherComment" name="teacherComment" ></textarea></td>
+							<td><textarea class="editInput" id="teacherComment" name="teacherComment" >宝贝这节课表现得很棒，继续加油.</textarea></td>
 						</tr>
 					</tbody>
 				</table>

@@ -132,12 +132,13 @@
 	            + seperator2 + second;
 	    return currentdate;
 	}
+	var ct;
 	function getClassRecordByType(obj){
 		var currentdate = getNowFormatDate();
 		$(".time").text(currentdate);
 		
 		var records=JSON.parse(recordsJson);
-		var ct=$(obj).find("option:selected").val();
+		ct=$(obj).find("option:selected").val();
 		var totalClass=records[ct]==null?'':records[ct].totalClass;
 		var expenseClass=records[ct]==null?'':records[ct].expenseClass;
 		var leftPayClass=records[ct]==null?'':records[ct].leftPayClass;
@@ -146,6 +147,7 @@
 		$("#used").text(expenseClass);
 		$("#left").text(leftPayClass);
 		$("#gift").text(leftSendClass);
+		$("#href").attr("href","expenseClassList.jsp?UID=<%=uid%>&&classType="+ct);
 		FusionCharts.ready(function() {
 			var dietChart = new FusionCharts({
 				type : 'pie3d',
@@ -320,7 +322,7 @@ z-index:100000;
 			<p>课时总量</p>
 			<p id="total"><%=total %></p>
 		</div>
-		<a href="expenseClassList.jsp?UID=<%=uid%>"><div class="classRow">
+		<a id="href" href="expenseClassList.jsp?UID=<%=uid%>&&classType=<%=classType%>"><div class="classRow">
 			<p>已用课时</p>
 			<p id="used"><%=used %></p>
 		</div></a>

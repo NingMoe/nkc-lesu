@@ -25,7 +25,7 @@ if(res!=null){
 		phone=res.get("phone");
 	}
 }
-List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords(uid);
+List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords(uid,"");
 %><!DOCTYPE html>
 <html>
 <head>
@@ -33,12 +33,12 @@ List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords(uid);
 <title>课销记录</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
-<link rel="stylesheet" type="text/css" href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css" />
 
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css" />
 <script src="../MetroStyleFiles/sweetalert.min.js"></script>
 <style type="text/css">
-*{margin:0;}
+*{margin:0};
+p{margin:0!important;}
 a,a:hover,a:visited{text-decoration:none;color:black;}
 .expensePanel{
 width:88%;
@@ -53,7 +53,7 @@ padding-right:2%;}
 	width:100%;}
 	.title{
 	height:100%;
-	width:30%;
+	width:35%;
 	line-height:38px;
 	text-align:left;
 	font-size:15px;
@@ -61,7 +61,7 @@ padding-right:2%;}
 	}
 	.value{
 	height:100%;
-	width:69%;
+	width:64%;
 	line-height:38px;
 	text-align:right;
 	font-size:15px;

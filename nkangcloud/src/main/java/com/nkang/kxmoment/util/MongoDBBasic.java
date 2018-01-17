@@ -4631,9 +4631,9 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			dbo.put("studentOpenID",exrecord.getStudentOpenID());
 			dbo.put("expenseDistrict", exrecord.getExpenseDistrict());
 			dbo.put("teacherComment", exrecord.getTeacherComment());
-			dbo.put("teacherConfirmExpense", "yes");
+			dbo.put("teacherConfirmExpense", true);
 			dbo.put("teacherConfirmTime", DateUtil.timestamp2Str(cursqlTS));//convertTime(a.getTime()),convertTime(Long.valueOf("1515398255469"))
-			dbo.put("parentConfirmExpense", "no");
+			dbo.put("parentConfirmExpense", false);
 			//dbo.put("parentConfirmTime", exrecord.getParentConfirmTime());
 			
 			
@@ -4701,11 +4701,15 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 	}
 	
 	//get ClassExpenseRecords by id
-	public static List<Classexpenserecord> getClassExpenseRecords(String openid) {
+	public static List<Classexpenserecord> getClassExpenseRecords(String openid,String classType) {
 		mongoDB = getMongoDB();
 		List<Classexpenserecord> recordList = new ArrayList<Classexpenserecord>();
 		DBObject query = new BasicDBObject();
 		query.put("studentOpenID",openid);
+		if(classType!=""){
+
+			query.put("expenseOption",classType);
+		}
 		DBCursor records = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
 		while(records.hasNext()){
 			Classexpenserecord record = new Classexpenserecord();
@@ -4715,12 +4719,12 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			record.setExpenseDistrict(dbo.get("expenseDistrict")==null?"":dbo.get("expenseDistrict")+"");
 			record.setExpenseOption(dbo.get("expenseOption")==null?"":dbo.get("expenseOption")+"");
 			record.setExpenseTime(dbo.get("expenseTime")==null?"":dbo.get("expenseTime")+"");
-			record.setParentConfirmExpense("yes".equals(dbo.get("parentConfirmExpense")+"")?true:false);
+			record.setParentConfirmExpense("true".equals(dbo.get("parentConfirmExpense")+"")?true:false);
 			record.setParentConfirmTime(dbo.get("parentConfirmTime")==null?"":dbo.get("parentConfirmTime")+"");
 			record.setStudentName(dbo.get("studentName")==null?"":dbo.get("studentName")+"");
 			record.setStudentOpenID(dbo.get("studentOpenID")==null?"":dbo.get("studentOpenID")+"");
 			record.setTeacherComment(dbo.get("teacherComment")==null?"":dbo.get("teacherComment")+"");
-			record.setTeacherConfirmExpense("yes".equals(dbo.get("teacherConfirmExpense")+"")?true:false);
+			record.setTeacherConfirmExpense("true".equals(dbo.get("teacherConfirmExpense")+"")?true:false);
 			record.setTeacherConfirmTime(dbo.get("teacherConfirmTime")==null?"":dbo.get("teacherConfirmTime")+"");
 			record.setTeacherName(dbo.get("teacherName")==null?"":dbo.get("teacherName")+"");
 			record.setTeacherOpenID(dbo.get("teacherOpenID")==null?"":dbo.get("teacherOpenID")+"");
@@ -4740,7 +4744,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime());
 		try {
 			DBObject dbo = new BasicDBObject();
-			dbo.put("parentConfirmExpense", "yes");
+			dbo.put("parentConfirmExpense", true);
 			dbo.put("parentConfirmTime", DateUtil.timestamp2Str(cursqlTS));
 			dbo.put("parentComment", comment);
 			BasicDBObject doc = new BasicDBObject();
@@ -4779,12 +4783,12 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					record.setExpenseDistrict(dbo.get("expenseDistrict")==null?"":dbo.get("expenseDistrict")+"");
 					record.setExpenseOption(dbo.get("expenseOption")==null?"":dbo.get("expenseOption")+"");
 					record.setExpenseTime(dbo.get("expenseTime")==null?"":dbo.get("expenseTime")+"");
-					record.setParentConfirmExpense("yes".equals(dbo.get("parentConfirmExpense")+"")?true:false);
+					record.setParentConfirmExpense("true".equals(dbo.get("parentConfirmExpense")+"")?true:false);
 					record.setParentConfirmTime(dbo.get("parentConfirmTime")==null?"":dbo.get("parentConfirmTime")+"");
 					record.setStudentName(dbo.get("studentName")==null?"":dbo.get("studentName")+"");
 					record.setStudentOpenID(dbo.get("studentOpenID")==null?"":dbo.get("studentOpenID")+"");
 					record.setTeacherComment(dbo.get("teacherComment")==null?"":dbo.get("teacherComment")+"");
-					record.setTeacherConfirmExpense("yes".equals(dbo.get("teacherConfirmExpense")+"")?true:false);
+					record.setTeacherConfirmExpense("true".equals(dbo.get("teacherConfirmExpense")+"")?true:false);
 					record.setTeacherConfirmTime(dbo.get("teacherConfirmTime")==null?"":dbo.get("teacherConfirmTime")+"");
 					record.setTeacherName(dbo.get("teacherName")==null?"":dbo.get("teacherName")+"");
 					record.setTeacherOpenID(dbo.get("teacherOpenID")==null?"":dbo.get("teacherOpenID")+"");

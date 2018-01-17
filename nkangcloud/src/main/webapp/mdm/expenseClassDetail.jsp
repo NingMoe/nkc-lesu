@@ -8,7 +8,6 @@
 <%
 
 String uid = request.getParameter("UID"); 
-
 String expenseID = request.getParameter("expenseID"); 
 
 String name = "";
@@ -36,38 +35,61 @@ Classexpenserecord record=MongoDBBasic.getexpenseRecord(expenseID);
 <title>课销详情</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
-<link rel="stylesheet" type="text/css" href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css" />
 
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css" />
 <script src="../MetroStyleFiles/sweetalert.min.js"></script>
 <script>
 $(function(){
 	$(".xk").on("click",function(){
-		$.ajax({
-			 url:'../ClassRecord/parentConfirmTime',
-			 type:"GET",
-			 data : {
-				 expenseID:'<%=expenseID%>',
-				 comment:""
-			 },
-			 success:function(data){
-				 if(data){
-						swal("确认成功!", "恭喜!", "success"); 
-						window.location.href="http://leshucq.bceapp.com/mdm/expenseClassDetail.jsp?UID=<%=uid %>&&expenseID=<%=expenseID%>";
-					}
-					else{
 
-						swal("确认失败!", "请填写正确的信息.", "error");
-					}
-				
-				 
-			}
-		});
+		swal({  
+	        title:"请填写确认备注",  
+	        text:"<textarea style='height:100px;width:80%' id='confirmComment'></textarea>",
+	        html:"true",
+	        showConfirmButton:true, 
+			showCancelButton: true,   
+			closeOnConfirm: false,  
+	        confirmButtonText:"确认", 
+	        cancelButtonText:"取消",
+	        animation:"slide-from-top"  
+	      }, 
+			function(inputValue){
+				if (inputValue === false){
+					return false;
+				}
+				else{
+					var comment=$("#confirmComment").val();
+					$.ajax({
+						 url:'../ClassRecord/parentConfirmTime',
+						 type:"GET",
+						 data : {
+							 expenseID:'<%=expenseID%>',
+							 comment:comment
+						 },
+						 success:function(data){
+							 if(data){
+									swal("确认成功!", "恭喜!", "success"); 
+									$("#status").text("已确认");
+									$(".xk").hide();
+									$(".usedPanel").append("<div class='item'><p class='title'>家长评语</p><textarea style='color:black;margin-bottom:10px;border:none;width:100%;' class='value' disabled>"+comment+"</textarea></div>")
+								}
+								else{
+
+									swal("确认失败!", "请填写正确的信息.", "error");
+								}
+							
+							 
+						}
+					});
+				}
+	      });
+
 	});
 })
 </script>
 <style type="text/css">
 *{margin:0;}
+p{margin-bottom:10px;}
 .usedPanel{
 width:86%;
 margin-left:7%;}
@@ -81,12 +103,13 @@ margin-left:7%;}
 	text-align:left;
 	font-size:15px;
 	float:left;
+	font-weight:bold;
 	}
 	.value{
 	height:100%;
 	width:70%;
 	line-height:30px;
-	text-align:right;
+	text-align:left;
 	font-size:15px;
 	float:left;
 	}
@@ -143,10 +166,11 @@ margin-left:7%;}
 <div class="item"><p class="title">消费课时</p><p class="value"><%=record.getExpenseClassCount() %></p></div>
 <div class="item"><p class="title">任课老师</p><p class="value"><%=record.getTeacherName() %></p></div>
 <div class="item"><p class="title">课消校区</p><p class="value"><%=record.getExpenseDistrict() %></p></div>
-<div class="item"><p class="title">确认状态</p><p class="value">
+<div class="item"><p class="title">确认状态</p><p id="status" class="value">
 <%if(!record.isParentConfirmExpense()){ %>未确认<%}else{ %>已确认<%} %></p></div>
 
-<div class="item"><p class="title">老师评语</p><p class="value"><%=record.getTeacherComment() %></p></div>
+<div class="item"><p class="title">老师评语</p><textarea style="margin-bottom:10px;border:none;width:100%;" class="value" disabled><%=record.getTeacherComment() %></textarea></div>
+<%if(record.isParentConfirmExpense()){ %><div class="item"><p class="title">家长评语</p><textarea style="color:black;margin-bottom:10px;border:none;width:100%;" class="value" disabled><%=record.getParentComment() %></textarea></div><%} %>
 </div>
 
 <%if(!record.isParentConfirmExpense()){ %>
