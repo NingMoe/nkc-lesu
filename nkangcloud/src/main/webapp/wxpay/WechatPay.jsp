@@ -5,12 +5,13 @@
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
+<%@ page import="com.nkang.kxmoment.util.Constants"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%
 String uid = request.getParameter("UID");
 String code = uid;
 String price = request.getParameter("TOTALFEE");
-
+String notifyURL = Constants.notifyURL;
 String name = "";
 String headImgUrl ="";
 String phone="";
@@ -32,9 +33,9 @@ if(res!=null){
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>微信支付</title>
+  <title>购买课时</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
+	<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 	<style>
 	*{padding:0;margin: 0;}
 body{
@@ -102,7 +103,7 @@ a:visited{
     text-align: center;
     height:50px;
     line-height: 50px;
-    background: #20b672;
+    background: #000000;
     color: white;
     position:absolute;
     bottom:30px;}
@@ -124,8 +125,8 @@ width:30%;
 margin-left:2%;
 height:50px;
 float:left;
-border:1px solid #20b672;
-color:#20b672;
+border:1px solid #000000;
+color:#000000;
 border-radius:5px;
 line-height:25px;
 font-size:0.8rem;
@@ -142,6 +143,10 @@ text-align:center;
     width: 100%;
     z-index: 1002;
     left: 0;
+}
+.default{
+	color:white;
+	background:#000000;
 }
 	</style>
 	</head>
@@ -166,9 +171,8 @@ text-align:center;
                    "paySign" : paySign    //微信签名   
                },  
                function(res){       
-                   if(res.err_msg == "get_brand_wcpay_request:ok" ) { 
-                	   window.location.href = "http://nkctech.duapp.com/mdm/profile.jsp?UID=<%= code%>";
-                       alert("感谢您的支持,支付成功!");  
+                   if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                	   window.location.href = "<%= notifyURL%>";
                    }
                    else{
        	    	    alert('抱歉系统故障，支付失败！请联系商家'+res.err_msg);//这里一直返回getBrandWCPayRequest提示fail_invalid appid
@@ -178,27 +182,26 @@ text-align:center;
         }  
         function pay(){   
             send_request(function(value){  
-                var json = eval("(" + value + ")");  
-                if(json.length > 0){  
-                    appId = json[0].appId;  
-                    timeStamp = json[0].timeStamp;  
-                    nonceStr = json[0].nonceStr;
-                    pg = json[0].pg;  
-                    signType = json[0].signType;  
-                    paySign = json[0].paySign;
-                    
-                    if (typeof WeixinJSBridge == "undefined"){  
-                       if( document.addEventListener ){
-                           document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);  
-                       }else if (document.attachEvent){  
-                           document.attachEvent('WeixinJSBridgeReady', onBridgeReady);  
-                           document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);  
-                       }  
-                    }else{
-                       onBridgeReady(); 
-                    }   
-                }  
-            },"http://nkctech.duapp.com/pay/payparm?openId=<%= code%>&totalfee="+totalfee,true);  
+            var json = eval("(" + value + ")");  
+            if(json.length > 0){  
+                appId = json[0].appId;  
+                timeStamp = json[0].timeStamp;  
+                nonceStr = json[0].nonceStr;
+                pg = json[0].pg;  
+                signType = json[0].signType;  
+                paySign = json[0].paySign;
+                if (typeof WeixinJSBridge == "undefined"){  
+                   if( document.addEventListener ){
+                       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);  
+                   }else if (document.attachEvent){  
+                       document.attachEvent('WeixinJSBridgeReady', onBridgeReady);  
+                       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);  
+                   }  
+                }else{
+                   onBridgeReady(); 
+                }   
+            }  
+            },"http://nkctech.duapp.com/pay/payparm?openId=<%= code%>&totalfee="+totalfee,true);   
         }  
 function send_request(callback, urladdress,isReturnData){        
     var xmlhttp = getXMLHttpRequest();  
@@ -242,10 +245,14 @@ function getXMLHttpRequest() {
         }  
     }  
     return xmlhttp;  
-}  
+}
 $(function(){
 	$(".infoItem").on("click",function(){
 		totalfee=$(this).children("span").text();
+		$(this).addClass("default");
+		$(this).siblings().removeClass("default");
+		totalfee = totalfee+"00";
+		totalfee = "1";
 	});
 });
     </script>
@@ -253,16 +260,14 @@ $(function(){
 	
 	
 	<div id="data_model_div" style="height: 100px">
-	<i class="icon" style="position: absolute;top: 25px;z-index: 100;right: 20px;">
-			<!-- <img class="exit" src="http://leshu.bj.bcebos.com/icon/EXIT1.png"
-			style="width: 30px; height: 30px;"> -->
-<div style="width: 30px;height: 30px;float: left;border-radius: 50%;overflow: hidden;">
-<img class="exit" src="<%=headImgUrl %>" style="width: 30px; height: 30px;" />
-</div>
-<span style="position: relative;top: 8px;left: 5px;font-style:normal"><%=name %></span></i>
-	<img style="position: absolute;top: 8px;left: 10px;z-index: 100;height: 60px;" class="HpLogo" src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo">
-		<div style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
-		</div>
+		<i class="icon" style="position: absolute;top: 25px;z-index: 100;right: 20px;">
+			<div style="width: 30px;height: 30px;float: left;border-radius: 50%;overflow: hidden;">
+				<img class="exit" src="<%=headImgUrl %>" style="width: 30px; height: 30px;" />
+			</div>
+			<span style="position: relative;top: 8px;left: 5px;font-style:normal"><%=name %></span>
+		</i>
+		<img style="position: absolute;top: 8px;left: 10px;z-index: 100;height: 60px;" class="HpLogo" src="http://nkctech.gz.bcebos.com/nkclogo.png" alt="Logo">
+		<div style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #000000;"></div>
 	</div>
     <div class="infoPanel">
       <div class="infoArea">
@@ -272,13 +277,13 @@ $(function(){
     </div>
     <div class="infoPanel">
       <div class="infoPay">
-	  <div class="infoItem"><span>2160</span>元<br>24次课</div>
+	  <div class="infoItem default"><span>2160</span>元<br>24次课</div>
 	  <div class="infoItem"><span>3880</span>元<br>48次课</div>
 	  <div class="infoItem"><span>6680</span>元<br>96次课</div>
      </div>
     </div>
 
-<div class="infoPanel">
+	<div class="infoPanel">
       <div class="infoArea">
         <p class="infoTitle">支付方式</p>
         <p class="infoVal"></p>
@@ -287,12 +292,12 @@ $(function(){
           <div class="infoPanel">
       <div class="infoPay">
 	  <div class="infoItem" style="color:gray;border:1px solid gray;line-height:50px;">支付宝支付</div>
-	  <div class="infoItem" style="line-height:50px;">微信支付</div>
+	  <div class="infoItem default" style="line-height:50px;">微信支付</div>
      </div>
     </div>
-      <div class="infoArea pay"><a href="javascript:pay();">立即支付</a></div>
+      <div class="infoArea pay"><a href="javascript:pay();" style="color:white;">立即购买</a></div>
     	<div id="footer">
-		<span class="clientCopyRight"><nobr>©版权所有 | 重庆乐数艺术培训有限公司</nobr></span>
+		<span class="clientCopyRight"><nobr>©版权所有 | 重庆乐数珠心算</nobr></span>
 	</div>
 	</body>
 </html>
