@@ -9,7 +9,6 @@
 
 String uid = request.getParameter("UID"); 
 
-String classType= request.getParameter("classType");
 String name = "";
 String headImgUrl ="";
 String phone="";
@@ -26,15 +25,20 @@ if(res!=null){
 		phone=res.get("phone");
 	}
 }
-List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords("studentOpenID",uid, classType);
+List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords("teacherOpenID",uid,"");
 %><!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
 <title>课销记录</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css" />
+<script src="../MetroStyleFiles/sweetalert.min.js"></script>
 <style type="text/css">
-*{margin:0;}
+*{margin:0};
+p{margin:0!important;}
 a,a:hover,a:visited{text-decoration:none;color:black;}
 .expensePanel{
 width:88%;
@@ -76,6 +80,7 @@ padding-right:2%;}
     left: 0;
 }
 </style>
+
 </head>
 <body>
 	<div id="data_model_div" style="height: 100px">

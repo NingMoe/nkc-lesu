@@ -207,7 +207,7 @@ public class ClassRecordController {
 		if(classType==null){
 			classType="";
 		}
-		return MongoDBBasic.getClassExpenseRecords(openid,classType);
+		return MongoDBBasic.getClassExpenseRecords("studentOpenID",openid,classType);
 	}
 	
 	

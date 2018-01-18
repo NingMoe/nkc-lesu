@@ -4701,11 +4701,11 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 	}
 	
 	//get ClassExpenseRecords by id
-	public static List<Classexpenserecord> getClassExpenseRecords(String openid,String classType) {
+	public static List<Classexpenserecord> getClassExpenseRecords(String type,String openid,String classType) {
 		mongoDB = getMongoDB();
 		List<Classexpenserecord> recordList = new ArrayList<Classexpenserecord>();
 		DBObject query = new BasicDBObject();
-		query.put("studentOpenID",openid);
+		query.put(type,openid);
 		if(classType!=""){
 
 			query.put("expenseOption",classType);
