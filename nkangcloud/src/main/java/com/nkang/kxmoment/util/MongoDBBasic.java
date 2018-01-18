@@ -4534,7 +4534,9 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		mongoDB = getMongoDB();
 		Boolean ret = false;
 		try {
+			Date a = new Date();
 			DBObject dbo = new BasicDBObject();
+			dbo.put("payID", a.getTime()+"");
 			dbo.put("phone", classpr.getPhone());
 			dbo.put("payOption", classpr.getPayOption());
 		    dbo.put("payMoney", classpr.getPayMoney());
@@ -4601,6 +4603,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				classrecord.setPayTime(dboj.get("payTime")+"");
 				classrecord.setStudentName(dboj.get("studentName")+"");
 				classrecord.setStudentOpenID(openid);
+				classrecord.setPayID(dboj.get("payID]")+"");
 				records.add(classrecord);
 			}
 		}catch (Exception e) {

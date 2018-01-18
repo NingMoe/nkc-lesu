@@ -19,7 +19,14 @@ public class Classpayrecord {
 	public String studentOpenID;
 	public String phone;
 	public String operatorOpenID;
+	public String payID;
 	
+	public String getPayID() {
+		return payID;
+	}
+	public void setPayID(String payID) {
+		this.payID = payID;
+	}
 	public String getPhone() {
 		return phone;
 	}
