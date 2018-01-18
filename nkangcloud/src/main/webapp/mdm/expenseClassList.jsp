@@ -35,7 +35,7 @@ List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords(uid, classT
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <style type="text/css">
 *{margin:0;}
-a,a:hover,a:visited{text-decoration:none;}
+a,a:hover,a:visited{text-decoration:none;color:black;}
 .expensePanel{
 width:88%;
 margin-left:5%;
