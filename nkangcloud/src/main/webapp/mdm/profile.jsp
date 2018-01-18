@@ -1639,9 +1639,9 @@ function getNowFormatDate() {
 													</a>
 												</td>
 												<td>
-													<a target="_self" href="http://leshucq.bceapp.com/mdm/MyExpenseClass.jsp?UID=<%=uid %>">
+<%-- 													<a target="_self" href="http://leshucq.bceapp.com/mdm/MyExpenseClass.jsp?UID=<%=uid %>">
 														<img src="http://leshucq.bj.bcebos.com/standard/classunitmgt.png" /><h4>我的课销</h4>
-													</a>
+													</a> --%>
 												</td>
 												<% } %>
 													<%if(isTeacher==true) { %>
@@ -1656,9 +1656,9 @@ function getNowFormatDate() {
 													<h4>课销记录</h4></a>
 												</td> --%>
 												<td>
-												<a target="_self"  href="http://leshucq.bceapp.com/wxpay/WechatPay.jsp?UID=<%=uid %>">
+<%-- 												<a target="_self"  href="http://leshucq.bceapp.com/wxpay/WechatPay.jsp?UID=<%=uid %>">
 												<img src="http://leshucq.bj.bcebos.com/icon/CourseBuy.png" />
-													<h4>课程购买</h4></a>
+													<h4>课程购买</h4></a> --%>
 												</td>
 												<% } %>
 											</tr>

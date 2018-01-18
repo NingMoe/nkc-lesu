@@ -174,10 +174,10 @@ public class CoreService
 							articleList.add(article3);
 							
 							Article article4 = new Article();
-							article4.setTitle("乐数E教师");
+							article4.setTitle("课时充值");
 							article4.setDescription("Administration");
-							article4.setPicUrl("http://leshu.bj.bcebos.com/icon/weiadmin.png");
-							article4.setUrl("http://"+Constants.baehost+"/admin/index.jsp?UID=" + fromUserName);
+							article4.setPicUrl("http://leshucq.bj.bcebos.com/icon/Cost_savings.png");
+							article4.setUrl("http://"+Constants.baehost+"/wxpay/WechatPay.jsp?UID=" + fromUserName);
 							articleList.add(article4);
 						}
 						newsMessage.setArticleCount(articleList.size());
