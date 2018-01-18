@@ -869,7 +869,7 @@ function showUpdateUserPanel(openid,name){
 			            +'												        </td>'
 			            +'												    </tr> '
 			            +'												    <tr>'
-			            +'												        <td><p class="editText">聊天组</p></td>'
+			            +'												        <td><p class="editText">在校学员</p></td>'
 			            +'												        <td  align="left" class="tdText">'
 			            +'												        	<input class="radioInput" type="radio" name="isActived" value="true"  '+(IsActived=="true"?'checked="checked"':'')+' /><span class="radioText">是</span><input class="radioInput" type="radio" name="isActived" '+(IsActived!="true"?'checked="checked"':'')+' value="false"/>否'
 			            +'												        </td>'
