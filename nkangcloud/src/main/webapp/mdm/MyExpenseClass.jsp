@@ -25,7 +25,7 @@ if(res!=null){
 		phone=res.get("phone");
 	}
 }
-List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords(uid,"");
+List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords("studentOpenID",uid,"");
 %><!DOCTYPE html>
 <html>
 <head>

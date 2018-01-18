@@ -463,4 +463,14 @@ public class UserProfileController {
 	public @ResponseBody List<WeChatMDLUser> getUserByTeacherOpenid(@RequestParam(value="teacherID")String teacherID) throws Exception{
 		return MongoDBBasic.getUserByTeacherOpenid(teacherID);
 	}
+	
+	@RequestMapping("/getNameByPhone")
+	public @ResponseBody WeChatMDLUser getNameByPhone(@RequestParam(value="phone")String phone) throws Exception{
+		WeChatMDLUser wcu=new WeChatMDLUser();
+		String name=MongoDBBasic.queryTargetAttrBySourceAttr("phone", "realName", phone, true,true);
+		String uid=MongoDBBasic.queryTargetAttrBySourceAttr("phone", "OpenID", phone, false,true);
+		wcu.setRealName(name);
+		wcu.setOpenid(uid);
+		return wcu;
+	}
 }

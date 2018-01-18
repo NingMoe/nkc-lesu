@@ -545,6 +545,7 @@ public class MongoDBBasic {
 		}
 		return res;
 	}
+	
 	public static List<QuoteVisit> getVisitedDetailByWeek(String date) {
 		mongoDB = getMongoDB();
 		DBObject query = new BasicDBObject();
@@ -708,6 +709,41 @@ public class MongoDBBasic {
 					
 				}else{
 				return queryresult.get(attr).toString();
+				}
+			}
+		} catch (Exception e) {
+			log.info("queryWeChatUser--" + e.getMessage());
+		}
+		return "";
+	}
+	public static String queryTargetAttrBySourceAttr(String sourceAttr,String targetAttr,String sourceValue,boolean isTargetTeamer,boolean isSourceTeamer) {
+		mongoDB = getMongoDB();
+		try {
+			DBObject query = new BasicDBObject();
+			if(isSourceTeamer){
+				query.put("Teamer."+sourceAttr, sourceValue);
+			}
+			else{
+				query.put(sourceAttr, sourceValue);
+			}
+			DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(
+					query);
+			if (queryresult != null) {
+				if(isTargetTeamer){
+					Object teamer = queryresult.get("Teamer");
+					DBObject teamobj = new BasicDBObject();
+					teamobj = (DBObject) teamer;
+					if (teamobj != null) {
+						if (teamobj.get(targetAttr) != null) {
+
+							System.out.println("from teamobj+++++"+teamobj.get(targetAttr).toString());
+							return teamobj.get(targetAttr).toString();
+						}
+					}
+					
+				}else{
+					System.out.println("from non-teamobj+++++"+queryresult.get(targetAttr).toString());
+				return queryresult.get(targetAttr).toString();
 				}
 			}
 		} catch (Exception e) {

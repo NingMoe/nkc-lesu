@@ -35,6 +35,9 @@ if(res!=null){
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>购买课时</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css" />
+<script src="../MetroStyleFiles/sweetalert.min.js"></script>
 	<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 	<style>
 	*{padding:0;margin: 0;}
@@ -246,6 +249,66 @@ function getXMLHttpRequest() {
     }  
     return xmlhttp;  
 }
+var studentID;
+function pay(){
+	var currentTime=getNowFormatDate();
+	var payMoney=$(".default").find(".priceText").text();
+	var classCount=$(".default").find(".classText").text();
+	$.ajax({
+		 url:'../ClassRecord/addClasspayrecord',
+		 type:"GET",
+		 data : {
+			 payOption:$("#classType").find("option:selected").val(),
+			 payMoney:payMoney,
+			 classCount:classCount,
+			 payTime:currentTime,
+			 studentName:$("#name").text(),
+			 studentOpenID:studentID,
+			 phone:$("#phone").val(),	
+			 operatorOpenID:'<%=uid%>'
+		 },
+		 success:function(data){
+			 if(data){
+				 $("#name").text(data.realName);
+				 studentID=data.openid;
+					swal("支付成功!", "恭喜!", "success");
+			 }else{
+
+					swal("支付失败!", "请填写正确的信息.", "error");
+				}
+		}
+	});
+	
+}
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var hour=date.getHours();
+    var minute=date.getMinutes();
+    var second=date.getSeconds();
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (hour >= 1 && hour <= 9) {
+        hour = "0" + hour;
+    }
+    if (minute >= 1 && minute <= 9) {
+        minute = "0" + minute;
+    }
+    if (second >= 1 && second <= 9) {
+        second = "0" + second;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + hour + seperator2 + minute
+            + seperator2 + second;
+    return currentdate;
+}
 $(function(){
 	$(".price").on("click",function(){
 		totalfee=$(this).children("span").text();
@@ -253,6 +316,23 @@ $(function(){
 		$(this).siblings().removeClass("default");
 		totalfee = totalfee+"00";
 		totalfee = "1";
+	});
+	$("#phone").blur(function(){
+		$.ajax({
+			 url:'../userProfile/getNameByPhone',
+			 type:"GET",
+			 data : {
+				 phone:$(this).val(),
+			 },
+			 success:function(data){
+				 if(data){
+					 $("#name").text(data.realName);
+					 studentID=data.openid;
+				 }
+				 
+			}
+		});
+		
 	});
 });
     </script>
@@ -272,20 +352,31 @@ $(function(){
     <div class="infoPanel">
       <div class="infoArea">
         <p class="infoTitle">手机号码</p>
-        <p class="infoVal"><%=phone %></p>
+        <p class="infoVal"><input id="phone" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p>
       </div>
     </div>   
      <div class="infoPanel">
       <div class="infoArea">
         <p class="infoTitle">姓名</p>
-        <p class="infoVal"><%=name %></p>
+        <p id="name" class="infoVal"></p>
+      </div>
+    </div>  
+     <div class="infoPanel">
+      <div class="infoArea">
+        <p class="infoTitle">课程类型</p>
+        <p class="infoVal">
+        <select id="classType" style="border:none;font-size:15px;">
+        <option value="丫丫拼音">丫丫拼音</option>
+        <option value="珠心算">珠心算</option>
+        <option value="趣味数学">趣味数学</option>
+        </select></p>
       </div>
     </div>
     <div class="infoPanel">
       <div class="infoPay">
-	  <div class="infoItem price default"><span>2160</span>元<br>24次课</div>
-	  <div class="infoItem price"><span>3880</span>元<br>48次课</div>
-	  <div class="infoItem price"><span>6680</span>元<br>96次课</div>
+	  <div class="infoItem price default"><span class="priceText">2160</span>元<br><span class="classText">24</span>次课</div>
+	  <div class="infoItem price"><span class="priceText">3880</span>元<br><span class="classText">48</span>次课</div>
+	  <div class="infoItem price"><span class="priceText">6680</span>元<br><span class="classText">96</span>次课</div>
      </div>
     </div>
 
