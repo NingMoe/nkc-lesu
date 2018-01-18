@@ -4535,18 +4535,15 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		Boolean ret = false;
 		try {
 			DBObject dbo = new BasicDBObject();
-			//dbo.put("payOption", classpr.getPayOption());
+			dbo.put("phone", classpr.getPhone());
 			dbo.put("payOption", classpr.getPayOption());
 		    dbo.put("payMoney", classpr.getPayMoney());
 			dbo.put("classCount", classpr.getClassCount());
 			dbo.put("payTime", classpr.getPayTime());
 			dbo.put("studentName", classpr.getStudentName());
 			dbo.put("studentOpenID", classpr.getStudentOpenID());
-		    
+			dbo.put("operatorOpenID", classpr.getOperatorOpenID());
 			//String OpenID = classpr.getStudentOpenID();
-			
-			mongoDB.getCollection(collectionClassPayRecord).insert(dbo);
-			
 			DBObject query = new BasicDBObject();
 			query.put("OpenID", classpr.getStudentOpenID());
 			query.put("payOption", classpr.getPayOption());
@@ -4566,6 +4563,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				updatedbo.put("leftPayClass", classpr.getClassCount()+leftPay);
 				BasicDBObject doc = new BasicDBObject();
 				doc.put("$set", updatedbo);
+				mongoDB.getCollection(collectionClassPayRecord).insert(dbo);
 				mongoDB.getCollection(collectionClassTypeRecord).update(dbcur, doc);
 				ret = true;
 			}else{

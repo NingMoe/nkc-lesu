@@ -6,6 +6,8 @@ package com.nkang.kxmoment.baseobject.classhourrecord;
                 1-》 购买时间:2017.5.11
                 1-》 学员姓名：康智萌
                 1-》 学员ID：12345      
+				-》 phone
+				->g购买着的openid
 
  */
 public class Classpayrecord {
@@ -15,6 +17,21 @@ public class Classpayrecord {
 	public String payTime;
 	public String studentName;
 	public String studentOpenID;
+	public String phone;
+	public String operatorOpenID;
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getOperatorOpenID() {
+		return operatorOpenID;
+	}
+	public void setOperatorOpenID(String operatorOpenID) {
+		this.operatorOpenID = operatorOpenID;
+	}
 	public String getPayOption() {
 		return payOption;
 	}
