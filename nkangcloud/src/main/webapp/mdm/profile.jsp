@@ -37,7 +37,7 @@ System.out.println("role is========"+role);
 boolean isTeacher=false;
 if(role.equals("Role001")||role.equals("Role004")||role.equals("Role005")){
 	isTeacher=true;
-	welcomenote = "欢迎您乐数老师";
+	welcomenote = "乐数老师";
 System.out.println("isTeacher is true");
 }
 boolean IsAuthenticated=MongoDBBasic.checkUserAuth(uid,"IsAuthenticated");
