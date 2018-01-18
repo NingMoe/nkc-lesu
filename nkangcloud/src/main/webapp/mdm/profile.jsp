@@ -7,6 +7,7 @@
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%
+String welcomenote = "欢迎您";
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
 MongoDBBasic.updateUser(uid);
@@ -36,6 +37,7 @@ System.out.println("role is========"+role);
 boolean isTeacher=false;
 if(role.equals("Role001")||role.equals("Role004")||role.equals("Role005")){
 	isTeacher=true;
+	welcomenote = "欢迎您乐数老师";
 System.out.println("isTeacher is true");
 }
 boolean IsAuthenticated=MongoDBBasic.checkUserAuth(uid,"IsAuthenticated");
@@ -1443,7 +1445,7 @@ function getNowFormatDate() {
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"
 						style="font-size: 15px; margin: 0px; padding: 5px 0px;">
-							欢迎您： <span class="username colorBlue" id="username">
+							<%= welcomenote%>： <span class="username colorBlue" id="username">
 						</span>
 					</a> <span><a style="float: right;"> <img id="userImage"
 								src="<%=wcu.getHeadimgurl() %>" alt="userImage"
