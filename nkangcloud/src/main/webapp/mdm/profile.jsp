@@ -1624,7 +1624,7 @@ function getNowFormatDate() {
 												<%}else{ %>
 												<td>
 												<a target="_self" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=<%=Constants.APP_ID%>&redirect_uri=http%3A%2F%2F<%=Constants.baehost%>%2Fmdm%2FNavigator.jsp?UID=<%=uid %>&response_type=code&scope=snsapi_userinfo&state=<%=uid %>#wechat_redirect">
-												 <img src="http://ww1.prweb.com/prfiles/2013/10/31/11293784/gI_134943_Icon%201024%20cropped.png" /></a>
+												 <img src="http://leshucq.bj.bcebos.com/icon/selflearning.png" /></a>
 													<h4>悟时自渡</h4> </td> 
 												<% } %> 
 													
