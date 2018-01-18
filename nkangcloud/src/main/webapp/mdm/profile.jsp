@@ -1657,7 +1657,7 @@ function getNowFormatDate() {
 												</td> --%>
 												<td>
 												<a target="_self"  href="http://leshucq.bceapp.com/wxpay/WechatPay.jsp?UID=<%=uid %>">
-												<img src="http://leshucq.bj.bcebos.com/standard%2Fclassunit2.png" />
+												<img src="http://leshucq.bj.bcebos.com/icon/CourseCharge.png" />
 													<h4>课程购买</h4></a>
 												</td>
 												<% } %>
