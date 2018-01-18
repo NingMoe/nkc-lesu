@@ -143,6 +143,7 @@ $(function(){
 					 for(var i=0;i<data.length;i++){
 						 select+="<option value='"+data[i].openID+"' >"+data[i].realName+"</option>";
 					 }
+					 $("#studentName").val(data[0].realName);
 					 $("#studentsList").html(select);
 					 getClassRecordById(data[0].openID);
 				 }
@@ -208,6 +209,7 @@ $(function(){
 	function getClassRecordByStudent(obj){
 
 		var openid=$(obj).find("option:selected").val();
+		$("#studentName").val($(obj).find("option:selected").text());
 		jQuery.ajax({
 			type : "GET",
 			url : "../ClassRecord/getClassTypeRecords",
@@ -283,7 +285,8 @@ $(function(){
 					
 						<tr>
 							<td><p class="classText">学员姓名</p></td>
-							<td><select id="studentsList" class="editInput" onchange="getClassRecordByStudent(this)" name="studentOpenID"></select></td>
+							<td><select id="studentsList" class="editInput" onchange="getClassRecordByStudent(this)" name="studentOpenID"></select>
+							<input id="studentName" name="studentName" type="hidden" value=""/></td>
 						</tr>
 						<tr>
 							<td><p class="classText">消费项目</p></td>

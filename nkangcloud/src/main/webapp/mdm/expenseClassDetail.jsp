@@ -160,7 +160,7 @@ margin-left:7%;}
 		</div>
 	</div>
 <div class="usedPanel">
-<div class="item"><p class="title">学员姓名</p><p class="value"><%=name %></p></div>
+<div class="item"><p class="title">学员姓名</p><p class="value"><%=record.getStudentName() %></p></div>
 <div class="item"><p class="title">消费项目</p><p class="value"><%=record.getExpenseOption() %></p></div>
 <div class="item"><p class="title">消费时间</p><p class="value"><%=record.getExpenseTime() %></p></div>
 <div class="item"><p class="title">消费课时</p><p class="value"><%=record.getExpenseClassCount() %></p></div>
