@@ -272,6 +272,9 @@ function pay(){
 				 $("#name").text(data.realName);
 				 studentID=data.openid;
 					swal("支付成功!", "恭喜!", "success");
+
+					 $("#name").text("");
+					 $("#phone").val("");
 			 }else{
 
 					swal("支付失败!", "请填写正确的信息.", "error");

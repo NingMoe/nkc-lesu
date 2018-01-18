@@ -1650,11 +1650,17 @@ function getNowFormatDate() {
 												<img src="http://leshucq.bj.bcebos.com/standard%2Fclassunit2.png" />
 													<h4>课销管理</h4></a>
 												</td>
-												<td>
+												<%-- <td>
 												<a target="_self"  href="http://leshucq.bceapp.com/mdm/TeacherExpenseClass.jsp?UID=<%=uid %>">
 												<img src="http://leshucq.bj.bcebos.com/standard%2Fclassunit2.png" />
 													<h4>课销记录</h4></a>
-												</td><% } %>
+												</td> --%>
+												<td>
+												<a target="_self"  href="http://leshucq.bceapp.com/wxpay/WechatPay.jsp?UID=<%=uid %>">
+												<img src="http://leshucq.bj.bcebos.com/standard%2Fclassunit2.png" />
+													<h4>课程购买</h4></a>
+												</td>
+												<% } %>
 											</tr>
 										</table>
 									</div>
