@@ -154,7 +154,7 @@ public class ClassRecordController {
 	//	http://leshucq.bceapp.com/ClassRecord/getClasspayrecords?openID=oO8exvzE95JUvwpNxNTxraOqzUFI
 	@RequestMapping("/getClasspayrecords")
 	public @ResponseBody List<Classpayrecord> getClasspayrecords(@RequestParam(value = "openID") String openid){
-		return MongoDBBasic.getClasspayrecords(openid);
+		return MongoDBBasic.getClasspayrecords("studentOpenID",openid);
 	}
 
 //	ClassRecord/addClassExpenseRecord?expenseOption=YY语音&expenseTime=2018-1-5&
