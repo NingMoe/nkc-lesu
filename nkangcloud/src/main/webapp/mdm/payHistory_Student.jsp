@@ -25,12 +25,12 @@ if(res!=null){
 		phone=res.get("phone");
 	}
 }
-List<Classpayrecord> records=MongoDBBasic.getClasspayrecords("operatorOpenID",uid);
+List<Classpayrecord> records=MongoDBBasic.getClasspayrecords("studentOpenID",uid);
 %><!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
-<title>缴费记录_缴费人</title>
+<title>缴费记录_被缴费人</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <style type="text/css">
 *{margin:0;}
