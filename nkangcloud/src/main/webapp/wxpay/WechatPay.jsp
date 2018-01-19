@@ -341,8 +341,8 @@ $(function(){
     </script>
     	
 	
-	
-	<div id="data_model_div" style="height: 100px">
+	<a href="http://leshucq.bceapp.com/mdm/payHistory.jsp?UID=<%=uid %>" style="position: absolute;bottom: 90px;right: 10px;font-size: 14px;text-decoration: underline;color: #20b672;">查看缴费记录</a>
+	<div id="data_model_div" style="height: 90px">
 		<i class="icon" style="position: absolute;top: 25px;z-index: 100;right: 20px;">
 			<div style="width: 30px;height: 30px;float: left;border-radius: 50%;overflow: hidden;">
 				<img class="exit" src="<%=headImgUrl %>" style="width: 30px; height: 30px;" />
