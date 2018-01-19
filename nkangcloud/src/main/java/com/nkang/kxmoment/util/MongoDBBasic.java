@@ -4590,7 +4590,6 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			dbo.put("operatorOpenID", classpr.getOperatorOpenID());
 			//String OpenID = classpr.getStudentOpenID();
 			DBObject query = new BasicDBObject();
-			query.put("OpenID", classpr.getStudentOpenID());
 			query.put("payOption", classpr.getPayOption());
 			mongoDB = getMongoDB();
 			DBObject dbcur = mongoDB.getCollection(collectionClassTypeRecord).findOne(query);
@@ -4632,11 +4631,11 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 	}
 	
 	//get Classpayrecords
-	public static List<Classpayrecord> getClasspayrecords(String openid) {
+	public static List<Classpayrecord> getClasspayrecords(String who,String openid) {
 		mongoDB = getMongoDB();
 		List<Classpayrecord> records = new ArrayList<Classpayrecord>();
 		try {
-			DBCursor dbcur = mongoDB.getCollection(collectionClassPayRecord).find(new BasicDBObject().append("studentOpenID", openid));
+			DBCursor dbcur = mongoDB.getCollection(collectionClassPayRecord).find(new BasicDBObject().append(who, openid));
 			while(dbcur.hasNext()){
 				Classpayrecord classrecord = new Classpayrecord();
 				DBObject dboj = dbcur.next();
@@ -4645,8 +4644,10 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				classrecord.setPayOption(dboj.get("payOption")+"");
 				classrecord.setPayTime(dboj.get("payTime")+"");
 				classrecord.setStudentName(dboj.get("studentName")+"");
-				classrecord.setStudentOpenID(openid);
-				classrecord.setPayID(dboj.get("payID]")+"");
+				classrecord.setStudentOpenID(dboj.get("studentOpenID")+"");
+				classrecord.setPayID(dboj.get("payID")+"");
+				classrecord.setPhone(dboj.get("phone")+"");
+				classrecord.setOperatorOpenID(dboj.get("operatorOpenID")+"");
 				records.add(classrecord);
 			}
 		}catch (Exception e) {

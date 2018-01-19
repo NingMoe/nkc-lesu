@@ -307,7 +307,7 @@ $(function(){
 						<tr>
 							<td><p class="classText">消费课时</p></td>
 							<td><input class="editInput" type="text" name="expenseClassCount"
-								id="totalClass" value=""></td>
+								id="totalClass" value="1"></td>
 						</tr>
 						<tr>
 							<td><p class="classText">老师评语</p></td>
