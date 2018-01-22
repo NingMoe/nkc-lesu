@@ -126,7 +126,7 @@ height:70px;
 .infoItem{
 width:30%;
 margin-left:2%;
-height:50px;
+height:60px;
 float:left;
 border:1px solid #20b672;
 color:#20b672;
@@ -281,8 +281,8 @@ $(function(){
 
     <div class="infoPanel">
       <div class="infoPay">
-		  <div class="infoItem price default"><span class="priceText"></span>消费<br><span class="classText"></span>积分</div>
-		  <div class="infoItem price"><span class="priceText"></span>增加<br><span class="classText"></span>积分</div>
+		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/minus_white.png" width="30px" height="30px"><br><span class="classText"></span>消费积分</div>
+		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/plus_white.png" width="30px" height="30px"><br><span class="classText"></span>增加积分</div>
      </div>
     </div>
 
