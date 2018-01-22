@@ -354,12 +354,12 @@ $(function(){
 		<img style="position: absolute;top: 8px;left: 10px;z-index: 100;height: 60px;" class="HpLogo" src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo">
 		<div style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;"></div>
 	</div>
-    <div class="infoPanel">
+	<div class="infoPanel">
       <div class="infoArea">
-        <p class="infoTitle">手机号码</p>
-        <p class="infoVal"><input id="phone" placeholder="请输入学员手机号码" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p>
+        <p class="infoTitle"><input id="phone" placeholder="请输入学员电话号码" style="border:none;height:30px;text-align: left;font-size:15px;" type="text" value=""></p>
+
       </div>
-    </div>   
+    </div> 
      <div class="infoPanel">
       <div class="infoArea">
         <p class="infoTitle">姓名</p>
