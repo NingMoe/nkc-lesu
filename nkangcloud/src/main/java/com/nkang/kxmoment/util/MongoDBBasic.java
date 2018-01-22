@@ -4588,6 +4588,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			dbo.put("studentName", classpr.getStudentName());
 			dbo.put("studentOpenID", classpr.getStudentOpenID());
 			dbo.put("operatorOpenID", classpr.getOperatorOpenID());
+			dbo.put("giftClass", classpr.getGiftClass());
 			//String OpenID = classpr.getStudentOpenID();
 			DBObject query = new BasicDBObject();
 			query.put("payOption", classpr.getPayOption());
@@ -4596,6 +4597,8 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			DBObject updatedbo = new BasicDBObject();
 			int total = 0;
 			int leftPay=0;
+
+			int leftSend=0;
 			if(null!=dbcur){
 				if(dbcur.get("totalClass")!=null && !"".equals(dbcur.get("totalClass")+"")){
 					total = Integer.parseInt(dbcur.get("totalClass")+"");
@@ -4603,8 +4606,12 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				if((dbcur.get("leftPayClass"))!=null && !"".equals(dbcur.get("leftPayClass")+"")){
 					leftPay = Integer.parseInt(dbcur.get("leftPayClass")+"");
 				}
+				if((dbcur.get("leftSendClass"))!=null && !"".equals(dbcur.get("leftSendClass")+"")){
+					leftSend = Integer.parseInt(dbcur.get("leftSendClass")+"");
+				}
 				updatedbo.put("totalClass", total+classpr.getClassCount());
 				updatedbo.put("leftPayClass", classpr.getClassCount()+leftPay);
+				updatedbo.put("leftSendClass", classpr.getGiftClass()+leftSend);
 				BasicDBObject doc = new BasicDBObject();
 				doc.put("$set", updatedbo);
 				mongoDB.getCollection(collectionClassPayRecord).insert(dbo);
@@ -4619,7 +4626,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				updatedbo.put("district", "付款校区");
 				updatedbo.put("expenseClass", 0);
 				updatedbo.put("leftPayClass", classpr.getClassCount());
-				updatedbo.put("leftSendClass", 0);
+				updatedbo.put("leftSendClass", classpr.getGiftClass());
 				updatedbo.put("totalClass", classpr.getClassCount());
 				mongoDB.getCollection(collectionClassTypeRecord).insert(updatedbo);
 				ret = true;
@@ -4634,12 +4641,18 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 	public static List<Classpayrecord> getClasspayrecords(String who,String openid) {
 		mongoDB = getMongoDB();
 		List<Classpayrecord> records = new ArrayList<Classpayrecord>();
+		DBCursor dbcur;
 		try {
-			DBCursor dbcur = mongoDB.getCollection(collectionClassPayRecord).find(new BasicDBObject().append(who, openid));
+			if(who==""&&openid==""){
+				dbcur = mongoDB.getCollection(collectionClassPayRecord).find();
+			}else{
+				dbcur = mongoDB.getCollection(collectionClassPayRecord).find(new BasicDBObject().append(who, openid));
+			}
 			while(dbcur.hasNext()){
 				Classpayrecord classrecord = new Classpayrecord();
 				DBObject dboj = dbcur.next();
 				classrecord.setClassCount(dboj.get("classCount")==null?0:Integer.parseInt(dboj.get("classCount")+""));
+				classrecord.setGiftClass(dboj.get("giftClass")==null?0:Integer.parseInt(dboj.get("giftClass")+""));
 				classrecord.setPayMoney(Integer.parseInt(dboj.get("payMoney")+""));
 				classrecord.setPayOption(dboj.get("payOption")+"");
 				classrecord.setPayTime(dboj.get("payTime")+"");

@@ -20,7 +20,14 @@ public class Classpayrecord {
 	public String phone;
 	public String operatorOpenID;
 	public String payID;
+	public int giftClass;
 	
+	public int getGiftClass() {
+		return giftClass;
+	}
+	public void setGiftClass(int giftClass) {
+		this.giftClass = giftClass;
+	}
 	public String getPayID() {
 		return payID;
 	}

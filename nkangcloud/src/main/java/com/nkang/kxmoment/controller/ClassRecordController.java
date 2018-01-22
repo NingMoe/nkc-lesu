@@ -123,15 +123,20 @@ public class ClassRecordController {
 			@RequestParam(value = "studentName") String studentName,
 			@RequestParam(value = "studentOpenID") String studentOpenID,
 			@RequestParam(value = "phone") String phone,
+			@RequestParam(value = "giftClass") String giftClass,
 			@RequestParam(value = "operatorOpenID") String operatorOpenID){
 		Classpayrecord cpd = new Classpayrecord();
 		int money=0;
 		int count=0;
+		int gift=0;
 		if(null!=payMoney && !"".equals(payMoney)){
 			money=Integer.parseInt(payMoney);
 		}
 		if(null!=classCount && !"".equals(classCount)){
 			count = Integer.parseInt(classCount);
+		}
+		if(null!=giftClass && !"".equals(giftClass)){
+			gift = Integer.parseInt(giftClass);
 		}
 		cpd.setStudentName(studentName);
 		cpd.setPayMoney(money);
@@ -141,6 +146,7 @@ public class ClassRecordController {
 		cpd.setClassCount(count);
 		cpd.setPhone(phone);
 		cpd.setOperatorOpenID(operatorOpenID);
+		cpd.setGiftClass(gift);
 		if(MongoDBBasic.addClasspayrecord(cpd)){
 			return "succss addClasspayrecord";
 		}

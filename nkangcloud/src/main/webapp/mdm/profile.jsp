@@ -1630,7 +1630,7 @@ function getNowFormatDate() {
 													
 													<%if(isTeacher==true) { %>
 												<td>
-												<a target="_self"  href="http://leshucq.bceapp.com/mdm/HomeWork.jsp?UID=<%=uid %>">
+												<a target="_self"  href="http://leshucq.bceapp.com/mdm/StudentDetail.jsp?UID=<%=uid %>">
 												<img src="http://leshucq.bj.bcebos.com/standard/techerview.png" />
 													<h4>我的学员</h4></a>
 												</td><% } %>

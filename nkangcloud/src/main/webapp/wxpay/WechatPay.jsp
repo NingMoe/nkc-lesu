@@ -111,8 +111,7 @@ a:visited{
     position:absolute;
     bottom:30px;}
 .infoPay{
-padding-top:20px;
-height:70px;
+height:150px;
 /* border-bottom:1px solid #EFEFEF; */
 }
 .payTitle{
@@ -124,6 +123,7 @@ height:70px;
     font-weight:bolder;
 }
 .infoItem{
+margin-top:15px;
 width:30%;
 margin-left:2%;
 height:50px;
@@ -254,6 +254,7 @@ function pay(){
 	var currentTime=getNowFormatDate();
 	var payMoney=$(".default").find(".priceText").text();
 	var classCount=$(".default").find(".classText").text();
+	var giftClass=$("#giftClass").val();
 	$.ajax({
 		 url:'../ClassRecord/addClasspayrecord',
 		 type:"GET",
@@ -265,7 +266,8 @@ function pay(){
 			 studentName:$("#name").text(),
 			 studentOpenID:studentID,
 			 phone:$("#phone").val(),	
-			 operatorOpenID:'<%=uid%>'
+			 operatorOpenID:'<%=uid%>',
+			 giftClass:giftClass
 		 },
 		 success:function(data){
 			 if(data){
@@ -380,9 +382,16 @@ $(function(){
 	  <div class="infoItem price default"><span class="priceText">2160</span>元<br><span class="classText">24</span>次课</div>
 	  <div class="infoItem price"><span class="priceText">3880</span>元<br><span class="classText">48</span>次课</div>
 	  <div class="infoItem price"><span class="priceText">6680</span>元<br><span class="classText">96</span>次课</div>
+	  <div class="infoItem price"><span class="priceText">0</span>元<br><span style="display:none" class="classText">0</span>赠送课时</div>
      </div>
     </div>
-
+  
+     <div class="infoPanel">
+      <div class="infoArea">
+        <p class="infoTitle">赠送课时</p>
+        <p id="gift" class="infoVal"><input id="giftClass" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="0" /></p>
+      </div>
+    </div> 
 	<div class="infoPanel">
       <div class="infoArea">
         <p class="infoTitle">支付方式</p>

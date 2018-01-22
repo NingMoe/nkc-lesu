@@ -48,7 +48,7 @@ padding-right:2%;}
 	width:100%;}
 	.title{
 	height:100%;
-	width:70%;
+	width:60%;
 	line-height:38px;
 	text-align:left;
 	font-size:15px;
@@ -56,7 +56,7 @@ padding-right:2%;}
 	}
 	.value{
 	height:100%;
-	width:30%;
+	width:40%;
 	line-height:38px;
 	text-align:right;
 	font-size:15px;
@@ -99,7 +99,7 @@ padding-right:2%;}
 	<%for(int i=0;i<records.size();i++){ %>
 <div class="expensePanel">
 <div class="item"><p class="title"><%=records.get(i).getStudentName() %>(<%=records.get(i).getPhone() %>)</p><p class="value"><%=records.get(i).getPayOption() %></p></div>
-<div class="item"><p class="title"><%=records.get(i).getPayTime() %></p><p class="value"><%=records.get(i).getPayMoney()%>元</p></div>
+<div class="item"><p class="title"><%=records.get(i).getPayTime() %></p><p class="value"><%=records.get(i).getPayMoney()%>元/<%=records.get(i).getClassCount() %><%if(records.get(i).getGiftClass()!=0){%>(+<%=records.get(i).getGiftClass()%>)<%} %>次课</p></div>
 </div>
 <%} %>
 </body>
