@@ -178,6 +178,14 @@ public class CoreService
 							article4.setDescription("Administration");
 							article4.setPicUrl("http://leshucq.bj.bcebos.com/icon/Cost_savings.png");
 							article4.setUrl("http://"+Constants.baehost+"/wxpay/WechatPay.jsp?UID=" + fromUserName);
+							
+							Article article5 = new Article();
+							article5.setTitle("积分管理");
+							article5.setDescription("Administration");
+							article5.setPicUrl("http://leshucq.bj.bcebos.com/icon/Cost_savings.png");
+							article5.setUrl("http://"+Constants.baehost+"/mdm/CreditManagement.jsp?UID=" + fromUserName);
+							
+							
 							articleList.add(article4);
 						}
 						newsMessage.setArticleCount(articleList.size());
