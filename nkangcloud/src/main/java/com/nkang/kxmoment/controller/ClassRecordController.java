@@ -16,7 +16,6 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classexpenserecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classpayrecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation;
-import com.nkang.kxmoment.baseobject.classhourrecord.TeamerCredit;
 import com.nkang.kxmoment.util.DateUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
 //  http://leshucq.bceapp.com/ClassRecord/updateStudentBasicInfo?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&enrolledTime=2018-1-5&enrolledWay=lao&district=chongqing&totalClass=55&expenseClass=33&leftPayClass=22&leftSendClass=0&classType=珠心算
@@ -95,9 +94,9 @@ public class ClassRecordController {
 		return MongoDBBasic.getClassTypeRecords(openid);
 		
 		}
-	@RequestMapping("/getClassTypeRecordsByTeacher")
-	public @ResponseBody List<StudentBasicInformation> getClassTypeRecordsByTeacher(@RequestParam(value = "teacher") String teacherID){
-		return MongoDBBasic.getClassTypeRecordsByTeacher(teacherID);
+	@RequestMapping("/getStudentsByTeacher")
+	public @ResponseBody List<StudentBasicInformation> getStudentsByTeacher(@RequestParam(value = "teacher") String teacherID){
+		return MongoDBBasic.getStudentsByTeacher(teacherID);
 		
 		}
 	@RequestMapping("/getAllOpenIDHasClass")
@@ -241,41 +240,4 @@ public class ClassRecordController {
 		return MongoDBBasic.getexpenseRecord(expenseID);
 		
 	}
-	
-	
-	
-	@RequestMapping("/addHistryTeamerCredit")
-	public @ResponseBody String AddHistryTeamerCredit(HttpServletRequest request, HttpServletResponse response,
-			//@RequestParam(value = "Name") String expenseOption,
-			@RequestParam(value = "StudentOpenID") String StudentOpenID,
-			@RequestParam(value = "Operation") String Operation,
-			@RequestParam(value = "Operator") String Operator,
-			@RequestParam(value = "Amount") String Amount,
-			@RequestParam(value = "ChangeJustification",required=false) String ChangeJustification){
-		
-		TeamerCredit credit = new TeamerCredit();
-		credit.setAmount(Amount);
-		credit.setChangeJustification(ChangeJustification);
-		credit.setOperation(Operation);
-		credit.setOperator(Operator);
-		credit.setStudentOpenID(StudentOpenID);
-		
-		
-		if(MongoDBBasic.addHistryTeamerCredit(credit)){
-			return "success addHistryTeamerCredit";
-		}
-		
-		return "false";
-		
-		
-	}
-	
-	@RequestMapping("/getlistCredit")
-	public @ResponseBody List<TeamerCredit> getHistryTeamerCredit(
-			@RequestParam(value = "StudentOpenID") String StudentOpenID
-			){
-		return MongoDBBasic.getHistryTeamerCredit(StudentOpenID);
-		
-	}
-	
 }
