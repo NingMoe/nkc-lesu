@@ -56,6 +56,7 @@ padding-right:2%;}
 	text-align:left;
 	font-size:14px;
 	float:left;
+	font-weight: normal;
 	}
 	.value{
 	height:100%;
@@ -64,6 +65,7 @@ padding-right:2%;}
 	text-align:right;
 	font-size:14px;
 	float:left;
+	font-weight: normal;
 	}
 	.
 #footer {
