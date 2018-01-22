@@ -183,7 +183,7 @@ public class CoreService
 							Article article5 = new Article();
 							article5.setTitle("积分管理");
 							article5.setDescription("Administration");
-							article5.setPicUrl("http://leshucq.bj.bcebos.com/icon/creditmgt.png");
+							article5.setPicUrl("http://leshucq.bj.bcebos.com/icon/creditbuy.png");
 							article5.setUrl("http://"+Constants.baehost+"/mdm/CreditManagement.jsp?UID=" + fromUserName);
 							articleList.add(article5);
 							
