@@ -132,7 +132,7 @@ font-weight:0!important;}
 		</div>
 	</div>
 		<div style="position: absolute; top: 100px; overflow: hidden" data-role="page" style="padding-top:45px" data-theme="c">
-		<ul id="Work_Mates_div" class="Work_Mates_div2" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="margin-top: 15px">
+		<ul id="Work_Mates_div" class="Work_Mates_div2" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="margin-top: 25px">
 	<li>
 	<%for(int i=0;i<records.size();i++){ %>
 <div class="expensePanel">
