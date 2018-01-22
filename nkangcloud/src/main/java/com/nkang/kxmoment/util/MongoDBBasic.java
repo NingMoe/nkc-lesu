@@ -51,6 +51,7 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classexpenserecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classpayrecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation;
+import com.nkang.kxmoment.baseobject.classhourrecord.TeamerCredit;
 import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.SmsUtils.RestTest;
 
@@ -74,7 +75,7 @@ public class MongoDBBasic {
 	private static String collectionClassPayRecord="ClassPayRecord";
 	private static String collectionClassExpenseRecord="ClassExpenseRecord";
 	private static String collectionClassTypeRecord="ClassTypeRecord";
-	
+	private static String collectionHistryTeamerCredit="HistryTeamerCredit";
 	public static DB getMongoDB() {
 		if (mongoDB != null) {
 			return mongoDB;
@@ -4857,4 +4858,93 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			}
 			return record;
 		}
+		
+		
+		public static boolean addHistryTeamerCredit(TeamerCredit teamerCredit) {
+			mongoDB = getMongoDB();
+			Boolean ret = false;
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime());
+			try {
+				Date a = new Date();
+				DBObject dbo = new BasicDBObject();
+				dbo.put("DateTime", DateUtil.timestamp2Str(cursqlTS));
+				//dbo.put("Name", teamerCredit.getName());
+			    dbo.put("StudentOpenID",teamerCredit.getStudentOpenID());
+				dbo.put("Amount", teamerCredit.getAmount());
+				dbo.put("Operation", teamerCredit.getOperation());
+				dbo.put("Operator", teamerCredit.getOperator());
+				dbo.put("ChangeJustification", teamerCredit.getChangeJustification());
+				
+
+				DBObject query = new BasicDBObject();
+				query.put("OpenID", teamerCredit.getStudentOpenID());
+				DBObject dbcur = mongoDB.getCollection(wechat_user).findOne(query);
+				
+				if(dbcur!=null){
+					
+					DBObject updatedbo = new BasicDBObject();
+					Object teamer = dbcur.get("Teamer");
+					DBObject tm = (DBObject)teamer;
+					if(tm!=null){
+						dbo.put("Name", tm.get("realName")+"");
+						int creditPoints=0;
+						if("Increase".equals(teamerCredit.getOperation())){
+							creditPoints=Integer.parseInt(tm.get("CreditPoint")+"")+Integer.parseInt(teamerCredit.getAmount());
+							if(null!=tm.get("CreditPoint") && !"".equals(tm.get("CreditPoint")+"")){
+								updatedbo.put("Teamer.CreditPoint",creditPoints);
+							}else{
+								updatedbo.put("Teamer.CreditPoint", Integer.parseInt(teamerCredit.getAmount()));
+							}
+						}else if("Decrease".equals(teamerCredit.getOperation())){
+							creditPoints=Integer.parseInt(tm.get("CreditPoint")+"")-Integer.parseInt(teamerCredit.getAmount());
+							if(creditPoints<=0){
+								creditPoints=0;
+							}
+							updatedbo.put("Teamer.CreditPoint",creditPoints);
+						}
+						
+						BasicDBObject doc = new BasicDBObject();
+						doc.put("$set", updatedbo);
+						mongoDB = getMongoDB();
+						
+						mongoDB.getCollection(collectionHistryTeamerCredit).insert(dbo);
+						mongoDB.getCollection(wechat_user).update(dbcur, doc);
+						ret = true;	
+					}
+				}
+			} catch (Exception e) {
+				log.info("addHistryTeamerCredit--" + e.getMessage());
+			}
+			return ret;
+		}
+		
+		
+		public static List<TeamerCredit> getHistryTeamerCredit(String id) {
+			mongoDB = getMongoDB();
+			List<TeamerCredit> listCredit = new ArrayList<TeamerCredit>();
+			TeamerCredit record=null;
+			try {
+				BasicDBObject db=new BasicDBObject();
+				db.append("StudentOpenID",id);
+				
+				DBCursor dbo = mongoDB.getCollection(collectionHistryTeamerCredit).find(db);
+				while(dbo.hasNext()){
+					DBObject bdbo = dbo.next();
+					record = new TeamerCredit();
+					record.setAmount(bdbo.get("Amount")+"");
+					record.setChangeJustification(bdbo.get("ChangeJustification")+"");
+					record.setDateTime(bdbo.get("DateTime")+"");
+					record.setName(bdbo.get("Name")+"");
+					record.setOperation(bdbo.get("Operation")+"");
+					record.setOperator(bdbo.get("Operator")+"");
+					record.setStudentOpenID(id);
+					listCredit.add(record);
+				}
+			} catch (Exception e) {
+				log.info("parentConfirmTime--" + e.getMessage());
+			}
+			return listCredit;
+		}
+		
+		
 }
