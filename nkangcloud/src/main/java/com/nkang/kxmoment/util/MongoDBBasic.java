@@ -4885,33 +4885,34 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					Object teamer = dboj.get("Teamer");
 					DBObject tm = (DBObject)teamer;
 					if(tm!=null){
-						dbo.put("Name", "name2");
-						mongoDB.getCollection(collectionHistryTeamerCredit).insert(dbo);
 						dbo.put("Name", tm.get("realName")+"");
+						
 						int creditPoints=0;
 						if("Increase".equals(teamerCredit.getOperation())){
-							creditPoints=Integer.parseInt(tm.get("CreditPoint")+"")+Integer.parseInt(teamerCredit.getAmount());
-							if(null!=tm.get("CreditPoint") && !"".equals(tm.get("CreditPoint")+"")){
-								updatedbo.put("Teamer.CreditPoint",creditPoints);
+							if(null!=tm.get("CreditPoint")){
+								creditPoints=Integer.parseInt(tm.get("CreditPoint")+"")+Integer.parseInt(teamerCredit.getAmount());
 							}else{
-								updatedbo.put("Teamer.CreditPoint", Integer.parseInt(teamerCredit.getAmount()));
+								creditPoints=Integer.parseInt(teamerCredit.getAmount());
 							}
+							updatedbo.put("Teamer.CreditPoint",creditPoints);
 						}else if("Decrease".equals(teamerCredit.getOperation())){
-							creditPoints=Integer.parseInt(tm.get("CreditPoint")+"")-Integer.parseInt(teamerCredit.getAmount());
+							if(null!=tm.get("CreditPoint")){
+								creditPoints=Integer.parseInt(tm.get("CreditPoint")+"")-Integer.parseInt(teamerCredit.getAmount());
+							}else{
+								creditPoints=0;
+							}
 							if(creditPoints<=0){
 								creditPoints=0;
 							}
 							updatedbo.put("Teamer.CreditPoint",creditPoints);
 						}
-						
 						BasicDBObject doc = new BasicDBObject();
 						doc.put("$set", updatedbo);
-						mongoDB = getMongoDB();
-						
 						mongoDB.getCollection(collectionHistryTeamerCredit).insert(dbo);
 						mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",teamerCredit.getStudentOpenID()), doc);
-						ret = true;	
+						ret = true;
 					}
+					
 				}
 			} catch (Exception e) {
 				log.info("addHistryTeamerCredit--" + e.getMessage());
