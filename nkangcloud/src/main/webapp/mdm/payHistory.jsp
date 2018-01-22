@@ -104,6 +104,8 @@ input.ui-input-text {
     padding-left: 10px;   
      padding-right: 10px;
      font-size:14px;
+     position: relative;
+    z-index: 10000;
 }
 
 .ui-btn-up-c{
@@ -132,7 +134,7 @@ font-weight:0!important;}
 		</div>
 	</div>
 		<div style="position: absolute; top: 100px; overflow: hidden" data-role="page" style="padding-top:45px" data-theme="c">
-		<ul id="Work_Mates_div" class="Work_Mates_div2" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="margin-top: 25px">
+		<ul id="Work_Mates_div" class="Work_Mates_div2" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="margin-top: 30px">
 	<li>
 	<%for(int i=0;i<records.size();i++){ %>
 <div class="expensePanel">
