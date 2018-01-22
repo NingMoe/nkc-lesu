@@ -135,14 +135,16 @@ font-weight:0!important;}
 	</div>
 		<div style="position: absolute; top: 100px; overflow: hidden" data-role="page" style="padding-top:45px" data-theme="c">
 		<ul id="Work_Mates_div" class="Work_Mates_div2" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="margin-top: 30px">
-	<li>
+	
 	<%for(int i=0;i<records.size();i++){ %>
+	<li>
 <div class="expensePanel">
 <div class="item"><p class="title"><%=records.get(i).getStudentName() %>(<%=records.get(i).getPhone() %>)</p><p class="value"><%=records.get(i).getPayOption() %></p></div>
 <div class="item"><p class="title"><%=records.get(i).getPayTime() %></p><p class="value"><%=records.get(i).getPayMoney()%>元/<%=records.get(i).getClassCount() %><%if(records.get(i).getGiftClass()!=0){%>(+<%=records.get(i).getGiftClass()%>)<%} %>次课</p></div>
 </div>
-<%} %>
 </li>
+<%} %>
+
 </ul>
 </body>
 </html>
