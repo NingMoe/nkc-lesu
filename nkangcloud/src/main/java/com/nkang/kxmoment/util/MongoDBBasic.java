@@ -4868,24 +4868,25 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				Date a = new Date();
 				DBObject dbo = new BasicDBObject();
 				dbo.put("DateTime", DateUtil.timestamp2Str(cursqlTS));
-				//dbo.put("Name", teamerCredit.getName());
+				
 			    dbo.put("StudentOpenID",teamerCredit.getStudentOpenID());
 				dbo.put("Amount", teamerCredit.getAmount());
 				dbo.put("Operation", teamerCredit.getOperation());
 				dbo.put("Operator", teamerCredit.getOperator());
 				dbo.put("ChangeJustification", teamerCredit.getChangeJustification());
 				
-
 				DBObject query = new BasicDBObject();
 				query.put("OpenID", teamerCredit.getStudentOpenID());
-				DBObject dbcur = mongoDB.getCollection(wechat_user).findOne(query);
+				DBCursor dbcur = mongoDB.getCollection(wechat_user).find(query);
 				
-				if(dbcur!=null){
-					
+				while(dbcur.hasNext()){
 					DBObject updatedbo = new BasicDBObject();
-					Object teamer = dbcur.get("Teamer");
+					DBObject dboj=dbcur.next();
+					Object teamer = dboj.get("Teamer");
 					DBObject tm = (DBObject)teamer;
 					if(tm!=null){
+						dbo.put("Name", "name2");
+						mongoDB.getCollection(collectionHistryTeamerCredit).insert(dbo);
 						dbo.put("Name", tm.get("realName")+"");
 						int creditPoints=0;
 						if("Increase".equals(teamerCredit.getOperation())){
@@ -4908,7 +4909,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 						mongoDB = getMongoDB();
 						
 						mongoDB.getCollection(collectionHistryTeamerCredit).insert(dbo);
-						mongoDB.getCollection(wechat_user).update(dbcur, doc);
+						mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",teamerCredit.getStudentOpenID()), doc);
 						ret = true;	
 					}
 				}
