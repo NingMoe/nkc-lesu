@@ -131,7 +131,7 @@ $(function(){
 	var studentRecords;
 	function findParentList(){
 		$.ajax({
-			 url:'../ClassRecord/getClassTypeRecordsByTeacher',
+			 url:'../ClassRecord/getStudentsByTeacher',
 			 type:"GET",
 			 data : {
 				 teacher:'<%=uid%>',
