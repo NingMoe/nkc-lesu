@@ -4426,9 +4426,8 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		return map;
 		
 	}
-	
 	//ClassTypeRecord
-	public static List<StudentBasicInformation> getClassTypeRecordsByTeacher(String teacherID){
+	public static List<StudentBasicInformation> getStudentsByTeacher(String teacherID){
 		List<StudentBasicInformation> list = new ArrayList<StudentBasicInformation>();
 		//List<String> lstype = new ArrayList<String>();
 		StudentBasicInformation sbi;
@@ -4444,6 +4443,32 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				uid=db.get("OpenID")+"";
 				if(!names.contains(uid)){
 				names.add(db.get("OpenID")+"");
+				sbi.setTeacher(db.get("teacher")+"");
+				sbi.setOpenID(db.get("OpenID")+"");
+				sbi.setRealName(db.get("name")+"");
+				//sbi.setPhone(dbcur.get("phone")+"");
+				list.add(sbi);}
+			}
+		}catch (Exception e) {
+			log.info( e.getMessage());
+			}
+		return list;
+		
+	}	
+	//ClassTypeRecord
+	public static List<StudentBasicInformation> getClassTypeRecordsByTeacher(String teacherID){
+		List<StudentBasicInformation> list = new ArrayList<StudentBasicInformation>();
+		//List<String> lstype = new ArrayList<String>();
+		StudentBasicInformation sbi;
+		List<String> names=new ArrayList<String>();
+		String uid="";
+		try {
+			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(new BasicDBObject().append("teacher", teacherID));
+			while(wr.hasNext()){
+				DBObject db = wr.next();
+
+				sbi = new StudentBasicInformation();
+
 				String key=db.get("payOption")+"";
 				int expenseClass=db.get("expenseClass")==null?0:Integer.parseInt(db.get("expenseClass")+"");
 				int leftPayClass=db.get("leftPayClass")==null?0:Integer.parseInt(db.get("leftPayClass")+"");
@@ -4463,7 +4488,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				sbi.setClassType(classType);
 				//sbi.setRealName(dbcur.get("realName")+"");
 				sbi.setTotalClass(totalClass);
-				list.add(sbi);}
+				list.add(sbi);
 			}
 		}catch (Exception e) {
 			log.info( e.getMessage());
