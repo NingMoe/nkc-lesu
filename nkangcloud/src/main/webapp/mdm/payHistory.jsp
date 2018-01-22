@@ -48,18 +48,18 @@ padding-right:2%;}
 	width:100%;}
 	.title{
 	height:100%;
-	width:60%;
+	width:55%;
 	line-height:38px;
 	text-align:left;
-	font-size:15px;
+	font-size:14px;
 	float:left;
 	}
 	.value{
 	height:100%;
-	width:40%;
+	width:45%;
 	line-height:38px;
 	text-align:right;
-	font-size:15px;
+	font-size:14px;
 	float:left;
 	}
 	.

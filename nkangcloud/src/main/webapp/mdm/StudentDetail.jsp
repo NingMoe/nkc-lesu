@@ -77,7 +77,12 @@ height:50px!important;
     z-index: 1002;
     left: 0;
 }
-
+.ui-body-c .ui-link:visited{
+color:black!important;
+font-weight:normal!important;}
+.ui-body-c .ui-link{
+color:black!important;
+font-weight:normal!important;}
 .ui-icon{
 background:none!important;}
 .ui-btn-hover-c{
