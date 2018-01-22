@@ -357,7 +357,7 @@ $(function(){
     <div class="infoPanel">
       <div class="infoArea">
         <p class="infoTitle">手机号码</p>
-        <p class="infoVal"><input id="phone" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p>
+        <p class="infoVal"><input id="phone" placeholder="请输入学员手机号码" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p>
       </div>
     </div>   
      <div class="infoPanel">
