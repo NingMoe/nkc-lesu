@@ -4618,7 +4618,8 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			//String OpenID = classpr.getStudentOpenID();
 			DBObject query = new BasicDBObject();
 			query.put("payOption", classpr.getPayOption());
-			mongoDB = getMongoDB();
+			query.put("OpenID", classpr.getStudentOpenID());
+			//mongoDB = getMongoDB();
 			DBObject dbcur = mongoDB.getCollection(collectionClassTypeRecord).findOne(query);
 			DBObject updatedbo = new BasicDBObject();
 			int total = 0;
@@ -4635,7 +4636,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				if((dbcur.get("leftSendClass"))!=null && !"".equals(dbcur.get("leftSendClass")+"")){
 					leftSend = Integer.parseInt(dbcur.get("leftSendClass")+"");
 				}
-				updatedbo.put("totalClass", total+classpr.getClassCount());
+				updatedbo.put("totalClass", total+classpr.getClassCount()+leftSend);
 				updatedbo.put("leftPayClass", classpr.getClassCount()+leftPay);
 				updatedbo.put("leftSendClass", classpr.getGiftClass()+leftSend);
 				BasicDBObject doc = new BasicDBObject();
@@ -4648,12 +4649,13 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				updatedbo.put("payOption", classpr.getPayOption());
 				updatedbo.put("OpenID", classpr.getStudentOpenID());
 				updatedbo.put("enrolledTime", "");
-				updatedbo.put("enrolledWay", "购买时候");
+				updatedbo.put("enrolledWay", "unclear");
 				updatedbo.put("district", "付款校区");
 				updatedbo.put("expenseClass", 0);
 				updatedbo.put("leftPayClass", classpr.getClassCount());
 				updatedbo.put("leftSendClass", classpr.getGiftClass());
 				updatedbo.put("totalClass", classpr.getClassCount());
+				mongoDB.getCollection(collectionClassPayRecord).insert(dbo);
 				mongoDB.getCollection(collectionClassTypeRecord).insert(updatedbo);
 				ret = true;
 			}
