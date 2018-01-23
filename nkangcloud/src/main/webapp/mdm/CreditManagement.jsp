@@ -115,7 +115,7 @@ a:visited{
     position:absolute;
     bottom:30px;}
 .infoPay{
-padding-top:20px;
+padding-top:10px;
 padding-left:2%;
 padding-right:2%;
 height:70px;
@@ -325,11 +325,11 @@ $(function(){
 	</div>
 	<div class="infoPanel">
 		<div class="infoPay" style="height: 45px;border-bottom-width: 0px;">
-			<div class="infoItem type" style="width: 47%;height: 30px;">消费积分</div>
+			<div class="infoItem type default" style="width: 47%;height: 30px;">消费积分</div>
 			<div class="infoItem type" style="width: 47%;height: 30px;">增加积分</div>
 	     </div>
 	</div>
-	<div id="user_current_credit_div" style="margin-top: 20px;margin-bottom: 20px;display: none;">
+	<div id="user_current_credit_div" style="margin-top: 10px;width: 100%;float: left;display: none;">
 		<center>
 	    	<div id="user_current_credit" style="width: 80px;height: 80px;line-height: 80px;border-radius: 40px;font-size: 48px;text-align: center;color: #20b672;border: solid 1px #20b672;">0</div>
 	    	<div style="text-align: center;">当前积分</div>
