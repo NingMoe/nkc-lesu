@@ -9,6 +9,7 @@
 <%@ page import="java.util.*"%>
 <%
 	String uid = request.getParameter("UID");
+	String teacherID = request.getParameter("teacherID");
 	Date d = new Date();  
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
     String dateNowStr = sdf.format(d);  
@@ -322,7 +323,8 @@ z-index:100000;
 			<p>课时总量</p>
 			<p id="total"><%=total %></p>
 		</div>
-		<a id="href" href="expenseClassList.jsp?UID=<%=uid%>&&classType=<%=classType%>"><div class="classRow">
+		<a id="href" href="expenseClassList.jsp?UID=<%=uid%>&&classType=<%=classType%>&teacherID=<%=teacherID%>">
+		<div class="classRow">
 			<p>已用课时</p>
 			<p id="used"><%=used %></p>
 		</div></a>

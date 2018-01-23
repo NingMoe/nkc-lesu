@@ -9,6 +9,7 @@
 
 String uid = request.getParameter("UID"); 
 String expenseID = request.getParameter("expenseID"); 
+String teacherID = request.getParameter("teacherID"); 
 
 String name = "";
 String headImgUrl ="";
@@ -40,7 +41,7 @@ Classexpenserecord record=MongoDBBasic.getexpenseRecord(expenseID);
 <script src="../MetroStyleFiles/sweetalert.min.js"></script>
 <script>
 $(function(){
-	$(".xk").on("click",function(){
+	$("#xkid").on("click",function(){
 
 		swal({  
 	        title:"请填写确认备注",  
@@ -174,7 +175,11 @@ margin-left:7%;}
 </div>
 
 <%if(!record.isParentConfirmExpense()){ %>
-<div class="xk">确认销课</div>
+<%if(teacherID ==""){ %>
+<div id="xkid" class="xk">确认销课</div>
+<%}else{ %>
+<div class="xk" style="background:#cfcfcf">确认销课</div>
+<%} %>
 <%} %>
 </body>
 </html>

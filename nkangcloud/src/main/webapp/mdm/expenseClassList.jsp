@@ -9,6 +9,7 @@
 
 String uid = request.getParameter("UID"); 
 
+String teacherID = request.getParameter("teacherID"); 
 String classType= request.getParameter("classType");
 String name = "";
 String headImgUrl ="";
@@ -98,7 +99,7 @@ padding-right:2%;}
 		</div>
 	</div>
 	<%for(int i=0;i<records.size();i++){ %>
-<a href="expenseClassDetail.jsp?UID=<%=uid %>&&expenseID=<%=records.get(i).getExpenseID() %>" >
+<a href="expenseClassDetail.jsp?UID=<%=uid %>&&expenseID=<%=records.get(i).getExpenseID() %>&teacherID=<%=teacherID %>" >
 <div class="expensePanel">
 <div class="item"><p class="title"><%=records.get(i).getExpenseOption() %>(<%=records.get(i).getExpenseClassCount() %>课时)</p><p class="value"><%=records.get(i).getExpenseDistrict() %></p></div>
 <div class="item"><p class="title"><%=records.get(i).getExpenseTime() %></p><p class="value">
