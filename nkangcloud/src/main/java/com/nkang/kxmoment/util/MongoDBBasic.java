@@ -4654,7 +4654,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				updatedbo.put("expenseClass", 0);
 				updatedbo.put("leftPayClass", classpr.getClassCount());
 				updatedbo.put("leftSendClass", classpr.getGiftClass());
-				updatedbo.put("totalClass", classpr.getClassCount());
+				updatedbo.put("totalClass", classpr.getClassCount()+classpr.getGiftClass());
 				mongoDB.getCollection(collectionClassPayRecord).insert(dbo);
 				mongoDB.getCollection(collectionClassTypeRecord).insert(updatedbo);
 				ret = true;
