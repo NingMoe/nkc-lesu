@@ -143,7 +143,7 @@ font-weight:0!important;}
 			<p class="strong">剩余课时</p>
 		</div>
 		<div class="classRow" style="border-right: none;">
-			<p class="strong">总课时|赠</p>
+			<p class="strong">总课时/赠</p>
 		</div>
 	</div>
 	<div style="position: absolute; top: 100px; overflow: hidden" data-role="page" style="padding-top:45px" data-theme="c">
@@ -168,7 +168,7 @@ font-weight:0!important;}
 			<p id="left"><%=records.get(i).getLeftPayClass() %></p>
 		</div>
 		<div class="classRow classRow2" style="border-right: none;">
-			<p id="gift"><%=records.get(i).getTotalClass() %>|<%=records.get(i).getLeftSendClass() %></p>
+			<p id="gift"><%=records.get(i).getTotalClass() %>/<%=records.get(i).getLeftSendClass() %></p>
 		</div>
 		</a>
 	</div>
