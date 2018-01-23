@@ -43,8 +43,12 @@ if(res!=null){
 	*{padding:0;margin: 0;}
 body{
   background: #FEFEFE;
-  margin-bottom: 50px;
-  height: auto;
+  position: absolute;
+  height: 100%;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  top: 0px;
 }
 a{
   text-decoration: none;
@@ -112,6 +116,8 @@ a:visited{
     bottom:30px;}
 .infoPay{
 padding-top:20px;
+padding-left:2%;
+padding-right:2%;
 height:70px;
 /* border-bottom:1px solid #EFEFEF; */
 }
@@ -125,7 +131,8 @@ height:70px;
 }
 .infoItem{
 width:30%;
-margin-left:2%;
+margin-left:1%;
+margin-right:1%;
 height:60px;
 float:left;
 border:1px solid #20b672;
@@ -140,7 +147,7 @@ text-align:center;
     bottom: 0px;
     color: #757575;
     font-size: 12px;
-    padding: 10px 1%;
+    padding: 10px 0px;
     position: absolute;
     text-align: center;
     width: 100%;
@@ -163,7 +170,7 @@ function pay(){
 	var payMoney=$(".default").find(".priceText").text();
 	var classCount=$(".default").find(".classText").text();
 	$.ajax({
-		 url:'../ClassRecord/addClasspayrecord',
+		 url:'../xxx/xxx',
 		 type:"GET",
 		 data : {
 			 payOption:$("#classType").find("option:selected").val(),
@@ -222,11 +229,17 @@ function getNowFormatDate() {
 }
 $(function(){
 	$(".price").on("click",function(){
-		totalfee=$(this).children("span").text();
 		$(this).addClass("default");
 		$(this).siblings().removeClass("default");
-		totalfee = totalfee+"00";
-		totalfee = "1";
+		if($("#user_defined").hasClass("default")){
+			$("#user_defined_num_div").show();
+		}else{
+			$("#user_defined_num_div").hide();
+		}
+	});
+	$(".type").on("click",function(){
+		$(this).addClass("default");
+		$(this).siblings().removeClass("default");
 	});
 	$("#phone").blur(function(){
 		$.ajax({
@@ -239,11 +252,21 @@ $(function(){
 				 if(data){
 					 $("#name").text(data.realName);
 					 studentID=data.openid;
+					 $("#user_current_credit_div").show();
+					 $("#user_current_credit").html("5")
+					 
 				 }
-				 
 			}
 		});
 		
+	});
+	$("#user_defined_num").blur(function(){
+		var reg =/^[1-9]*[1-9][0-9]*$/;
+		if(!reg.test($(this).val())){
+			 $(user_defined_num_div).css({"border":"1px solid red"});
+		}else{
+			$(user_defined_num_div).css({"border":"1px solid #20b672"});
+		}
 	});
 });
     </script>
@@ -262,7 +285,7 @@ $(function(){
 	</div>
     <div class="infoPanel">
       <div class="infoArea">
-        <p class="infoTitle">手机号码</p>
+        <p class="infoTitle">学员手机</p>
         <p class="infoVal"><input id="phone" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p>
       </div>
     </div>   
@@ -272,24 +295,49 @@ $(function(){
         <p id="name" class="infoVal"></p>
       </div>
     </div>
-    <div class="infoPanel">
-      <div class="infoArea">
+<!--     <div class="infoPanel"> -->
+<!--       <div class="infoArea"> -->
+<!--         <p class="infoTitle">积分变化说明</p> -->
+<!--         <p class="infoVal"><input id="ChangeJustification" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p> -->
+<!--       </div> -->
+<!--     </div>    -->
+	<div class="infoPanel">
+      <div class="infoArea" style="height: 50px;">
         <p class="infoTitle">积分变化说明</p>
-        <p class="infoVal"><input id="ChangeJustification" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p>
+        <p class="infoVal"><textarea id="ChangeJustification" rows="3" style="border: none; text-align: right; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 13.3333px; line-height: normal; font-family: Arial; margin: 0px; width: 201px;" type="text"></textarea></p>
       </div>
-    </div>   
-
-    <div class="infoPanel">
-      <div class="infoPay">
-		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/minus_white.png" width="30px" height="30px"><br><span class="classText"></span>消费积分</div>
-		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/plus_white.png" width="30px" height="30px"><br><span class="classText"></span>增加积分</div>
-     </div>
     </div>
+<!--     <div class="infoPanel"> -->
+<!--       <div class="infoPay"> -->
+<!-- 		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/minus_white.png" width="30px" height="30px"><br><span class="classText"></span>消费积分</div> -->
+<!-- 		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/plus_white.png" width="30px" height="30px"><br><span class="classText"></span>增加积分</div> -->
+<!--      </div> -->
+<!--     </div> -->
+	<div class="infoPanel">
+		<div class="infoPay">
+			<div class="infoItem price default"><span style="font-size: 30px;line-height: 35px;">5</span><br>积分</div>
+			<div class="infoItem price"><span style="font-size: 30px;line-height: 35px;">10</span><br>积分</div>
+			<div class="infoItem price" id="user_defined"><span style="font-size: 30px;line-height: 35px;">自定义</span><br>积分</div>
+		</div>
+	</div>
+	<div class="infoItem" id="user_defined_num_div" style="width: 76%;height: 30px;margin: 5% 10%; display: none;">
+		<input id="user_defined_num" style="border:none;height:30px;text-align: center;font-size:15px;" type="text" placeholder="请输入积分">
+	</div>
+	<div class="infoPanel">
+		<div class="infoPay" style="height: 45px;border-bottom-width: 0px;">
+			<div class="infoItem type" style="width: 47%;height: 30px;">消费积分</div>
+			<div class="infoItem type" style="width: 47%;height: 30px;">增加积分</div>
+	     </div>
+	</div>
+	<div id="user_current_credit_div" style="margin-top: 20px;margin-bottom: 20px;display: none;">
+		<center>
+	    	<div id="user_current_credit" style="width: 80px;height: 80px;line-height: 80px;border-radius: 40px;font-size: 48px;text-align: center;color: #20b672;border: solid 1px #20b672;">0</div>
+	    	<div style="text-align: center;">当前积分</div>
+		</center>
+	</div>
 
-
-
-      <div class="infoArea pay"><a href="javascript:pay();" style="color:white;">提交请求</a></div>
-    	<div id="footer">
+    <div class="infoArea pay"><a href="javascript:pay();" style="color:white;">提交请求</a></div>
+    <div id="footer">
 		<span class="clientCopyRight"><nobr>©版权所有 | 重庆乐数珠心算</nobr></span>
 	</div>
 	</body>
