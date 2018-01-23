@@ -30,7 +30,7 @@ List<StudentBasicInformation> records=MongoDBBasic.getClassTypeRecordsByTeacher(
 <html>
 <head>
 <meta charset="utf-8" />
-<title>缴费记录_缴费人</title>
+<title>统一课时视图</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <script type="text/javascript" src="../nkang/jquery-1.8.0.js"></script>
 <link rel="stylesheet" href="../nkang/jquery.mobile.min.css" />
