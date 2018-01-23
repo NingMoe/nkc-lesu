@@ -101,7 +101,9 @@ input.ui-input-text {
     margin-left: -10px;
     padding-left: 10px;
 }
-
+.strong{
+font-weight:bold;
+}
 .ui-btn-up-c{
 background-image:none!important;
 font-weight:0!important;}
@@ -129,19 +131,19 @@ font-weight:0!important;}
 	</div>		
 	<div class="classPanel" style="height:45px;position:absolute;top:150px;">
 	<div class="classRow" style="border-left: none;">
-			<p>学员姓名</p>
+			<p class="strong">学员姓名</p>
 		</div>
 		<div class="classRow">
-			<p>课时类型</p>
+			<p class="strong">课时类型</p>
 		</div>
 		<div class="classRow">
-			<p>已用课时</p>
+			<p class="strong">已用课时</p>
 		</div>
 		<div class="classRow" style="border-right: none;">
-			<p>剩余课时</p>
+			<p class="strong">剩余课时</p>
 		</div>
 		<div class="classRow" style="border-right: none;">
-			<p>总课时|赠</p>
+			<p class="strong">总课时|赠</p>
 		</div>
 	</div>
 	<div style="position: absolute; top: 100px; overflow: hidden" data-role="page" style="padding-top:45px" data-theme="c">
