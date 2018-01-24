@@ -171,22 +171,26 @@ function pay(){
 
 	if(studentID==null||studentID == ""){
 		swal("请输入正确的学生电话号码", "", "error");
+		return;
 	}
 	
 	var amount = getAmount();
 	var reg =/^[1-9]*[1-9][0-9]*$/;
 	if(!reg.test(amount)){
 		swal("请在积分栏输入合理的数字", "", "error");
+		return;
 	}
 	var justification = $("#ChangeJustification").val();
 	if(justification==null||justification.trim()==""){
 		swal("积分变化说明不能为空", "", "error");
+		return;
 	}
 	
 	var operation= $(".type.default").attr("value");
 	var calculation = getCalculation(operation,amount);
 	if(calculation<0){
 		swal("当前积分不够消费", "", "error");
+		return;
 	}
 	
 	$.ajax({
@@ -287,8 +291,11 @@ $(function(){
 					 studentID=data.studentOpenID;
 					 if(data.name){
 						 studentCredit = data.amount;
+						 if(studentCredit==null||studentCredit==""){
+							 studentCredit=0;
+						 }
 						 $("#user_current_credit_div").show();
-						 $("#user_current_credit").html(data.amount)
+						 $("#user_current_credit").html(studentCredit)
 					 }else{
 						 $("#user_current_credit_div").hide();
 						 $("#user_current_credit").html("")
