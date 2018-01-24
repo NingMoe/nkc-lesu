@@ -130,7 +130,7 @@ height:70px;
     font-weight:bolder;
 }
 .infoItem{
-width:30%;
+width:30.7%;
 margin-left:1%;
 margin-right:1%;
 height:60px;
@@ -165,39 +165,72 @@ text-align:center;
 <script type="text/javascript">  
 
 var studentID;
+var studentCredit;
 function pay(){
-	var currentTime=getNowFormatDate();
-	var payMoney=$(".default").find(".priceText").text();
-	var classCount=$(".default").find(".classText").text();
+// 	var currentTime=getNowFormatDate();
+
+	if(studentID==null||studentID = ""){
+		swal("请输入正确的学生电话号码", "", "error");
+	}
+	
+	var amount = getAmount();
+	var reg =/^[1-9]*[1-9][0-9]*$/;
+	if(!reg.test(amount)){
+		swal("请在积分栏输入合理的数字", "", "error");
+	}
+	var justification = $("#ChangeJustification").val();
+	if(justification==null||justification.trim() = ""){
+		swal("积分变化说明不能为空", "", "error");
+	}
+	
+	var operation= $(".type.default").attr("value");
+	var calculation = getCalculation(operation,amount);
+	if(calculation<0){
+		swal("当前积分不够消费", "", "error");
+	}
+	
 	$.ajax({
-		 url:'../xxx/xxx',
+		 url:'../ClassRecord/addTeamerCredit',
 		 type:"GET",
 		 data : {
-			 payOption:$("#classType").find("option:selected").val(),
-			 payMoney:payMoney,
-			 classCount:classCount,
-			 payTime:currentTime,
-			 studentName:$("#name").text(),
+			 Operation:operation,
+			 Amount:amount,
+			 ChangeJustification:justification.trim(),
 			 studentOpenID:studentID,
-			 phone:$("#phone").val(),	
 			 operatorOpenID:'<%=uid%>'
 		 },
 		 success:function(data){
 			 if(data){
-				 $("#name").text(data.realName);
-				 studentID=data.openid;
-					swal("提交成功!", "恭喜!", "success");
-
-					 $("#name").text("");
-					 $("#phone").val("");
+				swal("提交成功!", "恭喜!", "success");
+				$("#user_current_credit").html(calculation)
 			 }else{
-
-					swal("提交失败!", "请填写正确的信息.", "error");
-				}
+				swal("提交失败!", "网络异常，请稍后再试！", "error");
+			}
 		}
 	});
 	
 }
+
+function getAmount() {
+	var amount;
+	if($("#user_defined_num_div").is(":visible")){
+		amount = $("#user_defined_num").val();
+	}else{
+		amount = $(".price.default>span").html();
+	}
+	return amount;
+}
+
+function getCalculation(operation,amount) {
+	var calculation;
+	if(operation="Increase"){
+		calculation = studentCredit+amount;
+	}else{
+		calculation = studentCredit-amount;
+	}
+	return calculation;
+}
+
 function getNowFormatDate() {
     var date = new Date();
     var seperator1 = "-";
@@ -243,17 +276,23 @@ $(function(){
 	});
 	$("#phone").blur(function(){
 		$.ajax({
-			 url:'../userProfile/getNameByPhone',
+			 url:'../ClassRecord/getTeamerCredit',
 			 type:"GET",
 			 data : {
 				 phone:$(this).val(),
 			 },
 			 success:function(data){
 				 if(data){
-					 $("#name").text(data.realName);
-					 studentID=data.openid;
-					 $("#user_current_credit_div").show();
-					 $("#user_current_credit").html("5")
+					 $("#name").text(data.name);
+					 studentID=data.studentOpenID;
+					 if(data.name){
+						 studentCredit = data.amount;
+						 $("#user_current_credit_div").show();
+						 $("#user_current_credit").html(data.amount)
+					 }else{
+						 $("#user_current_credit_div").hide();
+						 $("#user_current_credit").html("")
+					 }
 					 
 				 }
 			}
@@ -320,13 +359,13 @@ $(function(){
 			<div class="infoItem price" id="user_defined"><span style="font-size: 30px;line-height: 35px;">自定义</span><br>积分</div>
 		</div>
 	</div>
-	<div class="infoItem" id="user_defined_num_div" style="width: 76%;height: 30px;margin: 5% 10%; display: none;">
+	<div class="infoItem" id="user_defined_num_div" style="width: 90%;height: 30px;margin: 2% 5%; display: none;">
 		<input id="user_defined_num" style="border:none;height:30px;text-align: center;font-size:15px;" type="text" placeholder="请输入积分">
 	</div>
 	<div class="infoPanel">
 		<div class="infoPay" style="height: 45px;border-bottom-width: 0px;">
-			<div class="infoItem type default" style="width: 47%;height: 30px;">消费积分</div>
-			<div class="infoItem type" style="width: 47%;height: 30px;">增加积分</div>
+			<div class="infoItem type default" style="width: 47.4%;height: 30px;" value="Decrease">消费积分</div>
+			<div class="infoItem type" style="width: 47.4%;height: 30px;" value="Increase">增加积分</div>
 	     </div>
 	</div>
 	<div id="user_current_credit_div" style="margin-top: 10px;width: 100%;float: left;display: none;">
