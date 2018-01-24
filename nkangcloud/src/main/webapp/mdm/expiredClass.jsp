@@ -215,7 +215,7 @@ $(function(){
 			url : "../ClassRecord/getClassTypeRecordsByTeacherAndStudent",
 			data : {
 				openID : openid,
-				teacherID:<%=uid%>
+				teacherID:'<%=uid%>'
 			},
 			cache : false,
 			success : function(data) {
