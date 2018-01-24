@@ -4510,6 +4510,9 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			while(wr.hasNext()){
 				DBObject db = wr.next();
 
+				if("0".equals(db.get("leftSendClass")+"") && "0".equals(db.get("leftSendClass")+"")){
+					continue;
+				}
 				sbi = new StudentBasicInformation();
 
 				String key=db.get("payOption")+"";
