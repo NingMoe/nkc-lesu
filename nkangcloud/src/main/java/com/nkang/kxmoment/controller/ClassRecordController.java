@@ -276,4 +276,13 @@ public class ClassRecordController {
 		return MongoDBBasic.getHistryTeamerCredit(StudentOpenID);
 		
 	}
+	
+	//queryWeChatUserByTelephone
+	
+	@RequestMapping("/getTeamerCredit")
+	public @ResponseBody TeamerCredit queryWeChatUserByTelephone(@RequestParam(value = "phone") String phone) {
+		
+		return MongoDBBasic.queryWeChatUserByTelephone(phone);
+		
+	}
 }
