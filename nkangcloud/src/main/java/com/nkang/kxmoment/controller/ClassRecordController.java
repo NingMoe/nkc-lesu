@@ -1,5 +1,6 @@
 package com.nkang.kxmoment.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classexpenserecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classpayrecord;
@@ -19,6 +22,7 @@ import com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation;
 import com.nkang.kxmoment.baseobject.classhourrecord.TeamerCredit;
 import com.nkang.kxmoment.util.DateUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
+import com.nkang.kxmoment.util.RestUtils;
 //  http://leshucq.bceapp.com/ClassRecord/updateStudentBasicInfo?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&enrolledTime=2018-1-5&enrolledWay=lao&district=chongqing&totalClass=55&expenseClass=33&leftPayClass=22&leftSendClass=0&classType=珠心算
 @Controller
 @RequestMapping("/ClassRecord")
@@ -194,6 +198,9 @@ public class ClassRecordController {
 		cer.setExpenseDistrict(expenseDistrict);
 		cer.setExpenseOption(expenseOption);
 		cer.setExpenseTime(expenseTime);
+
+		Date a = new Date();
+		cer.setExpenseID(a.getTime()+"");
 		//cer.setParentConfirmExpense(parentConfirmExpense);
 		//cer.setParentConfirmTime(parentConfirmTime);
 		cer.setStudentName(studentName);
@@ -206,6 +213,7 @@ public class ClassRecordController {
 		
 		
 		if(MongoDBBasic.addClassExpenseRecord(cer)){
+			RestUtils.sendQuotationToUser(studentOpenID, "您的老师已确认销课啦，请您再次确认", "http://leshu.bj.bcebos.com/standard/leshuapp.JPG", "【乐数】请确认你的课时销课哦","http://leshucq.bceapp.com/mdm/expenseClassDetail.jsp?UID="+studentOpenID+"&&expenseID="+cer.getExpenseID());
 			return true;
 		}
 		

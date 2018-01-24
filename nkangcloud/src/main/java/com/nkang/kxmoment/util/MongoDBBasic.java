@@ -4752,9 +4752,8 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		Boolean ret1 = false;
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime());
 		try {
-			Date a = new Date();
 			DBObject dbo = new BasicDBObject();
-			dbo.put("expenseID", a.getTime()+"");
+			dbo.put("expenseID", exrecord.getExpenseID());
 			dbo.put("expenseOption", exrecord.getExpenseOption());
 		    dbo.put("expenseTime", exrecord.getExpenseTime());
 			dbo.put("expenseClassCount", exrecord.getExpenseClassCount());
