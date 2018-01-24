@@ -212,9 +212,10 @@ $(function(){
 		$("#studentName").val($(obj).find("option:selected").text());
 		jQuery.ajax({
 			type : "GET",
-			url : "../ClassRecord/getClassTypeRecords",
+			url : "../ClassRecord/getClassTypeRecordsByTeacherAndStudent",
 			data : {
-				openID : openid
+				openID : openid,
+				teacherID:<%=uid%>
 			},
 			cache : false,
 			success : function(data) {
