@@ -4432,11 +4432,14 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		//List<String> lstype = new ArrayList<String>();
 		StudentBasicInformation sbi;
 		try {
-			BasicDBObject bd=new BasicDBObject();
-			bd.append("OpenID", OpenID);
-			bd.append("teacher", teacherID);
-			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(new BasicDBObject().append("OpenID", OpenID));
+			DBObject bd=new BasicDBObject();
+			bd.put("OpenID", OpenID);
+			bd.put("teacher", teacherID);
+
+			System.out.println("have values......"+teacherID+"||"+OpenID);
+			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(bd);
 			while(wr.hasNext()){
+				System.out.println("have values......");
 				DBObject db = wr.next();
 				String key=db.get("payOption")+"";
 				int expenseClass=db.get("expenseClass")==null?0:Integer.parseInt(db.get("expenseClass")+"");
