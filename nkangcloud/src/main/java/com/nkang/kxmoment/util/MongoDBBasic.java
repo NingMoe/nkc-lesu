@@ -5008,10 +5008,36 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					listCredit.add(record);
 				}
 			} catch (Exception e) {
-				log.info("parentConfirmTime--" + e.getMessage());
+				log.info("getHistryTeamerCredit--" + e.getMessage());
 			}
 			return listCredit;
 		}
 		
+		public static TeamerCredit queryWeChatUserByTelephone(String telephone) {
+			mongoDB = getMongoDB();
+			TeamerCredit tc = null;
+			try {
+				DBObject query = new BasicDBObject();
+				query.put("telephone", telephone);
+				DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
+				if (queryresult != null) {
+					DBObject bdbo = (DBObject) queryresult.get("Teamer");
+					if(null!=bdbo){
+						tc = new TeamerCredit();
+						tc.setStudentOpenID(bdbo.get("openid")+"");
+						tc.setAmount(bdbo.get("CreditPoint")+"");
+						tc.setName(bdbo.get("realName")+"");
+					}
+				}
+			} catch (Exception e) {
+				log.info("queryWeChatUserByTelephone--" + e.getMessage());
+			}
+			if(tc==null){
+				tc = new TeamerCredit();
+				tc.setName("");
+				tc.setAmount("");
+			}
+			return tc;
+		}
 		
 }
