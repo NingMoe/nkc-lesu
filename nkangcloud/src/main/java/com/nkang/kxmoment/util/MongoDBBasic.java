@@ -4478,17 +4478,19 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(new BasicDBObject().append("teacher", teacherID));
 			while(wr.hasNext()){
 				DBObject db = wr.next();
-
+				if("0".equals(db.get("leftSendClass")+"") && "0".equals(db.get("leftSendClass")+"")){
+					continue;
+				}
 				sbi = new StudentBasicInformation();
-
 				uid=db.get("OpenID")+"";
 				if(!names.contains(uid)){
-				names.add(db.get("OpenID")+"");
-				sbi.setTeacher(db.get("teacher")+"");
-				sbi.setOpenID(db.get("OpenID")+"");
-				sbi.setRealName(db.get("name")+"");
-				//sbi.setPhone(dbcur.get("phone")+"");
-				list.add(sbi);}
+					names.add(db.get("OpenID")+"");
+					sbi.setTeacher(db.get("teacher")+"");
+					sbi.setOpenID(db.get("OpenID")+"");
+					sbi.setRealName(db.get("name")+"");
+					//sbi.setPhone(dbcur.get("phone")+"");
+					list.add(sbi);
+				}
 			}
 		}catch (Exception e) {
 			log.info( e.getMessage());
