@@ -95,6 +95,10 @@ public class ClassRecordController {
 		return MongoDBBasic.getClassTypeRecords(openid);
 		
 		}
+	@RequestMapping("/getClassTypeRecordsByTeacherAndStudent")
+	public @ResponseBody Map<String,StudentBasicInformation> getClassTypeRecordsByTeacherAndStudent(@RequestParam(value = "openID") String openid,@RequestParam(value = "teacherID") String teacherID){
+		return MongoDBBasic.getClassTypeRecordsByTeacherAndStudent(openid,teacherID);
+	}
 	@RequestMapping("/getStudentsByTeacher")
 	public @ResponseBody List<StudentBasicInformation> getStudentsByTeacher(@RequestParam(value = "teacher") String teacherID){
 		return MongoDBBasic.getStudentsByTeacher(teacherID);

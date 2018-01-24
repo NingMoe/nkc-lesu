@@ -4427,6 +4427,44 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		
 	}
 	//ClassTypeRecord
+	public static Map<String,StudentBasicInformation> getClassTypeRecordsByTeacherAndStudent(String OpenID,String teacherID){
+		Map<String,StudentBasicInformation> map = new HashMap();
+		//List<String> lstype = new ArrayList<String>();
+		StudentBasicInformation sbi;
+		try {
+			BasicDBObject bd=new BasicDBObject();
+			bd.append("OpenID", OpenID);
+			bd.append("teacher", teacherID);
+			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(new BasicDBObject().append("OpenID", OpenID));
+			while(wr.hasNext()){
+				DBObject db = wr.next();
+				String key=db.get("payOption")+"";
+				int expenseClass=db.get("expenseClass")==null?0:Integer.parseInt(db.get("expenseClass")+"");
+				int leftPayClass=db.get("leftPayClass")==null?0:Integer.parseInt(db.get("leftPayClass")+"");
+				int leftSendClass=db.get("leftSendClass")==null?0:Integer.parseInt(db.get("leftSendClass")+"");
+				int totalClass=db.get("totalClass")==null?0:Integer.parseInt(db.get("totalClass")+"");
+				String classType=db.get("payOption")==null?"":db.get("payOption")+"";
+				sbi = new StudentBasicInformation();
+				sbi.setDistrict(db.get("district")+"");
+				sbi.setTeacher(db.get("teacher")+"");
+				sbi.setEnrolledTime(db.get("enrolledTime")+"");
+				sbi.setEnrolledWay(db.get("enrolledWay")+"");
+				sbi.setExpenseClass(expenseClass);
+				sbi.setLeftPayClass(leftPayClass);
+				sbi.setLeftSendClass(leftSendClass);
+				//sbi.setPhone(dbcur.get("phone")+"");
+				sbi.setClassType(classType);
+				//sbi.setRealName(dbcur.get("realName")+"");
+				sbi.setTotalClass(totalClass);
+				map.put(key, sbi);
+			}
+		}catch (Exception e) {
+			log.info( e.getMessage());
+			}
+		return map;
+		
+	}
+	//ClassTypeRecord
 	public static List<StudentBasicInformation> getStudentsByTeacher(String teacherID){
 		List<StudentBasicInformation> list = new ArrayList<StudentBasicInformation>();
 		//List<String> lstype = new ArrayList<String>();
