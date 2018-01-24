@@ -267,7 +267,7 @@ public class ClassRecordController {
 			
 	//getHistryTeamerCredit
 	@RequestMapping("/getHistryTeamerCredit")
-	public static List<TeamerCredit> getHistryTeamerCredit(@RequestParam(value = "StudentOpenID") String StudentOpenID) {
+	public @ResponseBody List<TeamerCredit> getHistryTeamerCredit(@RequestParam(value = "StudentOpenID") String StudentOpenID) {
 		
 		return MongoDBBasic.getHistryTeamerCredit(StudentOpenID);
 		
