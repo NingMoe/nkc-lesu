@@ -226,6 +226,7 @@ $(function(){
 					
 				}
 				keyArrays=keys.split(",");
+				keyArrays.splice(keyArrays.length-1,1);
 				var index=keyArrays[0];
 
 				 var select="";
