@@ -50,7 +50,7 @@ padding-right:2%;}
 	width:100%;}
 	.title{
 	height:100%;
-	width:35%;
+	width:50%;
 	line-height:38px;
 	text-align:left;
 	font-size:15px;
@@ -58,7 +58,7 @@ padding-right:2%;}
 	}
 	.value{
 	height:100%;
-	width:64%;
+	width:50%;
 	line-height:38px;
 	text-align:right;
 	font-size:15px;

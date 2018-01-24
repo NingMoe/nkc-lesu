@@ -175,7 +175,7 @@ margin-left:7%;}
 </div>
 
 <%if(!record.isParentConfirmExpense()){ %>
-<%if(teacherID ==""){ %>
+<%if("".equals(teacherID)||teacherID==null||"null".equals(teacherID)){ %>
 <div id="xkid" class="xk">确认销课</div>
 <%}else{ %>
 <div class="xk" style="background:#cfcfcf">确认销课</div>
