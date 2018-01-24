@@ -206,11 +206,14 @@ function pay(){
 		 success:function(data){
 			 if(data){
 				swal("提交成功!", "恭喜!", "success");
-				$("#user_current_credit").html(calculation)
+				$("#user_current_credit").html(calculation);
 			 }else{
 				swal("提交失败!", "网络异常，请稍后再试！", "error");
 			}
-		}
+		},
+		error:function(){
+			swal("提交失败!", "网络异常，请稍后再试！", "error");
+        }
 	});
 	
 }
@@ -227,6 +230,7 @@ function getAmount() {
 
 function getCalculation(operation,amount) {
 	var calculation;
+	amount = parseInt(amount);
 	if(operation=="Increase"){
 		calculation = studentCredit+amount;
 	}else{
@@ -291,14 +295,16 @@ $(function(){
 					 studentID=data.studentOpenID;
 					 if(data.name){
 						 studentCredit = data.amount;
-						 if(studentCredit==null||studentCredit==""){
+						 if(studentCredit==null||studentCredit==""||studentCredit=="null"){
 							 studentCredit=0;
+						 }else{
+							 studentCredit = parseInt(studentCredit);
 						 }
 						 $("#user_current_credit_div").show();
-						 $("#user_current_credit").html(studentCredit)
+						 $("#user_current_credit").html(studentCredit);
 					 }else{
 						 $("#user_current_credit_div").hide();
-						 $("#user_current_credit").html("")
+						 $("#user_current_credit").html("");
 					 }
 					 
 				 }
@@ -377,7 +383,7 @@ $(function(){
 	</div>
 	<div id="user_current_credit_div" style="margin-top: 10px;width: 100%;float: left;display: none;">
 		<center>
-	    	<div id="user_current_credit" style="width: 80px;height: 80px;line-height: 80px;border-radius: 40px;font-size: 48px;text-align: center;color: #20b672;border: solid 1px #20b672;">0</div>
+	    	<div id="user_current_credit" style="width: 80px;height: 80px;line-height: 80px;border-radius: 40px;font-size: 30px;text-align: center;color: #20b672;border: solid 1px #20b672;">0</div>
 	    	<div style="text-align: center;">当前积分</div>
 		</center>
 	</div>
