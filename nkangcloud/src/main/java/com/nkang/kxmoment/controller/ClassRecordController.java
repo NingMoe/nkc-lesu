@@ -16,6 +16,7 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classexpenserecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classpayrecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation;
+import com.nkang.kxmoment.baseobject.classhourrecord.TeamerCredit;
 import com.nkang.kxmoment.util.DateUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
 //  http://leshucq.bceapp.com/ClassRecord/updateStudentBasicInfo?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&enrolledTime=2018-1-5&enrolledWay=lao&district=chongqing&totalClass=55&expenseClass=33&leftPayClass=22&leftSendClass=0&classType=珠心算
@@ -238,6 +239,37 @@ public class ClassRecordController {
 			@RequestParam(value = "expenseID") String expenseID
 			){
 		return MongoDBBasic.getexpenseRecord(expenseID);
+		
+	}
+	
+	@RequestMapping("/addTeamerCredit")
+	public @ResponseBody boolean AddTeamerCredit(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "StudentOpenID") String StudentOpenID,
+			@RequestParam(value = "Operation") String Operation,
+			@RequestParam(value = "Operator") String Operator,
+			@RequestParam(value = "Amount") String Amount,
+			@RequestParam(value = "ChangeJustification") String ChangeJustification){
+		TeamerCredit tc = new TeamerCredit();
+		tc.setAmount(Amount);
+		tc.setChangeJustification(ChangeJustification);
+		tc.setOperation(Operation);
+		tc.setOperator(Operator);
+		tc.setStudentOpenID(StudentOpenID);
+		if(MongoDBBasic.addHistryTeamerCredit(tc)){
+			return true;
+		}
+		return false;
+		
+	}
+			
+			
+			
+			
+	//getHistryTeamerCredit
+	@RequestMapping("/getHistryTeamerCredit")
+	public static List<TeamerCredit> getHistryTeamerCredit(@RequestParam(value = "StudentOpenID") String StudentOpenID) {
+		
+		return MongoDBBasic.getHistryTeamerCredit(StudentOpenID);
 		
 	}
 }
