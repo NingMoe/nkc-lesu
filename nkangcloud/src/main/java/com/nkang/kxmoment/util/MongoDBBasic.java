@@ -5018,7 +5018,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			TeamerCredit tc = null;
 			try {
 				DBObject query = new BasicDBObject();
-				query.put("telephone", telephone);
+				query.put("Teamer.phone", telephone);
 				DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
 				if (queryresult != null) {
 					DBObject bdbo = (DBObject) queryresult.get("Teamer");
@@ -5035,7 +5035,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			if(tc==null){
 				tc = new TeamerCredit();
 				tc.setName("");
-				tc.setAmount("");
+				tc.setAmount("0");
 			}
 			return tc;
 		}
