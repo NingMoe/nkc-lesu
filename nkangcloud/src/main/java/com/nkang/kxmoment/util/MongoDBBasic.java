@@ -4441,6 +4441,10 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			while(wr.hasNext()){
 				System.out.println("have values......");
 				DBObject db = wr.next();
+
+				if("0".equals(db.get("leftSendClass")+"") && "0".equals(db.get("leftPayClass")+"")){
+					continue;
+				}
 				String key=db.get("payOption")+"";
 				int expenseClass=db.get("expenseClass")==null?0:Integer.parseInt(db.get("expenseClass")+"");
 				int leftPayClass=db.get("leftPayClass")==null?0:Integer.parseInt(db.get("leftPayClass")+"");
@@ -4478,7 +4482,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(new BasicDBObject().append("teacher", teacherID));
 			while(wr.hasNext()){
 				DBObject db = wr.next();
-				if("0".equals(db.get("leftSendClass")+"") && "0".equals(db.get("leftSendClass")+"")){
+				if("0".equals(db.get("leftSendClass")+"") && "0".equals(db.get("leftPayClass")+"")){
 					continue;
 				}
 				sbi = new StudentBasicInformation();
@@ -4510,9 +4514,6 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			while(wr.hasNext()){
 				DBObject db = wr.next();
 
-				if("0".equals(db.get("leftSendClass")+"") && "0".equals(db.get("leftSendClass")+"")){
-					continue;
-				}
 				sbi = new StudentBasicInformation();
 
 				String key=db.get("payOption")+"";
