@@ -169,7 +169,7 @@ var studentCredit;
 function pay(){
 // 	var currentTime=getNowFormatDate();
 
-	if(studentID==null||studentID = ""){
+	if(studentID==null||studentID == ""){
 		swal("请输入正确的学生电话号码", "", "error");
 	}
 	
