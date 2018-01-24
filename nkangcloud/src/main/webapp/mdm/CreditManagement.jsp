@@ -179,7 +179,7 @@ function pay(){
 		swal("请在积分栏输入合理的数字", "", "error");
 	}
 	var justification = $("#ChangeJustification").val();
-	if(justification==null||justification.trim() == ""){
+	if(justification==null||justification.trim()==""){
 		swal("积分变化说明不能为空", "", "error");
 	}
 	
@@ -223,7 +223,7 @@ function getAmount() {
 
 function getCalculation(operation,amount) {
 	var calculation;
-	if(operation="Increase"){
+	if(operation=="Increase"){
 		calculation = studentCredit+amount;
 	}else{
 		calculation = studentCredit-amount;
