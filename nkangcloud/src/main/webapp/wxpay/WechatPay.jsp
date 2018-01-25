@@ -108,7 +108,7 @@ a:visited{
     line-height: 50px;
     background: #20b672;
     color: white;
-    position:absolute;
+    position:fixed;
     bottom:30px;}
 .infoPay{
 height:150px;
@@ -141,7 +141,7 @@ text-align:center;
     color: #757575;
     font-size: 12px;
     padding: 10px 1%;
-    position: absolute;
+    position: fixed;
     text-align: center;
     width: 100%;
     z-index: 1002;

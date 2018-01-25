@@ -213,7 +213,7 @@ public class ClassRecordController {
 		
 		
 		if(MongoDBBasic.addClassExpenseRecord(cer)){
-			RestUtils.sendQuotationToUser(studentOpenID, teacherName+"老师已确认您的"+expenseOption+"课程销课啦，请您再次确认~", "http://leshu.bj.bcebos.com/standard/leshuapp.JPG", "【乐数】"+studentName+",请确认您的课时销课哦","http://leshucq.bceapp.com/mdm/expenseClassDetail.jsp?expenseID="+cer.getExpenseID()+"&UID=");
+			RestUtils.sendQuotationToUser(studentOpenID, studentName+","+teacherName+"老师在"+expenseTime+"发起了"+expenseOption+"课销记录，您可以点击详情查看课销并确认课销，感谢支持~", "http://leshu.bj.bcebos.com/standard/leshuapp.JPG", studentName+",您有一次来自乐数新的课销请求","http://leshucq.bceapp.com/mdm/expenseClassDetail.jsp?expenseID="+cer.getExpenseID()+"&UID=");
 			return true;
 		}
 		
