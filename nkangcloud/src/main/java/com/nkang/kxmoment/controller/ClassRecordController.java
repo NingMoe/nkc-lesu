@@ -274,9 +274,6 @@ public class ClassRecordController {
 		
 	}
 			
-			
-			
-			
 	//getHistryTeamerCredit
 	@RequestMapping("/getHistryTeamerCredit")
 	public @ResponseBody List<TeamerCredit> getHistryTeamerCredit(@RequestParam(value = "StudentOpenID") String StudentOpenID) {
@@ -291,6 +288,13 @@ public class ClassRecordController {
 	public @ResponseBody TeamerCredit queryWeChatUserByTelephone(@RequestParam(value = "phone") String phone) {
 		
 		return MongoDBBasic.queryWeChatUserByTelephone(phone);
+		
+	}
+	
+	@RequestMapping("/clearAll")
+	public @ResponseBody boolean clearAll(@RequestParam(value = "phone") String phone) {
+		
+		return MongoDBBasic.clearAll(phone);
 		
 	}
 }
