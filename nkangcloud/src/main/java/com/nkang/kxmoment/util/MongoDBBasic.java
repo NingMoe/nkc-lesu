@@ -4478,8 +4478,15 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		StudentBasicInformation sbi;
 		List<String> names=new ArrayList<String>();
 		String uid="";
+		DBCursor wr;
 		try {
-			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(new BasicDBObject().append("teacher", teacherID));
+			if ("null".equals(teacherID.trim())) {
+
+				wr = mongoDB.getCollection(collectionClassTypeRecord).find();
+			} else {
+				wr = mongoDB.getCollection(collectionClassTypeRecord).find(
+						new BasicDBObject().append("teacher", teacherID));
+			}
 			while(wr.hasNext()){
 				DBObject db = wr.next();
 				if("0".equals(db.get("leftSendClass")+"") && "0".equals(db.get("leftPayClass")+"")){
@@ -4509,8 +4516,16 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		StudentBasicInformation sbi;
 		List<String> names=new ArrayList<String>();
 		String uid="";
+		DBCursor wr;
 		try {
-			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(new BasicDBObject().append("teacher", teacherID));
+			if("".equals(teacherID)){
+
+			wr = mongoDB.getCollection(collectionClassTypeRecord).find();
+			}
+			else{
+			 wr = mongoDB.getCollection(collectionClassTypeRecord).find(new BasicDBObject().append("teacher", teacherID));
+			}
+			 
 			while(wr.hasNext()){
 				DBObject db = wr.next();
 

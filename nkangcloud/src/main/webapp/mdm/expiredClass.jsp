@@ -25,6 +25,11 @@ if(res!=null){
 		phone=res.get("phone");
 	}
 }
+String isMaster="false";
+String role=MongoDBBasic.queryAttrByOpenID("role", uid,true);
+if(role.equals("Role004")||role.equals("Role005")){
+	isMaster="true";
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -126,15 +131,21 @@ height:100px!important;}
 }
 </style>
 <script>
+var isMaster='<%=isMaster%>';
 $(function(){
 	findParentList();
 	var studentRecords;
 	function findParentList(){
+
+		var uid='<%=uid%>';
+		if(isMaster=="true"){
+			uid="null";
+		}
 		$.ajax({
 			 url:'../ClassRecord/getStudentsByTeacher',
 			 type:"GET",
 			 data : {
-				 teacher:'<%=uid%>',
+				 teacher:uid
 			 },
 			 success:function(data){
 				 if(data){
@@ -163,8 +174,8 @@ $(function(){
 				if(data){
 					swal("更改成功!", "恭喜!", "success"); 
 					//alert("消课成功~");
-					$("#totalClass").val("");
-					$("#teacherComment").val("");
+					$("#totalClass").val("1");
+					$("#teacherComment").val("宝贝这节课表现得很棒，继续加油.");
 				}
 				else{
 

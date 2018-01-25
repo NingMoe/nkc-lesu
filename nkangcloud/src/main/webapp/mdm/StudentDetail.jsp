@@ -25,7 +25,14 @@ if(res!=null){
 		phone=res.get("phone");
 	}
 }
-List<StudentBasicInformation> records=MongoDBBasic.getClassTypeRecordsByTeacher(uid);
+String role=MongoDBBasic.queryAttrByOpenID("role", uid,true);
+System.out.println("role is========"+role);
+List<StudentBasicInformation> records;
+if(role.equals("Role004")||role.equals("Role005")){
+	records=MongoDBBasic.getClassTypeRecordsByTeacher("");
+}else{
+	records=MongoDBBasic.getClassTypeRecordsByTeacher(uid);
+}
 %><!DOCTYPE html>
 <html>
 <head>
