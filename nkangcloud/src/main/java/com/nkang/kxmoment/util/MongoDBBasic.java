@@ -5069,7 +5069,28 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 	//	private static String collectionClassExpenseRecord="ClassExpenseRecord";
 	//	private static String collectionClassTypeRecord="ClassTypeRecord";
 	//	private static String collectionHistryTeamerCredit="HistryTeamerCredit";	
-		
+		public static boolean clearAll(String telephone) {
+			mongoDB = getMongoDB();
+			boolean bole = false;
+			try {
+				TeamerCredit tc = queryWeChatUserByTelephone(telephone) ;
+				DBObject updateQuery = new BasicDBObject();
+				String id = tc.getStudentOpenID();
+				if(null!=id && !"".equals(id)){
+					updateQuery.put("Teamer.CreditPoint", 0);
+					DBObject doc = new BasicDBObject();
+					doc.put("$set", updateQuery);
+					mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",tc.getStudentOpenID()), doc);
+					mongoDB.getCollection(collectionHistryTeamerCredit).remove(new BasicDBObject().append("StudentOpenID",tc.getStudentOpenID()));
+					mongoDB.getCollection(collectionClassTypeRecord).remove(new BasicDBObject().append("OpenID",tc.getStudentOpenID()));
+					mongoDB.getCollection(collectionClassExpenseRecord).remove(new BasicDBObject().append("StudentOpenID",tc.getStudentOpenID()));
+					bole=clearClassPayRecords(telephone);
+				}
+			}catch (Exception e) {
+				log.info("clearHistryTeamerCredit--" + e.getMessage());
+			}
+			return bole;
+		}
 		public static boolean clearTeamerCredit(String telephone) {
 			mongoDB = getMongoDB();
 			boolean bole = false;
