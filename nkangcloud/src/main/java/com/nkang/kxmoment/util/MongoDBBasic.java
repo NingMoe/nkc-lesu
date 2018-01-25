@@ -4434,7 +4434,8 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		try {
 			DBObject bd=new BasicDBObject();
 			bd.put("OpenID", OpenID);
-			bd.put("teacher", teacherID);
+			if(!"null".equals(teacherID)){
+			bd.put("teacher", teacherID);}
 
 			System.out.println("have values......"+teacherID+"||"+OpenID);
 			DBCursor wr = mongoDB.getCollection(collectionClassTypeRecord).find(bd);

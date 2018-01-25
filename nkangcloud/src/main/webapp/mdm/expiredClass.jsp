@@ -219,6 +219,10 @@ $(function(){
 	}
 	function getClassRecordByStudent(obj){
 
+		var uid='<%=uid%>';
+		if(isMaster=="true"){
+			uid="null";
+		}
 		var openid=$(obj).find("option:selected").val();
 		$("#studentName").val($(obj).find("option:selected").text());
 		jQuery.ajax({
@@ -226,7 +230,7 @@ $(function(){
 			url : "../ClassRecord/getClassTypeRecordsByTeacherAndStudent",
 			data : {
 				openID : openid,
-				teacherID:'<%=uid%>'
+				teacherID:uid
 			},
 			cache : false,
 			success : function(data) {
