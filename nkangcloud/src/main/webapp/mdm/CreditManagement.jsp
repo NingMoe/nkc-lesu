@@ -97,8 +97,7 @@ a:visited{
   float: left;
   font-weight:bold;
 }
-.infoVal
-{
+.infoVal{
   float: right;
   width:68%;
   text-align: right;
@@ -113,7 +112,8 @@ a:visited{
     background: #20b672;
     color: white;
     position:absolute;
-    bottom:30px;}
+    bottom:0px;
+}
 .infoPay{
 padding-top:10px;
 padding-left:2%;
@@ -144,15 +144,11 @@ text-align:center;
 }
 #footer {
     background: #DCD9D9;
-    bottom: 0px;
     color: #757575;
     font-size: 12px;
     padding: 10px 0px;
-    position: absolute;
     text-align: center;
     width: 100%;
-    z-index: 1002;
-    left: 0;
 }
 .default{
 	color:white;
@@ -216,6 +212,11 @@ function pay(){
         }
 	});
 	
+}
+
+function creditHistory() {
+	var historyUrl = "http://leshucq.bceapp.com/mdm/CreditHistory.jsp?UID=<%=uid %>&StudentOpenID="+studentID;
+	window.location.href=historyUrl;
 }
 
 function getAmount() {
@@ -302,9 +303,12 @@ $(function(){
 						 }
 						 $("#user_current_credit_div").show();
 						 $("#user_current_credit").html(studentCredit);
+						 $("#user_credit_history").show();
+						 
 					 }else{
 						 $("#user_current_credit_div").hide();
 						 $("#user_current_credit").html("");
+						 $("#user_credit_history").hide();
 					 }
 					 
 				 }
@@ -322,9 +326,7 @@ $(function(){
 	});
 });
     </script>
-    	
-	
-	<a href="http://leshucq.bceapp.com/mdm/payHistory.jsp?UID=<%=uid %>" style="position: absolute;bottom: 90px;right: 10px;font-size: 14px;text-decoration: underline;color: #20b672;">查看积分记录</a>
+    <!-- logo information -->
 	<div id="data_model_div" style="height: 90px">
 		<i class="icon" style="position: absolute;top: 25px;z-index: 100;right: 20px;">
 			<div style="width: 30px;height: 30px;float: left;border-radius: 50%;overflow: hidden;">
@@ -335,60 +337,64 @@ $(function(){
 		<img style="position: absolute;top: 8px;left: 10px;z-index: 100;height: 60px;" class="HpLogo" src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo">
 		<div style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;"></div>
 	</div>
-    <div class="infoPanel">
-      <div class="infoArea">
-        <p class="infoTitle">学员手机</p>
-        <p class="infoVal"><input id="phone" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p>
-      </div>
-    </div>   
-     <div class="infoPanel">
-      <div class="infoArea">
-        <p class="infoTitle">姓名</p>
-        <p id="name" class="infoVal"></p>
-      </div>
-    </div>
-<!--     <div class="infoPanel"> -->
-<!--       <div class="infoArea"> -->
-<!--         <p class="infoTitle">积分变化说明</p> -->
-<!--         <p class="infoVal"><input id="ChangeJustification" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p> -->
-<!--       </div> -->
-<!--     </div>    -->
-	<div class="infoPanel">
-      <div class="infoArea" style="height: 50px;">
-        <p class="infoTitle">积分变化说明</p>
-        <p class="infoVal"><textarea id="ChangeJustification" rows="3" style="border: none; text-align: right; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 13.3333px; line-height: normal; font-family: Arial; margin: 0px; width: 201px;" type="text"></textarea></p>
-      </div>
-    </div>
-<!--     <div class="infoPanel"> -->
-<!--       <div class="infoPay"> -->
-<!-- 		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/minus_white.png" width="30px" height="30px"><br><span class="classText"></span>消费积分</div> -->
-<!-- 		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/plus_white.png" width="30px" height="30px"><br><span class="classText"></span>增加积分</div> -->
-<!--      </div> -->
-<!--     </div> -->
-	<div class="infoPanel">
-		<div class="infoPay">
-			<div class="infoItem price default"><span style="font-size: 30px;line-height: 35px;">5</span><br>积分</div>
-			<div class="infoItem price"><span style="font-size: 30px;line-height: 35px;">10</span><br>积分</div>
-			<div class="infoItem price" id="user_defined"><span style="font-size: 30px;line-height: 35px;">自定义</span><br>积分</div>
+	<!-- detail information -->
+	<div style="height: 82%;position: relative;">
+	    <div class="infoPanel">
+	      <div class="infoArea">
+	        <p class="infoTitle">学员手机</p>
+	        <p class="infoVal"><input id="phone" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p>
+	      </div>
+	    </div>   
+	     <div class="infoPanel">
+	      <div class="infoArea">
+	        <p class="infoTitle">姓名</p>
+	        <p id="name" class="infoVal"></p>
+	      </div>
+	    </div>
+	<!--     <div class="infoPanel"> -->
+	<!--       <div class="infoArea"> -->
+	<!--         <p class="infoTitle">积分变化说明</p> -->
+	<!--         <p class="infoVal"><input id="ChangeJustification" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p> -->
+	<!--       </div> -->
+	<!--     </div>    -->
+		<div class="infoPanel">
+	      <div class="infoArea" style="height: 50px;">
+	        <p class="infoTitle">积分变化说明</p>
+	        <p class="infoVal"><textarea id="ChangeJustification" placeholder="请输入积分变化的原因" rows="3" style="border: none; text-align: right; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 13.3333px; line-height: normal; font-family: Arial; margin: 0px; width: 201px;" type="text"></textarea></p>
+	      </div>
+	    </div>
+	<!--     <div class="infoPanel"> -->
+	<!--       <div class="infoPay"> -->
+	<!-- 		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/minus_white.png" width="30px" height="30px"><br><span class="classText"></span>消费积分</div> -->
+	<!-- 		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/plus_white.png" width="30px" height="30px"><br><span class="classText"></span>增加积分</div> -->
+	<!--      </div> -->
+	<!--     </div> -->
+		<div class="infoPanel">
+			<div class="infoPay">
+				<div class="infoItem price default"><span style="font-size: 30px;line-height: 35px;">5</span><br>积分</div>
+				<div class="infoItem price"><span style="font-size: 30px;line-height: 35px;">10</span><br>积分</div>
+				<div class="infoItem price" id="user_defined"><span style="font-size: 30px;line-height: 35px;">自定义</span><br>积分</div>
+			</div>
 		</div>
+		<div class="infoItem" id="user_defined_num_div" style="width: 90%;height: 30px;margin: 2% 5%; display: none;">
+			<input id="user_defined_num" style="border:none;height:30px;text-align: center;font-size:15px;" type="text" placeholder="请输入积分">
+		</div>
+		<div class="infoPanel">
+			<div class="infoPay" style="height: 45px;border-bottom-width: 0px;">
+				<div class="infoItem type default" style="width: 47.4%;height: 30px;" value="Decrease">消费积分</div>
+				<div class="infoItem type" style="width: 47.4%;height: 30px;" value="Increase">增加积分</div>
+		     </div>
+		</div>
+		<div id="user_current_credit_div" style="margin-top: 10px;width: 100%;float: left;display: none;">
+			<center>
+		    	<div id="user_current_credit" style="width: 80px;height: 80px;line-height: 80px;border-radius: 40px;font-size: 30px;text-align: center;color: #20b672;border: solid 1px #20b672;">0</div>
+		    	<div style="text-align: center;">当前积分</div>
+			</center>
+		</div>
+		<a id="user_credit_history" href="javascript:creditHistory();" style="position: absolute;bottom: 65px;right: 10px;font-size: 14px;text-decoration: underline;color: #20b672;display: none;">查看学生积分记录</a>
+	    <div class="infoArea pay"><a href="javascript:pay();" style="color:white;">提交请求</a></div>
 	</div>
-	<div class="infoItem" id="user_defined_num_div" style="width: 90%;height: 30px;margin: 2% 5%; display: none;">
-		<input id="user_defined_num" style="border:none;height:30px;text-align: center;font-size:15px;" type="text" placeholder="请输入积分">
-	</div>
-	<div class="infoPanel">
-		<div class="infoPay" style="height: 45px;border-bottom-width: 0px;">
-			<div class="infoItem type default" style="width: 47.4%;height: 30px;" value="Decrease">消费积分</div>
-			<div class="infoItem type" style="width: 47.4%;height: 30px;" value="Increase">增加积分</div>
-	     </div>
-	</div>
-	<div id="user_current_credit_div" style="margin-top: 10px;width: 100%;float: left;display: none;">
-		<center>
-	    	<div id="user_current_credit" style="width: 80px;height: 80px;line-height: 80px;border-radius: 40px;font-size: 30px;text-align: center;color: #20b672;border: solid 1px #20b672;">0</div>
-	    	<div style="text-align: center;">当前积分</div>
-		</center>
-	</div>
-
-    <div class="infoArea pay"><a href="javascript:pay();" style="color:white;">提交请求</a></div>
+	<!-- copyright information -->
     <div id="footer">
 		<span class="clientCopyRight"><nobr>©版权所有 | 重庆乐数珠心算</nobr></span>
 	</div>
