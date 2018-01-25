@@ -148,7 +148,7 @@
 		$("#used").text(expenseClass);
 		$("#left").text(leftPayClass);
 		$("#gift").text(leftSendClass);
-		$("#href").attr("href","expenseClassList.jsp?UID=<%=uid%>&&classType="+ct);
+		$("#href").attr("href","expenseClassList.jsp?UID=<%=uid%>&classType="+ct+"&teacherID=<%=teacherID%>");
 		FusionCharts.ready(function() {
 			var dietChart = new FusionCharts({
 				type : 'pie3d',
