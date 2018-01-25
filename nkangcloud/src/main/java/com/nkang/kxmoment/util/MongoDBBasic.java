@@ -5049,7 +5049,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					if(null!=bdbo){
 						tc = new TeamerCredit();
 						tc.setStudentOpenID(bdbo.get("openid")+"");
-						tc.setAmount(bdbo.get("CreditPoint")+"");
+						tc.setAmount(bdbo.get("CreditPoint")==null ? "0" : (bdbo.get("CreditPoint")+""));
 						tc.setName(bdbo.get("realName")+"");
 					}
 				}
@@ -5063,5 +5063,106 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			}
 			return tc;
 		}
+		
+		//-----clear-----
+	//	private static String collectionClassPayRecord="ClassPayRecord";
+	//	private static String collectionClassExpenseRecord="ClassExpenseRecord";
+	//	private static String collectionClassTypeRecord="ClassTypeRecord";
+	//	private static String collectionHistryTeamerCredit="HistryTeamerCredit";	
+		
+		public static boolean clearTeamerCredit(String telephone) {
+			mongoDB = getMongoDB();
+			boolean bole = false;
+			try {
+				TeamerCredit tc = queryWeChatUserByTelephone(telephone) ;
+				DBObject updateQuery = new BasicDBObject();
+				String id = tc.getStudentOpenID();
+				if(null!=id && !"".equals(id)){
+					updateQuery.put("Teamer.CreditPoint", 0);
+					DBObject doc = new BasicDBObject();
+					doc.put("$set", updateQuery);
+					
+					mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",tc.getStudentOpenID()), doc);
+					bole = true;
+				}
+			}catch (Exception e) {
+				log.info("clearHistryTeamerCredit--" + e.getMessage());
+			}
+			return bole;
+		}
+		
+		public static boolean clearHistryTeamerCredit(String telephone) {
+			mongoDB = getMongoDB();
+			boolean bole = false;
+			try {
+				TeamerCredit tc = queryWeChatUserByTelephone(telephone) ;
+				DBObject removeQuery = new BasicDBObject();
+				String id = tc.getStudentOpenID();
+				if(null!=id && !"".equals(id)){
+					removeQuery.put("StudentOpenID", id);
+					mongoDB.getCollection(collectionHistryTeamerCredit).remove(removeQuery);
+					bole=true;
+				}
+			}catch (Exception e) {
+				log.info("clearHistryTeamerCredit--" + e.getMessage());
+			}
+			return bole;
+		}
+		
+		public static boolean clearClassTypeRecords(String telephone) {
+			mongoDB = getMongoDB();
+			boolean bole = false;
+			try {
+				TeamerCredit tc = queryWeChatUserByTelephone(telephone) ;
+				DBObject removeQuery = new BasicDBObject();
+				String id = tc.getStudentOpenID();
+				if(null!=id && !"".equals(id)){
+					removeQuery.put("OpenID", id);
+					mongoDB.getCollection(collectionClassTypeRecord).remove(removeQuery);
+					
+					bole=true;
+				}
+			}catch (Exception e) {
+				log.info("clearClassTypeRecords--" + e.getMessage());
+			}
+			return bole;
+		}
+		
+		public static boolean clearClassExpenseRecords(String telephone) {
+			mongoDB = getMongoDB();
+			boolean bole = false;
+			try {
+				TeamerCredit tc = queryWeChatUserByTelephone(telephone) ;
+				DBObject removeQuery = new BasicDBObject();
+				String id = tc.getStudentOpenID();
+				if(null!=id && !"".equals(id)){
+					removeQuery.put("studentOpenID", id);
+					mongoDB.getCollection(collectionClassExpenseRecord).remove(removeQuery);
+					bole=true;
+				}
+			}catch (Exception e) {
+				log.info("clearClassExpenseRecords--" + e.getMessage());
+			}
+			return bole;
+		}
+		
+		public static boolean clearClassPayRecords(String telephone) {
+			mongoDB = getMongoDB();
+			boolean bole = false;
+			try {
+				DBObject removeQuery = new BasicDBObject();
+				removeQuery.put("phone", telephone);
+				mongoDB.getCollection(collectionClassPayRecord).remove(removeQuery);
+				bole=true;
+			}catch (Exception e) {
+				log.info("clearClassPayRecords--" + e.getMessage());
+			}
+			return bole;
+		}
+		
+		
+		
+		
+		
 		
 }
