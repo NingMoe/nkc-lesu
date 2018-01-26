@@ -5255,6 +5255,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			Map<String,String> map = new HashMap<String,String>();
 			Map<String,String> mapv = new HashMap<String,String>();
 			int counts = 0;
+			//map.clear();
 			try {
 				DBObject query = new BasicDBObject();
 				if(null!=expenseOption && !"".equals(expenseOption)){
@@ -5282,13 +5283,13 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 							String count= dboj.get("expenseClassCount") == null ? "0" : dboj.get("expenseClassCount")+"";
 							counts = counts+Integer.parseInt(count);
 						}
-						if(counts>0){
-							mapv.put(str, counts+"");
-						}
+						
 					}
-					
+					if(counts>0){
+						mapv.put(str, counts+"");
+					}	
 				}
-				map.clear();
+				
 				//bole=true;
 			}catch (Exception e) {
 				log.info("clearClassPayRecords--" + e.getMessage());
