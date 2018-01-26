@@ -19,6 +19,7 @@ Table Name： HistryTeamerCredit
 	String StudentOpenID;
 	String Operation;
 	String Operator;
+	String OperatorName;
 	String Amount;
 	String ChangeJustification;
 	
@@ -51,6 +52,12 @@ Table Name： HistryTeamerCredit
 	}
 	public void setOperation(String operation) {
 		Operation = operation;
+	}
+	public String getOperatorName() {
+		return OperatorName;
+	}
+	public void setOperatorName(String operatorName) {
+		OperatorName = operatorName;
 	}
 	public String getOperator() {
 		return Operator;

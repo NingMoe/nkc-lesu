@@ -4962,6 +4962,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				dbo.put("Amount", teamerCredit.getAmount());
 				dbo.put("Operation", teamerCredit.getOperation());
 				dbo.put("Operator", teamerCredit.getOperator());
+				dbo.put("OperatorName", teamerCredit.getOperatorName());
 				dbo.put("ChangeJustification", teamerCredit.getChangeJustification());
 				
 				DBObject query = new BasicDBObject();
@@ -5017,8 +5018,9 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			try {
 				BasicDBObject db=new BasicDBObject();
 				db.append("StudentOpenID",id);
-				
-				DBCursor dbo = mongoDB.getCollection(collectionHistryTeamerCredit).find(db);
+				BasicDBObject sort = new BasicDBObject();
+				sort.put("DateTime", -1);
+				DBCursor dbo = mongoDB.getCollection(collectionHistryTeamerCredit).find(db).sort(sort);
 				while(dbo.hasNext()){
 					DBObject bdbo = dbo.next();
 					record = new TeamerCredit();
@@ -5028,6 +5030,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					record.setName(bdbo.get("Name")+"");
 					record.setOperation(bdbo.get("Operation")+"");
 					record.setOperator(bdbo.get("Operator")+"");
+					record.setOperatorName(bdbo.get("OperatorName")+"");
 					record.setStudentOpenID(id);
 					listCredit.add(record);
 				}

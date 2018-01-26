@@ -27,6 +27,17 @@ if(res!=null){
 	}
 }
 List<TeamerCredit> records=MongoDBBasic.getHistryTeamerCredit(studentID);
+for(TeamerCredit tc:records){
+	String operation = tc.getOperation();
+	String amount = tc.getAmount();
+	if("Increase"==operation){
+		tc.setAmount("+"+amount);
+	}else if("Decrease"==operation){
+		tc.setAmount("-"+amount);
+	}
+}
+
+
 %><!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +63,7 @@ padding-right:2%;}
 	width:100%;}
 	.title{
 	height:100%;
-	width:55%;
+	width:45%;
 	line-height:38px;
 	text-align:left;
 	font-size:14px;
@@ -61,7 +72,7 @@ padding-right:2%;}
 	}
 	.value{
 	height:100%;
-	width:45%;
+	width:55%;
 	line-height:38px;
 	text-align:right;
 	font-size:14px;
@@ -139,10 +150,10 @@ font-weight:0!important;}
 	
 	<%for(int i=0;i<records.size();i++){ %>
 	<li>
-		<div class="expensePanel">
-			<div class="item"><p class="title"><%=records.get(i).getName() %></p><p class="value"><%=records.get(i).getDateTime() %></p></div>
-			<div class="item"><p class="title"><%=records.get(i).getOperation()=="Increase" ? "+" : "-" %><%=records.get(i).getAmount()%>积分</p><p class="value"><%=records.get(i).getChangeJustification() %></p></div>
-		</div>
+	<div class="expensePanel">
+		<div class="item"><p class="title"><%=records.get(i).getName() %></p><p class="value"><%=records.get(i).getDateTime() %></p></div>
+		<div class="item"><p class="title"><%=records.get(i).getAmount()%>积分(<%=records.get(i).getOperatorName()%>)</p><p class="value" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"><%=records.get(i).getChangeJustification() %></p></div>
+	</div>
 	</li>
 <%} %>
 

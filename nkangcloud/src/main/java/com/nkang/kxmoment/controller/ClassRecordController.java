@@ -259,6 +259,7 @@ public class ClassRecordController {
 			@RequestParam(value = "StudentOpenID") String StudentOpenID,
 			@RequestParam(value = "Operation") String Operation,
 			@RequestParam(value = "Operator") String Operator,
+			@RequestParam(value = "OperatorName") String OperatorName,
 			@RequestParam(value = "Amount") String Amount,
 			@RequestParam(value = "ChangeJustification") String ChangeJustification){
 		TeamerCredit tc = new TeamerCredit();
@@ -266,6 +267,7 @@ public class ClassRecordController {
 		tc.setChangeJustification(ChangeJustification);
 		tc.setOperation(Operation);
 		tc.setOperator(Operator);
+		tc.setOperatorName(OperatorName);
 		tc.setStudentOpenID(StudentOpenID);
 		if(MongoDBBasic.addHistryTeamerCredit(tc)){
 			return true;
