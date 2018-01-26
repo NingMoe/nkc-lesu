@@ -1,5 +1,6 @@
 package com.nkang.kxmoment.controller;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -310,6 +311,13 @@ public class ClassRecordController {
 	public @ResponseBody boolean clearAll(@RequestParam(value = "phone") String phone) {
 		
 		return MongoDBBasic.clearAll(phone);
+		
+	}
+	
+	@RequestMapping("/autoExpenseClass")
+	public List<Classexpenserecord> autoExpenseClass(@RequestParam(value = "openID") String openID,@RequestParam(value = "classType") String classType) throws ParseException {
+		
+		return MongoDBBasic.autoExpenseClass(openID,classType);
 		
 	}
 }
