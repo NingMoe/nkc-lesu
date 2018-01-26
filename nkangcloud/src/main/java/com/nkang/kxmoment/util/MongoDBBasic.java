@@ -5283,13 +5283,12 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 							String count= dboj.get("expenseClassCount") == null ? "0" : dboj.get("expenseClassCount")+"";
 							counts = counts+Integer.parseInt(count);
 						}
-						
 					}
 					if(counts>0){
 						mapv.put(str, counts+"");
 					}	
 				}
-				map.clear();
+				//map.clear();
 				//bole=true;
 			}catch (Exception e) {
 				log.info("clearClassPayRecords--" + e.getMessage());
