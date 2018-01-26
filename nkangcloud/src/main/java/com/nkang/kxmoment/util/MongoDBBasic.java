@@ -5247,6 +5247,46 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			return counts;
 		}	
 		
+		//校长 查看消课
+		public static Map<String,String> getExpenseClassCounts(String expenseOption ,String expenseDistrict ,String start , String end) {
+			mongoDB = getMongoDB();
+			Map<String,String> map = new HashMap<String,String>();
+			List ls = new ArrayList<String>();
+			int counts = 0;
+			try {
+				DBObject query = new BasicDBObject();
+				if(null!=expenseOption && !"".equals(expenseOption)){
+					query.put("expenseOption", expenseOption);
+				}
+				if(null!=expenseDistrict && !"".equals(expenseDistrict)){
+					query.put("expenseDistrict", expenseDistrict);
+				}
+				DBCursor dbc = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				while(dbc.hasNext()){
+					DBObject dbo = dbc.next();
+					String teacherOpenID = dbo.get("teacherOpenID")+"";
+					map.put(teacherOpenID, teacherOpenID);
+					//String teacherConfirmTime = dbo.get("teacherConfirmTime")+"";
+				}
+				for(String str : map.keySet()){
+					DBCursor dbo = mongoDB.getCollection(collectionClassExpenseRecord).find(new BasicDBObject().append("teacherOpenID",str));
+					while(dbo.hasNext()){
+						DBObject dboj = dbc.next();
+						String teacherConfirmTime = dboj.get("teacherConfirmTime")+"";
+						if(sdf.parse(start).before(sdf.parse(teacherConfirmTime)) && sdf.parse(teacherConfirmTime).before(sdf.parse(end))){
+							String count= dboj.get("expenseClassCount") == null ? "0" : dboj.get("expenseClassCount")+"";
+							counts = counts+Integer.parseInt(count);
+						}
+						map.put(str, counts+"");
+					}
+				}
+				//bole=true;
+			}catch (Exception e) {
+				log.info("clearClassPayRecords--" + e.getMessage());
+			}
+			return map;
+		}	
 		
 		
 }
