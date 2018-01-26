@@ -161,9 +161,9 @@ public class RestTest {
 //		System.out.println(obj.getInt("client"));
 		
 		
-		String templateId="154680";
+		String templateId="264415";
 		String to="15123944895";
-		String para="";
+		String para="付晓梅,15123944895,珠心算";
 		testTemplateSMS(true, Constants.ucpass_accountSid,Constants.ucpass_token,Constants.ucpass_appId, templateId,to,para);
 		
 		System.out.println("...完成！");
