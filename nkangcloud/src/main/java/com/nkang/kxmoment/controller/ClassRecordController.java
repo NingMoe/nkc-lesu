@@ -332,7 +332,7 @@ public class ClassRecordController {
 	}
 	
 	// http://leshucq.bceapp.com/ClassRecord/headmastergetExpenseCounts?expenseOption=趣味数学&teacherOpenID=oO8exv4NSFp5WnsKAyxAAJq7f3y8&start=2018-01-26&end=2018-01-27
-	@RequestMapping("/headmastergetExpenseCounts")
+	@RequestMapping("/headmasterGetExpenseCounts")
 	public @ResponseBody Map<String,String> getExpenseClassCounts(@RequestParam(value = "expenseOption",required=false ) String expenseOption,
 			@RequestParam(value = "expenseDistrict",required=false) String expenseDistrict,
 			@RequestParam(value = "start") String start,
