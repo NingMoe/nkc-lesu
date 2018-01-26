@@ -166,7 +166,7 @@
 
 					},
 					"data" : [ {
-						"label" : "已用课时",
+						"label" : "已销课时",
 						"value" : expenseClass
 					}, {
 						"label" : "剩余课时",
@@ -198,7 +198,7 @@
 
 				},
 				"data" : [ {
-					"label" : "已用课时",
+					"label" : "已销课时",
 					"value" : used
 				}, {
 					"label" : "剩余课时",
@@ -325,7 +325,7 @@ z-index:100000;
 		</div>
 		<a id="href" href="expenseClassList.jsp?UID=<%=uid%>&&classType=<%=classType%>&teacherID=<%=teacherID%>">
 		<div class="classRow">
-			<p>已用课时</p>
+			<p>已销课时</p>
 			<p id="used"><%=used %></p>
 		</div></a>
 		<div class="classRow" style="border-right: none;">
