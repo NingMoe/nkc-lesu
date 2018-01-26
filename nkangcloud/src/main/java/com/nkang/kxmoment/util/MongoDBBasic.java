@@ -5270,24 +5270,25 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					map.put(teacherOpenID, teacherOpenID);
 					//String teacherConfirmTime = dbo.get("teacherConfirmTime")+"";
 				}
+				
 				for(String str : map.keySet()){
 					query.put("teacherOpenID", str);
-					DBCursor dbo = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
-					while(dbo.hasNext()){
-						DBObject dboj = dbc.next();
+					DBCursor db = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
+					while(db.hasNext()){
+						DBObject dboj = db.next();
 						String teacherConfirmTime = dboj.get("teacherConfirmTime")+"";
 						if(sdf.parse(start).before(sdf.parse(teacherConfirmTime)) && sdf.parse(teacherConfirmTime).before(sdf.parse(end))){
 							String count= dboj.get("expenseClassCount") == null ? "0" : dboj.get("expenseClassCount")+"";
 							counts = counts+Integer.parseInt(count);
 						}
-						mapv.put(str, counts+"");
+						map.put(str, counts+"");
 					}
 				}
 				//bole=true;
 			}catch (Exception e) {
 				log.info("clearClassPayRecords--" + e.getMessage());
 			}
-			return mapv;
+			return map;
 		}	
 		
 		
