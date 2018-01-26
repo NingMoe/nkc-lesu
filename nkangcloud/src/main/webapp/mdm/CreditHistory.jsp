@@ -30,9 +30,9 @@ List<TeamerCredit> records=MongoDBBasic.getHistryTeamerCredit(studentID);
 for(TeamerCredit tc:records){
 	String operation = tc.getOperation();
 	String amount = tc.getAmount();
-	if("Increase"==operation){
+	if(operation.equals("Increase")){
 		tc.setAmount("+"+amount);
-	}else if("Decrease"==operation){
+	}else if(operation.equals("Decrease")){
 		tc.setAmount("-"+amount);
 	}
 }
@@ -152,7 +152,7 @@ font-weight:0!important;}
 	<li>
 	<div class="expensePanel">
 		<div class="item"><p class="title"><%=records.get(i).getName() %></p><p class="value"><%=records.get(i).getDateTime() %></p></div>
-		<div class="item"><p class="title"><%=records.get(i).getAmount()%>积分(<%=records.get(i).getOperatorName()%>)</p><p class="value" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"><%=records.get(i).getChangeJustification() %></p></div>
+		<div class="item"><p class="title"><%=records.get(i).getAmount() %>积分(<%=records.get(i).getOperatorName()%>)</p><p class="value" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"><%=records.get(i).getChangeJustification() %></p></div>
 	</div>
 	</li>
 <%} %>
