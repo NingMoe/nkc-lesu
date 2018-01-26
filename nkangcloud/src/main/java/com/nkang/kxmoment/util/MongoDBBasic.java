@@ -5231,7 +5231,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				query.put("expenseOption", expenseOption);
 				query.put("teacherOpenID", teacherOpenID);
 				DBCursor dbc = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				while(dbc.hasNext()){
 					DBObject dbo = dbc.next();
 					String teacherConfirmTime = dbo.get("teacherConfirmTime")+"";
