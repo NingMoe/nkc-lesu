@@ -5223,7 +5223,29 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		return records;
 	}
 		
-		
+		public static int getExpenseClassCountByTime(String expenseOption ,String teacherOpenID ,String start , String end) {
+			mongoDB = getMongoDB();
+			int counts = 0;
+			try {
+				DBObject query = new BasicDBObject();
+				query.put("expenseOption", expenseOption);
+				query.put("teacherOpenID", teacherOpenID);
+				DBCursor dbc = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				while(dbc.hasNext()){
+					DBObject dbo = dbc.next();
+					String teacherConfirmTime = dbo.get("teacherConfirmTime")+"";
+					if(sdf.parse(start).before(sdf.parse(teacherConfirmTime)) && sdf.parse(teacherConfirmTime).before(sdf.parse(end))){
+						String count= dbo.get("expenseClassCount") == null ? "0" : dbo.get("expenseClassCount")+"";
+						counts = counts+Integer.parseInt(count);
+					}
+				}
+				//bole=true;
+			}catch (Exception e) {
+				log.info("clearClassPayRecords--" + e.getMessage());
+			}
+			return counts;
+		}	
 		
 		
 		
