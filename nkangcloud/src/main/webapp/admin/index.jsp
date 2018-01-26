@@ -774,6 +774,7 @@ function showUpdateUserPanel(openid,name){
 				var isSmsTeam=data[0].isSmsTeam==null?'false':data[0].isSmsTeam;
 				var registerDate=data[0].registerDate==null?'':data[0].registerDate.replace(/\//g,"-");
 				var realName=data[0].realName==null?'':data[0].realName;
+				var creditPoint=data[0].creditPoint==null?'0':data[0].creditPoint;
 				var phone=data[0].phone==null?'':data[0].phone;
 				var email=data[0].email==null?'':data[0].email;
 				var role=data[0].role==null?'':data[0].role;
@@ -832,6 +833,10 @@ function showUpdateUserPanel(openid,name){
 			            +'													<tr>'
 			            +'														<td><p class="editText">手机号码</p></td>'
 			            +'														<td><input class="editInput" type="text" name="phone" value="'+phone+'"/></td>'
+			            +'													</tr>'
+			            +'													<tr>'
+			            +'														<td><p class="editText">乐数积分</p></td>'
+			            +'														<td><input class="editInput" type="text" name="creditPoint" value="'+creditPoint+'"/></td>'
 			            +'													</tr>'
 			            /* +'													<tr>'
 			            +'														<td>电子邮箱:</td>'

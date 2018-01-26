@@ -1224,6 +1224,7 @@ public class MongoDBBasic {
 			update.put("Teamer.phone", user.getPhone());
 			update.put("Teamer.role", user.getRole());
 			update.put("Teamer.level", user.getLevel());
+			update.put("Teamer.CreditPoint", user.getCreditPoint());
 
 			log.info("Teacher--" + user.getTeacher());
 			System.out.println("get level from mongoBasic"+user.getLevel());
@@ -2145,6 +2146,10 @@ public class MongoDBBasic {
 							}
 							if (teamobj.get("level") != null) {
 								weChatMDLUser.setLevel(teamobj.get("level")
+										.toString());
+							}
+							if (teamobj.get("CreditPoint") != null) {
+								weChatMDLUser.setCreditPoint(teamobj.get("CreditPoint")
 										.toString());
 							}
 							if (o.get("LastUpdatedDate") != null) {

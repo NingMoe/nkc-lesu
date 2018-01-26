@@ -24,7 +24,14 @@ public class WeChatMDLUser extends WeChatUser {
 	public String IsSmsTeam;
 	public ArrayList tag;
 	public HashMap like;
+	public String creditPoint;
 
+	public String getCreditPoint() {
+		return creditPoint;
+	}
+	public void setCreditPoint(String creditPoint) {
+		this.creditPoint = creditPoint;
+	}
 	public double distance;
 
 	public String getLevel() {

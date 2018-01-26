@@ -76,6 +76,7 @@ public class RegisterController {
 		String registerDate = request.getParameter("registerDate");
 		String role = request.getParameter("role");
 		String level = request.getParameter("level");
+		String creditPoint = request.getParameter("creditPoint");
 		System.out.println("get level is"+level);
 		String teacher = request.getParameter("teacher");
 		String realName = request.getParameter("realName");
@@ -94,6 +95,7 @@ public class RegisterController {
 		user.setRealName(realName);
 		user.setPhone(phone);
 		user.setEmail(email);
+		user.setCreditPoint(creditPoint);
 
 		System.out.println("Teacher first" + user.getTeacher());
 		if(!StringUtils.isNullOrEmpty(registerDate)){
