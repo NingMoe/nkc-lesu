@@ -386,8 +386,8 @@ $(function(){
 		</div>
 		<div class="infoPanel">
 			<div class="infoPay" style="height: 45px;border-bottom-width: 0px;">
-				<div class="infoItem type default" style="width: 47.4%;height: 30px;line-height:30px;" value="Decrease">消费积分</div>
-				<div class="infoItem type" style="width: 47.4%;height: 30px;line-height:30px;" value="Increase">增加积分</div>
+				<div class="infoItem type default" style="width: 47.4%;height: 30px;line-height:30px;" value="Increase">增加积分</div>
+				<div class="infoItem type" style="width: 47.4%;height: 30px;line-height:30px;" value="Decrease">消费积分</div>
 		     </div>
 		</div>
 		<div id="user_current_credit_div" style="margin-top: 10px;width: 100%;float: left;display: none;">
