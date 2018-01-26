@@ -5289,7 +5289,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 						mapv.put(str, counts+"");
 					}	
 				}
-				
+				map.clear();
 				//bole=true;
 			}catch (Exception e) {
 				log.info("clearClassPayRecords--" + e.getMessage());
