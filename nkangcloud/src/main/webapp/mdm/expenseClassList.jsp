@@ -27,8 +27,28 @@ if(res!=null){
 		phone=res.get("phone");
 	}
 }
+Date date=new Date();
+Date old;
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords("studentOpenID",uid, classType);
-%><!DOCTYPE html>
+String dateString="";
+for(int i=0;i<records.size();i++){
+	dateString=records.get(i).getTeacherConfirmTime();
+	System.out.println("teacherConfirmTime------"+dateString);
+	old=sdf.parse(dateString);
+
+	System.out.println("the time elapses------"+RestUtils.differentDaysByMillisecond(date,old));
+	if(RestUtils.differentDaysByMillisecond(date,old)>=7){
+
+		System.out.println("parentConfirmTime------");
+		MongoDBBasic.parentConfirmTime(records.get(i).getExpenseID(),"乐数E老师","宝贝这节课表现很棒，继续加油。因为学员长时间未确认销课，此次销课为乐数E老师代替学员进行课销确认");
+	}
+}
+records.clear();
+records=MongoDBBasic.getClassExpenseRecords("studentOpenID",uid, classType);
+
+%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
