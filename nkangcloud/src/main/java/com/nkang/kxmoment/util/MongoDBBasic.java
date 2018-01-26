@@ -4860,11 +4860,13 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		List<Classexpenserecord> recordList = new ArrayList<Classexpenserecord>();
 		DBObject query = new BasicDBObject();
 		query.put(type,openid);
+		BasicDBObject sort = new BasicDBObject();
+		sort.put("_id", -1);
 		if(classType!=""){
 
 			query.put("expenseOption",classType);
 		}
-		DBCursor records = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
+		DBCursor records = mongoDB.getCollection(collectionClassExpenseRecord).find(query).sort(sort);
 		while(records.hasNext()){
 			Classexpenserecord record = new Classexpenserecord();
 			DBObject dbo = records.next();
