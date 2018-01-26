@@ -8,7 +8,7 @@
 <%
 
 String uid = request.getParameter("UID"); 
-
+String mgtview = "老师课时视图";
 String name = "";
 String headImgUrl ="";
 String phone="";
@@ -28,8 +28,13 @@ if(res!=null){
 String role=MongoDBBasic.queryAttrByOpenID("role", uid,true);
 System.out.println("role is========"+role);
 List<StudentBasicInformation> records;
-if(role.equals("Role004")||role.equals("Role005")){
+if(role.equals("Role004")){
 	records=MongoDBBasic.getClassTypeRecordsByTeacher("");
+	mgtview = "主管课时视图";
+}
+else if(role.equals("Role005")){
+	records=MongoDBBasic.getClassTypeRecordsByTeacher("");
+	mgtview = "校长课时视图";
 }else{
 	records=MongoDBBasic.getClassTypeRecordsByTeacher(uid);
 }
@@ -37,7 +42,7 @@ if(role.equals("Role004")||role.equals("Role005")){
 <html>
 <head>
 <meta charset="utf-8" />
-<title>统一课时视图</title>
+<title><%= mgtview%></title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <script type="text/javascript" src="../nkang/jquery-1.8.0.js"></script>
 <link rel="stylesheet" href="../nkang/jquery.mobile.min.css" />
