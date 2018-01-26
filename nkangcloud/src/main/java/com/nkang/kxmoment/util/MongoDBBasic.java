@@ -5272,6 +5272,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				}
 				
 				for(String str : map.keySet()){
+					map.clear();
 					query.put("teacherOpenID", str);
 					DBCursor db = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
 					while(db.hasNext()){
@@ -5281,7 +5282,10 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 							String count= dboj.get("expenseClassCount") == null ? "0" : dboj.get("expenseClassCount")+"";
 							counts = counts+Integer.parseInt(count);
 						}
-						map.put(str, counts+"");
+						if(counts>0){
+							map.put(str, counts+"");
+						}
+						
 					}
 				}
 				//bole=true;
