@@ -341,4 +341,15 @@ public class ClassRecordController {
 			return MongoDBBasic.getExpenseClassCounts(expenseOption,expenseDistrict,start,end);
 				
 	}
+	
+	// http://leshucq.bceapp.com/ClassRecord/governorGetExpenseCounts?expenseOption=趣味数学&expenseDistrict=""&start=2018-01-26&end=2018-01-27
+		@RequestMapping("/governorGetExpenseCounts")
+		public @ResponseBody Map<String,String> governorGetExpenseClassCounts(@RequestParam(value = "expenseOption",required=false ) String expenseOption,
+				@RequestParam(value = "expenseDistrict") String expenseDistrict,
+				@RequestParam(value = "start") String start,
+				@RequestParam(value = "end") String end) {
+					
+				return MongoDBBasic.getExpenseClassCounts(expenseOption,expenseDistrict,start,end);
+					
+		}
 }
