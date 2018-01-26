@@ -5249,12 +5249,12 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			return counts;
 		}	
 		
-		//校长 查看消课
+		//校长、 主管 查看消课
 		public static Map<String,String> getExpenseClassCounts(String expenseOption ,String expenseDistrict ,String start , String end) {
 			mongoDB = getMongoDB();
 			Map<String,String> map = new HashMap<String,String>();
 			Map<String,String> mapv = new HashMap<String,String>();
-			int counts = 0;
+			
 			//map.clear();
 			try {
 				DBObject query = new BasicDBObject();
@@ -5265,31 +5265,19 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					query.put("expenseDistrict", expenseDistrict);
 				}
 				DBCursor dbc = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
 				while(dbc.hasNext()){
 					DBObject dbo = dbc.next();
 					String teacherOpenID = dbo.get("teacherOpenID")+"";
 					map.put(teacherOpenID, teacherOpenID);
 					//String teacherConfirmTime = dbo.get("teacherConfirmTime")+"";
 				}
-				
 				for(String str : map.keySet()){
-					query.put("teacherOpenID", str);
-					DBCursor db = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
-					while(db.hasNext()){
-						DBObject dboj = db.next();
-						String teacherConfirmTime = dboj.get("teacherConfirmTime")+"";
-						if(sdf.parse(start).before(sdf.parse(teacherConfirmTime)) && sdf.parse(teacherConfirmTime).before(sdf.parse(end))){
-							String count= dboj.get("expenseClassCount") == null ? "0" : dboj.get("expenseClassCount")+"";
-							counts = counts+Integer.parseInt(count);
-						}
-					}
-					if(counts>0){
-						mapv.put(str, counts+"");
-					}	
-					counts=0;
+					mapv.put(str,getCounts(str,expenseOption,expenseDistrict,start,end)+"");
 				}
-				//map.clear();
+				
+				
+				map.clear();
 				//bole=true;
 			}catch (Exception e) {
 				log.info("clearClassPayRecords--" + e.getMessage());
@@ -5297,5 +5285,29 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			return mapv;
 		}	
 		
+		public static int getCounts(String id,String expenseOption,String expenseDistrict,String start,String end) throws NumberFormatException, ParseException{
+			mongoDB = getMongoDB();
+			DBObject query = new BasicDBObject();
+			int counts = 0;
+			query.put("teacherOpenID", id);
+			if(expenseOption!=null && !"".equals(expenseOption)){
+				query.put("expenseOption", expenseOption);
+			}
+			if(expenseDistrict!=null && !"".equals(expenseDistrict)){
+				query.put("expenseDistrict", expenseDistrict);
+			}
+			DBCursor dbc = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			while(dbc.hasNext()){
+				DBObject dbo = dbc.next();
+				String teacherConfirmTime = dbo.get("teacherConfirmTime")+"";
+				if(sdf.parse(start).before(sdf.parse(teacherConfirmTime)) && sdf.parse(teacherConfirmTime).before(sdf.parse(end))){
+					String count= dbo.get("expenseClassCount") == null ? "0" : dbo.get("expenseClassCount")+"";
+					counts = counts+Integer.parseInt(count);
+				}
+			}
+			
+			return counts;
+		}
 		
 }
