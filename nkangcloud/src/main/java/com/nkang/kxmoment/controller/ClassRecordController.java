@@ -342,7 +342,7 @@ public class ClassRecordController {
 				
 	}
 	
-	// http://leshucq.bceapp.com/ClassRecord/governorGetExpenseCounts?expenseOption=趣味数学&expenseDistrict=""&start=2018-01-26&end=2018-01-27
+	// http://leshucq.bceapp.com/ClassRecord/governorGetExpenseCounts?expenseOption=趣味数学&expenseDistrict=江北校区&start=2018-01-26&end=2018-01-27
 		@RequestMapping("/governorGetExpenseCounts")
 		public @ResponseBody Map<String,String> governorGetExpenseClassCounts(@RequestParam(value = "expenseOption",required=false ) String expenseOption,
 				@RequestParam(value = "expenseDistrict") String expenseDistrict,
