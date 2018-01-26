@@ -32,16 +32,19 @@ Date old;
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 List<Classexpenserecord> records=MongoDBBasic.getClassExpenseRecords("studentOpenID",uid, classType);
 String dateString="";
+int num=0;
 for(int i=0;i<records.size();i++){
 	dateString=records.get(i).getTeacherConfirmTime();
-	System.out.println("teacherConfirmTime------"+dateString);
+	System.out.println("teacherConfirmTime*****"+dateString);
 	old=sdf.parse(dateString);
 
-	System.out.println("the time elapses------"+RestUtils.differentDaysByMillisecond(date,old));
-	if(RestUtils.differentDaysByMillisecond(date,old)-7>=0){
+	System.out.println("the time elapses*****"+RestUtils.differentDaysByMillisecond(date,old));
+	num=RestUtils.differentDaysByMillisecond(old,date)-7;
+	System.out.println("the time elapses 2*****"+num);
+	if(num>=0){
 
-		System.out.println("parentConfirmTime------");
-		MongoDBBasic.parentConfirmTime(records.get(i).getExpenseID(),"乐数E老师","宝贝这节课表现很棒，继续加油。因为学员长时间未确认销课，此次销课为乐数E老师代替学员进行课销确认");
+		System.out.println("parentConfirmTime*****");
+		MongoDBBasic.parentConfirmTime(records.get(i).getExpenseID(),"宝贝这节课表现很棒，继续加油。因为学员长时间未确认销课，此次销课为乐数E老师代替学员进行课销确认");
 	}
 }
 records.clear();

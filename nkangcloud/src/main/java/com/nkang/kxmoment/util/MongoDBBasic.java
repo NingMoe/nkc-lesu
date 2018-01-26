@@ -4885,7 +4885,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 	
 	
 	// parentConfirmTime
-	public static boolean parentConfirmTime(String id,String StudentName,String comment) {
+	public static boolean parentConfirmTime(String id,String comment) {
 
 		System.out.println("Start Parents Confirm------");
 		mongoDB = getMongoDB();
@@ -4897,11 +4897,6 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			dbo.put("parentConfirmExpense", true);
 			dbo.put("parentConfirmTime", DateUtil.timestamp2Str(cursqlTS));
 			dbo.put("parentComment", comment);
-			System.out.println("StudentName------"+StudentName);
-			if(!"null".equals(StudentName)){
-				
-				dbo.put("studentName", StudentName);
-			}
 			BasicDBObject doc = new BasicDBObject();
 			doc.put("$set", dbo);
 			BasicDBObject db=new BasicDBObject();

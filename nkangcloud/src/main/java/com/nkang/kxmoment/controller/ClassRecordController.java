@@ -253,7 +253,7 @@ public class ClassRecordController {
 			@RequestParam(value = "expenseID") String expenseID,
 			@RequestParam(value = "comment") String parentComment){
 		
-		return MongoDBBasic.parentConfirmTime(expenseID,"null",parentComment);
+		return MongoDBBasic.parentConfirmTime(expenseID,parentComment);
 			
 		
 	}
