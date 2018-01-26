@@ -198,7 +198,7 @@ function pay(){
 			 ChangeJustification:justification.trim(),
 			 StudentOpenID:studentID,
 			 Operator:'<%=uid%>',
-			 OperatorName:<%=name %>
+			 OperatorName:'<%=name %>'
 		 },
 		 success:function(data){
 			 if(data){
