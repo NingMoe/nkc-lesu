@@ -330,5 +330,15 @@ public class ClassRecordController {
 			return MongoDBBasic.getExpenseClassCountByTime(expenseOption,teacherOpenID,start,end);
 				
 	}
-			
+	
+	// http://leshucq.bceapp.com/ClassRecord/headmastergetExpenseCounts?expenseOption=趣味数学&teacherOpenID=oO8exv4NSFp5WnsKAyxAAJq7f3y8&start=2018-01-26&end=2018-01-27
+	@RequestMapping("/headmastergetExpenseCounts")
+	public @ResponseBody Map<String,String> getExpenseClassCounts(@RequestParam(value = "expenseOption") String expenseOption,
+			@RequestParam(value = "expenseDistrict") String expenseDistrict,
+			@RequestParam(value = "start") String start,
+			@RequestParam(value = "end") String end) {
+				
+			return MongoDBBasic.getExpenseClassCounts(expenseOption,expenseDistrict,start,end);
+				
+	}
 }
