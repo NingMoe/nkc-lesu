@@ -20,9 +20,12 @@ import com.nkang.kxmoment.baseobject.classhourrecord.Classexpenserecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.Classpayrecord;
 import com.nkang.kxmoment.baseobject.classhourrecord.StudentBasicInformation;
 import com.nkang.kxmoment.baseobject.classhourrecord.TeamerCredit;
+import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.DateUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
+import com.nkang.kxmoment.util.StringUtils;
+import com.nkang.kxmoment.util.SmsUtils.RestTest;
 //  http://leshucq.bceapp.com/ClassRecord/updateStudentBasicInfo?openID=oO8exvzE95JUvwpNxNTxraOqzUFI&enrolledTime=2018-1-5&enrolledWay=lao&district=chongqing&totalClass=55&expenseClass=33&leftPayClass=22&leftSendClass=0&classType=珠心算
 @Controller
 @RequestMapping("/ClassRecord")
@@ -214,6 +217,16 @@ public class ClassRecordController {
 		
 		if(MongoDBBasic.addClassExpenseRecord(cer)){
 			RestUtils.sendQuotationToUser(studentOpenID, studentName+","+teacherName+"老师在"+expenseTime+"发起了"+expenseOption+"课销记录，您可以点击详情查看课销并确认课销，感谢支持~", "http://leshu.bj.bcebos.com/standard/leshuapp.JPG", studentName+",您有一次来自乐数新的课销请求","http://leshucq.bceapp.com/mdm/expenseClassDetail.jsp?expenseID="+cer.getExpenseID()+"&UID=");
+			//send message to leshu admin to get client engaged
+
+			String tel = MongoDBBasic.queryAttrByOpenID("phone", studentOpenID, true);
+			String templateId="276211";
+			if(StringUtils.isEmpty(tel)){
+				tel = "15123944895";
+			}
+			String para=studentName+","+expenseTime+","+expenseOption;
+			RestTest.testTemplateSMS(true, Constants.ucpass_accountSid,Constants.ucpass_token,Constants.ucpass_appId, templateId,tel,para);
+
 			return true;
 		}
 		
