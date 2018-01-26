@@ -5254,7 +5254,6 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			mongoDB = getMongoDB();
 			Map<String,String> map = new HashMap<String,String>();
 			Map<String,String> mapv = new HashMap<String,String>();
-			List ls = new ArrayList<String>();
 			int counts = 0;
 			try {
 				DBObject query = new BasicDBObject();
@@ -5274,7 +5273,6 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				}
 				
 				for(String str : map.keySet()){
-					map.clear();
 					query.put("teacherOpenID", str);
 					DBCursor db = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
 					while(db.hasNext()){
@@ -5285,16 +5283,16 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 							counts = counts+Integer.parseInt(count);
 						}
 						if(counts>0){
-							map.put(str, counts+"");
+							mapv.put(str, counts+"");
 						}
-						
 					}
+					map.clear();
 				}
 				//bole=true;
 			}catch (Exception e) {
 				log.info("clearClassPayRecords--" + e.getMessage());
 			}
-			return map;
+			return mapv;
 		}	
 		
 		
