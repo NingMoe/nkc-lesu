@@ -5287,6 +5287,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					if(counts>0){
 						mapv.put(str, counts+"");
 					}	
+					counts=0;
 				}
 				//map.clear();
 				//bole=true;
