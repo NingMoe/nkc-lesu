@@ -111,7 +111,7 @@ a:visited{
     line-height: 50px;
     background: #20b672;
     color: white;
-    position:absolute;
+    position:fixed;
     bottom:0px;
 }
 .infoPay{
@@ -341,8 +341,7 @@ $(function(){
 	<div style="height: 82%;position: relative;">
 	    <div class="infoPanel">
 	      <div class="infoArea">
-	        <p class="infoTitle">学员手机</p>
-	        <p class="infoVal"><input id="phone" style="border:none;height:30px;text-align:right;font-size:15px;" type="text" value="" /></p>
+        <p class="infoTitle" style="width:100%;"><input id="phone" placeholder="请输入学员电话号码" style="width:100%;border:none;height:30px;text-align: left;font-size:15px;" type="text" value=""></p>
 	      </div>
 	    </div>   
 	     <div class="infoPanel">
@@ -358,12 +357,17 @@ $(function(){
 	<!--       </div> -->
 	<!--     </div>    -->
 		<div class="infoPanel">
-	      <div class="infoArea" style="height: 50px;">
-	        <p class="infoTitle">积分变化说明</p>
-	        <p class="infoVal"><textarea id="ChangeJustification" placeholder="请输入积分变化的原因" rows="3" style="border: none; text-align: right; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 13.3333px; line-height: normal; font-family: Arial; margin: 0px; width: 201px;" type="text"></textarea></p>
-	      </div>
-	    </div>
-	<!--     <div class="infoPanel"> -->
+			<div class="infoArea" style="height: 80px;">
+
+				<p class="infoTitle" style="width: 100%;">
+					<textarea id="ChangeJustification" placeholder="请输入积分变化的原因"
+						rows="3"
+						style="border: none; text-align: left; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial; margin: 0px;  width: 100%; height: 70px; padding-top: 10px;"
+						type="text"></textarea>
+				</p>
+			</div>
+		</div>
+		<!--     <div class="infoPanel"> -->
 	<!--       <div class="infoPay"> -->
 	<!-- 		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/minus_white.png" width="30px" height="30px"><br><span class="classText"></span>消费积分</div> -->
 	<!-- 		  <div class="infoItem price default"><img src="http://leshucq.bj.bcebos.com/icon/plus_white.png" width="30px" height="30px"><br><span class="classText"></span>增加积分</div> -->
@@ -381,17 +385,17 @@ $(function(){
 		</div>
 		<div class="infoPanel">
 			<div class="infoPay" style="height: 45px;border-bottom-width: 0px;">
-				<div class="infoItem type default" style="width: 47.4%;height: 30px;" value="Decrease">消费积分</div>
-				<div class="infoItem type" style="width: 47.4%;height: 30px;" value="Increase">增加积分</div>
+				<div class="infoItem type default" style="width: 47.4%;height: 30px;line-height:30px;" value="Decrease">消费积分</div>
+				<div class="infoItem type" style="width: 47.4%;height: 30px;line-height:30px;" value="Increase">增加积分</div>
 		     </div>
 		</div>
 		<div id="user_current_credit_div" style="margin-top: 10px;width: 100%;float: left;display: none;">
 			<center>
 		    	<div id="user_current_credit" style="width: 80px;height: 80px;line-height: 80px;border-radius: 40px;font-size: 30px;text-align: center;color: #20b672;border: solid 1px #20b672;">0</div>
-		    	<div style="text-align: center;">当前积分</div>
+		    	<div style="text-align: center;height: 40px;line-height: 40px;font-size: 16px;color: #20b672;">当前积分</div>
 			</center>
 		</div>
-		<a id="user_credit_history" href="javascript:creditHistory();" style="position: absolute;bottom: 65px;right: 10px;font-size: 14px;text-decoration: underline;color: #20b672;display: none;">查看学生积分记录</a>
+		<a id="user_credit_history" href="javascript:creditHistory();" style="position: fixed;bottom: 65px;right: 10px;font-size: 14px;text-decoration: underline;color: #20b672;display: none;">查看学生积分记录</a>
 	    <div class="infoArea pay"><a href="javascript:pay();" style="color:white;">提交请求</a></div>
 	</div>
 	<!-- copyright information -->
