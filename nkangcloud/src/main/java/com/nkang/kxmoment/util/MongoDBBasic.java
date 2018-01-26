@@ -5251,6 +5251,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		public static Map<String,String> getExpenseClassCounts(String expenseOption ,String expenseDistrict ,String start , String end) {
 			mongoDB = getMongoDB();
 			Map<String,String> map = new HashMap<String,String>();
+			Map<String,String> mapv = new HashMap<String,String>();
 			List ls = new ArrayList<String>();
 			int counts = 0;
 			try {
@@ -5270,7 +5271,8 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					//String teacherConfirmTime = dbo.get("teacherConfirmTime")+"";
 				}
 				for(String str : map.keySet()){
-					DBCursor dbo = mongoDB.getCollection(collectionClassExpenseRecord).find(new BasicDBObject().append("teacherOpenID",str));
+					query.put("teacherOpenID", str);
+					DBCursor dbo = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
 					while(dbo.hasNext()){
 						DBObject dboj = dbc.next();
 						String teacherConfirmTime = dboj.get("teacherConfirmTime")+"";
@@ -5278,14 +5280,14 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 							String count= dboj.get("expenseClassCount") == null ? "0" : dboj.get("expenseClassCount")+"";
 							counts = counts+Integer.parseInt(count);
 						}
-						map.put(str, counts+"");
+						mapv.put(str, counts+"");
 					}
 				}
 				//bole=true;
 			}catch (Exception e) {
 				log.info("clearClassPayRecords--" + e.getMessage());
 			}
-			return map;
+			return mapv;
 		}	
 		
 		
