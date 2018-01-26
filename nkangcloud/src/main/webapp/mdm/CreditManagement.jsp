@@ -341,7 +341,7 @@ $(function(){
 	<div style="height: 82%;position: relative;">
 	    <div class="infoPanel">
 	      <div class="infoArea">
-        <p class="infoTitle" style="width:100%;"><input id="phone" placeholder="请输入学员电话号码" style="width:100%;border:none;height:30px;text-align: left;font-size:15px;" type="text" value=""></p>
+        <p class="infoTitle" style="width:100%;"><input id="phone" placeholder="请输入学员电话号码" style="padding-left:10px;width:100%;border:none;height:30px;text-align: left;font-size:15px;" type="text" value=""></p>
 	      </div>
 	    </div>   
 	     <div class="infoPanel">
@@ -362,7 +362,7 @@ $(function(){
 				<p class="infoTitle" style="width: 100%;">
 					<textarea id="ChangeJustification" placeholder="请输入积分变化的原因"
 						rows="3"
-						style="border: none; text-align: left; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial; margin: 0px;  width: 100%; height: 70px; padding-top: 10px;"
+						style="border: none; padding-left:10px;text-align: left; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial; margin: 0px;  width: 100%; height: 70px; padding-top: 10px;"
 						type="text"></textarea>
 				</p>
 			</div>
