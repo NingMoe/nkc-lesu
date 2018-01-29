@@ -155,7 +155,7 @@ public class CoreService
 							article.setTitle("我的乐数课时");
 							article.setDescription("您可以在次查看课时消费情况哦");
 							article.setPicUrl("http://leshucq.bj.bcebos.com/standard/classunitmgtbig.JPG");
-							article.setUrl("http://"+Constants.baehost+"/mdm/expenseClassList.jsp?UID=" + fromUserName + "&teacherID=oO8exvz-DZOu8wc0f81v9EHYq2HE");
+							article.setUrl("http://"+Constants.baehost+"/mdm/MyClassDetail.jsp?UID=" + fromUserName);
 							articleList.add(article);
 						}
 
