@@ -143,20 +143,20 @@ public class CoreService
 						String role=MongoDBBasic.queryAttrByOpenID("role", fromUserName,true);
 
 						if(role.equals("Role001")||role.equals("Role004")||role.equals("Role005")){
-							Article article = new Article();
-							article.setTitle("我的乐数课时");
-							article.setDescription("您可以在次查看课时消费情况哦");
-							article.setPicUrl("http://leshucq.bj.bcebos.com/standard/classunitmgtbig.JPG");
-							article.setUrl("http://"+Constants.baehost+"/mdm/expenseClassList.jsp?UID=" + fromUserName + "&teacherID=oO8exvz-DZOu8wc0f81v9EHYq2HE");
-							articleList.add(article);
-						}
-						else{
 							Article article1 = new Article();
 							article1.setTitle("我的课时视图");
 							article1.setDescription("欢迎乐数老师在次查看和管理学员课时");
 							article1.setPicUrl("http://leshucq.bj.bcebos.com/standard/classunitmgtbig.JPG");
 							article1.setUrl("http://"+Constants.baehost+"/mdm/StudentDetail.jsp?UID=" + fromUserName);
 							articleList.add(article1);
+						}
+						else{
+							Article article = new Article();
+							article.setTitle("我的乐数课时");
+							article.setDescription("您可以在次查看课时消费情况哦");
+							article.setPicUrl("http://leshucq.bj.bcebos.com/standard/classunitmgtbig.JPG");
+							article.setUrl("http://"+Constants.baehost+"/mdm/expenseClassList.jsp?UID=" + fromUserName + "&teacherID=oO8exvz-DZOu8wc0f81v9EHYq2HE");
+							articleList.add(article);
 						}
 
 						newsMessage.setArticleCount(articleList.size());
