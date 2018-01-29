@@ -32,7 +32,7 @@ if(null != user) {
 		}else{
 			name = user.getNickname();
 			headImgUrl = user.getHeadImgUrl(); 
-			uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
+			uid=Constants.devOpenID;
 		}
 	}else{
 		name = user.getNickname();
