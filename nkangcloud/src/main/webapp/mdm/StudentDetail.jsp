@@ -145,6 +145,33 @@ width: 20%;
     border: 1px solid #20b672;
     border-radius: 5px;
     font-size: 15px;}
+.title{
+    width: 25%;
+    height: 40px;
+    line-height: 46px;
+    font-size: 15px;
+    float: left;
+    text-align: center;
+}
+.put{
+    float: left;
+    width: 60%;
+    height: 40px;
+}
+.single{
+    width: 98%;
+    margin-left: 1%;
+    height: 40px;
+}
+.put input,.put select{
+    margin-top: 8px;
+    border-radius: 5px;
+    border-style: none;
+    border: 1px solid #20b672;
+    height: 28px;
+    width: 80%;
+    font-size: 15px;
+}
 </style>
 <script>
 $(function(){
@@ -186,7 +213,17 @@ $(function(){
 		</div>
 	</div>	
 	<div id="navi"><p id="allData">所有数据</p><p id="search">搜索</p></div>
-	<div id="searchView"></div>
+	<div id="searchView" style="margin-top:10px;display:none;">
+	<div class="single"><p class="title">起始时间</p><p class="put"><input type="date" /></p></div>
+	<div class="single"><p class="title">终止时间</p><p class="put"><input type="date" /></p></div>
+	<div class="single"><p class="title">课时类型</p><p class="put">
+	<select><option>珠心算</option><option>趣味数学</option><option>丫丫拼音</option></select>
+	</p></div>
+	<div class="single"><p class="title">任课校区</p><p class="put">
+	
+	<select><option>江北校区</option><option>南坪校区</option><option>杨家坪校区</option><option>李家沱校区</option></select>
+	</p></div>
+	</div>
 	<div id="completeView">	
 	<div class="classPanel" style="height:45px;position:absolute;top:200px;">
 	<div class="classRow" style="border-left: none;">
