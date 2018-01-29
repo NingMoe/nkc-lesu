@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+<%@ page import="com.nkang.kxmoment.util.Constants"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ShortNews"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%

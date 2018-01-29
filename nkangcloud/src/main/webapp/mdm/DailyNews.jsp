@@ -4,6 +4,7 @@
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ShortNews"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="com.nkang.kxmoment.util.Constants"%>
 <%
 //获取由OAuthServlet中传入的参数
 SNSUserInfo user = (SNSUserInfo)request.getAttribute("snsUserInfo"); 
@@ -36,7 +37,7 @@ if(null != user) {
 	}else{
 		name = user.getNickname();
 		headImgUrl = user.getHeadImgUrl(); 
-		uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
+		uid=Constants.devOpenID;
 	}
 	SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 	Date date=new Date();
