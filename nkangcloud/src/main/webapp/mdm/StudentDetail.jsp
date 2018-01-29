@@ -179,7 +179,7 @@ width: 20%;
 }
 #yes{
 box-shadow:none;
-width: 30%;
+width: 99%;
     height: 30px;
     line-height:30px;
     text-align:center;
@@ -187,10 +187,8 @@ width: 30%;
     border: 1px solid #20b672;
     background: #20b672;
     color: white;
-    border-radius: 5px;
     font-size:15px;
     margin-top: 15px;
-    margin-left: 35%;
 }
 
 .resultPanel,.masterPanel{
@@ -306,7 +304,7 @@ $(function(){
 			style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
 	</div>	
-	<div id="navi"><p id="allData">所有数据</p><p id="search">搜索</p></div>
+	<div id="navi"><p id="allData">智能搜索</p><p id="search">条件搜索</p></div>
 	<div id="searchView" style="margin-top:10px;display:none;">
 	<form id="searchForm">
 	<%if(!role.equals("Role004")&&!role.equals("Role005")){ %>
@@ -328,7 +326,7 @@ $(function(){
 	<%} %>
 	<option>江北校区</option><option>南坪校区</option><option>杨家坪校区</option><option>李家沱校区</option></select>
 	</p></div>
-	<div class="single"><p id="yes">确认</p></div>
+	<div class="single"><p id="yes">查询</p></div>
 	</form>
 	
 	<div class="resultPanel">
