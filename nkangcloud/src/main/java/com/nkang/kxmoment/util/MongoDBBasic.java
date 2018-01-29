@@ -5062,7 +5062,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					DBObject bdbo = (DBObject) queryresult.get("Teamer");
 					if(null!=bdbo){
 						tc = new TeamerCredit();
-						tc.setStudentOpenID(bdbo.get("openid")+"");
+						//tc.setStudentOpenID(bdbo.get("openid")+"");
 						tc.setAmount(bdbo.get("CreditPoint")==null ? "0" : (bdbo.get("CreditPoint")+""));
 						tc.setName(bdbo.get("realName")+"");
 					}
@@ -5097,7 +5097,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",tc.getStudentOpenID()), doc);
 					mongoDB.getCollection(collectionHistryTeamerCredit).remove(new BasicDBObject().append("StudentOpenID",tc.getStudentOpenID()));
 					mongoDB.getCollection(collectionClassTypeRecord).remove(new BasicDBObject().append("OpenID",tc.getStudentOpenID()));
-					mongoDB.getCollection(collectionClassExpenseRecord).remove(new BasicDBObject().append("StudentOpenID",tc.getStudentOpenID()));
+					mongoDB.getCollection(collectionClassExpenseRecord).remove(new BasicDBObject().append("studentOpenID",tc.getStudentOpenID()));
 					bole=clearClassPayRecords(telephone);
 				}
 			}catch (Exception e) {
