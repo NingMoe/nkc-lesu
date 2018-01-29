@@ -172,6 +172,21 @@ width: 20%;
     width: 80%;
     font-size: 15px;
 }
+#yes{
+box-shadow:none;
+width: 30%;
+    height: 30px;
+    line-height:30px;
+    text-align:center;
+    border-style: none;
+    border: 1px solid #20b672;
+    background: #20b672;
+    color: white;
+    border-radius: 5px;
+    font-size:15px;
+    margin-top: 15px;
+    margin-left: 35%;
+}
 </style>
 <script>
 $(function(){
@@ -214,15 +229,16 @@ $(function(){
 	</div>	
 	<div id="navi"><p id="allData">所有数据</p><p id="search">搜索</p></div>
 	<div id="searchView" style="margin-top:10px;display:none;">
-	<div class="single"><p class="title">起始时间</p><p class="put"><input type="date" /></p></div>
-	<div class="single"><p class="title">终止时间</p><p class="put"><input type="date" /></p></div>
+	<div class="single"><p class="title">起始时间</p><p class="put"><input name="start" type="date" /></p></div>
+	<div class="single"><p class="title">终止时间</p><p class="put"><input name="end" type="date" /></p></div>
 	<div class="single"><p class="title">课时类型</p><p class="put">
-	<select><option>珠心算</option><option>趣味数学</option><option>丫丫拼音</option></select>
+	<select name="expenseOption"><option>珠心算</option><option>趣味数学</option><option>丫丫拼音</option></select>
 	</p></div>
 	<div class="single"><p class="title">任课校区</p><p class="put">
 	
 	<select><option>江北校区</option><option>南坪校区</option><option>杨家坪校区</option><option>李家沱校区</option></select>
 	</p></div>
+	<div class="single"><p id="yes">确认</p></div>
 	</div>
 	<div id="completeView">	
 	<div class="classPanel" style="height:45px;position:absolute;top:200px;">
