@@ -313,13 +313,6 @@ public class CoreService
 						article1.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FNavigator.jsp?UID="+fromUserName+"&response_type=code&scope=snsapi_userinfo&state="+fromUserName+"#wechat_redirect");
 						articleList.add(article1);
 
-/*						Article article3 = new Article();
-						article3.setTitle("乐数在线练习 - 迷时师渡");
-						article3.setDescription("乐数在线练习 - 迷时师渡");
-						article3.setPicUrl("http://leshucq.bj.bcebos.com/standard/leshuTeacher.png");
-						article3.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FNavigator.jsp?UID="+fromUserName+"&response_type=code&scope=snsapi_userinfo&state="+fromUserName+"#wechat_redirect");
-						articleList.add(article3);*/
-						
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
@@ -341,14 +334,7 @@ public class CoreService
 						article1.setPicUrl("http://leshu.bj.bcebos.com/icon/student.png");
 						article1.setUrl("http://wxe542e71449270554.dodoca.com/164368/phonewebsitet/websitet?uid=164368&openid=FANS_ID&id=99846#mp.weixin.qq.com");
 						articleList.add(article1);
-						
-/*						Article article2 = new Article();
-						article2.setTitle("师资风采");
-						article2.setDescription("生产环境智能监控");
-						article2.setPicUrl("http://leshu.bj.bcebos.com/icon/Teacher.png");
-						article2.setUrl("http://wxe542e71449270554.dodoca.com/164368/phonewebsitet/websitet?uid=164368&openid=FANS_ID&id=99846#mp.weixin.qq.com");
-						articleList.add(article2);*/
-						
+
 						Article article3 = new Article();
 						article3.setTitle("家园共育");
 						article3.setDescription("家园共育");
