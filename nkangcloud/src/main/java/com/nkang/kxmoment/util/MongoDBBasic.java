@@ -5097,11 +5097,20 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					updateQuery.put("Teamer.CreditPoint", 0);
 					DBObject doc = new BasicDBObject();
 					doc.put("$set", updateQuery);
-					mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",tc.getStudentOpenID()), doc);
-					mongoDB.getCollection(collectionHistryTeamerCredit).remove(new BasicDBObject().append("StudentOpenID",tc.getStudentOpenID()));
-					mongoDB.getCollection(collectionClassTypeRecord).remove(new BasicDBObject().append("OpenID",tc.getStudentOpenID()));
-					mongoDB.getCollection(collectionClassExpenseRecord).remove(new BasicDBObject().append("studentOpenID",tc.getStudentOpenID()));
-					bole=clearClassPayRecords(telephone);
+					mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",id), doc);
+					DBObject removeQuery = new BasicDBObject();
+					removeQuery.put("StudentOpenID", id);
+					mongoDB.getCollection(collectionHistryTeamerCredit).remove(removeQuery);
+					DBObject removeQuery1 = new BasicDBObject();
+					removeQuery1.put("OpenID", id);
+					mongoDB.getCollection(collectionClassTypeRecord).remove(removeQuery1);
+					DBObject removeQuery2 = new BasicDBObject();
+					removeQuery2.put("studentOpenID", id);
+					mongoDB.getCollection(collectionClassExpenseRecord).remove(removeQuery2);
+					/*if(clearClassExpenseRecords(telephone)){
+						bole=clearClassPayRecords(telephone);
+					}*/
+					bole=true;
 				}
 			}catch (Exception e) {
 				log.info("clearHistryTeamerCredit--" + e.getMessage());
