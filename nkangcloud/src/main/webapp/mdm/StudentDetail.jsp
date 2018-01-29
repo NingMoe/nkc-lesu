@@ -241,6 +241,7 @@ $(function(){
 		
 	});
 	$("#yes").on("click",function(){
+		$(".new").remove();
 		var datas=$("#searchForm").serialize();
 		$.ajax({
 			url:'<%=redirectUrl%>',
@@ -256,13 +257,17 @@ $(function(){
 					var i=0;
 					for(var key in result){
 						if(i%2==0){
-							$("#qishuName").append("<p>"+key+"</p>");
-							$("#qishuValue").append("<p>"+result[key]+"</p>");
+							$("#qishuName").append("<p class='new'>"+key+"</p>");
+							if(i==result.length-1){
+								$("#qishuValue").append("<p class='new'>"+result[key]+"</p>");
+								}else{
+								$("#qishuValue").append("<p class='new' style='border-right:1px solid #cfcfcf'>"+result[key]+"</p>");
+								}
 						}
 						else{
 
-							$("#oushuName").append("<p>"+key+"</p>");
-							$("#oushuValue").append("<p>"+result[key]+"</p>");
+							$("#oushuName").append("<p class='new'>"+key+"</p>");
+							$("#oushuValue").append("<p class='new'>"+result[key]+"</p>");
 						}
 						i++;
 					}
