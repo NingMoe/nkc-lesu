@@ -324,10 +324,11 @@ public class ClassRecordController {
 	@RequestMapping("/getExpenseCounts")
 	public @ResponseBody int getExpenseClassCountByTime(@RequestParam(value = "expenseOption") String expenseOption,
 			@RequestParam(value = "teacherOpenID") String teacherOpenID,
+			@RequestParam(value = "expenseDistrict") String expenseDistrict,
 			@RequestParam(value = "start") String start,
 			@RequestParam(value = "end") String end) {
 				
-			return MongoDBBasic.getExpenseClassCountByTime(expenseOption,teacherOpenID,start,end);
+			return MongoDBBasic.getExpenseClassCountByTime(expenseOption,teacherOpenID,expenseDistrict,start,end);
 				
 	}
 	

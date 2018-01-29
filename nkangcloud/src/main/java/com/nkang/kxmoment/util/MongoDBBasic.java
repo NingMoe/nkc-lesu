@@ -4740,10 +4740,13 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		List<Classpayrecord> records = new ArrayList<Classpayrecord>();
 		DBCursor dbcur;
 		try {
+
+			BasicDBObject sort = new BasicDBObject();
+			sort.put("_id", -1);
 			if(who==""&&openid==""){
-				dbcur = mongoDB.getCollection(collectionClassPayRecord).find();
+				dbcur = mongoDB.getCollection(collectionClassPayRecord).find().sort(sort);
 			}else{
-				dbcur = mongoDB.getCollection(collectionClassPayRecord).find(new BasicDBObject().append(who, openid));
+				dbcur = mongoDB.getCollection(collectionClassPayRecord).find(new BasicDBObject().append(who, openid)).sort(sort);
 			}
 			while(dbcur.hasNext()){
 				Classpayrecord classrecord = new Classpayrecord();
@@ -5225,13 +5228,14 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		return records;
 	}
 		
-		public static int getExpenseClassCountByTime(String expenseOption ,String teacherOpenID ,String start , String end) {
+		public static int getExpenseClassCountByTime(String expenseOption ,String teacherOpenID ,String district,String start , String end) {
 			mongoDB = getMongoDB();
 			int counts = 0;
 			try {
 				DBObject query = new BasicDBObject();
 				query.put("expenseOption", expenseOption);
 				query.put("teacherOpenID", teacherOpenID);
+				query.put("expenseDistrict", district);
 				DBCursor dbc = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				while(dbc.hasNext()){
@@ -5255,10 +5259,10 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			Map<String,String> map = new HashMap<String,String>();
 			try {
 				DBObject query = new BasicDBObject();
-				if(null!=expenseOption && !"".equals(expenseOption)){
+				if(!"全部".equals(expenseOption)){
 					query.put("expenseOption", expenseOption);
 				}
-				if(null!=expenseDistrict && !"".equals(expenseDistrict)){
+				if(!"全部".equals(expenseDistrict)){
 					query.put("expenseDistrict", expenseDistrict);
 				}
 				DBCursor dbc = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
@@ -5268,11 +5272,11 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					String teacherConfirmTime = dbo.get("teacherConfirmTime")+"";
 					if(sdf.parse(start).before(sdf.parse(teacherConfirmTime)) && sdf.parse(teacherConfirmTime).before(sdf.parse(end))){
 						String count= dbo.get("expenseClassCount") == null ? "0" : dbo.get("expenseClassCount")+"";
-						String teacherOpenID = dbo.get("teacherOpenID")+"";
-						if(map.keySet().contains(teacherOpenID)){
-							map.put(teacherOpenID, (Integer.parseInt(map.get(teacherOpenID))+Integer.parseInt(count))+"");
+						String teacherName = dbo.get("teacherName")+"";
+						if(map.keySet().contains(teacherName)){
+							map.put(teacherName, (Integer.parseInt(map.get(teacherName))+Integer.parseInt(count))+"");
 						}else{
-							map.put(teacherOpenID, count);
+							map.put(teacherName, count);
 						}
 						
 					}

@@ -25,19 +25,23 @@ if(res!=null){
 		phone=res.get("phone");
 	}
 }
+String redirectUrl="../ClassRecord/getExpenseCounts";
 String role=MongoDBBasic.queryAttrByOpenID("role", uid,true);
 System.out.println("role is========"+role);
 List<StudentBasicInformation> records;
 if(role.equals("Role004")){
 	records=MongoDBBasic.getClassTypeRecordsByTeacher("");
 	mgtview = "主管课时视图";
+	redirectUrl="../ClassRecord/governorGetExpenseCounts";
 }
 else if(role.equals("Role005")){
 	records=MongoDBBasic.getClassTypeRecordsByTeacher("");
 	mgtview = "校长课时视图";
+	redirectUrl="../ClassRecord/headmasterGetExpenseCounts";
 }else{
 	records=MongoDBBasic.getClassTypeRecordsByTeacher(uid);
 }
+int studentCount=MongoDBBasic.getStudentsByTeacher(uid).size();
 %><!DOCTYPE html>
 <html>
 <head>
@@ -171,6 +175,7 @@ width: 20%;
     height: 28px;
     width: 80%;
     font-size: 15px;
+    padding-left:5px;
 }
 #yes{
 box-shadow:none;
@@ -187,8 +192,39 @@ width: 30%;
     margin-top: 15px;
     margin-left: 35%;
 }
+
+.resultPanel,.masterPanel{
+display:none;
+position:relative;
+top:20px;
+width:94%;
+margin-left:3%;
+height:auto;
+border-top:1px solid #CFCFCF;
+}
+.classRowWidth{
+
+width:33%;
+}
+.classRowResult{
+height:70px;
+width:24.7%;
+margin-bottom:5px;
+float:left;
+border-left:1px solid #CFCFCF;}
+.classRowResult p{
+font-size:13px;
+width:100%;
+float:left;
+height:35px;
+border-bottom: 1px solid #cfcfcf;
+line-height:35px;
+text-align:center;
+font-family:黑体;
+}
 </style>
 <script>
+var role='<%=role%>';
 $(function(){
 	$("#search").on("click",function(){
 		$(this).css({"background":"#20b672","color":"white"});
@@ -203,6 +239,44 @@ $(function(){
 		$("#completeView").show();
 		$("#searchView").hide();
 		
+	});
+	$("#yes").on("click",function(){
+		var datas=$("#searchForm").serialize();
+		$.ajax({
+			url:'<%=redirectUrl%>',
+			data:datas,
+			type:"POST",
+			dataType:"json",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			cache:false,
+			async:false,
+			success:function(result) {
+				if(role=="Role004"||role=="Role005"){ 
+
+					var i=0;
+					for(var key in result){
+						if(i%2==0){
+							$("#qishuName").append("<p>"+key+"</p>");
+							$("#qishuValue").append("<p>"+result[key]+"</p>");
+						}
+						else{
+
+							$("#oushuName").append("<p>"+key+"</p>");
+							$("#oushuValue").append("<p>"+result[key]+"</p>");
+						}
+						i++;
+					}
+
+					$(".masterPanel").show();
+				}else{
+					$("#total").text(result);
+					$("#type").text($("#expenseOption").find("option:selected").text());
+					$("#district").text($("#districtSelect").find("option:selected").text());
+					$(".resultPanel").show();
+				}
+				
+			}
+		});
 	});
 });
 </script>
@@ -229,16 +303,64 @@ $(function(){
 	</div>	
 	<div id="navi"><p id="allData">所有数据</p><p id="search">搜索</p></div>
 	<div id="searchView" style="margin-top:10px;display:none;">
+	<form id="searchForm">
+	<%if(!role.equals("Role004")&&!role.equals("Role005")){ %>
+	<input name="teacherOpenID" type="hidden" value="<%=uid %>" />
+	<%} %>
 	<div class="single"><p class="title">起始时间</p><p class="put"><input name="start" type="date" /></p></div>
 	<div class="single"><p class="title">终止时间</p><p class="put"><input name="end" type="date" /></p></div>
 	<div class="single"><p class="title">课时类型</p><p class="put">
-	<select name="expenseOption"><option>珠心算</option><option>趣味数学</option><option>丫丫拼音</option></select>
+	<select id="expenseOption" name="expenseOption">
+	<%if(role.equals("Role004")||role.equals("Role005")){ %>
+	<option>全部</option>
+	<%} %>
+	<option>珠心算</option><option>趣味数学</option><option>丫丫拼音</option></select>
 	</p></div>
 	<div class="single"><p class="title">任课校区</p><p class="put">
-	
-	<select><option>江北校区</option><option>南坪校区</option><option>杨家坪校区</option><option>李家沱校区</option></select>
+	<select id="districtSelect" name="expenseDistrict">
+		<%if(role.equals("Role005")){ %>
+	<option>全部</option>
+	<%} %>
+	<option>江北校区</option><option>南坪校区</option><option>杨家坪校区</option><option>李家沱校区</option></select>
 	</p></div>
 	<div class="single"><p id="yes">确认</p></div>
+	</form>
+	
+	<div class="resultPanel">
+		<div class="classRowResult" style="border-left: none;">
+		<p>学生总数</p>
+			<p ><%=studentCount %></p>
+		</div>
+		<div class="classRowResult">
+			<p>课时类型</p>
+			<p id="type"></p>
+		</div>
+		<div class="classRowResult" style="border-right: none;">
+			<p>课时校区</p>
+			<p id="district"></p>
+		</div>
+		<div class="classRowResult" style="border-right: none;">
+			
+			<p>上课总数</p>
+			<p id="total"></p>
+		</div>
+	</div>
+	
+		<div class="masterPanel" style="height:auto;border-bottom:none;">
+		<div id="qishuName" class="classRowResult" style="border-left: none;height:auto;">
+		<p>老师姓名</p>
+		</div>
+		<div id="qishuValue" class="classRowResult" style="height:auto;">
+			<p>上课总数</p>
+		</div>
+		<div  id="oushuName" class="classRowResult" style="border-right: none;height:auto;">
+			<p>老师姓名</p>
+		</div>
+		<div  id="oushuValue" class="classRowResult" style="border-right: none;height:auto;">
+			
+			<p>上课总数</p>
+		</div>
+	</div>
 	</div>
 	<div id="completeView">	
 	<div class="classPanel" style="height:45px;position:absolute;top:200px;">
