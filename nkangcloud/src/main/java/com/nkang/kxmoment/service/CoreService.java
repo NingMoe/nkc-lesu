@@ -138,10 +138,30 @@ public class CoreService
 
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
 					String eventKey = requestObject.element("EventKey").getText();
-					if(eventKey.equals("myleshuclass")){ // Data Lake
-						respContent = "正在建设中，请等待";
-						textMessage.setContent(respContent);
-						respXml = MessageUtil.textMessageToXml(textMessage);
+					if(eventKey.equals("myleshuclass")){
+						articleList.clear();
+						String role=MongoDBBasic.queryAttrByOpenID("role", fromUserName,true);
+
+						if(role.equals("Role001")||role.equals("Role004")||role.equals("Role005")){
+							Article article = new Article();
+							article.setTitle("我的乐数课时");
+							article.setDescription("我的乐数课时");
+							article.setPicUrl("http://leshucq.bj.bcebos.com/standard/classunitmgtbig.JPG");
+							article.setUrl("http://"+Constants.baehost+"/mdm/MyClassDetail.jsp?UID=" + fromUserName);
+							articleList.add(article);
+						}
+						else{
+							Article article1 = new Article();
+							article1.setTitle("我的课时视图");
+							article1.setDescription("我的乐数课时");
+							article1.setPicUrl("http://leshucq.bj.bcebos.com/standard/classunitmgtbig.JPG");
+							article1.setUrl("http://"+Constants.baehost+"/mdm/StudentDetail.jsp?UID=" + fromUserName);
+							articleList.add(article1);
+						}
+
+						newsMessage.setArticleCount(articleList.size());
+						newsMessage.setArticles(articleList);
+						respXml = MessageUtil.newsMessageToXml(newsMessage);
 					}
 					else if(eventKey.equals("mycoupen")){ // Data Lake
 						respContent = "正在建设中，请等待";
