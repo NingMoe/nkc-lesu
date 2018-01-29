@@ -5065,7 +5065,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					DBObject bdbo = (DBObject) queryresult.get("Teamer");
 					if(null!=bdbo){
 						tc = new TeamerCredit();
-						//tc.setStudentOpenID(bdbo.get("openid")+"");
+						tc.setStudentOpenID(bdbo.get("openid")+"");
 						tc.setAmount(bdbo.get("CreditPoint")==null ? "0" : (bdbo.get("CreditPoint")+""));
 						tc.setName(bdbo.get("realName")+"");
 					}
