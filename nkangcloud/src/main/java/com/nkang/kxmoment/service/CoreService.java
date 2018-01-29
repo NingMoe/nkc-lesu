@@ -317,9 +317,9 @@ public class CoreService
 						article2.setTitle("乐数在线练习 - 虚拟算盘");
 						article2.setDescription("乐数在线练习 - 虚拟算盘");
 						article2.setPicUrl("http://leshucq.bj.bcebos.com/standard/classunitmgt.png");
-						article2.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FNavigator.jsp?UID="+fromUserName+"&response_type=code&scope=snsapi_userinfo&state="+fromUserName+"#wechat_redirect");
+						article2.setUrl("http://"+Constants.baehost+"/mdm/AbacusSimulate2.jsp?UID=" + fromUserName);
 						articleList.add(article2);
-
+						
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
