@@ -119,7 +119,51 @@ font-weight:bold;
 .ui-btn-up-c{
 background-image:none!important;
 font-weight:0!important;}
+
+#navi{
+width: 100%;
+height: 35px;
+border-bottom: 1px solid #20b672;
+overflow: hidden;
+}
+#allData{
+width: 20%;
+    padding: 10px 10px;
+    float: left;
+    text-align: center;
+    margin-left: 10px;
+    border: 1px solid #20b672;
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    background: #20b672;}
+ #search{
+ width: 20%;
+    padding: 10px 10px;
+    float: left;
+    text-align: center;
+    border: 1px solid #20b672;
+    border-radius: 5px;
+    font-size: 15px;}
 </style>
+<script>
+$(function(){
+	$("#search").on("click",function(){
+		$(this).css({"background":"#20b672","color":"white"});
+		$("#allData").css({"background":"none","color":"black"});
+		$("#completeView").hide();
+		$("#searchView").show();
+		
+	});
+	$("#allData").on("click",function(){
+		$(this).css({"background":"#20b672","color":"white"});
+		$("#search").css({"background":"none","color":"black"});
+		$("#completeView").show();
+		$("#searchView").hide();
+		
+	});
+});
+</script>
 </head>
 <body>
 	<div id="data_model_div" style="height: 100px">
@@ -140,8 +184,11 @@ font-weight:0!important;}
 		<div
 			style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
-	</div>		
-	<div class="classPanel" style="height:45px;position:absolute;top:150px;">
+	</div>	
+	<div id="navi"><p id="allData">所有数据</p><p id="search">搜索</p></div>
+	<div id="searchView"></div>
+	<div id="completeView">	
+	<div class="classPanel" style="height:45px;position:absolute;top:200px;">
 	<div class="classRow" style="border-left: none;">
 			<p class="strong">学员姓名</p>
 		</div>
@@ -158,7 +205,7 @@ font-weight:0!important;}
 			<p class="strong">总课时/赠</p>
 		</div>
 	</div>
-	<div style="position: absolute; top: 100px; overflow: hidden" data-role="page" style="padding-top:45px" data-theme="c">
+	<div style="position: absolute; top: 150px; overflow: hidden" data-role="page" style="padding-top:45px" data-theme="c">
 
 		<ul id="Work_Mates_div" class="Work_Mates_div2" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="margin-top: 55px">
 
@@ -187,6 +234,7 @@ font-weight:0!important;}
 	</li>
 <%}}%>
 		</ul>
+	</div>
 	</div>
 
 </body>
