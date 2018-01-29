@@ -5253,9 +5253,6 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 		public static Map<String,String> getExpenseClassCounts(String expenseOption ,String expenseDistrict ,String start , String end) {
 			mongoDB = getMongoDB();
 			Map<String,String> map = new HashMap<String,String>();
-			Map<String,String> mapv = new HashMap<String,String>();
-			
-			//map.clear();
 			try {
 				DBObject query = new BasicDBObject();
 				if(null!=expenseOption && !"".equals(expenseOption)){
@@ -5265,27 +5262,28 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					query.put("expenseDistrict", expenseDistrict);
 				}
 				DBCursor dbc = mongoDB.getCollection(collectionClassExpenseRecord).find(query);
-				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				while(dbc.hasNext()){
 					DBObject dbo = dbc.next();
-					String teacherOpenID = dbo.get("teacherOpenID")+"";
-					map.put(teacherOpenID, teacherOpenID);
-					//String teacherConfirmTime = dbo.get("teacherConfirmTime")+"";
+					String teacherConfirmTime = dbo.get("teacherConfirmTime")+"";
+					if(sdf.parse(start).before(sdf.parse(teacherConfirmTime)) && sdf.parse(teacherConfirmTime).before(sdf.parse(end))){
+						String count= dbo.get("expenseClassCount") == null ? "0" : dbo.get("expenseClassCount")+"";
+						String teacherOpenID = dbo.get("teacherOpenID")+"";
+						if(map.keySet().contains(teacherOpenID)){
+							map.put(teacherOpenID, (Integer.parseInt(map.get(teacherOpenID))+Integer.parseInt(count))+"");
+						}else{
+							map.put(teacherOpenID, count);
+						}
+						
+					}
 				}
-				for(String str : map.keySet()){
-					mapv.put(str,getCounts(str,expenseOption,expenseDistrict,start,end)+"");
-				}
-				
-				
-				map.clear();
-				//bole=true;
 			}catch (Exception e) {
 				log.info("clearClassPayRecords--" + e.getMessage());
 			}
-			return mapv;
+			return map;
 		}	
 		
-		public static int getCounts(String id,String expenseOption,String expenseDistrict,String start,String end) throws NumberFormatException, ParseException{
+		/*public static int getCounts(String id,String expenseOption,String expenseDistrict,String start,String end) throws NumberFormatException, ParseException{
 			mongoDB = getMongoDB();
 			DBObject query = new BasicDBObject();
 			int counts = 0;
@@ -5308,6 +5306,6 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			}
 			
 			return counts;
-		}
+		}*/
 		
 }
