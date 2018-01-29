@@ -179,7 +179,7 @@ width: 20%;
 }
 #yes{
 box-shadow:none;
-width: 99%;
+width: 99。5%;
     height: 30px;
     line-height:30px;
     text-align:center;
