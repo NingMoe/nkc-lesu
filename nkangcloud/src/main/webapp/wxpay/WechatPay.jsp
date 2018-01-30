@@ -339,6 +339,24 @@ $(function(){
 		});
 		
 	});
+	$("#classType").on("change",function(){
+		var type=$(this).find("option:selected").text();
+		if(type=="丫丫拼音"){
+			$("#yypy").show();
+			$("#zxs").hide();
+			$("#qwsx").hide();
+		}
+		if(type=="珠心算"){
+			$("#yypy").hide();
+			$("#zxs").show();
+			$("#qwsx").hide();
+		}
+		if(type=="趣味数学"){
+			$("#yypy").hide();
+			$("#zxs").hide();
+			$("#qwsx").show();
+		}
+	});
 });
     </script>
     	
@@ -371,13 +389,13 @@ $(function(){
         <p class="infoTitle">课程类型</p>
         <p class="infoVal">
         <select id="classType" style="border:none;font-size:15px;">
-        <option value="丫丫拼音">丫丫拼音</option>
         <option value="珠心算">珠心算</option>
+        <option value="丫丫拼音">丫丫拼音</option>
         <option value="趣味数学">趣味数学</option>
         </select></p>
       </div>
     </div>
-    <div class="infoPanel">
+    <div class="infoPanel" id="zxs">
       <div class="infoPay">
 	  <div class="infoItem price default"><span class="priceText">2160</span>元<br><span class="classText">24</span>次课</div>
 	  <div class="infoItem price"><span class="priceText">3880</span>元<br><span class="classText">48</span>次课</div>
@@ -385,7 +403,18 @@ $(function(){
 	  <div class="infoItem price"><span class="priceText">0</span>元<br><span style="display:none" class="classText">0</span>赠送课时</div>
      </div>
     </div>
-  
+      <div class="infoPanel" id="yypy" style="display:none">
+      <div class="infoPay">
+	  <div class="infoItem price default"><span class="priceText">1380</span>元<br><span class="classText">16</span>次课</div>
+	  <div class="infoItem price"><span class="priceText">0</span>元<br><span style="display:none" class="classText">0</span>赠送课时</div>
+     </div>
+    </div>
+        <div class="infoPanel" id="qwsx" style="display:none">
+      <div class="infoPay">
+	  <div class="infoItem price default"><span class="priceText">1280</span>元<br><span class="classText">16</span>次课</div>
+	  <div class="infoItem price"><span class="priceText">0</span>元<br><span style="display:none" class="classText">0</span>赠送课时</div>
+     </div>
+    </div>
      <div class="infoPanel">
       <div class="infoArea">
         <p class="infoTitle">赠送课时</p>
