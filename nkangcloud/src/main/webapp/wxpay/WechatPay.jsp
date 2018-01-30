@@ -250,10 +250,11 @@ function getXMLHttpRequest() {
     return xmlhttp;  
 }
 var studentID;
+var elID="#zxs";
 function pay(){
 	var currentTime=getNowFormatDate();
-	var payMoney=$(".default").find(".priceText").text();
-	var classCount=$(".default").find(".classText").text();
+	var payMoney=$(elID).find(".default").find(".priceText").text();
+	var classCount=$(elID).find(".default").find(".classText").text();
 	var giftClass=$("#giftClass").val();
 	$.ajax({
 		 url:'../ClassRecord/addClasspayrecord',
@@ -345,16 +346,19 @@ $(function(){
 			$("#yypy").show();
 			$("#zxs").hide();
 			$("#qwsx").hide();
+			elID="#yypy";
 		}
 		if(type=="珠心算"){
 			$("#yypy").hide();
 			$("#zxs").show();
 			$("#qwsx").hide();
+			elID="#zxs";
 		}
 		if(type=="趣味数学"){
 			$("#yypy").hide();
 			$("#zxs").hide();
 			$("#qwsx").show();
+			elID="#qwsx";
 		}
 	});
 });
