@@ -114,14 +114,14 @@ public class CoreService
 					Article article = new Article();
 					article.setTitle("【"+cm.getClientName()+"】欢迎来到乐数大家庭，请完成注册，享受更多会员福利");
 					article.setDescription("移动应用");
-					article.setPicUrl("http://leshu.bj.bcebos.com/standard/registerherepls.JPG");
+					article.setPicUrl("http://leshucq.bj.bcebos.com/standard/standard_registerherepls.jpg");
 					article.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
 					articleList.add(article);
 
 					Article article4 = new Article();
 					article4.setTitle("在此注册");
 					article4.setDescription("在此注册");
-					article4.setPicUrl("http://leshu.bj.bcebos.com/standard/register_icon.png");
+					article4.setPicUrl("http://leshucq.bj.bcebos.com/standard/standard_registerherepls.jpg");
 					article4.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
 					articleList.add(article4);
 					newsMessage.setArticleCount(articleList.size());
@@ -174,13 +174,13 @@ public class CoreService
 						
 						article.setTitle(cm.getClientName()+"|移动应用");
 						article.setDescription("移动应用");
-						article.setPicUrl("http://leshu.bj.bcebos.com/standard/leshuapp.JPG");
+						article.setPicUrl("http://leshucq.bj.bcebos.com/standard/standard_leshuapp.jpg");
 						article.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article2 = new Article();
 						article2.setTitle("乐数微应用");
 						article2.setDescription("My Personal Applications");
-						article2.setPicUrl("http://leshu.bj.bcebos.com/icon/weiapp.png");
+						article2.setPicUrl("http://leshucq.bj.bcebos.com/icon/icon_weiapp.png");
 						article2.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
 						articleList.add(article2);
 						String hardcodeUID = "oO8exvz-DZOu8wc0f81v9EHYq2HE";
@@ -189,7 +189,7 @@ public class CoreService
 							Article article3 = new Article();
 							article3.setTitle("乐数微管理");
 							article3.setDescription("Administration");
-							article3.setPicUrl("http://leshu.bj.bcebos.com/icon/weiadmin.png");
+							article3.setPicUrl("http://leshucq.bj.bcebos.com/icon/icon_weiadmin.png");
 							article3.setUrl("http://"+Constants.baehost+"/admin/index.jsp?UID=" + fromUserName);
 							articleList.add(article3);
 							
@@ -277,7 +277,7 @@ public class CoreService
 						int randNum = rand.nextInt(30);
 						article.setTitle("附近和我一起学习珠心算的乐数同学");
 						article.setDescription("您当前所在位置:" + addr);
-						article.setPicUrl("http://leshu.bj.bcebos.com/standard/abacus.jpg");
+						article.setPicUrl("http://leshucq.bj.bcebos.com/standard/standard_abacus.jpg");
 						article.setUrl("http://"+Constants.baehost+"/mdm/scan/scan.jsp?UID=" + fromUserName+"&num="+randNum);
 						articleList.add(article);
 						newsMessage.setArticleCount(articleList.size());
@@ -303,7 +303,7 @@ public class CoreService
 						article.setTitle(cm.getClientName()+"|欢迎进入自我修炼");
 						article.setDescription("乐数在线练习");
 						article.setPicUrl("http://leshucq.bj.bcebos.com/standard/standard_leshuslide1.jpg");
-						article.setUrl("http://leshu.bj.bcebos.com/standard/leshuslide2.JPG");
+						article.setUrl("http://leshucq.bj.bcebos.com/standard/standard_leshuslide2.JPG");
 						articleList.add(article);
 						
 						Article article1 = new Article();
@@ -331,21 +331,21 @@ public class CoreService
 						Article article = new Article();
 						article.setTitle(cm.getClientName()+"|乐数风采");
 						article.setDescription("您可查看实时更新的产品运维报表");
-						article.setPicUrl("http://leshu.bj.bcebos.com/standard/leshumoment.JPG");
-						article.setUrl("http://leshu.bj.bcebos.com/standard/leshuslide2.JPG");
+						article.setPicUrl("http://leshucq.bj.bcebos.com/standard/standard_leshumoment.jpg");
+						article.setUrl("http://leshucq.bj.bcebos.com/standard/standard_leshuslide2.jpg");
 						articleList.add(article);
 						
 						Article article1 = new Article();
 						article1.setTitle("学员风采");
 						article1.setDescription("IM统计情况");
-						article1.setPicUrl("http://leshu.bj.bcebos.com/icon/student.png");
+						article1.setPicUrl("http://leshucq.bj.bcebos.com/icon/icon_student.png");
 						article1.setUrl("http://wxe542e71449270554.dodoca.com/164368/phonewebsitet/websitet?uid=164368&openid=FANS_ID&id=99846#mp.weixin.qq.com");
 						articleList.add(article1);
 
 						Article article3 = new Article();
 						article3.setTitle("家园共育");
 						article3.setDescription("家园共育");
-						article3.setPicUrl("http://leshu.bj.bcebos.com/icon/parenteacher.png");
+						article3.setPicUrl("http://leshucq.bj.bcebos.com/icon/icon_parenteacher.png");
 						article3.setUrl("http://mp.weixin.qq.com/s/EwgxfqfuzIuQgPss7jdNtQ");
 						articleList.add(article3);
 						
@@ -359,7 +359,7 @@ public class CoreService
 						Article article = new Article();
 						article.setTitle("乐数为您导航");
 						article.setDescription("乐数为您导航");
-						article.setPicUrl("http://leshu.bj.bcebos.com/standard/carnavigation.JPG");
+						article.setPicUrl("http://leshucq.bj.bcebos.com/standard/standard_carnavigation.jpg");
 						article.setUrl("http://m.amap.com/search/view/keywords=%E5%8D%97%E5%9D%AA%E4%B8%87%E8%BE%BE%E5%B9%BF%E5%9C%BA2%E5%8F%B7%E5%86%99%E5%AD%97%E6%A5%BC11-6%20"); //http://map.baidu.com/mobile
 						articleList.add(article);
 						
@@ -408,7 +408,7 @@ public class CoreService
 						Article article = new Article();
 						article.setTitle(cm.getClientName()+"| 更多精彩尽乐数动态 ");
 						article.setDescription("更多精彩尽乐数动态 ");
-						article.setPicUrl("http://leshu.bj.bcebos.com/standard/leshuslide4.JPG");
+						article.setPicUrl("http://leshucq.bj.bcebos.com/standard/standard_leshuslide4.jpg");
 						article.setUrl("http://"+Constants.baehost+"/mdm/MesPushHistory.jsp?UID="+fromUserName);
 						articleList.add(article);
 						List<ArticleMessage> ams=MongoDBBasic.getArticleMessageByNum("");
@@ -424,7 +424,7 @@ public class CoreService
 							articlevar.setPicUrl(ams.get(i).getPicture());
 							}
 							else{
-								articlevar.setPicUrl("http://leshu.bj.bcebos.com/standard/reservationBigPic.jpg");
+								articlevar.setPicUrl("http://leshucq.bj.bcebos.com/standard/standard_reservationBigPic.jpg");
 							}
 							articlevar.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FNotificationCenter.jsp?num="+ams.get(i).getNum()+"&response_type=code&scope=snsapi_userinfo&state="+fromUserName+"#wechat_redirect");
 							System.out.println("url======="+"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FNotificationCenter.jsp?num="+ams.get(i).getNum()+"&response_type=code&scope=snsapi_userinfo&state="+fromUserName+"#wechat_redirect");
