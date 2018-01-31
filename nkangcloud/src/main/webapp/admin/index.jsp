@@ -1363,8 +1363,7 @@ jQuery
 					<!-- end logoElements-->
 				</div>
 				<div class="tab-pane  active" id="WorkMates">
-<!-- 				<img id="refreshUser"  src="http://leshu.bj.bcebos.com/icon/refresh2.png" style="height:25px;float:right;margin-top:8px;margin-left:15px;"/>
- -->					<img id="syncUser"  src="http://leshucq.bj.bcebos.com/icon/icon_sync.png" style="height:30px;float:right;margin-top:7px;"/>
+					<img id="syncUser"  src="http://leshucq.bj.bcebos.com/icon/icon_sync.png" style="height:30px;float:right;margin-top:7px;"/>
 					<div id="chart-container" style="margin-left:auto;margin-right:auto;text-align:center;"></div>
 					
 					
