@@ -360,7 +360,7 @@ wx.config({
    
    </div>
   
-<img style="position:relative;top:10px;" src="http://leshu.bj.bcebos.com/standard/leshuQRCode.JPG" alt="" width="100%" /> 
+<img style="position:relative;top:10px;" src="http://leshucq.bj.bcebos.com/standard/standard_leshuQRCode.jpg" alt="" width="100%" /> 
 
 	<div id="footer">
 		<span class="clientCopyRight"><nobr></nobr></span>

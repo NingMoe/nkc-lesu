@@ -205,8 +205,6 @@ margin-bottom:20px;}
 
 <div id="data_model_div" style="height: 110px">
 		<i class="icon" style="position: absolute;top: 25px;z-index: 100;right: 20px;">
-			<!-- <img class="exit" src="http://leshu.bj.bcebos.com/icon/EXIT1.png"
-			style="width: 30px; height: 30px;"> -->
 <div style="width: 30px;height: 30px;float: left;border-radius: 50%;overflow: hidden;">
 <img class="exit" src="<%=user.getHeadImgUrl() %>" style="width: 30px; height: 30px;">
 </div>
@@ -215,7 +213,7 @@ margin-bottom:20px;}
 		<div style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
 	</div>
-	<img class="exit" src="http://leshu.bj.bcebos.com/icon/EXIT1.png" style="position: absolute;width: 30px;top: 100px;left: 30px;">
+	<img class="exit" src="http://leshucq.bj.bcebos.com/icon/icon_EXIT1.png" style="position: absolute;width: 30px;top: 100px;left: 30px;">
       <section class="sub-block" id="speedAjust">
 
 		 <div class="tabs-content">

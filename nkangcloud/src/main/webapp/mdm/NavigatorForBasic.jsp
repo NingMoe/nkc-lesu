@@ -241,8 +241,6 @@ display:none;
 <body>
 <div id="data_model_div" style="height: 100px">
 		<i class="icon" style="position: absolute;top: 25px;z-index: 100;right: 20px;">
-			<!-- <img class="exit" src="http://leshu.bj.bcebos.com/icon/EXIT1.png"
-			style="width: 30px; height: 30px;"> -->
 <div style="width: 30px;height: 30px;float: left;border-radius: 50%;overflow: hidden;">
 <img class="exit" src="<%=user.getHeadImgUrl() %>" style="width: 30px; height: 30px;" />
 </div>

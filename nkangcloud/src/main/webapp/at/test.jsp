@@ -392,7 +392,7 @@ if(res!=null){
     
 	
 </div><div class="head">
-    <img src="http://leshu.bj.bcebos.com/standard/leshuslide1.JPG" />
+    <img src="http://leshucq.bj.bcebos.com/standard/standard_leshuslide1.jpg" />
 </div>
 <div class="content" id="app" v-cloak>
     <div class="content-nav">

@@ -53,7 +53,7 @@ margin-left: 4%;
 	<div id="data_model_div" style="height: 80px">
 		<i class="icon"
 			style="position: absolute; top: 20px; left: 20px; z-index: 100;">
-			<img class="exit" src="http://leshu.bj.bcebos.com/icon/EXIT1.png"
+			<img class="exit" src="http://leshucq.bj.bcebos.com/icon/icon_EXIT1.png"
 			style="width: 30px; height: 30px;">
 		</i> <img
 			style="position: absolute; top: 8px; right: 20px; z-index: 100; height: 60px;"

@@ -260,7 +260,7 @@ wx.config({
              </tbody>
             </table>
 <p style="margin: 10px;margin-left:20px;line-height:14.0pt;"><span style="font-size: 14px;font-family:&quot;Arial&quot;,sans-serif;color:black;"><%=n.getContent().replaceAll("\n", "<br/>") %><o:p></o:p></span></p>
-<img style="position:relative;top:20px;" src="http://leshu.bj.bcebos.com/standard/leshuQRCode.JPG" alt="" width="100%" /> 
+<img style="position:relative;top:20px;" src="http://leshucq.bj.bcebos.com/standard/standard_leshuQRCode.jpg" alt="" width="100%" /> 
 
 	<div id="footer">
 		<span class="clientCopyRight"><nobr></nobr></span>

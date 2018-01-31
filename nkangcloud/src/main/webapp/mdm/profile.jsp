@@ -665,7 +665,7 @@ function showRecognitionDetail(from,to,point,type,coments)
 			+"<p style='line-height:22px;'>"+point+" Points have been added to your <a href='https://login.ext.hpe.com/idp/startSSO.ping?PartnerSpId=hpe_biw_sp'>MyRecognition@hpe</a> account. Enjoy surfing the catalogue and finding something that is perfect just for you: merchandise, travel, gift cards or vouchers. <p>"
 			+"<p style='width:100%;line-height:22px;font-size:16px;margin:15px 0px;'>Here’s what was said about you</p>"
 			+"<p style='line-height:22px;'>Thanks <span id='to'>"+to+"</span> for "+text+"</p>"
-			+"<img onclick='hideRecognitionCenter()' src='http://leshu.bj.bcebos.com/icon/EXIT1.png' style='width: 30px; height: 30px;position:relative;top:20px;left:250px;'></div></div>");
+			+"<img onclick='hideRecognitionCenter()' src='http://leshucq.bj.bcebos.com/icon/icon_EXIT1.png' style='width: 30px; height: 30px;position:relative;top:20px;left:250px;'></div></div>");
 	$('#recognitionCenter').addClass('bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
 	    });
@@ -797,7 +797,7 @@ function mesSend(){
 	$("body").append("<div id='sendR'>"
 			+"	<div class='rcommon' style='height:40px'><p class='bsLabel'>图文标题</p><input id='notificationTitle' style='height:35px;border:1px solid black' type='text' placeholder='请输入标题' class='input-xlarge bsBtn'></div>"
 			+"	<div class='rcommon' style='height:40px'><p class='bsLabel'>主题图片</p><form id='submit_form' name='submit_form' action='../userProfile/uploadPicture' enctype='multipart/form-data' method='post'><input id='file-1' type='file' name='file-1'  onchange='uploadPic(this)' class='inputfile inputfile-1' data-multiple-caption='{count} files selected' multiple=''><label for='file-1' style='height: 15px;border-radius: 5px;line-height: 10px;text-align: center;width: 65%;'><svg xmlns='http://www.w3.org/2000/svg' width='20' height='17' viewBox='0 0 20 17'><path d='M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z'></path></svg> <span id='picName' style='color: white;font-size: 16px;'>Choose a file…</span></label></form><input id='hiddenPic' type='hidden' /></div>"
-			+"  <div class='rcommon' style='height:160px;margin-bottom: 8px;'><div class='imgSelect'><input type='checkbox' class='imgCB' checked='true'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000E9rG0&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602305452&di=14b5b01aade695d780cf3dbf89cd7392&imgtype=0&src=http%3A%2F%2Fimg01.taopic.com%2F160907%2F318765-160ZFQ52837.jpg'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602293964&di=5b70b7f2c1dbf9aae98dba9143897e2d&imgtype=0&src=http%3A%2F%2Fimg01.taopic.com%2F160816%2F240437-160Q60A3119.jpg'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602432167&di=7e223d3ad19485014fb9a57c875c00f3&imgtype=0&src=http%3A%2F%2Fwww.taopic.com%2Fuploads%2Fallimg%2F110914%2F34250-11091410324328.jpg'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602512392&di=173870f13b3a95bfe9b71c9a2ab75b3c&imgtype=0&src=http%3A%2F%2Fwww.yc9y.com%2Fupfiles%2Farticle%2Fimage%2F20160802%2F20160802095320_22922.png'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602549485&di=af00ddd5cc0391d1616e8b4864502288&imgtype=0&src=http%3A%2F%2Fpic.qjimage.com%2Ftongro_rf004%2Fhigh%2Ftis067a1608.jpg'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='http://leshu.bj.bcebos.com/standard/reservationBigPic.jpg'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=428411870,2259267624&fm=23&gp=0.jpg'></div></div>"
+			+"  <div class='rcommon' style='height:160px;margin-bottom: 8px;'><div class='imgSelect'><input type='checkbox' class='imgCB' checked='true'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000E9rG0&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602305452&di=14b5b01aade695d780cf3dbf89cd7392&imgtype=0&src=http%3A%2F%2Fimg01.taopic.com%2F160907%2F318765-160ZFQ52837.jpg'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602293964&di=5b70b7f2c1dbf9aae98dba9143897e2d&imgtype=0&src=http%3A%2F%2Fimg01.taopic.com%2F160816%2F240437-160Q60A3119.jpg'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602432167&di=7e223d3ad19485014fb9a57c875c00f3&imgtype=0&src=http%3A%2F%2Fwww.taopic.com%2Fuploads%2Fallimg%2F110914%2F34250-11091410324328.jpg'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602512392&di=173870f13b3a95bfe9b71c9a2ab75b3c&imgtype=0&src=http%3A%2F%2Fwww.yc9y.com%2Fupfiles%2Farticle%2Fimage%2F20160802%2F20160802095320_22922.png'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602549485&di=af00ddd5cc0391d1616e8b4864502288&imgtype=0&src=http%3A%2F%2Fpic.qjimage.com%2Ftongro_rf004%2Fhigh%2Ftis067a1608.jpg'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='http://leshucq.bj.bcebos.com/standard/standard_reservationBigPic.jpg'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=428411870,2259267624&fm=23&gp=0.jpg'></div></div>"
 			+"  <div id='commonPush' style='margin-top: 10px;'><div class='rcommon'><p class='bsLabel'>图文类型</p><select class='bsBtn' style='border:1px solid black' id='notificationType'>"+selectedType+"</select></div>"
 			+"	<div class='rcommon'><p class='bsLabel'>网页链接</p><input id='notificationURL' type='text' style='width:75%;height:35px;border:1px solid black' placeholder='不想输入网络链接？那直接填内容吧'  class='input-xlarge bsBtn'></div>"
 			+"	<div class='rcommon'><div id='content' style='height:200px;width:95%;line-height:20px;' placeholder='请输入内容' class='input-xlarge bsBtn'></div></div>"
@@ -884,7 +884,7 @@ function recognizationPanelByPerson(personName){
 	}
 function showCommonPanel()
 {
-	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><i class='icon' style='position:absolute;top:20px;left:20px;z-index:100;'><img class='exit' onclick='hideBouncePanel()' src='http://leshu.bj.bcebos.com/icon/EXIT1.png' style='width: 30px; height: 30px; -webkit-filter: drop-shadow(30px 0 "+clientThemeColor+");' /></i>	<img style='position:absolute;top:8px;right:20px;z-index:100;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height: 74px;background: white;position:absolute;border-bottom: 4px solid "+clientThemeColor+";'></div></div>");
+	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><i class='icon' style='position:absolute;top:20px;left:20px;z-index:100;'><img class='exit' onclick='hideBouncePanel()' src='http://leshucq.bj.bcebos.com/icon/icon_EXIT1.png' style='width: 30px; height: 30px; -webkit-filter: drop-shadow(30px 0 "+clientThemeColor+");' /></i>	<img style='position:absolute;top:8px;right:20px;z-index:100;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height: 74px;background: white;position:absolute;border-bottom: 4px solid "+clientThemeColor+";'></div></div>");
 	$('#data_model_div').removeClass().addClass('panelShowAnmitation').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass();
 	    }); }
@@ -1599,19 +1599,19 @@ function getNowFormatDate() {
 											<tr>
 												<td>
 													<a target="_self" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=<%=Constants.APP_ID%>&redirect_uri=http%3A%2F%2F<%=Constants.baehost%>%2Fmdm%2FDailyNews.jsp?UID=<%=uid %>&response_type=code&scope=snsapi_userinfo&state=<%=uid %>#wechat_redirect">
-														<img src="http://leshu.bj.bcebos.com/icon/Notification.png" /><h4>乐数快讯</h4>
+														<img src="http://leshucq.bj.bcebos.com/icon/icon_Notification.png" /><h4>乐数快讯</h4>
 													</a>
 												</td>
 												<td>
 												<a target="_self" <%if(IsAuthenticated==true) { %> href="http://leshucq.bceapp.com/mdm/DataVisualization.jsp?UID=<%=uid %>"  <%}else{ %>onclick="noAuth()"<%} %>
-												><img src="http://leshu.bj.bcebos.com/icon/menu-stock.png" />
+												><img src="http://leshucq.bj.bcebos.com/icon/icon_menu-stock.png" />
 													<h4>乐数足迹</h4></a>
 												</td>
-												<td><img  <%if(IsAuthenticated==true) { %> onclick="mesSend()" <%}else{ %>onclick="noAuth()"<%} %> src="http://leshu.bj.bcebos.com/icon/menu-technology.png" />
+												<td><img  <%if(IsAuthenticated==true) { %> onclick="mesSend()" <%}else{ %>onclick="noAuth()"<%} %> src="http://leshucq.bj.bcebos.com/icon/icon_menu-technology.png" />
 													<h4>消息推送</h4></td>
 													
 												<td>		<img    <%if(IsAuthenticated==true) { %> onclick="recognizationPanel()" <%}else{ %>onclick="noAuth()"<%} %>
-														src="http://leshu.bj.bcebos.com/icon/menu-recognition.png" />
+														src="http://leshucq.bj.bcebos.com/icon/icon_menu-recognition.png" />
 														<h4>奖项管理</h4>
 												</td>
 											</tr>
@@ -1724,7 +1724,7 @@ function getNowFormatDate() {
 					
 									<ul class="Work_Mates_div2" id="Work_Mates_div"  data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="margin-top:15px">
 									</ul>
-<div id="return-top"><img class="scroll-top" src="http://leshu.bj.bcebos.com/icon/upgrade.png" alt="" width="50px"></div>  
+<div id="return-top"><img class="scroll-top" src="http://leshucq.bj.bcebos.com/icon/icon_upgrade.png" alt="" width="50px"></div>  
 								</div>
 							</div>
 						</div>
