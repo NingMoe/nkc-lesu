@@ -308,7 +308,7 @@ function syncUser(){
 		cache : false,
 		success : function(data) {
 			swal("同步成功！", data, "success"); 
-			$("#syncUser").attr("src","http://leshu.bj.bcebos.com/icon/sync.png");
+			$("#syncUser").attr("src","http://leshucq.bj.bcebos.com/icon/icon_sync.png");
 			getMDLUserLists();
 		}
 	});
@@ -1011,7 +1011,7 @@ function showLogoPanel(index){
 }
 function showCommonPanel()
 {
-	$("body").append("<div  id='data_model_div' style='z-index:999;height:100000px'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='http://leshu.bj.bcebos.com/icon/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:8px;right:20px;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:"+clientThemeColor+";position:absolute;top:70px;'></div></div>");
+	$("body").append("<div  id='data_model_div' style='z-index:999;height:100000px'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='http://leshucq.bj.bcebos.com/icon/icon_EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:8px;right:20px;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:"+clientThemeColor+";position:absolute;top:70px;'></div></div>");
 	$('#data_model_div').removeClass().addClass('panelShowAnmitation').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass();
 	    }); }
@@ -1322,7 +1322,7 @@ jQuery
 		<div class="container-fluid">
 			<!-- <a style="float: left; padding-top: 10px;" id="logo_now"><img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000E9IMj&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display: inline !important; height: 30px; float: none; padding: 0px; vertical-align: bottom;"><span class="clientSubName" style="font-size: 12px; padding-left: 7px; color: #333;">MDM China</span>				<h1 style="color: #333; font-size: 18px;" class="clientName">DXC Technology Coperation</h1></a>
 			 -->
-			 <a style="float: left; padding-top: 10px;" id="logo_now"><img src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo" class="HpLogo" style="display: inline !important; height:50px; float: none; padding: 0px; vertical-align: bottom;">				</a>
+			 <a style="float: left; padding-top: 10px;" id="logo_now"><img src="http://leshucq.bj.bcebos.com/standard/leshuLogo.png" alt="Logo" class="HpLogo" style="display: inline !important; height:50px; float: none; padding: 0px; vertical-align: bottom;">				</a>
 			 <div class="clear"></div>
 			<ul class="nav pull-right top-menu" style="margin-top: -70px;display:none;">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -1364,7 +1364,7 @@ jQuery
 				</div>
 				<div class="tab-pane  active" id="WorkMates">
 <!-- 				<img id="refreshUser"  src="http://leshu.bj.bcebos.com/icon/refresh2.png" style="height:25px;float:right;margin-top:8px;margin-left:15px;"/>
- -->					<img id="syncUser"  src="http://leshu.bj.bcebos.com/icon/sync.png" style="height:30px;float:right;margin-top:7px;"/>
+ -->					<img id="syncUser"  src="http://leshucq.bj.bcebos.com/icon/icon_sync.png" style="height:30px;float:right;margin-top:7px;"/>
 					<div id="chart-container" style="margin-left:auto;margin-right:auto;text-align:center;"></div>
 					
 					
@@ -1372,7 +1372,7 @@ jQuery
 						<ul id="Work_Mates_div" class="Work_Mates_div2"  data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="margin-top:15px">
 						</ul>
 					</div>
-					<div id="return-top" style="display: block;"><img class="scroll-top"  src="http://leshu.bj.bcebos.com/icon/upgrade.png"  alt="" width="50px"></div>
+					<div id="return-top" style="display: block;"><img class="scroll-top"  src="http://leshucq.bj.bcebos.com/icon/icon_upgrade.png"  alt="" width="50px"></div>
 				</div>
 			</div>
 		</div>
