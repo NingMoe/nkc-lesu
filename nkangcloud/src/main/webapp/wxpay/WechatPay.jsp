@@ -373,7 +373,7 @@ $(function(){
 			</div>
 			<span style="position: relative;top: 8px;left: 5px;font-style:normal"><%=name %></span>
 		</i>
-		<img style="position: absolute;top: 8px;left: 10px;z-index: 100;height: 60px;" class="HpLogo" src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo">
+		<img style="position: absolute;top: 8px;left: 10px;z-index: 100;height: 60px;" class="HpLogo" src="http://leshucq.bj.bcebos.com/standard/leshuLogo.png" alt="Logo">
 		<div style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;"></div>
 	</div>
 	<div class="infoPanel">

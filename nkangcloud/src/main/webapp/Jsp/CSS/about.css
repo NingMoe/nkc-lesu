@@ -15,14 +15,14 @@ body{font:normal 14px/24px "Helvetica Neue",Helvetica,STheiti,"Microsoft Yahei",
 .box { width:115%;margin:18px auto 0 auto; margin-left:-15%;text-align:right;}
 
 .event_list { width:100%;background:url('../../mdm/images/dian3.png') 35% 0 repeat-y;margin:10px 0 20px 0; }
-.event_list h3 { margin:0 0 10px 132px;font-size:24px;font-family:Georgia;color:#0066ff;padding-left:25px;background:url('http://leshu.bj.bcebos.com/icon/jian.png') 0 -45px no-repeat;height:38px;line-height:30px;font-style:italic; }
-.event_list li { position:relative;background:url('http://leshu.bj.bcebos.com/icon/jian.png') 36% -41px no-repeat; height:120px;}
+.event_list h3 { margin:0 0 10px 132px;font-size:24px;font-family:Georgia;color:#0066ff;padding-left:25px;background:url('http://leshucq.bj.bcebos.com/icon/icon_jian.png') 0 -45px no-repeat;height:38px;line-height:30px;font-style:italic; }
+.event_list li { position:relative;background:url('http://leshucq.bj.bcebos.com/icon/icon_jian.png') 36% -41px no-repeat; height:120px;}
 .event_list li span { width:32%;text-align:right;display:block;float:left;margin-top:10px;height:70px;overflow : hidden;
 text-overflow: ellipsis;
 display: -webkit-box;
 -webkit-line-clamp: 3;
 -webkit-box-orient: vertical;}
-.event_list li p { width:60%;display:inline-block;padding-left:10px;background:url('http://leshu.bj.bcebos.com/icon/jian.png') -21px 0 no-repeat;line-height:25px;_float:left; }
+.event_list li p { width:60%;display:inline-block;padding-left:10px;background:url('http://leshucq.bj.bcebos.com/icon/icon_jian.png') -21px 0 no-repeat;line-height:25px;_float:left; }
 .event_list li p span { width:85%;text-align:left;border-bottom:1px solid #DDD;padding:10px 15px;background:#F8F8F8;margin:0; }
 
 .titlelist{line-height:24px;color: #8C8C8C;padding-bottom:20px;}
