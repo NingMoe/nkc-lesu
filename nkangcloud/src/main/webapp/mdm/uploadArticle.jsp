@@ -258,7 +258,7 @@ function uploadPic(obj){
       <div class="sk-circle11 sk-child"></div>
       <div class="sk-circle12 sk-child"></div>
     </div>
-<div id="data_model_div" style="z-index:999;" class=""><a href="http://leshucq.bceapp.com/mdm/profile.jsp?UID=<%=uid%>"><i class="icon" style="position:absolute;top:20px;left:20px;z-index:100;"><img class="exit" src="http://leshu.bj.bcebos.com/icon/EXIT1.png" style="width: 30px; height: 30px; "></i></a>	<img style="position:absolute;top:8px;right:20px;z-index:100;" class="HpLogo" src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo"><div style="width:100%;height: 74px;background: white;position:absolute;border-bottom: 4px solid #20b672;"></div></div>
+<div id="data_model_div" style="z-index:999;" class=""><a href="http://leshucq.bceapp.com/mdm/profile.jsp?UID=<%=uid%>"><i class="icon" style="position:absolute;top:20px;left:20px;z-index:100;"><img class="exit" src="http://leshu.bj.bcebos.com/icon/EXIT1.png" style="width: 30px; height: 30px; "></i></a>	<img style="position:absolute;top:8px;right:20px;z-index:100;" class="HpLogo" src="http://leshucq.bj.bcebos.com/standard/leshuLogo.png" alt="Logo"><div style="width:100%;height: 74px;background: white;position:absolute;border-bottom: 4px solid #20b672;"></div></div>
 <div id='sendR'>
 <div class='rcommon' style='height:45px'>
 <p class='bsLabel'>图文标题</p>

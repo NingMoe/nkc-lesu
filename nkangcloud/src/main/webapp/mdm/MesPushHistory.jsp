@@ -284,7 +284,7 @@ Your browser does not support the video tag.
   
  <div style="position: absolute;top: 0px;right: 0px;"><p style="margin-right: 10px;margin-top: 5px;">欢迎您：<span class="username colorBlue" id="username" style="color:#2489ce;"><%=name %></span></p><img src="<%=headImgUrl %>" alt="" style="border-radius: 25px;height: 35px;width: 35px;position: absolute;right: 8px;top: 25px;"></div>
 <div style="padding-left: 10px;height: 60px;padding-top: 10px;">
-<img src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo" class="HpLogo" style="display: inline !important; height:50px; float: none; padding: 0px; vertical-align: bottom;">
+<img src="http://leshucq.bj.bcebos.com/standard/leshuLogo.png" alt="Logo" class="HpLogo" style="display: inline !important; height:50px; float: none; padding: 0px; vertical-align: bottom;">
 </div>
 <div class="topPic"><img src="http://leshu.bj.bcebos.com/standard/reservationBigPic.jpg" />
 <div class="topPic_title">【乐数】，乐在其中，心中有数</div></div>

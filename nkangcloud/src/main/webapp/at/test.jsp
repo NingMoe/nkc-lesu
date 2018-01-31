@@ -445,10 +445,10 @@ if(res!=null){
         <p class="intr">乐数珠心算成立于2014年（原名尔智尔慧珠心算）， 是重庆市方圆职业培训学校旗下幼儿培训品牌，乐数师资是由小学特级教师、全国教育系统劳动模范、全国十杰中小学中青年教师提名奖获得者、全国优秀珠心算教练师何克亮老师亲自授教和培训。乐数珠心算不仅传承了古老珠心算的优秀教学理念，而且拥有简单易懂属于自己独特的教学方法。实践证明，学过珠心算的儿童的计算速度比不学的儿童快3---5倍，被誉为开发儿童智力发展的“金钥匙”从而达到“一科学习，多科受益”的效果。乐数珠心算致力于幼儿珠心算的培训及幼儿综合素质的培养，致力于中华优秀非物质文化遗产的推广，向全世界展现中华文化魅力。</p>
         <div class="logo">
             <div class="lg">
-                <a href="yy/yy.jsp"><img src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" height="81" width="158"></a>
+                <a href="yy/yy.jsp"><img src="http://leshucq.bj.bcebos.com/standard/leshuLogo.png" height="81" width="158"></a>
             </div>
             <div class="lg">
-                <img src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" height="68" width="140">
+                <img src="http://leshucq.bj.bcebos.com/standard/leshuLogo.png" height="68" width="140">
             </div>
         </div>
     </div>

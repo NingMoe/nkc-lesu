@@ -129,8 +129,7 @@ font-weight:0!important;}
 	<div id="data_model_div" style="height: 100px">
 		<i class="icon"
 			style="position: absolute; top: 25px; z-index: 100; right: 20px;">
-			<!-- <img class="exit" src="http://leshu.bj.bcebos.com/icon/EXIT1.png"
-			style="width: 30px; height: 30px;"> -->
+
 			<div
 				style="width: 30px; height: 30px; float: left; border-radius: 50%; overflow: hidden;">
 				<img class="exit" src="<%=headImgUrl%>"
@@ -140,7 +139,7 @@ font-weight:0!important;}
 		</i> <img
 			style="position: absolute; top: 8px; left: 10px; z-index: 100; height: 60px;"
 			class="HpLogo"
-			src="http://leshu.bj.bcebos.com/standard/leshuLogo.png" alt="Logo">
+			src="http://leshucq.bj.bcebos.com/standard/leshuLogo.png" alt="Logo">
 		<div
 			style="width: 100%; height: 80px; background: white; position: absolute; border-bottom: 4px solid #20b672;">
 		</div>
