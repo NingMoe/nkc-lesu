@@ -125,7 +125,7 @@ public class MasterDataRestController {
 			}
 			content+="\n【更多消息请点击微信公众号菜单：\n      发现附近-->往期回顾-->图文消息】";
 			String title=mes.getTitle();
-			String picture="http://leshu.bj.bcebos.com/standard/reservationBigPic.jpg";
+			String picture="http://leshucq.bj.bcebos.com/standard/standard_reservationBigPic.jpg";
 			if(mes.getPicture()!=null&&mes.getPicture()!=""){
 				picture=mes.getPicture();
 			}

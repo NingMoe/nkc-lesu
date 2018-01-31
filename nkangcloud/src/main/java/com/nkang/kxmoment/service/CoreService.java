@@ -33,7 +33,7 @@ public class CoreService
 		String respContent = "unknown request type.";
 		String AccessKey = MongoDBBasic.getValidAccessKey();
 		ClientMeta cm=MongoDBBasic.QueryClientMeta(Constants.clientCode);
-		String navPic = "http://leshu.bj.bcebos.com/standard/navigation.png";
+		String navPic = "http://leshucq.bj.bcebos.com/standard/standard_carnavigation.jpg";
 		try {
 			Element requestObject 	= 	MessageUtil.parseXml(request);
 			String fromUserName 	= 	requestObject.element("FromUserName").getText();

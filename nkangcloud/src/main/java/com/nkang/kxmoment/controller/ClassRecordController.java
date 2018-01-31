@@ -217,7 +217,7 @@ public class ClassRecordController {
 		
 		
 		if(MongoDBBasic.addClassExpenseRecord(cer)){
-			RestUtils.sendQuotationToUser(studentOpenID, studentName+","+teacherName+"老师在"+expenseTime+"发起了"+expenseOption+"课销记录，您可以点击详情查看课销并确认课销，感谢支持~", "http://leshu.bj.bcebos.com/standard/leshuapp.JPG", studentName+",您有一次来自乐数新的课销请求","http://leshucq.bceapp.com/mdm/expenseClassDetail.jsp?expenseID="+cer.getExpenseID()+"&UID=");
+			RestUtils.sendQuotationToUser(studentOpenID, studentName+","+teacherName+"老师在"+expenseTime+"发起了"+expenseOption+"课销记录，您可以点击详情查看课销并确认课销，感谢支持~", "http://leshucq.bj.bcebos.com/standard/standard_leshuapp.jpg", studentName+",您有一次来自乐数新的课销请求","http://leshucq.bceapp.com/mdm/expenseClassDetail.jsp?expenseID="+cer.getExpenseID()+"&UID=");
 			//send message to leshu admin to get client engaged
 
 			String tel = MongoDBBasic.queryAttrByOpenID("phone", studentOpenID, true);
