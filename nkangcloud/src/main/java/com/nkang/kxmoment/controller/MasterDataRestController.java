@@ -576,10 +576,14 @@ public class MasterDataRestController {
 			content=reqContent;
 		}
 		List<WeChatMDLUser> allUser = MongoDBBasic.getWeChatUserFromMongoDB("");
+	//	List<WeChatMDLUser> allUser = new ArrayList<WeChatMDLUser>();
+	//	WeChatMDLUser wcu=new WeChatMDLUser();
+	//	wcu.setOpenid("oO8exv5qxR-KcrpaSezZJsAfrQF4");
+	//	allUser.add(wcu);
 		int realReceiver=0;
         String status="";
 		 for(int i=0;i<allUser.size();i++){
-			 url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FDailyNews.jsp?response_type=code&scope=snsapi_userinfo&state="+allUser.get(i).getOpenid()+"#wechat_redirect&UID=";
+			 url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FDailyNews.jsp?UID="+allUser.get(i).getOpenid()+"&response_type=code&scope=snsapi_userinfo&state="+allUser.get(i).getOpenid()+"#wechat_redirect";
 			 status= RestUtils.sendQuotationToUser(allUser.get(i).getOpenid(),content,"http://leshucq.bj.bcebos.com/standard/standard_ThanksLetter.jpg","【"+allUser.get(i).getNickname()+"】"+title,url);
 			 if(RestUtils.getValueFromJson(status,"errcode").equals("0")){
           	   realReceiver++;

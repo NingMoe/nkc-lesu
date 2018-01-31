@@ -1635,7 +1635,7 @@ public class RestUtils {
 		String str = "";
 
 		str = "{\"title\":\"" + title + "\",\"description\":\"" + content
-				+ "\",\"url\":\"" + url + openID
+				+ "\",\"url\":\"" + url 
 				+ "\",\"picurl\":" + "\"" + img + "\"}";
 		String json = "{\"touser\":\"" + openID
 				+ "\",\"msgtype\":\"news\",\"news\":" +
