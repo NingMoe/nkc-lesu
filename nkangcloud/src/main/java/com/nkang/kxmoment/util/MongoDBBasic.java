@@ -5094,7 +5094,29 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			boolean bole = false;
 			try {
 				if(null!=telephone && !"".equals(telephone)){
-					
+					TeamerCredit tc = queryWeChatUserByTelephone(telephone) ;
+					DBObject updateQuery = new BasicDBObject();
+					String id = tc.getStudentOpenID();
+					if(null!=id && !"".equals(id)){
+						updateQuery.put("Teamer.CreditPoint", 0);
+						DBObject doc = new BasicDBObject();
+						doc.put("$set", updateQuery);
+						mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",id), doc);
+						DBObject removeQuery = new BasicDBObject();
+						removeQuery.put("StudentOpenID", id);
+						mongoDB.getCollection(collectionHistryTeamerCredit).remove(removeQuery);
+						DBObject removeQuery1 = new BasicDBObject();
+						removeQuery1.put("OpenID", id);
+						mongoDB.getCollection(collectionClassTypeRecord).remove(removeQuery1);
+						DBObject removeQuery2 = new BasicDBObject();
+						removeQuery2.put("studentOpenID", id);
+						mongoDB.getCollection(collectionClassExpenseRecord).remove(removeQuery2);
+						clearClassPayRecords(telephone);
+						/*if(clearClassExpenseRecords(telephone)){
+							bole=clearClassPayRecords(telephone);
+						}*/
+						bole=true;
+					}
 				}else{
 					DBObject removeuery = new BasicDBObject();
 					mongoDB.getCollection(collectionHistryTeamerCredit).remove(removeuery);
@@ -5103,29 +5125,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					mongoDB.getCollection(collectionClassPayRecord).remove(removeuery);
 					bole=true;
 				}
-				TeamerCredit tc = queryWeChatUserByTelephone(telephone) ;
-				DBObject updateQuery = new BasicDBObject();
-				String id = tc.getStudentOpenID();
-				if(null!=id && !"".equals(id)){
-					updateQuery.put("Teamer.CreditPoint", 0);
-					DBObject doc = new BasicDBObject();
-					doc.put("$set", updateQuery);
-					mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",id), doc);
-					DBObject removeQuery = new BasicDBObject();
-					removeQuery.put("StudentOpenID", id);
-					mongoDB.getCollection(collectionHistryTeamerCredit).remove(removeQuery);
-					DBObject removeQuery1 = new BasicDBObject();
-					removeQuery1.put("OpenID", id);
-					mongoDB.getCollection(collectionClassTypeRecord).remove(removeQuery1);
-					DBObject removeQuery2 = new BasicDBObject();
-					removeQuery2.put("studentOpenID", id);
-					mongoDB.getCollection(collectionClassExpenseRecord).remove(removeQuery2);
-					clearClassPayRecords(telephone);
-					/*if(clearClassExpenseRecords(telephone)){
-						bole=clearClassPayRecords(telephone);
-					}*/
-					bole=true;
-				}
+				
 			}catch (Exception e) {
 				log.info("clearHistryTeamerCredit--" + e.getMessage());
 			}
