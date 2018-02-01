@@ -4803,7 +4803,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				DBObject dbcur = mongoDB.getCollection(collectionClassTypeRecord).findOne(query);
 				
 				if(dbcur!=null){
-					mongoDB.getCollection(collectionClassExpenseRecord).insert(dbo);
+					
 					DBObject updatedbo = new BasicDBObject();
 					/*int total = 0;
 					if(teamobj.get("totalClass")!=null && !"".equals(teamobj.get("totalClass")+"")){
@@ -4834,8 +4834,9 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					}if(leftPay<=0){
 						if((dbcur.get("leftSendClass"))!=null && !"".equals(dbcur.get("leftSendClass")+"")){
 							leftsend = Integer.parseInt(dbcur.get("leftSendClass")+"")-Math.abs(leftPay);
-						}if(leftsend<=0){
+						}if(leftsend<0){
 							leftsend=0;
+							return false;
 						}
 						updatedbo.put("leftSendClass",leftsend );
 						leftPay = 0;
@@ -4846,7 +4847,9 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					BasicDBObject doc = new BasicDBObject();
 					doc.put("$set", updatedbo);
 					mongoDB = getMongoDB();
+					mongoDB.getCollection(collectionClassExpenseRecord).insert(dbo);
 					mongoDB.getCollection(collectionClassTypeRecord).update(dbcur, doc);
+					
 					ret1 = true;
 				}
 			}
@@ -5090,6 +5093,16 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 			mongoDB = getMongoDB();
 			boolean bole = false;
 			try {
+				if(null!=telephone && !"".equals(telephone)){
+					
+				}else{
+					DBObject removeuery = new BasicDBObject();
+					mongoDB.getCollection(collectionHistryTeamerCredit).remove(removeuery);
+					mongoDB.getCollection(collectionClassTypeRecord).remove(removeuery);
+					mongoDB.getCollection(collectionClassExpenseRecord).remove(removeuery);
+					mongoDB.getCollection(collectionClassPayRecord).remove(removeuery);
+					bole=true;
+				}
 				TeamerCredit tc = queryWeChatUserByTelephone(telephone) ;
 				DBObject updateQuery = new BasicDBObject();
 				String id = tc.getStudentOpenID();
@@ -5107,6 +5120,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 					DBObject removeQuery2 = new BasicDBObject();
 					removeQuery2.put("studentOpenID", id);
 					mongoDB.getCollection(collectionClassExpenseRecord).remove(removeQuery2);
+					clearClassPayRecords(telephone);
 					/*if(clearClassExpenseRecords(telephone)){
 						bole=clearClassPayRecords(telephone);
 					}*/

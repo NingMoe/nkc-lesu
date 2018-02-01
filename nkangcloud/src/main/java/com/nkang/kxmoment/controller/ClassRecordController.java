@@ -308,7 +308,7 @@ public class ClassRecordController {
 	}
 	
 	@RequestMapping("/clearAll")
-	public @ResponseBody boolean clearAll(@RequestParam(value = "phone") String phone) {
+	public @ResponseBody boolean clearAll(@RequestParam(value = "phone",required=false ) String phone) {
 		
 		return MongoDBBasic.clearAll(phone);
 		
@@ -332,7 +332,7 @@ public class ClassRecordController {
 				
 	}
 	
-	// http://leshucq.bceapp.com/ClassRecord/headmasterGetExpenseCounts?expenseOption=趣味数学&expenseDistrict=""&start=2018-01-26&end=2018-01-27
+	// http://leshucq.bceapp.com/ClassRecord/headmasterGetExpenseCounts?expenseOption=趣味数学&start=2018-01-11&end=2018-01-27
 	@RequestMapping("/headmasterGetExpenseCounts")
 	public @ResponseBody Map<String,String> getExpenseClassCounts(@RequestParam(value = "expenseOption",required=false ) String expenseOption,
 			@RequestParam(value = "expenseDistrict",required=false) String expenseDistrict,
@@ -343,7 +343,7 @@ public class ClassRecordController {
 				
 	}
 	
-	// http://leshucq.bceapp.com/ClassRecord/governorGetExpenseCounts?expenseOption=趣味数学&expenseDistrict=江北校区&start=2018-01-26&end=2018-01-27
+	// http://leshucq.bceapp.com/ClassRecord/governorGetExpenseCounts?expenseOption=趣味数学&expenseDistrict=江北校区&start=2018-01-2&end=2018-01-27
 		@RequestMapping("/governorGetExpenseCounts")
 		public @ResponseBody Map<String,String> governorGetExpenseClassCounts(@RequestParam(value = "expenseOption",required=false ) String expenseOption,
 				@RequestParam(value = "expenseDistrict") String expenseDistrict,
