@@ -513,7 +513,7 @@ margin-left: 4%;
 			$("#answerPanel").show();
 
 			$(".circle").removeClass("start");
-			setTimeout("fakeClick()",1000);
+			setTimeout("fakeClick()",4000);
 
 		});
 		function fakeClick(){

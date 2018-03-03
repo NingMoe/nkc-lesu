@@ -424,7 +424,7 @@ margin-left: 4%;
 
 				$("#endPanel").hide();
 				$("#answerPanel").show();
-				setTimeout("wrongStart()",1000);
+				setTimeout("wrongStart()",4000);
 				
 			}else{
 			showAnswer(index);
@@ -461,7 +461,7 @@ margin-left: 4%;
 			$("#endPanel").hide();
 			$("#answerPanel").show();
 
-			setTimeout("fakeClick()",1000);
+			setTimeout("fakeClick()",4000);
 		}
 
 		});
