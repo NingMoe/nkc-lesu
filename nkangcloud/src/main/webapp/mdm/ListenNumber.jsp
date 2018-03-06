@@ -225,7 +225,7 @@ margin-left: 4%;
 											+ "<input type='text' style='width:"+numberL+";font-size:23px;margin:0;padding:0;height:40px;text-align:left;padding-right:10%' class='niput sxt' value="
 											+ tempString + " disabled />");
 				} else {
-					c = switchChar(tempCharArray[i - 1]);
+					c = switchChar(tempCharArray[i]);
 					if(c=="+"){
 					$("#answerInput")
 							.append(
@@ -248,7 +248,7 @@ margin-left: 4%;
 				if (i == 0) {
 					total = parseInt(tempArray[i]);
 				} else {
-					total = count(tempCharArray[i - 1], total,
+					total = count(tempCharArray[i], total,
 							parseInt(tempArray[i]));
 				}
 
@@ -301,7 +301,7 @@ margin-left: 4%;
 					var minusNumber = getVoiceForNumber(i);
 					if ( currentTotal - minusNumber <= 0) {
 						tempCharArray[i] = '加';
-						chars='加';
+						chars='';
 					}
 					tempArray[i] = minusNumber;
 					if( chars == '减'){
