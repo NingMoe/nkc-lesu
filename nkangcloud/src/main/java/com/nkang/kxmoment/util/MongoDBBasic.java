@@ -4705,7 +4705,7 @@ public static AbacusRank findAbacusRankByOpenid(String openid){
 				if((dbcur.get("leftSendClass"))!=null && !"".equals(dbcur.get("leftSendClass")+"")){
 					leftSend = Integer.parseInt(dbcur.get("leftSendClass")+"");
 				}
-				updatedbo.put("totalClass", total+classpr.getClassCount()+leftSend);
+				updatedbo.put("totalClass", total+classpr.getClassCount());
 				updatedbo.put("leftPayClass", classpr.getClassCount()+leftPay);
 				updatedbo.put("leftSendClass", classpr.getGiftClass()+leftSend);
 				BasicDBObject doc = new BasicDBObject();
