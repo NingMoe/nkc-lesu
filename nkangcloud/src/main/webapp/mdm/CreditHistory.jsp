@@ -27,13 +27,16 @@ if(res!=null){
 	}
 }
 List<TeamerCredit> records=MongoDBBasic.getHistryTeamerCredit(studentID);
+int total=0;
 for(TeamerCredit tc:records){
 	String operation = tc.getOperation();
 	String amount = tc.getAmount();
 	if(operation.equals("Increase")){
+		total=total+Integer.parseInt(amount);
 		tc.setAmount("+"+amount);
 	}else if(operation.equals("Decrease")){
 		tc.setAmount("-"+amount);
+		total=total-Integer.parseInt(amount);
 	}
 }
 
@@ -157,5 +160,7 @@ font-weight:0!important;}
 <%} %>
 
 </ul>
+
+<div style="text-align:right;padding-right: 20px;margin-top: 15px;">总积分：<%=total %></div>
 </body>
 </html>

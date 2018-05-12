@@ -1628,7 +1628,7 @@ function getNowFormatDate() {
 													<h4>悟时自渡</h4> </td> 
 												<% } %> 
 													
-													<%if(isTeacher==true) { %>
+													<%if(isTeacher) { %>
 												<td>
 												<a target="_self"  href="http://leshucq.bceapp.com/mdm/StudentDetail.jsp?UID=<%=uid %>">
 												<img src="http://leshucq.bj.bcebos.com/standard/techerview.png" />
@@ -1640,13 +1640,13 @@ function getNowFormatDate() {
 														<img src="http://leshucq.bj.bcebos.com/standard/classunitmgt.png" /><h4>我的课时</h4>
 													</a>
 												</td>
-												<td>
+												
 <%-- 													<a target="_self" href="http://leshucq.bceapp.com/mdm/MyExpenseClass.jsp?UID=<%=uid %>">
 														<img src="http://leshucq.bj.bcebos.com/standard/classunitmgt.png" /><h4>我的课销</h4>
 													</a> --%>
-												</td>
+												
 												<% } %>
-													<%if(isTeacher==true) { %>
+													<%if(isTeacher) { %>
 												<td>
 												<a target="_self"  href="http://leshucq.bceapp.com/mdm/expiredClass.jsp?UID=<%=uid %>">
 												<img src="http://leshucq.bj.bcebos.com/standard%2Fclassunit2.png" />
@@ -1663,6 +1663,13 @@ function getNowFormatDate() {
 													<h4>课程购买</h4></a> --%>
 												</td>
 												<% } %>
+												<%if(!isTeacher) { %>
+												<td>
+												<a target="_self"  href="http://leshucq.bceapp.com/mdm/CreditHistory.jsp?UID=<%=uid %>&StudentOpenID=<%=uid %>">
+												<img src="http://leshucq.bceapp.com/mdm/images/star.png" />
+													<h4>我的积分</h4></a>
+												</td>
+												<%} %>
 											</tr>
 										</table>
 									</div>
